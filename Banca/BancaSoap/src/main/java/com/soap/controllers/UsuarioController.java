@@ -34,7 +34,7 @@ public class UsuarioController  extends Conexion  {
 			}
 			return lista;
 		} catch (SQLException ex) {
-			Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
 			return null;
 		} finally {
 			rs.close();
@@ -61,7 +61,7 @@ public class UsuarioController  extends Conexion  {
 
 			return usuario;
 		} catch (SQLException ex) {
-			Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
 			return null;
 		} finally {
 			rs.close();
@@ -90,7 +90,7 @@ public class UsuarioController  extends Conexion  {
 
 			return respuesta;
 		} catch (SQLException ex) {
-			Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
 			return false;
 		} finally {
 			ps.close();
@@ -118,7 +118,7 @@ public class UsuarioController  extends Conexion  {
 
 			return respuesta;
 		} catch (SQLException ex) {
-			Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
 			return false;
 		} finally {
 			ps.close();
@@ -142,7 +142,7 @@ public class UsuarioController  extends Conexion  {
 
 			return respuesta;
 		} catch (SQLException ex) {
-			Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
 			return false;
 		} finally {
 			ps.close();

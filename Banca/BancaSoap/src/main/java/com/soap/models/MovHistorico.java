@@ -1,10 +1,11 @@
 package com.soap.models;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class MovHistorico {
 	private int idTransaccion;
-	private GregorianCalendar fecha;
+	private Date fecha;
 	private int signo;
 	private double monto;
 	private int idUsuario;
@@ -15,7 +16,7 @@ public class MovHistorico {
 
 	}
 
-	public MovHistorico(int idTransaccion, GregorianCalendar fecha, int signo, double monto, int idUsuario,
+	public MovHistorico(int idTransaccion, Date fecha, int signo, double monto, int idUsuario,
 			int idCuentaBancaria, int idMedioDePago) {
 
 		this.idTransaccion = idTransaccion;
@@ -35,11 +36,11 @@ public class MovHistorico {
 		this.idTransaccion = idTransaccion;
 	}
 
-	public GregorianCalendar getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(GregorianCalendar fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 

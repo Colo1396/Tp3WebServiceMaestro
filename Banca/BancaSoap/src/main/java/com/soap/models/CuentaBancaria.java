@@ -4,7 +4,6 @@ public class CuentaBancaria {
 	private int idCuentaBancaria;
 	private String nroCuenta;
 	private double monto;
-
 	private int idUsuario;
 
 	public CuentaBancaria(int idCuentaBancaria, String nroCuenta, double monto, int idUsuario) {
