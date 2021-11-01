@@ -26,7 +26,7 @@ public class CuentaBancariaService {
 		try {
 			return cuentaBancariaController.findAll();
 		} catch (SQLException ex) {
-			Logger.getLogger(CuentaBancariaController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(CuentaBancariaService.class.getName()).log(Level.SEVERE, null, ex);
 			return null;
 		}
 	}
@@ -38,7 +38,7 @@ public class CuentaBancariaService {
 		try {
 			return cuentaBancariaController.findById(id);
 		} catch (SQLException ex) {
-			Logger.getLogger(CuentaBancariaController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(CuentaBancariaService.class.getName()).log(Level.SEVERE, null, ex);
 			return null;
 		}
 	}
@@ -53,7 +53,7 @@ public class CuentaBancariaService {
 			}
 			return "Error al crear el cuentaBancaria";
 		} catch (SQLException ex) {
-			Logger.getLogger(CuentaBancariaController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(CuentaBancariaService.class.getName()).log(Level.SEVERE, null, ex);
 			return "Error al realizar la petición";
 		}
 	}
@@ -69,7 +69,7 @@ public class CuentaBancariaService {
 			}
 			return cuentaBancariaUpdated;
 		} catch (SQLException ex) {
-			Logger.getLogger(CuentaBancariaController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(CuentaBancariaService.class.getName()).log(Level.SEVERE, null, ex);
 			return null;
 		}
 	}
@@ -85,7 +85,7 @@ public class CuentaBancariaService {
 			}
 			return msg;
 		} catch (SQLException ex) {
-			Logger.getLogger(CuentaBancariaController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(CuentaBancariaService.class.getName()).log(Level.SEVERE, null, ex);
 			return "Error al realizar la petición";
 		}
 	}

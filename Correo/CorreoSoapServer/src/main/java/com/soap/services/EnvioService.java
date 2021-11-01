@@ -29,7 +29,7 @@ public class EnvioService {
 		try {
 			return envioController.findAll();
 		} catch (SQLException ex) {
-			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
 			return null;
 		}
 	}
@@ -41,7 +41,7 @@ public class EnvioService {
 		try {
 			return envioController.findById(id);
 		} catch (SQLException ex) {
-			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
 			return null;
 		}
 	}
@@ -56,7 +56,7 @@ public class EnvioService {
 			}
 			return "Error al crear el envio";
 		} catch (SQLException ex) {
-			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
 			return "Error al realizar la petición";
 		}
 	}
@@ -72,7 +72,7 @@ public class EnvioService {
 			}
 			return envioUpdated;
 		} catch (SQLException ex) {
-			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
 			return null;
 		}
 	}
@@ -88,7 +88,7 @@ public class EnvioService {
 			}
 			return msg;
 		} catch (SQLException ex) {
-			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
 			return "Error al realizar la petición";
 		}
 	}
