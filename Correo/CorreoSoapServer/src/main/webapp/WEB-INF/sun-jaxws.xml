@@ -3,12 +3,12 @@
 	xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
 	<endpoint name="IndexWebService" implementation="com.soap.config.IndexWs" 
 		url-pattern="/ws/IndexWs" />
-		
+	<endpoint name="EnvioService"
+		implementation="com.soap.services.EnvioService"
+		url-pattern="/ws/EnvioService" />		
 	<endpoint name="UsuarioService"
 		implementation="com.soap.services.UsuarioService"
 		url-pattern="/ws/UsuarioService" />
 		
-	<endpoint name="EnvioService"
-		implementation="com.soap.services.EnvioService"
-		url-pattern="/ws/EnvioService" />
+
 </endpoints>
