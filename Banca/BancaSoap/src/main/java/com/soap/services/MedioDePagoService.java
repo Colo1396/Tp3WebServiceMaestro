@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.RequestWrapper;
 
 import com.soap.controllers.MedioDePagoController;
 import com.soap.models.MedioDePago;
@@ -21,6 +22,7 @@ public class MedioDePagoService {
 
 	// Obtener todos los MediosDePago
 	@WebMethod(operationName = "findAll")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.findAll")
 	public List<MedioDePago> findAll() {
 		try {
 			return medioDePagoController.findAll();
@@ -32,6 +34,7 @@ public class MedioDePagoService {
 
 	// Obtener un MedioDePago por su id
 	@WebMethod(operationName = "findById")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.findById")
 	public MedioDePago findById(@WebParam(name = "id") int id) {
 		try {
 			return medioDePagoController.findById(id);
@@ -43,6 +46,7 @@ public class MedioDePagoService {
 
 	// Crear un nuevo MedioDePago
 	@WebMethod(operationName = "create")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.create")
 	public String create(@WebParam(name = "medioDePago") MedioDePago medioDePago) {
 		try {
 			if (medioDePagoController.create(medioDePago)) {
@@ -57,6 +61,7 @@ public class MedioDePagoService {
 
 	// Actualizar un Cliente por su id
 	@WebMethod(operationName = "update")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.update")
 	public MedioDePago update(@WebParam(name = "medioDePago") MedioDePago medioDePago) {
 		try {
 			MedioDePago medioDePagoUpdated = null;
@@ -72,6 +77,7 @@ public class MedioDePagoService {
 
 	// Eliminar un MedioDePago por su id
 	@WebMethod(operationName = "delete")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.delete")
 	public String delete(@WebParam(name = "id") int id) {
 		try {
 			String msg = "El medioDePago no se ha podido eliminar";

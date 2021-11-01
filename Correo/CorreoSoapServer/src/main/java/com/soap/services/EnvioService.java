@@ -8,6 +8,9 @@ import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.Use;
+import javax.xml.ws.RequestWrapper;
 
 import com.soap.controllers.EnvioController;
 import com.soap.models.Envio;
@@ -15,11 +18,13 @@ import com.soap.models.Envio;
 
 
 @WebService(serviceName = "EnvioService")
+@SOAPBinding(style= SOAPBinding.Style.DOCUMENT, use =Use.LITERAL)
 public class EnvioService {
 	EnvioController envioController = new EnvioController();
 
 	// Obtener todos los Envios
 	@WebMethod(operationName = "findAll")
+	@RequestWrapper(className="com.soap.services.EnvioService.findAll")
 	public List<Envio> findAll() {
 		try {
 			return envioController.findAll();
@@ -31,6 +36,7 @@ public class EnvioService {
 
 	// Obtener un envio por su id
 	@WebMethod(operationName = "findById")
+	@RequestWrapper(className="com.soap.services.EnvioService.findById")
 	public Envio findById(@WebParam(name = "id") int id) {
 		try {
 			return envioController.findById(id);
@@ -42,6 +48,7 @@ public class EnvioService {
 
 	// Crear un nuevo envio
 	@WebMethod(operationName = "create")
+	@RequestWrapper(className="com.soap.services.EnvioService.create")
 	public String create(@WebParam(name = "envio") Envio envio) {
 		try {
 			if (envioController.create(envio)) {
@@ -56,6 +63,7 @@ public class EnvioService {
 
 	// Actualizar un envio por su id
 	@WebMethod(operationName = "update")
+	@RequestWrapper(className="com.soap.services.EnvioService.update")
 	public Envio update(@WebParam(name = "envio") Envio envio) {
 		try {
 			Envio envioUpdated = null;
@@ -71,6 +79,7 @@ public class EnvioService {
 
 	// Eliminar un envio por su id
 	@WebMethod(operationName = "delete")
+	@RequestWrapper(className="com.soap.services.EnvioService.delete")
 	public String delete(@WebParam(name = "id") int id) {
 		try {
 			String msg = "El envio no se ha podido eliminar";

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.RequestWrapper;
 
 import com.soap.controllers.MovHistoricoController;
 import com.soap.models.MovHistorico;
@@ -20,6 +21,7 @@ public class MovHistoricoService {
 
 	// Obtener todos los movimientos
 	@WebMethod(operationName = "findAll")
+	@RequestWrapper(className="com.soap.services.MovHistoricoService.findAll")
 	public List<MovHistorico> findAll() {
 		try {
 			return movHistoricoController.findAll();
@@ -31,6 +33,7 @@ public class MovHistoricoService {
 
 	// Obtener un movimiento por su id
 	@WebMethod(operationName = "findById")
+	@RequestWrapper(className="com.soap.services.MovHistoricoService.findById")
 	public MovHistorico findById(@WebParam(name = "id") int id) {
 		try {
 			return movHistoricoController.findById(id);
@@ -42,6 +45,7 @@ public class MovHistoricoService {
 
 	// Crear un nuevo movimiento
 	@WebMethod(operationName = "create")
+	@RequestWrapper(className="com.soap.services.MovHistoricoService.create")
 	public String create(@WebParam(name = "movHistorico") MovHistorico movHistorico) {
 		try {
 			if (movHistoricoController.create(movHistorico)) {
@@ -56,6 +60,7 @@ public class MovHistoricoService {
 
 	// Actualizar un movimiento por su id
 	@WebMethod(operationName = "update")
+	@RequestWrapper(className="com.soap.services.MovHistoricoService.update")
 	public MovHistorico update(@WebParam(name = "movHistorico") MovHistorico movHistorico) {
 		try {
 			MovHistorico movHistoricoUpdated = null;
@@ -71,6 +76,7 @@ public class MovHistoricoService {
 
 	// Eliminar un movimiento por su id
 	@WebMethod(operationName = "delete")
+	@RequestWrapper(className="com.soap.services.MovHistoricoService.delete")
 	public String delete(@WebParam(name = "id") int id) {
 		try {
 			String msg = "El movimiento no se ha podido eliminar";

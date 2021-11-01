@@ -8,18 +8,24 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.Style;
+import javax.jws.soap.SOAPBinding.Use;
+import javax.xml.ws.RequestWrapper;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 
 
 @WebService(serviceName = "UsuarioService")
+@SOAPBinding(style= SOAPBinding.Style.DOCUMENT, use =Use.LITERAL)
 public class UsuarioService {
 
 	UsuarioController usuarioController = new UsuarioController();
 
 	// Obtener todos los Clientes
 	@WebMethod(operationName = "findAll")
+	@RequestWrapper(className="com.soap.services.UsuarioService.findAll")
 	public List<Usuario> findAll() {
 		try {
 			return usuarioController.findAll();
@@ -31,6 +37,7 @@ public class UsuarioService {
 
 	// Obtener un Cliente por su id
 	@WebMethod(operationName = "findById")
+	@RequestWrapper(className="com.soap.services.UsuarioService.findById")
 	public Usuario findById(@WebParam(name = "id") int id) {
 		try {
 			return usuarioController.findById(id);
@@ -42,6 +49,7 @@ public class UsuarioService {
 
 	// Crear un nuevo Cliente
 	@WebMethod(operationName = "create")
+	@RequestWrapper(className="com.soap.services.UsuarioService.create")
 	public String create(@WebParam(name = "usuario") Usuario usuario) {
 		try {
 			if (usuarioController.create(usuario)) {
@@ -56,6 +64,7 @@ public class UsuarioService {
 
 	// Actualizar un Cliente por su id
 	@WebMethod(operationName = "update")
+	@RequestWrapper(className="com.soap.services.UsuarioService.update")
 	public Usuario update(@WebParam(name = "usuario") Usuario usuario) {
 		try {
 			Usuario usuarioUpdated = null;
@@ -71,6 +80,7 @@ public class UsuarioService {
 
 	// Eliminar un Cliente por su id
 	@WebMethod(operationName = "delete")
+	@RequestWrapper(className="com.soap.services.UsuarioService.delete")
 	public String delete(@WebParam(name = "id") int id) {
 		try {
 			String msg = "El usuario no se ha podido eliminar";

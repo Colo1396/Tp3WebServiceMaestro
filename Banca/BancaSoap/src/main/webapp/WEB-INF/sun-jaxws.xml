@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints
+	xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+	<endpoint name="IndexWebService"
+		implementation="com.soap.config.IndexWs" url-pattern="/ws/IndexWs" />
+
+	<endpoint name="CuentaBancariaService"
+		implementation="com.soap.services.CuentaBancariaService"
+		url-pattern="/ws/CuentaBancariaService" />
+
+	<endpoint name="MedioDePagoService"
+		implementation="com.soap.services.MedioDePagoService"
+		url-pattern="/ws/MedioDePagoService" />
+
+	<endpoint name="MovHistoricoService"
+		implementation="com.soap.services.MovHistoricoService"
+		url-pattern="/ws/MovHistoricoService" />
+
+	<endpoint name="TarjetaService"
+		implementation="com.soap.services.TarjetaService"
+		url-pattern="/ws/TarjetaService" />
+
+	<endpoint name="UsuarioService"
+		implementation="com.soap.services.UsuarioService"
+		url-pattern="/ws/UsuarioService" />
+</endpoints>

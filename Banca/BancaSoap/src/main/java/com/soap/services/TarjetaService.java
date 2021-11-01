@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.RequestWrapper;
 
 import com.soap.controllers.TarjetaController;
 import com.soap.models.Tarjeta;
@@ -20,6 +21,7 @@ public class TarjetaService {
 
 	// Obtener todos los Clientes
 	@WebMethod(operationName = "findAll")
+	@RequestWrapper(className="com.soap.services.TarjetaService.findAll")
 	public List<Tarjeta> findAll() {
 		try {
 			return tarjetaController.findAll();
@@ -31,6 +33,7 @@ public class TarjetaService {
 
 	// Obtener un Cliente por su id
 	@WebMethod(operationName = "findById")
+	@RequestWrapper(className="com.soap.services.TarjetaService.findById")
 	public Tarjeta findById(@WebParam(name = "id") int id) {
 		try {
 			return tarjetaController.findById(id);
@@ -42,6 +45,7 @@ public class TarjetaService {
 
 	// Crear un nuevo Cliente
 	@WebMethod(operationName = "create")
+	@RequestWrapper(className="com.soap.services.TarjetaService.create")
 	public String create(@WebParam(name = "tarjeta") Tarjeta tarjeta) {
 		try {
 			if (tarjetaController.create(tarjeta)) {
@@ -56,6 +60,7 @@ public class TarjetaService {
 
 	// Actualizar un Cliente por su id
 	@WebMethod(operationName = "update")
+	@RequestWrapper(className="com.soap.services.TarjetaService.update")
 	public Tarjeta update(@WebParam(name = "tarjeta") Tarjeta tarjeta) {
 		try {
 			Tarjeta tarjetaUpdated = null;
@@ -71,6 +76,7 @@ public class TarjetaService {
 
 	// Eliminar un Cliente por su id
 	@WebMethod(operationName = "delete")
+	@RequestWrapper(className="com.soap.services.TarjetaService.delete")
 	public String delete(@WebParam(name = "id") int id) {
 		try {
 			String msg = "La tarjeta no se ha podido eliminar";
