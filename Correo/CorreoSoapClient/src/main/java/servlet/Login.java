@@ -1,11 +1,17 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import EnvioWsdl.Envio;
+import EnvioWsdl.EnvioService;
+import EnvioWsdl.EnvioService_Service;
 
 /**
  * Servlet implementation class Login
@@ -46,7 +52,16 @@ public class Login extends HttpServlet {
 		String password=request.getParameter("password");
 		
 		if(user.equals("java")&& password.equals("1234")) {
-			response.sendRedirect("mensaje.jsp");
+			//response.sendRedirect("mensaje.jsp");
+			EnvioService_Service envioService_service = new EnvioService_Service();
+	        EnvioService service = envioService_service.getEnvioServicePort();
+	        Envio envio = service.findById(1);
+	        int codigo = envio.getCodSeguimiento(); 
+	        System.out.println(codigo);
+	        
+	        request.setAttribute("codigo", codigo);
+	        RequestDispatcher  rd= request.getRequestDispatcher("mensaje.jsp");
+	        rd.forward(request, response);
 		}
 		else {
 			response.sendRedirect("error.jsp");

@@ -14,5 +14,9 @@
 	
 <script type="text/javascript" src="prueba.js"></script>
 	
+	<h1>el codigo de seguimiento de envio es :</h1>
+	<%
+	out.print(request.getAttribute("codigo"));
+	%>
 </body>
 </html>
