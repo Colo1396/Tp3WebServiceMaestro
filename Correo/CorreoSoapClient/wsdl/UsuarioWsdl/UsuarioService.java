@@ -96,13 +96,13 @@ public interface UsuarioService {
      * @param passwordLog
      * @param usuarioLog
      * @return
-     *     returns boolean
+     *     returns UsuarioWsdl.Usuario
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "validarLogin", targetNamespace = "http://services.soap.com/", className = "UsuarioWsdl.ValidarLogin")
     @ResponseWrapper(localName = "validarLoginResponse", targetNamespace = "http://services.soap.com/", className = "UsuarioWsdl.ValidarLoginResponse")
-    public boolean validarLogin(
+    public Usuario validarLogin(
         @WebParam(name = "usuarioLog", targetNamespace = "")
         String usuarioLog,
         @WebParam(name = "passwordLog", targetNamespace = "")

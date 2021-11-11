@@ -156,7 +156,7 @@ public class UsuarioController  extends Conexion  {
 	}
 	
 	//----------------------------------------------------------------------------------
-	public boolean validarLogin (String usuarioLog, String passwordLog) throws SQLException {
+	public Usuario validarLogin (String usuarioLog, String passwordLog) throws SQLException {
 		try {
 			String sql = "SELECT idUsuario,razonSocial,idUsuarioRef,dni,usuario,contraseña FROM usuario WHERE usuario = '" + usuarioLog + "' and contraseña='"+ passwordLog+"'";
 
@@ -170,15 +170,10 @@ public class UsuarioController  extends Conexion  {
 				usuario =  new Usuario(rs.getInt(1), rs.getString(2), rs.getInt(3),rs.getInt(4), rs.getString(5),rs.getString(6));
 
 			}
-			if (usuario!=null) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			return usuario;
 		} catch (SQLException ex) {
 			Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
-			return false;
+			return null;
 		} finally {
 			rs.close();
 			ps.close();

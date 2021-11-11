@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import EnvioWsdl.Envio;
 import EnvioWsdl.EnvioService;
 import EnvioWsdl.EnvioService_Service;
+import UsuarioWsdl.Usuario;
 import UsuarioWsdl.UsuarioService;
 import UsuarioWsdl.UsuarioService_Service;
 
@@ -41,45 +42,47 @@ public class Login extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}*/
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 * 
+	 *      protected void doPost(HttpServletRequest request, HttpServletResponse
+	 *      response) throws ServletException, IOException { // TODO Auto-generated
+	 *      method stub doGet(request, response); }
+	 */
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String user=request.getParameter("user");
-		String password=request.getParameter("password");
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String user = request.getParameter("user");
+		String password = request.getParameter("password");
+
 		UsuarioService_Service usaurioService_Service = new UsuarioService_Service();
 		UsuarioService usuarioService = usaurioService_Service.getUsuarioServicePort();
-		boolean usuarioValido= usuarioService.validarLogin(user, password);
-		
-		if (usuarioValido==true) {
-			response.sendRedirect("bienvenido.jsp");
-		}
-		else {
+		Usuario usuarioValido = usuarioService.validarLogin(user, password);
+
+		if (usuarioValido != null) {
+			request.setAttribute("idUsuario", usuarioValido.getIdUsuario());
+			request.setAttribute("dni", usuarioValido.getDni());
+			request.setAttribute("razonSocial", usuarioValido.getRazonSocial());
+			request.setAttribute("vendedor", usuarioValido.getIdUsuarioRef());
+			RequestDispatcher rd = request.getRequestDispatcher("bienvenido.jsp");
+			rd.forward(request, response);
+			//response.sendRedirect("bienvenido.jsp");
+		} else {
 			response.sendRedirect("error.jsp");
 		}
-		
-		
-		
-		/*if(user.equals("java")&& password.equals("1234")) {
-			//response.sendRedirect("mensaje.jsp");
-			EnvioService_Service envioService_service = new EnvioService_Service();
-	        EnvioService service = envioService_service.getEnvioServicePort();
-	        Envio envio = service.findById(1);
-	        int codigo = envio.getCodSeguimiento(); 
-	        System.out.println(codigo);
-	        
-	        request.setAttribute("codigo", codigo);
-	        RequestDispatcher  rd= request.getRequestDispatcher("mensaje.jsp");
-	        rd.forward(request, response);
-		}
-		else {
-			response.sendRedirect("error.jsp");
-		}*/
+
+		/*
+		 * if(user.equals("java")&& password.equals("1234")) {
+		 * //response.sendRedirect("mensaje.jsp"); EnvioService_Service
+		 * envioService_service = new EnvioService_Service(); EnvioService service =
+		 * envioService_service.getEnvioServicePort(); Envio envio =
+		 * service.findById(1); int codigo = envio.getCodSeguimiento();
+		 * System.out.println(codigo);
+		 * 
+		 * request.setAttribute("codigo", codigo); RequestDispatcher rd=
+		 * request.getRequestDispatcher("mensaje.jsp"); rd.forward(request, response); }
+		 * else { response.sendRedirect("error.jsp"); }
+		 */
 	}
 }

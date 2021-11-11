@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="return" type="{http://services.soap.com/}usuario" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,21 +33,29 @@ import javax.xml.bind.annotation.XmlType;
 public class ValidarLoginResponse {
 
     @XmlElement(name = "return")
-    protected boolean _return;
+    protected Usuario _return;
 
     /**
      * Obtiene el valor de la propiedad return.
      * 
+     * @return
+     *     possible object is
+     *     {@link Usuario }
+     *     
      */
-    public boolean isReturn() {
+    public Usuario getReturn() {
         return _return;
     }
 
     /**
      * Define el valor de la propiedad return.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Usuario }
+     *     
      */
-    public void setReturn(boolean value) {
+    public void setReturn(Usuario value) {
         this._return = value;
     }
 
