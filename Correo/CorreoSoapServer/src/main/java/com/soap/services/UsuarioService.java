@@ -2,6 +2,7 @@ package com.soap.services;
 
 
 import com.soap.controllers.UsuarioController;
+import com.soap.models.Envio;
 import com.soap.models.Usuario;
 import java.sql.SQLException;
 import java.util.List;
@@ -94,6 +95,17 @@ public class UsuarioService {
 		}
 	}
 
-
+	//----------------------------------------------------------------------------------
+	@WebMethod(operationName = "validarLogin")
+	@RequestWrapper(className="com.soap.services.EnvioService.validarLogin")
+	public boolean validarLogin(@WebParam(name = "usuarioLog") String  usuarioLog,@WebParam(name = "passwordLog") String passwordLog) {
+		try {
+			return usuarioController.validarLogin(usuarioLog,passwordLog);
+		} catch (SQLException ex) {
+			Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		}
+	}
+	//----------------------------------------------------------------------------------
 	
 }

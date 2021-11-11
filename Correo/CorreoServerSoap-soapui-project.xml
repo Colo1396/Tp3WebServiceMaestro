@@ -12,6 +12,8 @@
       <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
       <xs:element name="update" type="tns:update"/>
       <xs:element name="updateResponse" type="tns:updateResponse"/>
+      <xs:element name="validarLogin" type="tns:validarLogin"/>
+      <xs:element name="validarLoginResponse" type="tns:validarLoginResponse"/>
       <xs:complexType name="findById">
         <xs:sequence>
           <xs:element name="id" type="xs:int"/>
@@ -70,6 +72,17 @@
           <xs:element minOccurs="0" name="return" type="tns:usuario"/>
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="validarLogin">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="usuarioLog" type="xs:string"/>
+          <xs:element minOccurs="0" name="passwordLog" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="validarLoginResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="findById">
@@ -77,6 +90,9 @@
   </wsdl:message>
   <wsdl:message name="findByIdResponse">
     <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="validarLoginResponse">
+    <wsdl:part element="tns:validarLoginResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="deleteResponse">
     <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
@@ -102,6 +118,9 @@
   <wsdl:message name="update">
     <wsdl:part element="tns:update" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="validarLogin">
+    <wsdl:part element="tns:validarLogin" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="UsuarioService">
     <wsdl:operation name="findById">
       <wsdl:input message="tns:findById" name="findById"></wsdl:input>
@@ -122,6 +141,10 @@
     <wsdl:operation name="update">
       <wsdl:input message="tns:update" name="update"></wsdl:input>
       <wsdl:output message="tns:updateResponse" name="updateResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarLogin">
+      <wsdl:input message="tns:validarLogin" name="validarLogin"></wsdl:input>
+      <wsdl:output message="tns:validarLoginResponse" name="validarLoginResponse"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="UsuarioServiceSoapBinding" type="tns:UsuarioService">
@@ -168,6 +191,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="updateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarLogin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="validarLogin">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validarLoginResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -232,7 +264,17 @@
          </usuario>\r
       </ser:update>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/update"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="9ffe2b25-0d6f-4212-a63d-73749f222a1c" wsaVersion="NONE" name="EnvioServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}EnvioServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl"><con:part><con:url>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="EnvioService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/update"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="dbe69b52-bc7d-4692-a7b2-32356f7afe2a" isOneWay="false" action="" name="validarLogin" bindingOperationName="validarLogin" type="Request-Response" outputName="validarLoginResponse" inputName="validarLogin" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="61707d66-80ec-4bbf-904b-6f5ede59e11e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/UsuarioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:validarLogin>\r
+         <!--Optional:-->\r
+         <usuarioLog>pepe</usuarioLog>\r
+         <!--Optional:-->\r
+         <passwordLog>pepe</passwordLog>\r
+      </ser:validarLogin>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/validarLogin"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="9ffe2b25-0d6f-4212-a63d-73749f222a1c" wsaVersion="NONE" name="EnvioServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}EnvioServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl"><con:part><con:url>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="EnvioService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="create" type="tns:create"/>

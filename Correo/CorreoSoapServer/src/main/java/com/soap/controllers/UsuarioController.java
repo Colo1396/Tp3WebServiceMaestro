@@ -154,5 +154,38 @@ public class UsuarioController  extends Conexion  {
 			con.close();
 		}
 	}
+	
+	//----------------------------------------------------------------------------------
+	public boolean validarLogin (String usuarioLog, String passwordLog) throws SQLException {
+		try {
+			String sql = "SELECT idUsuario,razonSocial,idUsuarioRef,dni,usuario,contraseña FROM usuario WHERE usuario = '" + usuarioLog + "' and contraseña='"+ passwordLog+"'";
+
+			Usuario usuario = null;
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				usuario =  new Usuario(rs.getInt(1), rs.getString(2), rs.getInt(3),rs.getInt(4), rs.getString(5),rs.getString(6));
+
+			}
+			if (usuario!=null) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			rs.close();
+			ps.close();
+			con.close();
+		}
+	}
+	
+	//----------------------------------------------------------------------------------
 
 }

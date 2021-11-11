@@ -26,6 +26,7 @@ public class ObjectFactory {
 
     private final static QName _FindById_QNAME = new QName("http://services.soap.com/", "findById");
     private final static QName _FindByIdResponse_QNAME = new QName("http://services.soap.com/", "findByIdResponse");
+    private final static QName _ValidarLoginResponse_QNAME = new QName("http://services.soap.com/", "validarLoginResponse");
     private final static QName _DeleteResponse_QNAME = new QName("http://services.soap.com/", "deleteResponse");
     private final static QName _UpdateResponse_QNAME = new QName("http://services.soap.com/", "updateResponse");
     private final static QName _Delete_QNAME = new QName("http://services.soap.com/", "delete");
@@ -34,6 +35,7 @@ public class ObjectFactory {
     private final static QName _Create_QNAME = new QName("http://services.soap.com/", "create");
     private final static QName _CreateResponse_QNAME = new QName("http://services.soap.com/", "createResponse");
     private final static QName _Update_QNAME = new QName("http://services.soap.com/", "update");
+    private final static QName _ValidarLogin_QNAME = new QName("http://services.soap.com/", "validarLogin");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: UsuarioWsdl
@@ -64,6 +66,22 @@ public class ObjectFactory {
      */
     public FindByIdResponse createFindByIdResponse() {
         return new FindByIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link ValidarLoginResponse }
+     * 
+     */
+    public ValidarLoginResponse createValidarLoginResponse() {
+        return new ValidarLoginResponse();
+    }
+
+    /**
+     * Create an instance of {@link ValidarLogin }
+     * 
+     */
+    public ValidarLogin createValidarLogin() {
+        return new ValidarLogin();
     }
 
     /**
@@ -149,6 +167,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidarLoginResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.soap.com/", name = "validarLoginResponse")
+    public JAXBElement<ValidarLoginResponse> createValidarLoginResponse(ValidarLoginResponse value) {
+        return new JAXBElement<ValidarLoginResponse>(_ValidarLoginResponse_QNAME, ValidarLoginResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DeleteResponse }{@code >}}
      * 
      */
@@ -218,6 +245,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://services.soap.com/", name = "update")
     public JAXBElement<Update> createUpdate(Update value) {
         return new JAXBElement<Update>(_Update_QNAME, Update.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidarLogin }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.soap.com/", name = "validarLogin")
+    public JAXBElement<ValidarLogin> createValidarLogin(ValidarLogin value) {
+        return new JAXBElement<ValidarLogin>(_ValidarLogin_QNAME, ValidarLogin.class, null, value);
     }
 
 }

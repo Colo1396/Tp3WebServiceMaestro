@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import EnvioWsdl.Envio;
 import EnvioWsdl.EnvioService;
 import EnvioWsdl.EnvioService_Service;
+import UsuarioWsdl.UsuarioService;
+import UsuarioWsdl.UsuarioService_Service;
 
 /**
  * Servlet implementation class Login
@@ -51,7 +53,20 @@ public class Login extends HttpServlet {
 		String user=request.getParameter("user");
 		String password=request.getParameter("password");
 		
-		if(user.equals("java")&& password.equals("1234")) {
+		UsuarioService_Service usaurioService_Service = new UsuarioService_Service();
+		UsuarioService usuarioService = usaurioService_Service.getUsuarioServicePort();
+		boolean usuarioValido= usuarioService.validarLogin(user, password);
+		
+		if (usuarioValido==true) {
+			response.sendRedirect("bienvenido.jsp");
+		}
+		else {
+			response.sendRedirect("error.jsp");
+		}
+		
+		
+		
+		/*if(user.equals("java")&& password.equals("1234")) {
 			//response.sendRedirect("mensaje.jsp");
 			EnvioService_Service envioService_service = new EnvioService_Service();
 	        EnvioService service = envioService_service.getEnvioServicePort();
@@ -65,6 +80,6 @@ public class Login extends HttpServlet {
 		}
 		else {
 			response.sendRedirect("error.jsp");
-		}
+		}*/
 	}
 }
