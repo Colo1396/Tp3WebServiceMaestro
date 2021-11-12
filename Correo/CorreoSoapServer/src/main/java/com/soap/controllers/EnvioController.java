@@ -84,7 +84,7 @@ public class EnvioController extends Conexion{
 			ps.setInt(1, envio.getCodSeguimiento());
 			ps.setString(2, envio.getDomicilio());
 			ps.setString(3, envio.getEstado());
-			ps.setInt(4, envio.getIdVendedor());
+			ps.setInt(4, envio.getDni());
 			ps.setInt(5, envio.getIdUsuario());
 
 			if (ps.executeUpdate() == 1) {
@@ -114,7 +114,7 @@ public class EnvioController extends Conexion{
 			ps.setInt(1, envio.getCodSeguimiento());
 			ps.setString(2, envio.getDomicilio());
 			ps.setString(3, envio.getEstado());
-			ps.setInt(4, envio.getIdVendedor());
+			ps.setInt(4, envio.getDni());
 			ps.setInt(5, envio.getIdUsuario());
 			ps.setInt(6, envio.getIdEnvio());
 

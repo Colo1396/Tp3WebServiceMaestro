@@ -23,32 +23,17 @@ import UsuarioWsdl.UsuarioService_Service;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public Login() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 * 
-	 *      protected void doPost(HttpServletRequest request, HttpServletResponse
-	 *      response) throws ServletException, IOException { // TODO Auto-generated
-	 *      method stub doGet(request, response); }
-	 */
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -64,7 +49,7 @@ public class Login extends HttpServlet {
 			request.setAttribute("idUsuario", usuarioValido.getIdUsuario());
 			request.setAttribute("dni", usuarioValido.getDni());
 			request.setAttribute("razonSocial", usuarioValido.getRazonSocial());
-			request.setAttribute("vendedor", usuarioValido.getIdUsuarioRef());
+			request.setAttribute("idUsuarioRefVentas", usuarioValido.getIdUsuarioRef());
 			RequestDispatcher rd = request.getRequestDispatcher("bienvenido.jsp");
 			rd.forward(request, response);
 			//response.sendRedirect("bienvenido.jsp");

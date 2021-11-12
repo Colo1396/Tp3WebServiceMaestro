@@ -17,11 +17,11 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="codSeguimiento" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="dni" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="domicilio" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="idEnvio" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="idUsuario" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="idVendedor" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,20 +33,20 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "envio", propOrder = {
     "codSeguimiento",
+    "dni",
     "domicilio",
     "estado",
     "idEnvio",
-    "idUsuario",
-    "idVendedor"
+    "idUsuario"
 })
 public class Envio {
 
     protected int codSeguimiento;
+    protected int dni;
     protected String domicilio;
     protected String estado;
     protected int idEnvio;
     protected int idUsuario;
-    protected int idVendedor;
 
     /**
      * Obtiene el valor de la propiedad codSeguimiento.
@@ -62,6 +62,22 @@ public class Envio {
      */
     public void setCodSeguimiento(int value) {
         this.codSeguimiento = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad dni.
+     * 
+     */
+    public int getDni() {
+        return dni;
+    }
+
+    /**
+     * Define el valor de la propiedad dni.
+     * 
+     */
+    public void setDni(int value) {
+        this.dni = value;
     }
 
     /**
@@ -142,22 +158,6 @@ public class Envio {
      */
     public void setIdUsuario(int value) {
         this.idUsuario = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad idVendedor.
-     * 
-     */
-    public int getIdVendedor() {
-        return idVendedor;
-    }
-
-    /**
-     * Define el valor de la propiedad idVendedor.
-     * 
-     */
-    public void setIdVendedor(int value) {
-        this.idVendedor = value;
     }
 
 }

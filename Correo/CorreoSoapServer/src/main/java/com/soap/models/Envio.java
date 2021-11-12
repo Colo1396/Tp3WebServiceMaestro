@@ -6,16 +6,16 @@ public class Envio {
 	private int codSeguimiento;
 	private String domicilio;
 	private String estado;
-	private int idVendedor;
+	private int dni;
 	private int idUsuario;
 	public Envio() {
 	}
-	public Envio(int idEnvio, int codSeguimiento, String domicilio, String estado, int idVendedor, int idUsuario) {
+	public Envio(int idEnvio, int codSeguimiento, String domicilio, String estado, int dni, int idUsuario) {
 		this.idEnvio = idEnvio;
 		this.codSeguimiento = codSeguimiento;
 		this.domicilio = domicilio;
 		this.estado = estado;
-		this.idVendedor = idVendedor;
+		this.dni = dni;
 		this.idUsuario = idUsuario;
 	}
 	public int getIdEnvio() {
@@ -42,11 +42,11 @@ public class Envio {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public int getIdVendedor() {
-		return idVendedor;
+	public int getDni() {
+		return dni;
 	}
-	public void setIdVendedor(int idVendedor) {
-		this.idVendedor = idVendedor;
+	public void setDni(int dni) {
+		this.dni = dni;
 	}
 	public int getIdUsuario() {
 		return idUsuario;
