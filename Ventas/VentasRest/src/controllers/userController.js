@@ -42,19 +42,8 @@ const getUser = async (req, res) => {
     }
 }
 
-const getAllProductos = async (req, res) => {
-    try{
-        const productos = await ProductoService.getByUserId(req.params.idCliente);
-        res.status(200).send(productos);
-    } catch(err){
-        console.error(err);
-        res.status(400).send(err.message);
-    }
-}
-
 module.exports = {
     register,
     login,
-    getUser,
-    getAllProductos
+    getUser
 }

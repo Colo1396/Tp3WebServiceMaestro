@@ -5,11 +5,12 @@ const { MedioDePagoService } = require('./MedioDePagoService');
 const path = require('path');
 
 class ProductoService{
-    static async getByUserId(idVendedor){
+    static async getAll(idVendedor = null){
         const productos = await ProductoModel.findAll({
             where: {
-                idVendedor: idVendedor
-            }
+                ...idVendedor ? {idVendedor: idVendedor} : {}
+            },
+            include: ['mediosDePago']
          });
         return productos;    
     }
@@ -19,7 +20,7 @@ class ProductoService{
             where: {
                 id: id
             },
-            include: [MedioDePagoModel]
+            include: ['mediosDePago']
         });
         return producto;    
     }
@@ -39,7 +40,7 @@ class ProductoService{
         producto.imagen = result.url;
 
         const createdProducto = await ProductoModel.create(producto);
-        await createdProducto.setMedioDePagos(producto.mediosDePago);
+        await createdProducto.setMediosDePago(producto.mediosDePago);
         return createdProducto;
     }   
 

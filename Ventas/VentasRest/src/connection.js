@@ -27,7 +27,7 @@ ProductoModel.belongsTo(UserModel, {
 });
 
 /* relacion many to many de Producto y MedioDePago */
-ProductoModel.belongsToMany(MedioDePagoModel, { through: 'producto_mediodepago'});
+ProductoModel.belongsToMany(MedioDePagoModel, { through: 'producto_mediodepago', as: 'mediosDePago'});
 MedioDePagoModel.belongsToMany(ProductoModel, { through: 'producto_mediodepago'});
 
 /** INICIALIZO EL MAPEO **/

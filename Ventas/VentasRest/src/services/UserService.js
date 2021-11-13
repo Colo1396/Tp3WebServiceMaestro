@@ -34,7 +34,7 @@ class UserService{
 
         if(isValid){
             const token = jwt.sign({ id: userExists.id }, process.env.TOKEN_SECRET);
-            const loginInfo = {auth_token: token, id: userExists.id};
+            const loginInfo = {auth_token: token, id: userExists.id, nombre: userExists.nombre};
             return loginInfo;
         }
         else{

@@ -1,6 +1,16 @@
 const { ProductoService } = require('../services/ProductoService');
 const { dataURI } = require('../middlewares/multerConfig');
 
+const getAllProductos = async (req, res) => {
+    try{
+        const productos = await ProductoService.getAll(req.query.vendedor);
+        res.status(200).send(productos);
+    } catch(err){
+        console.error(err);
+        res.status(400).send(err.message);
+    }
+}
+
 const getProducto = async (req, res) => {
     try{
         const producto = await ProductoService.getById(req.params.idProducto);
@@ -59,6 +69,7 @@ const deleteProducto = async (req, res) => {
 }
 
 module.exports = {
+    getAllProductos,
     getProducto,
     postProducto,
     putProducto,

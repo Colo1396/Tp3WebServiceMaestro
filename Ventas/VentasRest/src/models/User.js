@@ -15,7 +15,7 @@ module.exports = (sequalize, type)=>{
             allowNull : false
         },
         apellido: {
-            type: type.INTEGER,
+            type: type.STRING,
             allowNull: false
         },
         password: {
