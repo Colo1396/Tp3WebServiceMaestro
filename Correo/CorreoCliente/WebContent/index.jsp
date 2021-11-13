@@ -13,7 +13,7 @@
 	</header>
 	<nav>
 		<ul>
-			<li><a href="login.jsp">Iniciar Sesion</a></li>
+			<li><a href="login.jsp">Login</a></li>
 		</ul>
 	</nav>
 
