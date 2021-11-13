@@ -26,6 +26,10 @@ module.exports = (sequalize, type)=>{
             type: type.INTEGER,
             allowNull: false
         },
+        telefono: {
+            type: type.INTEGER,
+            allowNull: true
+        },
         billetera: {
             type: type.DECIMAL,
             allowNull: false

@@ -43,8 +43,26 @@ const getUser = async (req, res) => {
     }
 }
 
+const putUser = async (req, res) => {
+    try{
+        const user = {
+            username: req.body.username,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            dni: req.body.dni,
+            telefono: req.body.telefono
+        }
+        const updatedUser = await UserService.update(user, req.user.id);
+        res.status(200).send(updatedUser);
+    } catch(err){
+        console.error(err);
+        res.status(400).send(err.message);
+    }
+}
+
 module.exports = {
     register,
     login,
-    getUser
+    getUser,
+    putUser
 }

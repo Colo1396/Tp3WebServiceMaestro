@@ -79,6 +79,35 @@ class UserService{
 
         return users;
     }
+
+    static async update(user, idUser){
+        const usernameExists = await this.getByUsername(user.username);
+        if(usernameExists){
+            if(usernameExists.id != idUser) throw new Error("Ya existe un usuario con ese username");
+        }
+
+        const dniExists = await this.getByDNI(user.dni);
+        if(dniExists){
+            if(dniExists.id != idUser) throw new Error("Ya existe un usuario con ese dni");
+        }
+
+        const updatedUser = await UserModel.update(
+            {
+                username: user.username,
+                nombre: user.nombre,
+                apellido: user.apellido,
+                dni: user.dni,
+                telefono: user.telefono
+            },
+            {
+                where: {
+                    id: idUser
+                }
+            }
+        );
+
+        return updatedUser;
+    }
 }
 
 module.exports = { UserService }
