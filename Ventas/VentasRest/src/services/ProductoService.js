@@ -5,10 +5,11 @@ const { MedioDePagoService } = require('./MedioDePagoService');
 const path = require('path');
 
 class ProductoService{
-    static async getAll(idVendedor = null){
+    static async getAll(idVendedor = null, sinStock = null){
         const productos = await ProductoModel.findAll({
             where: {
-                ...idVendedor ? {idVendedor: idVendedor} : {}
+                ...idVendedor ? {idVendedor: idVendedor} : {},
+                ...sinStock ? {} : { stock: { [Op.gt]: 0 } }
             },
             include: ['mediosDePago']
          });
@@ -81,7 +82,8 @@ class ProductoService{
         );
         
         if(producto.mediosDePago){
-            await productoData.setMedioDePagos(producto.mediosDePago);
+            await productoData.removeMediosDePago();
+            await productoData.setMediosDePago(producto.mediosDePago);
         }
         if(newImagen){
             await uploader.destroy(previousImage);

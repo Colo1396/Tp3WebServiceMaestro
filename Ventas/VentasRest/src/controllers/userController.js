@@ -8,7 +8,8 @@ const register = async (req, res) => {
             nombre: req.body.nombre,
             apellido: req.body.apellido,
             password: req.body.password,
-            dni: req.body.dni
+            dni: req.body.dni,
+            billetera: 0
         }
         const createdUser = await UserService.register(user);
         res.status(200).send(createdUser);

@@ -3,7 +3,7 @@ const { dataURI } = require('../middlewares/multerConfig');
 
 const getAllProductos = async (req, res) => {
     try{
-        const productos = await ProductoService.getAll(req.query.vendedor);
+        const productos = await ProductoService.getAll(req.query.vendedor, req.query.sinstock);
         res.status(200).send(productos);
     } catch(err){
         console.error(err);

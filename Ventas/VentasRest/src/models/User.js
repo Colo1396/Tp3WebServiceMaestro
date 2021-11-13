@@ -25,6 +25,10 @@ module.exports = (sequalize, type)=>{
         dni: {
             type: type.INTEGER,
             allowNull: false
+        },
+        billetera: {
+            type: type.DECIMAL,
+            allowNull: false
         }
     });
 }
