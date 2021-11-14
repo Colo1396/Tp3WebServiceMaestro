@@ -26,7 +26,7 @@
 				<h1>Ingrese sus datos:</h1>
 			</center>
 			
-			<form action="home.jsp" method="post">
+			<form action="Login" method="post">
 				<table border="0" aling="center" widh="500px" class="tablaLogin">
 					<tr>
 						<td>User</td>

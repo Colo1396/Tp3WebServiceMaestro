@@ -25,7 +25,7 @@
 	<div id="contenedor">
 		<div id="cargarEnvio">
 			<center>
-				<h1>Es hora de Cargar un ENVIO.</h1>
+				<h1>Es hora de Cargar un Envio</h1>
 			</center>
 			<form action="CargarEnvio" method="post">
 				<br>

@@ -23,6 +23,14 @@
 	</nav>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<div id="contenedor">
+		<h3>
+			<%
+			out.print(request.getAttribute("razonSocial"));
+			%>
+			, ID:<%
+			out.print(request.getAttribute("idUsuario"));
+			%>
+		</h3>
 		<form action="cargarEnvio.jsp" method="post">
 			<table border="0" aling="center" widh="500px">
 				<tr>
@@ -44,6 +52,14 @@
 				</tr>
 			</table>
 		</form>
+		El codigo de Seguimiento del Envio Cargado es: 
+		<% if (request.getAttribute("CodigoSeguimiento")!=null){
+			out.print(request.getAttribute("CodigoSeguimiento"));
+		}
+		else{
+			out.print("--");
+		}
+		%>
 
 	</div>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->

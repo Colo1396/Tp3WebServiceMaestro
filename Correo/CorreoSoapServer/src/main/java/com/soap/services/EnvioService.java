@@ -92,6 +92,46 @@ public class EnvioService {
 			return "Error al realizar la petición";
 		}
 	}
+	//----------------------------------------------------------------------------------
+	@WebMethod(operationName = "updateEstadoEnvio")
+	@RequestWrapper(className="com.soap.services.EnvioService.updateEstadoEnvio")
+	public Envio updateEstadoEnvio(@WebParam(name = "envio") Envio envio,@WebParam(name = "estado") String estado) {
+		try {
+			Envio envioUpdated = null;
+			if (envioController.updateEstadoEnvio(envio,estado)) {
+				envioUpdated = envioController.findById(envio.getIdEnvio());
+			}
+			return envioUpdated;
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
+	//----------------------------------------------------------------------------------
+	@WebMethod(operationName = "traerAllMisDespachos")
+	@RequestWrapper(className="com.soap.services.EnvioService.traerAllMisDespachos")
+	public List<Envio> traerAllMisDespachos(@WebParam(name = "idUsuario")int idUsuario, @WebParam(name = "orden")String orden) {
+		try {
+			return envioController.traerAllMisDespachos(idUsuario,orden);
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
+
+	//----------------------------------------------------------------------------------
+	@WebMethod(operationName = "traerAllMisPedidos")
+	@RequestWrapper(className="com.soap.services.EnvioService.traerAllMisPedidos")
+	public List<Envio> traerAllMisPedidos(@WebParam(name = "dni")int dni, @WebParam(name = "orden")String orden) {
+		try {
+			return envioController.traerAllMisPedidos(dni,orden);
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
+
+	//----------------------------------------------------------------------------------
 
 
 }

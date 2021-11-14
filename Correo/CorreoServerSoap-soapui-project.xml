@@ -274,7 +274,7 @@
          <passwordLog>pepe</passwordLog>\r
       </ser:validarLogin>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/validarLogin"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="b41f22dc-1a37-457d-826d-a487371be674" wsaVersion="NONE" name="EnvioServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}EnvioServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl"><con:part><con:url>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="EnvioService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/validarLogin"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="5d05d428-6f57-4c69-a3a8-88e9a127bbaf" wsaVersion="NONE" name="EnvioServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}EnvioServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl"><con:part><con:url>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="EnvioService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="create" type="tns:create"/>
@@ -285,7 +285,13 @@
       <xs:element name="findAllResponse" type="tns:findAllResponse"/>
       <xs:element name="findById" type="tns:findById"/>
       <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
+      <xs:element name="traerAllMisDespachos" type="tns:traerAllMisDespachos"/>
+      <xs:element name="traerAllMisDespachosResponse" type="tns:traerAllMisDespachosResponse"/>
+      <xs:element name="traerAllMisPedidos" type="tns:traerAllMisPedidos"/>
+      <xs:element name="traerAllMisPedidosResponse" type="tns:traerAllMisPedidosResponse"/>
       <xs:element name="update" type="tns:update"/>
+      <xs:element name="updateEstadoEnvio" type="tns:updateEstadoEnvio"/>
+      <xs:element name="updateEstadoEnvioResponse" type="tns:updateEstadoEnvioResponse"/>
       <xs:element name="updateResponse" type="tns:updateResponse"/>
       <xs:complexType name="findById">
         <xs:sequence>
@@ -305,6 +311,39 @@
           <xs:element minOccurs="0" name="estado" type="xs:string"/>
           <xs:element name="idEnvio" type="xs:int"/>
           <xs:element name="idUsuario" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="traerAllMisDespachos">
+        <xs:sequence>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element minOccurs="0" name="orden" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="traerAllMisDespachosResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:envio"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateEstadoEnvio">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="envio" type="tns:envio"/>
+          <xs:element minOccurs="0" name="estado" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateEstadoEnvioResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:envio"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="traerAllMisPedidos">
+        <xs:sequence>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="orden" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="traerAllMisPedidosResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:envio"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="delete">
@@ -347,29 +386,11 @@
       </xs:complexType>
     </xs:schema>
   </wsdl:types>
-  <wsdl:message name="findById">
-    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findByIdResponse">
-    <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="deleteResponse">
-    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="updateResponse">
-    <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
   <wsdl:message name="delete">
     <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="findAll">
     <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findAllResponse">
-    <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="create">
-    <wsdl:part element="tns:create" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="createResponse">
     <wsdl:part element="tns:createResponse" name="parameters"></wsdl:part>
@@ -377,10 +398,58 @@
   <wsdl:message name="update">
     <wsdl:part element="tns:update" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="findById">
+    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByIdResponse">
+    <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="traerAllMisDespachos">
+    <wsdl:part element="tns:traerAllMisDespachos" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="traerAllMisPedidosResponse">
+    <wsdl:part element="tns:traerAllMisPedidosResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateEstadoEnvio">
+    <wsdl:part element="tns:updateEstadoEnvio" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="traerAllMisPedidos">
+    <wsdl:part element="tns:traerAllMisPedidos" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateEstadoEnvioResponse">
+    <wsdl:part element="tns:updateEstadoEnvioResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="traerAllMisDespachosResponse">
+    <wsdl:part element="tns:traerAllMisDespachosResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllResponse">
+    <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create">
+    <wsdl:part element="tns:create" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="EnvioService">
     <wsdl:operation name="findById">
       <wsdl:input message="tns:findById" name="findById"></wsdl:input>
       <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="traerAllMisDespachos">
+      <wsdl:input message="tns:traerAllMisDespachos" name="traerAllMisDespachos"></wsdl:input>
+      <wsdl:output message="tns:traerAllMisDespachosResponse" name="traerAllMisDespachosResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateEstadoEnvio">
+      <wsdl:input message="tns:updateEstadoEnvio" name="updateEstadoEnvio"></wsdl:input>
+      <wsdl:output message="tns:updateEstadoEnvioResponse" name="updateEstadoEnvioResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="traerAllMisPedidos">
+      <wsdl:input message="tns:traerAllMisPedidos" name="traerAllMisPedidos"></wsdl:input>
+      <wsdl:output message="tns:traerAllMisPedidosResponse" name="traerAllMisPedidosResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="delete">
       <wsdl:input message="tns:delete" name="delete"></wsdl:input>
@@ -407,6 +476,33 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="findByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="traerAllMisDespachos">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="traerAllMisDespachos">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="traerAllMisDespachosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateEstadoEnvio">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateEstadoEnvio">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateEstadoEnvioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="traerAllMisPedidos">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="traerAllMisPedidos">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="traerAllMisPedidosResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -452,7 +548,7 @@
       <soap:address location="http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService"/>
     </wsdl:port>
   </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint></con:endpoints><con:operation id="8ec39042-86f6-458f-8ea8-7adccd8c80a8" isOneWay="false" action="" name="create" bindingOperationName="create" type="Request-Response" outputName="createResponse" inputName="create" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="aaf9944f-5bdf-4ed5-b38e-dec7ed33143a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint></con:endpoints><con:operation id="d0488f8f-eb02-47fe-9da5-af20ede0d062" isOneWay="false" action="" name="create" bindingOperationName="create" type="Request-Response" outputName="createResponse" inputName="create" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e2d53b8e-d583-4c2d-88bc-ebb439022b6d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:create>\r
@@ -469,26 +565,44 @@
          </envio>\r
       </ser:create>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/create"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1db19080-a74c-4d1b-a334-d71300295489" isOneWay="false" action="" name="delete" bindingOperationName="delete" type="Request-Response" outputName="deleteResponse" inputName="delete" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a0d84f9c-a2f5-44a5-8eaa-a1a6ead8ea6d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/create"/></con:call></con:operation><con:operation id="5c401d6e-f5f0-43c0-ad6d-e173aa7ffe61" isOneWay="false" action="" name="delete" bindingOperationName="delete" type="Request-Response" outputName="deleteResponse" inputName="delete" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="74e25487-de2f-4b44-b76a-b77a4a90e36c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:delete>\r
          <id>?</id>\r
       </ser:delete>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/delete"/></con:call></con:operation><con:operation id="eb3a385d-584d-4154-90e8-b06eaa1a9e28" isOneWay="false" action="" name="findAll" bindingOperationName="findAll" type="Request-Response" outputName="findAllResponse" inputName="findAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3550c303-c70c-4b62-b7d9-02730bfe6f6d" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/delete"/></con:call></con:operation><con:operation id="380831d1-1dd7-46b2-a270-54418e02056a" isOneWay="false" action="" name="findAll" bindingOperationName="findAll" type="Request-Response" outputName="findAllResponse" inputName="findAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="45638781-2033-4e1c-886c-3cde61997369" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:findAll/>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/findAll"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="fe2cb881-13d3-4310-baeb-981ce88ad983" isOneWay="false" action="" name="findById" bindingOperationName="findById" type="Request-Response" outputName="findByIdResponse" inputName="findById" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bffb554d-cc49-4d70-b0ea-a0e0483967b2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/findAll"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a9b0e6fb-2710-4449-9fdb-7914addc404a" isOneWay="false" action="" name="findById" bindingOperationName="findById" type="Request-Response" outputName="findByIdResponse" inputName="findById" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d3c5f768-e1f1-4688-be86-18d3f087647b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:findById>\r
          <id>?</id>\r
       </ser:findById>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/findById"/></con:call></con:operation><con:operation id="ba576319-7a2c-4485-960c-935c04c2620c" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="104bc20f-6e99-4e9a-8725-14d970b7fdf0" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/findById"/></con:call></con:operation><con:operation id="630dc737-0af9-4468-985e-90e248c814db" isOneWay="false" action="" name="traerAllMisDespachos" bindingOperationName="traerAllMisDespachos" type="Request-Response" outputName="traerAllMisDespachosResponse" inputName="traerAllMisDespachos" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="611b11a4-4746-4d9a-b99b-57541076f5b3" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:traerAllMisDespachos>\r
+         <idUsuario>1</idUsuario>\r
+         <!--Optional:-->\r
+         <orden>estado</orden>\r
+      </ser:traerAllMisDespachos>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/traerAllMisDespachos"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="2ae065d5-0ed2-429a-84b3-3c7aeecbb1a7" isOneWay="false" action="" name="traerAllMisPedidos" bindingOperationName="traerAllMisPedidos" type="Request-Response" outputName="traerAllMisPedidosResponse" inputName="traerAllMisPedidos" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b5bc4842-9cb5-48a5-8473-40845a5a5e0f" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:traerAllMisPedidos>\r
+         <dni>14123456</dni>\r
+         <!--Optional:-->\r
+         <orden>idEnvio</orden>\r
+      </ser:traerAllMisPedidos>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/traerAllMisPedidos"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="02046b74-d1e7-45b2-b3ba-a4addf479b08" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="67d5307d-3d0a-4a66-b293-086f11364f99" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:update>\r
@@ -505,4 +619,23 @@
          </envio>\r
       </ser:update>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/update"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/update"/></con:call></con:operation><con:operation id="4b250357-0fac-4243-a1de-f07a0b9bdfaa" isOneWay="false" action="" name="updateEstadoEnvio" bindingOperationName="updateEstadoEnvio" type="Request-Response" outputName="updateEstadoEnvioResponse" inputName="updateEstadoEnvio" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5d156366-c5c3-44c4-a15c-8f5b205eef1c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/CorreoSoapServer-0.0.1/EnvioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:updateEstadoEnvio>\r
+         <!--Optional:-->\r
+         <envio>\r
+            <codSeguimiento>10005</codSeguimiento>\r
+            <dni>37103919</dni>\r
+            <!--Optional:-->\r
+            <domicilio>Mariano 789</domicilio>\r
+            <!--Optional:-->\r
+            <estado>En Preparacion</estado>\r
+            <idEnvio>6</idEnvio>\r
+            <idUsuario>1</idUsuario>\r
+         </envio>\r
+         <!--Optional:-->\r
+         <estado>EnPreparacion</estado>\r
+      </ser:updateEstadoEnvio>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/EnvioService/updateEstadoEnvio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

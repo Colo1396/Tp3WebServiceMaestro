@@ -12,8 +12,7 @@ import java.util.logging.Logger;
 import com.soap.config.Conexion;
 import com.soap.models.Envio;
 
-
-public class EnvioController extends Conexion{
+public class EnvioController extends Conexion {
 	Connection con = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
@@ -29,8 +28,10 @@ public class EnvioController extends Conexion{
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				//Usuario usuario = new Usuario(int idUsuario, String razonSocial, int idUsuarioRef);
-				Envio envio = new Envio(rs.getInt(1),rs.getInt(2), rs.getString(3), rs.getString(4),rs.getInt(5),rs.getInt(6));
+				// Usuario usuario = new Usuario(int idUsuario, String razonSocial, int
+				// idUsuarioRef);
+				Envio envio = new Envio(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+						rs.getInt(6));
 				lista.add(envio);
 			}
 			return lista;
@@ -56,7 +57,8 @@ public class EnvioController extends Conexion{
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				envio =  new Envio(rs.getInt(1),rs.getInt(2), rs.getString(3), rs.getString(4),rs.getInt(5),rs.getInt(6));
+				envio = new Envio(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+						rs.getInt(6));
 
 			}
 
@@ -155,5 +157,95 @@ public class EnvioController extends Conexion{
 			con.close();
 		}
 	}
+
+	// ----------------------------------------------------------------------------------
+	public boolean updateEstadoEnvio(Envio envio, String estado) throws SQLException {
+		try {
+			String sql = "UPDATE envio SET estado=? WHERE idEnvio = ?";
+
+			boolean respuesta = false;
+
+			con = conectar();
+
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, estado);
+
+			ps.setInt(2, envio.getIdEnvio());
+
+			if (ps.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// ----------------------------------------------------------------------------------
+	public List<Envio> traerAllMisDespachos(int idUsuario, String orden) throws SQLException {
+		try {
+			
+			String sql="SELECT * FROM envio where idUsuario = ? order by "+ orden +" asc";
+
+			List<Envio> lista = new ArrayList<Envio>();
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idUsuario);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				// Usuario usuario = new Usuario(int idUsuario, String razonSocial, int
+				// idUsuarioRef);
+				Envio envio = new Envio(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+						rs.getInt(6));
+				lista.add(envio);
+			}
+			return lista;
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		} finally {
+			rs.close();
+			ps.close();
+			con.close();
+		}
+	}
+
+	// ----------------------------------------------------------------------------------
+	public List<Envio> traerAllMisPedidos(int dni, String orden) throws SQLException {
+		try {
+			String sql = "SELECT * FROM envio where dni = ?  order by "+ orden +" asc";
+			List<Envio> lista = new ArrayList<Envio>();
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, dni);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				// Usuario usuario = new Usuario(int idUsuario, String razonSocial, int
+				// idUsuarioRef);
+				Envio envio = new Envio(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+						rs.getInt(6));
+				lista.add(envio);
+			}
+			return lista;
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		} finally {
+			rs.close();
+			ps.close();
+			con.close();
+		}
+	}
+	// ----------------------------------------------------------------------------------
 
 }
