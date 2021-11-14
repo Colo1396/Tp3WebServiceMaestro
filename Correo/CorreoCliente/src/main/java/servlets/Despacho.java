@@ -49,20 +49,28 @@ public class Despacho extends HttpServlet {
 		
 		EnvioService_Service envioService_service = new EnvioService_Service();
 		EnvioService service = envioService_service.getEnvioServicePort();
-		List<Envio> lista = new ArrayList<Envio>();
+		List<Envio> listaEnvios = new ArrayList<Envio>();
 		
-		lista = service.traerAllMisDespachos(1,orden);
+		listaEnvios = service.traerAllMisDespachos(1,orden);
 
-		request.setAttribute("listaEnvioDespachado",lista);
+		request.setAttribute("listaEnvioDespachado",listaEnvios);
 		
-		if(!lista.isEmpty()) {
+		
+		
+		for(Envio e:listaEnvios) {
+			System.out.println(e.getCodSeguimiento());
+		}
+		
+		///System.out.println(listaEnvios.);
+		
+		/*if(!lista.isEmpty()) {
 			for(int i=0;i ==lista.size();i++) {
 				System.out.println("imprimo la lista de envios");
 			}
-		}
+		}*/
 
 		try (PrintWriter out =response.getWriter()){
-			RequestDispatcher rd = request.getRequestDispatcher("listaEnvios.js");
+			RequestDispatcher rd = request.getRequestDispatcher("despacho.jsp");
 			rd.forward(request, response);
 		}
 	}

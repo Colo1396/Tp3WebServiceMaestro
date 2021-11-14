@@ -1,10 +1,3 @@
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="java.util.List"%>
-<%@ page import="EnvioWsdl.Envio"%>
-<%@ page import="EnvioWsdl.EnvioService"%>
-<%@ page import="EnvioWsdl.EnvioService_Service"%>
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -12,8 +5,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <link href="css/estilos.css" rel="stylesheet" type="text/css" />
-
-
 <title>Despacho</title>
 </head>
 <body>
@@ -32,40 +23,41 @@
 	</nav>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<div id="contenedor">
-		<form action="despacho.jsp" method="post">
-			<br>
-			<tr>
-				<td>Buscar pedidos ordenado por: <select name="orden">
-						<option value="dni">DNI</option>
-						<option value="estado">Estado</option>
-						<option value="codSeguimiento">Codigo de Seguimiento</option>
-				</select>
-
-				</td>
-				<td><input type="submit" id="buscarEnvioDespachado"
-					name="buscarEnvioDespachado" value="Buscar"></td>
-			</tr>
-			</br>
-
+		<h3>
+			<%
+			out.print(request.getAttribute("razonSocial"));
+			%>
+			, ID:<%
+			out.print(request.getAttribute("idUsuario"));
+			%>
+		</h3>
+		<form action="despachoXDni.jsp" method="post">
+			<table border="0" aling="center" widh="500px">
+				<tr>
+					<td><input type="submit" value="Despacho odenado por Dni"></td>
+				</tr>
+			</table>
 		</form>
-
-		<table id="target">
-			<tr>
-				<td>ID</td>
-				<td>CodSeguimiento</td>
-				<td>Domicilio</td>
-				<td>Dni</td>
-				<td>Estado</td>
-			</tr>
-			<script type="text/javascript" src="listaEnvios.js"></script>
-		</table>
-
+		<form action="despachoXEstado.jsp" method="post">
+			<table border="0" aling="center" widh="500px">
+				<tr>
+					<td><input type="submit" value="Despacho odenado por Estado"></td>
+				</tr>
+			</table>
+		</form>
+		<form action="despachoXCodSeguimiento.jsp" method="post">
+			<table border="0" aling="center" widh="500px">
+				<tr>
+					<td><input type="submit" value="Despacho odenado por Codigo de Seguimiento"></td>
+				</tr>
+			</table>
+		</form>
+		
 	</div>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<footer>
 		<h3>Tp nro 3 Distribuidos Modulo de Correo</h3>
 	</footer>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
-
 </body>
 </html>

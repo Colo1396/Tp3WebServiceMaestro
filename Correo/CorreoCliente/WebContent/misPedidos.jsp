@@ -5,12 +5,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <link href="css/estilos.css" rel="stylesheet" type="text/css" />
-<title>Mis Pedidos</title>
+<title>Home</title>
 </head>
 <body>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<header>
-		<h1>Mis Pedidos</h1>
+		<h1>Home</h1>
 	</header>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<nav>
@@ -23,24 +23,37 @@
 	</nav>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<div id="contenedor">
-		<table>
-			<tr>
-				<th>#Id</th>
-				<th>Codigo Seguimiento</th>
-				<th>Domicilio</th>
-				<th>Estado</th>
-			</tr>
-			<tr>
-				<td>Alfreds Futterkiste</td>
-				<td>Maria Anders</td>
-				<td>Germany</td>
-			</tr>
-			<tr>
-				<td>Centro comercial Moctezuma</td>
-				<td>Francisco Chang</td>
-				<td>Mexico</td>
-			</tr>
-		</table>
+		<h3>
+			<%
+			out.print(request.getAttribute("razonSocial"));
+			%>
+			, ID:<%
+			out.print(request.getAttribute("idUsuario"));
+			%>
+		</h3>
+
+		<form action="misPedidosXDni.jsp" method="post">
+			<table border="0" aling="center" widh="500px">
+				<tr>
+					<td><input type="submit" value="Mis Pedidos odenado por DNI"></td>
+				</tr>
+			</table>
+		</form>
+				<form action="misPedidosXEstado.jsp" method="post">
+			<table border="0" aling="center" widh="500px">
+				<tr>
+					<td><input type="submit" value="Mis Pedidos odenado por Estado"></td>
+				</tr>
+			</table>
+		</form>
+				<form action="misPedidosXCodSeguimiento.jsp" method="post">
+			<table border="0" aling="center" widh="500px">
+				<tr>
+					<td><input type="submit" value="Mis Pedidos odenado por Codigo de Seguimiento"></td>
+				</tr>
+			</table>
+		</form>
+		
 
 
 	</div>

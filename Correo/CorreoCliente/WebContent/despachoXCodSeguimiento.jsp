@@ -1,3 +1,10 @@
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
+<%@ page import="EnvioWsdl.Envio"%>
+<%@ page import="EnvioWsdl.EnvioService"%>
+<%@ page import="EnvioWsdl.EnvioService_Service"%>
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -5,12 +12,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <link href="css/estilos.css" rel="stylesheet" type="text/css" />
-<title>Home</title>
+
+
+<title>Despacho x Seguimiento</title>
 </head>
 <body>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<header>
-		<h1>Home</h1>
+		<h1>Despacho Ordenado por Codigo de Seguimiento</h1>
 	</header>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<nav>
@@ -23,46 +32,35 @@
 	</nav>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<div id="contenedor">
-		<h3>
+		<table id="target">
+			<tr>
+				<td>ID</td>
+				<td>CodSeguimiento</td>
+				<td>Domicilio</td>
+				<td>Dni</td>
+				<td>Estado</td>
+			</tr>
 			<%
-			out.print(request.getAttribute("razonSocial"));
+			EnvioService_Service envioService_service = new EnvioService_Service();
+			EnvioService service = envioService_service.getEnvioServicePort();
+			List<Envio> listaEnvios = new ArrayList<Envio>();
+
+			listaEnvios = service.traerAllMisDespachos(1,"codSeguimiento");
+
+			for (Envio e : listaEnvios) {
+				System.out.println(e.getCodSeguimiento());
 			%>
-			, ID:<%
-			out.print(request.getAttribute("idUsuario"));
+			<tr>
+				<td><%=e.getIdEnvio()%></td>
+				<td><%=e.getCodSeguimiento()%></td>
+				<td><%=e.getDomicilio()%></td>
+				<td><%=e.getDni()%></td>
+				<td><%=e.getEstado()%></td>
+			</tr>
+			<%
+			}
 			%>
-		</h3>
-		<form action="cargarEnvio.jsp" method="post">
-			<table border="0" aling="center" widh="500px">
-				<tr>
-					<td><input type="submit" value="Cargar Envio"></td>
-				</tr>
-			</table>
-		</form>
-		El codigo de Seguimiento del Envio Cargado es:
-		<%
-		if (request.getAttribute("CodigoSeguimiento") != null) {
-			out.print(request.getAttribute("CodigoSeguimiento"));
-		} else {
-			out.print("--");
-		}
-		%>
-		<form action="despacho.jsp" method="post">
-			<table border="0" aling="center" widh="500px">
-				<tr>
-					<td><input type="submit" value="Despacho"></td>
-				</tr>
-			</table>
-		</form>
-
-		<form action="misPedidos.jsp" method="post">
-			<table border="0" aling="center" widh="500px">
-				<tr>
-					<td><input type="submit" value="Mis Pedidos"></td>
-				</tr>
-			</table>
-		</form>
-
-
+		</table>
 
 	</div>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
@@ -70,5 +68,6 @@
 		<h3>Tp nro 3 Distribuidos Modulo de Correo</h3>
 	</footer>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
+
 </body>
 </html>
