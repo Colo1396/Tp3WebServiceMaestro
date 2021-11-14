@@ -43,7 +43,7 @@ public class CargarEnvio extends HttpServlet {
 		envio.setCodSeguimiento((int) (100000 * Math.random()));
 		envio.setDni(dni);
 		envio.setDomicilio(domicilio);
-		envio.setEstado("En Preparacion");
+		envio.setEstado("1.En Preparacion");
 		envio.setIdEnvio(0);
 		envio.setIdUsuario(1);// Traerlo desde el login
 

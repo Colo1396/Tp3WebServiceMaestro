@@ -39,7 +39,6 @@
 				<td>Domicilio</td>
 				<td>Dni</td>
 				<td>Estado</td>
-				<td>IdUsuario</td>
 			</tr>
 			<%
 			EnvioService_Service envioService_service = new EnvioService_Service();
@@ -57,7 +56,6 @@
 				<td><%=e.getDomicilio()%></td>
 				<td><%=e.getDni()%></td>
 				<td><%=e.getEstado()%></td>
-				<td><%=e.getIdUsuario()%></td>
 			</tr>
 			<%
 			}

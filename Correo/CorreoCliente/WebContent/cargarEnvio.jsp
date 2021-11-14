@@ -23,6 +23,14 @@
 	</nav>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<div id="contenedor">
+			<h3>
+			<%
+			out.print(request.getAttribute("idUsuarioLogueado"));
+			%>
+			, ID:<%
+			out.print(request.getAttribute("dniUsuarioLogueado"));
+			%>
+		</h3>
 		<div id="cargarEnvio">
 			<center>
 				<h1>Es hora de Cargar un Envio</h1>

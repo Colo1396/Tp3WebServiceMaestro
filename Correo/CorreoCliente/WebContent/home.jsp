@@ -35,6 +35,8 @@
 			<table border="0" aling="center" widh="500px">
 				<tr>
 					<td><input type="submit" value="Cargar Envio"></td>
+					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=request.getAttribute("idUsuario")%>"></td>
+					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=request.getAttribute("dni")%>"></td>
 				</tr>
 			</table>
 		</form>
@@ -43,6 +45,8 @@
 			<table border="0" aling="center" widh="500px">
 				<tr>
 					<td><input type="submit" value="Despacho"></td>
+					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=request.getAttribute("idUsuario")%>"></td>
+					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=request.getAttribute("dni")%>"></td>
 				</tr>
 			</table>
 		</form>
@@ -51,6 +55,8 @@
 			<table border="0" aling="center" widh="500px">
 				<tr>
 					<td><input type="submit" value="Mis Pedidos"></td>
+					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=request.getAttribute("idUsuario")%>"></td>
+					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=request.getAttribute("dni")%>"></td>
 				</tr>
 			</table>
 		</form>
