@@ -14,27 +14,25 @@
 	</header>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<nav>
-		<ul>
-			<li><a href="home.jsp">Home |</a></li>
-			<li><a href="cargarEnvio.jsp">Cargar Envio |</a></li>
-			<li><a href="despacho.jsp">Despacho |</a></li>
-			<li><a href="misPedidos.jsp">Mis Pedidos |</a></li>
-		</ul>
+			<%
+			int idUsuarioLogueado2 =  Integer.parseInt(request.getParameter("idUsuarioLogueado"));
+			String dniUsuarioLogueado2 = request.getParameter("dniUsuarioLogueado");
+			%>
+		<h3>
+			<b>Datos Usuario:</b>
+			<b>Id:<%out.print(idUsuarioLogueado2);%></b>
+			<b>DNI:<%out.print(dniUsuarioLogueado2);%></b>
+		</h3>
 	</nav>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<div id="contenedor">
-		<h3>
-			<%
-			out.print(request.getAttribute("razonSocial"));
-			%>
-			, ID:<%
-			out.print(request.getAttribute("idUsuario"));
-			%>
-		</h3>
+
 
 		<form action="misPedidosXDni.jsp" method="post">
 			<table border="0" aling="center" widh="500px">
 				<tr>
+					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=idUsuarioLogueado2%>"></td>
+					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=dniUsuarioLogueado2%>"></td>
 					<td><input type="submit" value="Mis Pedidos odenado por DNI"></td>
 				</tr>
 			</table>
@@ -42,6 +40,8 @@
 				<form action="misPedidosXEstado.jsp" method="post">
 			<table border="0" aling="center" widh="500px">
 				<tr>
+					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=idUsuarioLogueado2%>"></td>
+					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=dniUsuarioLogueado2%>"></td>
 					<td><input type="submit" value="Mis Pedidos odenado por Estado"></td>
 				</tr>
 			</table>
@@ -49,6 +49,8 @@
 				<form action="misPedidosXCodSeguimiento.jsp" method="post">
 			<table border="0" aling="center" widh="500px">
 				<tr>
+					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=idUsuarioLogueado2%>"></td>
+					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=dniUsuarioLogueado2%>"></td>
 					<td><input type="submit" value="Mis Pedidos odenado por Codigo de Seguimiento"></td>
 				</tr>
 			</table>

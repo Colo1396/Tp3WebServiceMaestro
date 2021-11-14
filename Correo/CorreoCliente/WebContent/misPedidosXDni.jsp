@@ -23,12 +23,15 @@
 	</header>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<nav>
-		<ul>
-			<li><a href="home.jsp">Home |</a></li>
-			<li><a href="cargarEnvio.jsp">Cargar Envio |</a></li>
-			<li><a href="despacho.jsp">Despacho |</a></li>
-			<li><a href="misPedidos.jsp">Mis Pedidos |</a></li>
-		</ul>
+			<%
+			int idUsuarioLogueado2 =  Integer.parseInt(request.getParameter("idUsuarioLogueado"));
+			String dniUsuarioLogueado2 = request.getParameter("dniUsuarioLogueado");
+			%>
+		<h3>
+			<b>Datos Usuario:</b>
+			<b>Id:<%out.print(idUsuarioLogueado2);%></b>
+			<b>DNI:<%out.print(dniUsuarioLogueado2);%></b>
+		</h3>
 	</nav>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<div id="contenedor">
@@ -44,8 +47,9 @@
 			EnvioService_Service envioService_service = new EnvioService_Service();
 			EnvioService service = envioService_service.getEnvioServicePort();
 			List<Envio> listaEnvios = new ArrayList<Envio>();
-
-			listaEnvios = service.traerAllMisPedidos(39123456,"dni");
+			int dniUsuario = Integer.parseInt(request.getParameter("dniUsuarioLogueado"));
+			
+			listaEnvios = service.traerAllMisPedidos(dniUsuario,"dni");
 
 			for (Envio e : listaEnvios) {
 				System.out.println(e.getCodSeguimiento());

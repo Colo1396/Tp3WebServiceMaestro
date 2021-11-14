@@ -21,24 +21,6 @@
 	</header>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<nav>
-		<ul>
-			<li><a href="home.jsp">Home |</a></li>
-			<li><a href="cargarEnvio.jsp">Cargar Envio |</a></li>
-			<li><a href="despacho.jsp">Despacho |</a></li>
-			<li><a href="misPedidos.jsp">Mis Pedidos |</a></li>
-		</ul>
-	</nav>
-	<!-- ------------------------------------------------------------------------------------------------------------------ -->
-	<div id="contenedor">
-		<h3>
-			<%
-			out.print(request.getAttribute("razonSocial"));
-			%>
-			, ID:<%
-			out.print(request.getAttribute("idUsuario"));
-			%>
-		</h3>
-		
 		<%
 		Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
 		if(usuarioLogueado==null){
@@ -50,26 +32,25 @@
 		if(usuario !=null){
 			//usuarioLogueado.setDni(usuario.getDni());
 			usuarioLogueado=usuario;
-			System.out.println("el usuario logueado ahora es "+usuarioLogueado.getRazonSocial());
+			System.out.println("el usuario logueado ahora es "+usuarioLogueado.getRazonSocial()+" id :"+usuarioLogueado.getIdUsuario()+"Dni :"+usuarioLogueado.getDni() );
 		}
 		%>
 		
-		<h1>
-			<%
-			out.print(usuarioLogueado.getRazonSocial());
-			%>
-			, ID:<%
-			out.print(usuarioLogueado.getRazonSocial());
-			%>
-		</h1>
-		
-		
+		<h3>
+		<b>Datos Usuario:</b>
+		<b>Id:<%out.print(usuarioLogueado.getIdUsuario());%></b>
+		<b>Razon Social:<%out.print(usuarioLogueado.getRazonSocial());%></b>
+		<b>DNI:<%out.print(usuarioLogueado.getDni());%></b>
+		</h3>
+	</nav>
+	<!-- ------------------------------------------------------------------------------------------------------------------ -->
+	<div id="contenedor">
+
 		<form action="cargarEnvio.jsp" method="post">
 			<table border="0" aling="center" widh="500px">
 				<tr>
-					
-					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=request.getAttribute("idUsuario")%>"></td>
-					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=request.getAttribute("dni")%>"></td>
+					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=usuarioLogueado.getIdUsuario()%>"></td>
+					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=usuarioLogueado.getDni()%>"></td>
 					<td><input type="submit" value="Cargar Envio"></td>
 				</tr>
 			</table>
@@ -89,8 +70,8 @@
 		<form action="misPedidos.jsp" method="post">
 			<table border="0" aling="center" widh="500px">
 				<tr>
-					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=request.getAttribute("idUsuario")%>"></td>
-					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=request.getAttribute("dni")%>"></td>
+					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=usuarioLogueado.getIdUsuario()%>"></td>
+					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=usuarioLogueado.getDni()%>"></td>
 					<td><input type="submit" value="Mis Pedidos"></td>
 
 				</tr>

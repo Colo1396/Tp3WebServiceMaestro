@@ -34,7 +34,8 @@ public class CargarEnvio extends HttpServlet {
 
 		int dni = Integer.parseInt(request.getParameter("dni"));
 		String domicilio = request.getParameter("domicilio");
-		//FALTA TRAER EL ID DE USUARIO LOGUEADO
+		int idUsuario = Integer.parseInt(request.getParameter("idUsuarioLogueado"));
+
 		
 		EnvioService_Service envioService_service = new EnvioService_Service();
 		EnvioService service = envioService_service.getEnvioServicePort();
@@ -45,7 +46,7 @@ public class CargarEnvio extends HttpServlet {
 		envio.setDomicilio(domicilio);
 		envio.setEstado("1.En Preparacion");
 		envio.setIdEnvio(0);
-		envio.setIdUsuario(1);// Traerlo desde el login
+		envio.setIdUsuario(idUsuario);
 
 		request.setAttribute("CodigoSeguimiento", envio.getCodSeguimiento());
 

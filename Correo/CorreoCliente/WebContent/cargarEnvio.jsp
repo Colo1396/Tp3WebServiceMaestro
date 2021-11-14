@@ -14,23 +14,19 @@
 	</header>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<nav>
-		<ul>
-			<li><a href="home.jsp">Home |</a></li>
-			<li><a href="cargarEnvio.jsp">Cargar Envio |</a></li>
-			<li><a href="despacho.jsp">Despacho |</a></li>
-			<li><a href="misPedidos.jsp">Mis Pedidos |</a></li>
-		</ul>
+			<%
+			int idUsuarioLogueado2 =  Integer.parseInt(request.getParameter("idUsuarioLogueado"));
+			String dniUsuarioLogueado2 = request.getParameter("dniUsuarioLogueado");
+			%>
+		<h3>
+			<b>Datos Usuario:</b>
+			<b>Id:<%out.print(idUsuarioLogueado2);%></b>
+			<b>DNI:<%out.print(dniUsuarioLogueado2);%></b>
+		</h3>
 	</nav>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<div id="contenedor">
-			<h3>
-			<%
-			out.print(request.getAttribute("idUsuarioLogueado"));
-			%>
-			, ID:<%
-			out.print(request.getAttribute("dniUsuarioLogueado"));
-			%>
-		</h3>
+
 		<div id="cargarEnvio">
 			<center>
 				<h1>Es hora de Cargar un Envio</h1>
@@ -49,6 +45,8 @@
 				</br> <br>
 				<tr>
 					<td></td>
+					<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=idUsuarioLogueado2%>"></td>
+					<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=dniUsuarioLogueado2%>"></td>
 					<td><input type="submit" id="btnCargarEnvio" name="btnCargarEnvio" value="Cargar Envio"></td>
 				</tr>
 				</br>
