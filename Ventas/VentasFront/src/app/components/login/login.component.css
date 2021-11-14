@@ -1,0 +1,24 @@
+.login{
+    height: 100vh;
+    background: linear-gradient(90deg, #F58A07 50%, #F7F5FB 50%);
+}
+
+button{
+    background-color: #F58A07;
+    border-color: #F58A07;
+}
+
+button:hover{
+    background-color: #F58A07;
+    border-color: #F58A07;
+}
+
+button:focus{
+    background-color: #F58A07;
+    border-color: #F58A07;
+}
+
+button:disabled{
+    background-color: #F58A07;
+    border-color: #F58A07;
+}
