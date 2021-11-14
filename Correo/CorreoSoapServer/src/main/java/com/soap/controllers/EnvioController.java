@@ -186,7 +186,34 @@ public class EnvioController extends Conexion {
 			con.close();
 		}
 	}
+	// ----------------------------------------------------------------------------------
+		public boolean updateEstadoEnvioXId(int idEnvio, String estado) throws SQLException {
+			try {
+				String sql = "UPDATE envio SET estado=? WHERE idEnvio = ?";
 
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+
+				ps.setString(1, estado);
+
+				ps.setInt(2, idEnvio);
+
+				if (ps.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+				return respuesta;
+			} catch (SQLException ex) {
+				Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+				return false;
+			} finally {
+				ps.close();
+				con.close();
+			}
+		}
 	// ----------------------------------------------------------------------------------
 	public List<Envio> traerAllMisDespachos(int idUsuario, String orden) throws SQLException {
 		try {

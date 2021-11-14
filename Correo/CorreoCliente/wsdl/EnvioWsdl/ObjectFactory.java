@@ -24,6 +24,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _UpdateEstadoEnvioXIdResponse_QNAME = new QName("http://services.soap.com/", "updateEstadoEnvioXIdResponse");
+    private final static QName _UpdateEstadoEnvioXId_QNAME = new QName("http://services.soap.com/", "updateEstadoEnvioXId");
     private final static QName _Delete_QNAME = new QName("http://services.soap.com/", "delete");
     private final static QName _FindAll_QNAME = new QName("http://services.soap.com/", "findAll");
     private final static QName _CreateResponse_QNAME = new QName("http://services.soap.com/", "createResponse");
@@ -46,6 +48,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link UpdateEstadoEnvioXIdResponse }
+     * 
+     */
+    public UpdateEstadoEnvioXIdResponse createUpdateEstadoEnvioXIdResponse() {
+        return new UpdateEstadoEnvioXIdResponse();
     }
 
     /**
@@ -78,6 +88,14 @@ public class ObjectFactory {
      */
     public FindAll createFindAll() {
         return new FindAll();
+    }
+
+    /**
+     * Create an instance of {@link UpdateEstadoEnvioXId }
+     * 
+     */
+    public UpdateEstadoEnvioXId createUpdateEstadoEnvioXId() {
+        return new UpdateEstadoEnvioXId();
     }
 
     /**
@@ -182,6 +200,24 @@ public class ObjectFactory {
      */
     public Envio createEnvio() {
         return new Envio();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateEstadoEnvioXIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.soap.com/", name = "updateEstadoEnvioXIdResponse")
+    public JAXBElement<UpdateEstadoEnvioXIdResponse> createUpdateEstadoEnvioXIdResponse(UpdateEstadoEnvioXIdResponse value) {
+        return new JAXBElement<UpdateEstadoEnvioXIdResponse>(_UpdateEstadoEnvioXIdResponse_QNAME, UpdateEstadoEnvioXIdResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateEstadoEnvioXId }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.soap.com/", name = "updateEstadoEnvioXId")
+    public JAXBElement<UpdateEstadoEnvioXId> createUpdateEstadoEnvioXId(UpdateEstadoEnvioXId value) {
+        return new JAXBElement<UpdateEstadoEnvioXId>(_UpdateEstadoEnvioXId_QNAME, UpdateEstadoEnvioXId.class, null, value);
     }
 
     /**

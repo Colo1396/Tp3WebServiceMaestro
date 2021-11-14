@@ -26,20 +26,6 @@ public interface EnvioService {
 
     /**
      * 
-     * @param id
-     * @return
-     *     returns EnvioWsdl.Envio
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findById", targetNamespace = "http://services.soap.com/", className = "EnvioWsdl.FindById")
-    @ResponseWrapper(localName = "findByIdResponse", targetNamespace = "http://services.soap.com/", className = "EnvioWsdl.FindByIdResponse")
-    public Envio findById(
-        @WebParam(name = "id", targetNamespace = "")
-        int id);
-
-    /**
-     * 
      * @param idUsuario
      * @param orden
      * @return
@@ -54,6 +40,20 @@ public interface EnvioService {
         int idUsuario,
         @WebParam(name = "orden", targetNamespace = "")
         String orden);
+
+    /**
+     * 
+     * @param id
+     * @return
+     *     returns EnvioWsdl.Envio
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findById", targetNamespace = "http://services.soap.com/", className = "EnvioWsdl.FindById")
+    @ResponseWrapper(localName = "findByIdResponse", targetNamespace = "http://services.soap.com/", className = "EnvioWsdl.FindByIdResponse")
+    public Envio findById(
+        @WebParam(name = "id", targetNamespace = "")
+        int id);
 
     /**
      * 
@@ -88,6 +88,23 @@ public interface EnvioService {
         int dni,
         @WebParam(name = "orden", targetNamespace = "")
         String orden);
+
+    /**
+     * 
+     * @param estado
+     * @param idEnvio
+     * @return
+     *     returns EnvioWsdl.Envio
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "updateEstadoEnvioXId", targetNamespace = "http://services.soap.com/", className = "EnvioWsdl.UpdateEstadoEnvioXId")
+    @ResponseWrapper(localName = "updateEstadoEnvioXIdResponse", targetNamespace = "http://services.soap.com/", className = "EnvioWsdl.UpdateEstadoEnvioXIdResponse")
+    public Envio updateEstadoEnvioXId(
+        @WebParam(name = "idEnvio", targetNamespace = "")
+        int idEnvio,
+        @WebParam(name = "estado", targetNamespace = "")
+        String estado);
 
     /**
      * 

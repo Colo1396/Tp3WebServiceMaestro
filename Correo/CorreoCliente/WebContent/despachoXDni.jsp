@@ -61,7 +61,27 @@
 			}
 			%>
 		</table>
+		<form action="EditarEstado" method="POST">
 
+			<tr>
+				<td>Id del Envio</td>
+				<td><input type="text" id="idEnvio" name="idEnvio"></td>
+				<td><input type="hidden" id="urlDespacho" name="urlDespacho"
+					value="despachoXDni"></td>
+			</tr>
+			<tr>
+				<td>Estado</td>
+				<select name="estado">
+					<option value="1.En Preparacion">1.En Preparacion</option>
+					<option value="2.Despachado">2.Despachado</option>
+					<option value="3.En Camino">3.En Camino</option>
+					<option value="4.Entregado">4.Entregado</option>
+				</select>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Editar"></td>
+			</tr>
+		</form>
 	</div>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
 	<footer>

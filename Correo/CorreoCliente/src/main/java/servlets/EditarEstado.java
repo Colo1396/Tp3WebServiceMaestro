@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,46 +16,51 @@ import EnvioWsdl.Envio;
 import EnvioWsdl.EnvioService;
 import EnvioWsdl.EnvioService_Service;
 
-@WebServlet("/CargarEnvio")
-public class CargarEnvio extends HttpServlet {
+/**
+ * Servlet implementation class EditarEstado
+ */
+@WebServlet("/EditarEstado")
+public class EditarEstado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public CargarEnvio() {
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public EditarEstado() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		int dni = Integer.parseInt(request.getParameter("dni"));
-		String domicilio = request.getParameter("domicilio");
-		//FALTA TRAER EL ID DE USUARIO LOGUEADO
+		int idEnvio =Integer.parseInt(request.getParameter("idEnvio"));
+		String estado = request.getParameter("estado");
+		String urlDespacho = request.getParameter("urlDespacho");
 		
+		System.out.println("la ruta a redirigir es "+urlDespacho);
+
 		EnvioService_Service envioService_service = new EnvioService_Service();
 		EnvioService service = envioService_service.getEnvioServicePort();
 		Envio envio = new Envio();
 
-		envio.setCodSeguimiento((int) (100000 * Math.random()));
-		envio.setDni(dni);
-		envio.setDomicilio(domicilio);
-		envio.setEstado("En Preparacion");
-		envio.setIdEnvio(0);
-		envio.setIdUsuario(1);// Traerlo desde el login
+		envio = service.updateEstadoEnvioXId(idEnvio, estado);
 
-		request.setAttribute("CodigoSeguimiento", envio.getCodSeguimiento());
-
-		String returnString = service.create(envio);
-		System.out.println(returnString);
-
-		try (PrintWriter out =response.getWriter()){
-			RequestDispatcher rd = request.getRequestDispatcher("cargarEnvio.jsp");
+		try (PrintWriter out = response.getWriter()) {
+			RequestDispatcher rd = request.getRequestDispatcher(urlDespacho+".jsp");
 			rd.forward(request, response);
 		}
 

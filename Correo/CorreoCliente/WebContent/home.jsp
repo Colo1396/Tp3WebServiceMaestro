@@ -38,14 +38,7 @@
 				</tr>
 			</table>
 		</form>
-		El codigo de Seguimiento del Envio Cargado es:
-		<%
-		if (request.getAttribute("CodigoSeguimiento") != null) {
-			out.print(request.getAttribute("CodigoSeguimiento"));
-		} else {
-			out.print("--");
-		}
-		%>
+
 		<form action="despacho.jsp" method="post">
 			<table border="0" aling="center" widh="500px">
 				<tr>

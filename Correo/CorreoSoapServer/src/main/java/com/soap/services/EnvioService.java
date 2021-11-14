@@ -108,6 +108,21 @@ public class EnvioService {
 		}
 	}
 	//----------------------------------------------------------------------------------
+	@WebMethod(operationName = "updateEstadoEnvioXId")
+	@RequestWrapper(className="com.soap.services.EnvioService.updateEstadoEnvioXId")
+	public Envio updateEstadoEnvioXId(@WebParam(name = "idEnvio") int idEnvio,@WebParam(name = "estado") String estado) {
+		try {
+			Envio envioUpdated = null;
+			if (envioController.updateEstadoEnvioXId(idEnvio,estado)) {
+				envioUpdated = envioController.findById(idEnvio);
+			}
+			return envioUpdated;
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
+	//----------------------------------------------------------------------------------
 	@WebMethod(operationName = "traerAllMisDespachos")
 	@RequestWrapper(className="com.soap.services.EnvioService.traerAllMisDespachos")
 	public List<Envio> traerAllMisDespachos(@WebParam(name = "idUsuario")int idUsuario, @WebParam(name = "orden")String orden) {

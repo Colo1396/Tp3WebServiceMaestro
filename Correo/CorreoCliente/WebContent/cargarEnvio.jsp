@@ -45,7 +45,14 @@
 				</tr>
 				</br>
 			</form>
-	
+			El codigo de Seguimiento del Envio Cargado es:
+		<%
+		if (request.getAttribute("CodigoSeguimiento") != null) {
+			out.print(request.getAttribute("CodigoSeguimiento"));
+		} else {
+			out.print("--");
+		}
+		%>
 		</div>
 	</div>
 	<!-- ------------------------------------------------------------------------------------------------------------------ -->
