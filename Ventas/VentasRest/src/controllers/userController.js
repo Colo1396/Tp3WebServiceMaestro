@@ -35,7 +35,7 @@ const login = async (req, res) => {
 
 const getUser = async (req, res) => {
     try{
-        const user = await UserService.getById(req.user.id);
+        const user = await UserService.getById(req.params.idUser);
         res.status(200).send(user);
     } catch(err){
         console.error(err);
