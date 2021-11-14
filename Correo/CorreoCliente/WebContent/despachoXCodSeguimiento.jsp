@@ -84,6 +84,8 @@
 				</select>
 			</tr>
 			<tr>
+				<td><input type="hidden" id="idUsuarioLogueado" name="idUsuarioLogueado" value="<%=idUsuarioLogueado2%>"></td>
+				<td><input type="hidden" id="dniUsuarioLogueado" name="dniUsuarioLogueado" value="<%=dniUsuarioLogueado2%>"></td>
 				<td><input type="submit" value="Editar"></td>
 			</tr>
 		</form>

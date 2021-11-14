@@ -51,6 +51,12 @@ public class EditarEstado extends HttpServlet {
 		String estado = request.getParameter("estado");
 		String urlDespacho = request.getParameter("urlDespacho");
 		
+		int idUsuarioLogueado =Integer.parseInt(request.getParameter("idUsuarioLogueado"));
+		String dniUsuarioLogueado = request.getParameter("dniUsuarioLogueado");
+		
+		request.setAttribute("idUsuarioLogueado", idUsuarioLogueado);
+		request.setAttribute("dniUsuarioLogueado", dniUsuarioLogueado);
+		
 		System.out.println("la ruta a redirigir es "+urlDespacho);
 
 		EnvioService_Service envioService_service = new EnvioService_Service();
