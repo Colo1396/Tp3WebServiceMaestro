@@ -1,0 +1,45 @@
+<div class="card mb-3">
+    <form>
+        <div class="row g-0 p-4">
+            <div class="col-md-3">
+                <input type="file" accept="image/*" class="form-control" id="inputImage" (change)="previewImage($event)">
+                <label *ngIf="!imagePath" for="inputImage" class="default-image preview-image ratio ratio-1x1 w-100">
+                    <p class="d-flex justify-content-center align-items-center">Imagen del producto</p>
+                </label>
+                <label *ngIf="imagePath" for="inputImage" class="preview-image">
+                    <img [src]="imagePath" class="img-fluid rounded-start">
+                </label>
+            </div>
+            <div class="col-md-9">
+                <diV class="card-body">
+                    <div class="mb-3">
+                        <label for="inputNombre" class="form-label">Titulo</label>
+                        <input type="text" class="form-control" id="inputNombre" [(ngModel)]="producto.nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputDescripcion" class="form-label">Descripcion</label>
+                        <textarea class="form-control" id="inputDescripcion" rows="4" [(ngModel)]="producto.descripcion" name="descripcion" required></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <label for="inputPrecio" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="inputPrecio" [(ngModel)]="producto.precio" name="precio" placeholder="0" required>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="inputStock" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="inputStock" [(ngModel)]="producto.stock" name="stock" placeholder="0" required>
+                        </div>
+                    </div>
+                    <p class="fs-5 mb-1 pt-3">Medios de pago</p>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-outline-primary" [ngClass]="{'active' : mp.selected}" *ngFor="let mp of producto.mediosDePago" (click)="selectMP(mp)">{{mp.nombre}}</button>
+                    </div>
+                </diV>
+            </div>
+            <button [disabled]="loading" class="btn btn-success mt-5" (click)="onSubmit()">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> 
+                Confirmar
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,54 @@
+<div class="card mb-3">
+  <div class="row g-0 p-4">
+    <div *ngIf="!editMode" class="col-md-3">
+      <img src="{{producto?.imagen}}" class="img-fluid rounded-start">
+      <button id="btnVendidos" class="btn btn-sm btn-danger">Vendidos {{producto?.cantidadVentas}}</button>
+      <i id="btnEdit" *ngIf="!editMode" class="fas fa-edit" (click)="editMode=true"></i>
+    </div>
+    <div *ngIf="editMode" class="col-md-3">
+      <input [disabled]="producto.cantidadVentas > 0" type="file" accept="image/*" class="form-control" id="inputImage" (change)="previewImage($event)">
+      <label for="inputImage" class="preview-image">
+          <img [src]="imagePath" class="img-fluid rounded-start">
+      </label>
+    </div>
+    <div *ngIf="!editMode" class="col-md-9">
+      <div class="card-body">
+        <h5 class="card-title">{{producto?.nombre}}</h5>
+        <p class="fs-4">{{ producto?.precio | currency:'USD':'symbol':'1.0-0' }}</p>
+        <button class="btn btn-sm btn-secondary text-white">Stock disponible: {{producto?.stock}}</button>
+      </div>
+      <diV class="card-body col-12">
+        <p class="fs-5 mb-1">Medios de pago</p>
+        <div class="btn-group" role="group">
+          <button class="btn btn-outline-primary" disabled *ngFor="let mp of producto?.mediosDePago">{{mp.nombre}}</button>
+        </div>
+      </diV>
+    </div>
+    <div *ngIf="editMode" class="col-md-9">
+      <div class="mb-3">
+        <input [disabled]="producto.cantidadVentas > 0" type="text" class="form-control" id="inputNombre" [(ngModel)]="producto.nombre" name="nombre" required>
+      </div>
+      <div class="mb-3">
+        <input [disabled]="producto.cantidadVentas > 0" type="number" class="form-control" id="inputPrecio" [(ngModel)]="producto.precio" name="precio" placeholder="0" required>
+      </div>
+      <div class="mb-3">
+        <input type="number" class="form-control" id="inputStock" [(ngModel)]="producto.stock" name="stock" placeholder="0" required>
+      </div>
+      <div class="mb-3">
+        <textarea [disabled]="producto.cantidadVentas > 0" class="form-control" id="inputDescripcion" rows="4" [(ngModel)]="producto.descripcion" name="descripcion" required></textarea>
+      </div>
+      <div class="mb-3">
+        <div class="btn-group" role="group">
+          <button class="btn btn-outline-primary" [ngClass]="{'active' : mp.selected}" *ngFor="let mp of mediosDePago" (click)="mp.selected=!mp.selected">{{mp.nombre}}</button>
+        </div>
+      </div>
+      <div *ngIf="editMode" class="btn-group">
+        <button class="btn btn-outline-secondary" (click)="updateProducto()">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> 
+          Save
+        </button>
+        <button class="btn btn-secondary" (click)="editMode=false">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
