@@ -3,6 +3,7 @@ const {Sequelize} = require('sequelize');
 const userModel = require('./models/User');
 const productoModel = require('./models/Producto');
 const medioDePagoModel = require('./models/MedioDePago');
+const cuentaBancariaModel = require('./models/CuentaBancaria');
 
 /** CONFIGURACIÓN CONEXION PARA LA BD */
 const sequelize = new Sequelize("tpIIItienda", "root", "root" ,{
@@ -15,6 +16,7 @@ const sequelize = new Sequelize("tpIIItienda", "root", "root" ,{
 const UserModel = userModel(sequelize, Sequelize);
 const ProductoModel = productoModel(sequelize, Sequelize);
 const MedioDePagoModel = medioDePagoModel(sequelize, Sequelize);
+const CuentaBancariaModel = cuentaBancariaModel(sequelize, Sequelize);
 
 /* relacion one to many de User y Producto */
 UserModel.hasMany(ProductoModel, {
@@ -30,6 +32,15 @@ ProductoModel.belongsTo(UserModel, {
 ProductoModel.belongsToMany(MedioDePagoModel, { through: 'producto_mediodepago', as: 'mediosDePago'});
 MedioDePagoModel.belongsToMany(ProductoModel, { through: 'producto_mediodepago'});
 
+UserModel.hasMany(CuentaBancariaModel, {
+    foreignKey: 'idVendedor',
+    as: 'cuentasBancarias'
+});
+CuentaBancariaModel.belongsTo(UserModel, {
+    foreignKey: 'idVendedor',
+    as: 'vendedor'
+});
+
 /** INICIALIZO EL MAPEO **/
 sequelize.sync({ force: false})
     .then( ()=>{
@@ -40,5 +51,6 @@ sequelize.sync({ force: false})
 module.exports = {
     UserModel,
     ProductoModel,
-    MedioDePagoModel
+    MedioDePagoModel,
+    CuentaBancariaModel
 }

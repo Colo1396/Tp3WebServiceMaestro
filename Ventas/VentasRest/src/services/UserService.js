@@ -1,7 +1,7 @@
 const Op = require('sequelize').Op;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { UserModel } = require('../connection');
+const { UserModel, CuentaBancariaModel } = require('../connection');
 
 class UserService{
     static async register(user){
@@ -37,8 +37,7 @@ class UserService{
             const loginInfo = {
                 auth_token: token, 
                 id: userExists.id, 
-                nombre: userExists.nombre, 
-                billetera: userExists.billetera
+                nombre: userExists.nombre
             };
             return loginInfo;
         }
@@ -56,7 +55,12 @@ class UserService{
     }
 
     static async getById(id){
-        var users = await UserModel.findByPk(id);
+        var users = await UserModel.findOne({
+            where:{
+                id: id
+            },
+            include: ['cuentasBancarias']
+        });
         return  users;    
     }
 
@@ -64,7 +68,8 @@ class UserService{
         const users = await UserModel.findOne({
             where:{
                 username: username
-            }
+            },
+            include: ['cuentasBancarias']
         });
 
         return users;
@@ -74,7 +79,8 @@ class UserService{
         const users = await UserModel.findOne({
             where:{
                 dni: dni
-            }
+            },
+            include: ['cuentasBancarias']
         });
 
         return users;
@@ -91,7 +97,9 @@ class UserService{
             if(dniExists.id != idUser) throw new Error("Ya existe un usuario con ese dni");
         }
 
-        const updatedUser = await UserModel.update(
+        const updatedUser = await this.getById(idUser);
+
+        await updatedUser.update(
             {
                 username: user.username,
                 nombre: user.nombre,
@@ -105,6 +113,10 @@ class UserService{
                 }
             }
         );
+        
+        if(user.cuentaNueva){
+            await CuentaBancariaModel.create(user.cuentaNueva);
+        }
 
         return updatedUser;
     }
