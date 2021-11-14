@@ -41,6 +41,8 @@ public class Login extends HttpServlet {
 			request.setAttribute("razonSocial", usuarioValido.getRazonSocial());
 			request.setAttribute("idUsuarioRefVentas", usuarioValido.getIdUsuarioRef());
 
+			request.setAttribute("objUsuarioLogueado", usuarioValido);
+			
 			try (PrintWriter out =response.getWriter()){
 				RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 				rd.forward(request, response);
