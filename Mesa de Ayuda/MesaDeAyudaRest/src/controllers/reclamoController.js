@@ -1,6 +1,30 @@
 const {ReclamoService} = require('../services/ReclamoService');
 const {UserService} = require('../services/UsuarioServices');
 
+
+const obtenerReclamo = async(req,res)=>{
+    try{
+        const {id} = req.params;
+        let reclamo = await ReclamoService.getById(id);
+        if(reclamo){
+            res.status(200).json({
+                message: "reclamo encontrado exitosamente",
+                data: reclamo
+            });
+        }else{
+            res.status(200).json({
+                message: "no se encontro el reclamo",
+                data: reclamo
+            });
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: "Ocurrio un error --> "+err
+        });
+    }
+}
+
 const crearReclamo = async(req,res) =>{
     try{
         const {productoId, compradorId} = req.body;
@@ -24,6 +48,47 @@ const crearReclamo = async(req,res) =>{
     }
 }
 
+const modificarReclamo = async(req,res)=>{
+    try{
+        const {id} = req.params;
+        const {estado} = req.body;        
+        let reclamo = {
+                "id": id,
+                "estado": estado,
+        };
+        let reclamoModificado = await ReclamoService.update(reclamo);
+            return res.status(200).json({
+                message: "Reclamo modificado con exito!!!",
+                data: reclamoModificado
+            });
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({
+            message: "Ocurrio un error --> "+err
+        });
+    }
+}
+
+const eliminarReclamo = async(req,res)=>{
+    try{
+        const {id} = req.params;
+        let reclamoEliminado = await ReclamoService.delete(id);
+            return res.status(200).json({
+                message: "Reclamo eliminado con exito!!!",
+                data: reclamoEliminado
+            });
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({
+            message: "Ocurrio un error --> "+err
+        });
+    }
+}
+
+
 module.exports = {
-    crearReclamo
+    crearReclamo,
+    modificarReclamo,
+    eliminarReclamo,
+    obtenerReclamo
 }

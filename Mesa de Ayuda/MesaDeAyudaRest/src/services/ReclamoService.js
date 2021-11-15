@@ -8,7 +8,9 @@ class ReclamoService{
 
     static async update(reclamo){
         let reclamoModificado = await ReclamoModel.update({
-            "estado": reclamo.estado,
+            "estado": reclamo.estado
+        },
+        {
             where: {
                 "id": reclamo.id
             }
