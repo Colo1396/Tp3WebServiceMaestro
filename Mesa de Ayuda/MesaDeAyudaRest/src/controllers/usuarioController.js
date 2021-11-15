@@ -13,10 +13,11 @@ const registrarse = async(req, res)=> {
             "password": password,
             "nombre": nombre,
             "apellido": apellido,
-            "dni": dni,
+            "dni": parseInt(dni),
             "rolId": rolId
         };
-        const rolAsignado = await RolService.getById(rolId); 
+        console.log(user); 
+        const rolAsignado = await RolService.getById(rolId);
         if(!rolAsignado){
             const rolUser = await RolService.getByType("user"); //cuando no se le indica un rol, el rol por defecto es rol "user"
             user.rolId = rolUser.id;
@@ -29,16 +30,21 @@ const registrarse = async(req, res)=> {
             const token = jwt.sign({id: nuevoUsuario.id}, SECRET, {
                 expiresIn: 1200 //expira en 1 hora el token
             });
+            /*
             res.status(200).json({
                 message: "User created succesfully!!!",
                 data: nuevoUsuario,
                 token: token
-            });        
+            });
+            */
+            res.redirect('/api/usuarios/login');
+
         }else{
             res.status(200).json({
             message: "User cant be created",
             data: nuevoUsuario
             });
+            res.redirect('/api/usuarios/register');
         }
         
     }catch(err){
@@ -57,15 +63,22 @@ const ingresar = async(req,res)=>{
         if(user){
             try{
                 let loginInfo = await UserService.login(user);
+                /*
                 return res.status(200).json({
                     message: "login succesfully!!!",
                     data: loginInfo
                 });
+                */
+               res.redirect("/api/usuarios/home");
             }catch(err){
                 console.log(err);
+                /*
                 return res.status(400).json({
                     message: "cant connect because -->" + err
                 });
+                */
+                res.redirect("/api/usuarios/login");
+
             }
 
         }

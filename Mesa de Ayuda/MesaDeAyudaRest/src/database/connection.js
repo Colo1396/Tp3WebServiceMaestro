@@ -17,6 +17,18 @@ const sequelize = new Sequelize(
     }
 );
 
+/*
+const sequelize = new Sequelize(
+    "bbglhfbpl88th3ne8zmg", "unyu1hkmsskogwus", "V96syZVkwK1AwOV0O3Wn",
+    {
+        host: "bbglhfbpl88th3ne8zmg-mysql.services.clever-cloud.com",
+        port: "3306",
+        dialect: "mysql",
+        logging: false
+    }
+);
+*/
+
 /*** REALIZO LOS MAPEOS DE LAS CLASES */
 const UserModel = userModel(sequelize, Sequelize);
 const ProductoModel = productoModel(sequelize, Sequelize);
