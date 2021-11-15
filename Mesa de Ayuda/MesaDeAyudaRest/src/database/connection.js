@@ -4,7 +4,8 @@ const userModel = require('../models/Usuario');
 const productoModel = require('../models/Producto');
 const medioDePagoModel = require('../models/MedioDePago');
 const rolModel = require('../models/Rol');
-
+const denunciaModel = require('../models/Denuncia');
+const reclamoModel = require('../models/Reclamo');
 
 const sequelize = new Sequelize(
     "mesadeayuda_db", "root", "123456789",
@@ -21,6 +22,8 @@ const UserModel = userModel(sequelize, Sequelize);
 const ProductoModel = productoModel(sequelize, Sequelize);
 const MedioDePagoModel = medioDePagoModel(sequelize, Sequelize);
 const RolModel = rolModel(sequelize, Sequelize);
+const DenunciaModel = denunciaModel(sequelize, Sequelize);
+const ReclamoModel = reclamoModel(sequelize, Sequelize);
 
 /* relacion one to many de User y Rol*/
 RolModel.hasMany(UserModel, {
@@ -39,7 +42,47 @@ UserModel.hasMany(ProductoModel, {
 });
 ProductoModel.belongsTo(UserModel, {
     foreignKey: 'idVendedor',
-    as: 'vendedor'
+    as: 'usuario'
+});
+
+/* relacion one to many de user y denuncia */
+UserModel.hasMany(DenunciaModel,{
+    foreignKey: 'compradorId',
+    as: 'denuncias'
+});
+DenunciaModel.belongsTo(UserModel,{
+    foreignKey: 'compradorId',
+    as: 'comprador'
+});
+
+/* relacion one to many de user y reclamo */
+UserModel.hasMany(ReclamoModel,{
+    foreignKey: 'compradorId',
+    as: 'reclamos'
+});
+ReclamoModel.belongsTo(UserModel,{
+    foreignKey: 'compradorId',
+    as: 'comprador'
+});
+
+/* relacion one to many de producto y denuncia */
+ProductoModel.hasMany(DenunciaModel,{
+    foreignKey: 'productoId',
+    as: 'denuncias'
+});
+DenunciaModel.belongsTo(ProductoModel,{
+    foreignKey: 'productoId',
+    as: 'producto'
+});
+
+/* relacion one to many de producto y reclamo */
+ProductoModel.hasMany(ReclamoModel,{
+    foreignKey: 'productoId',
+    as: 'reclamos'
+});
+ReclamoModel.belongsTo(ProductoModel,{
+    foreignKey: 'productoId',
+    as: 'producto'
 });
 
 /* relacion many to many de Producto y MedioDePago */
@@ -57,5 +100,7 @@ module.exports = {
     UserModel,
     ProductoModel,
     MedioDePagoModel,
-    RolModel
+    RolModel,
+    ReclamoModel,
+    DenunciaModel
 }
