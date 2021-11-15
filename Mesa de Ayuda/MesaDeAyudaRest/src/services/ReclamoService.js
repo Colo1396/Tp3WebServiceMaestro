@@ -2,6 +2,29 @@ const Op = require('sequelize').Op;
 const { ReclamoModel } = require('../database/connection');
 
 class ReclamoService{
+    static async add(nuevoReclamo){
+        return await ReclamoModel.create(nuevoReclamo);
+    }
+
+    static async update(reclamo){
+        let reclamoModificado = await ReclamoModel.update({
+            "estado": reclamo.estado,
+            where: {
+                "id": reclamo.id
+            }
+        });
+        return reclamoModificado;
+    }
+
+    static async delete(idReclamo){
+        let reclamoEliminado = await ReclamoModel.destroy({
+            where: {
+                "id": idReclamo
+            }
+        });
+        return reclamoEliminado;
+    }
+
     static async getById(id){
         const reclamo = await ReclamoModel.findByPk(id);
         return reclamo;    

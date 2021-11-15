@@ -2,6 +2,7 @@ const Op = require('sequelize').Op;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { UserModel } = require('../database/connection');
+const {RolService} = require('./RolServices');
 const {SECRET} = require('../config/config.security');
 
 class UserService{
@@ -30,9 +31,39 @@ class UserService{
         if(!userExists){
             throw new Error("El usuario ingresado no existe");
         }
-        
-        const isValid = await bcrypt.compare(user.password, userExists.password);
+        let isValid = await bcrypt.compare(user.password, userExists.password);
+        const rolDelUser = await RolService.getById(userExists.rolId);
+        let estaEncriptada = false;
+        let esLaContraseniaCorrecta = (user.password === userExists.password);
 
+        try{
+            console.log(await bcrypt.getRounds(userExists.password));
+            estaEncriptada = true;
+        }catch(err){
+            console.log(err);
+        }
+
+        if(rolDelUser.tipo === "mesa" && !estaEncriptada && esLaContraseniaCorrecta){ //si no esta encriptada la password y es del userRol "mesa" se incripta, esto se usa para los user que no se registran desde el end point
+            const salt = await bcrypt.genSalt(12);
+            const hashUserPassword = await bcrypt.hash(userExists.password, salt); //hasheo la contraseña del usuario
+            await UserModel.update({ //modifico el user con la contraseña hasehada
+                "password": hashUserPassword
+                },
+                {
+                    where: {
+                        "id": userExists.id
+                    }
+                }
+            );
+            const validar = await bcrypt.compare(user.password, hashUserPassword); //compara las dos contraseñas ahora si hasheadas
+            if(validar){
+                isValid = true;
+            } 
+            else{
+                isValid = false;
+            } 
+        }
+        
         if(isValid){
             const token = jwt.sign({id: userExists.id}, SECRET, {
                 expiresIn: 1200 //expira en 1 hora el token
@@ -43,6 +74,7 @@ class UserService{
         else{
             throw new Error("La contraseña ingresada es incorrecta");
         }
+
     }   
 
     static async getAll(){

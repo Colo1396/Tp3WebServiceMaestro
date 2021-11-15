@@ -6,6 +6,8 @@ const cors = require('cors');
 const mediosDePagoRoutes = require('./routes/mediosDePago');
 const productosRoutes = require('./routes/productos');
 const usuariosRoutes = require('./routes/usuarios');
+const denunciasRouters = require('./routes/denuncias');
+//const reclamosRouters = require('./routes/reclamos');
 
 //inicializo
 const app = express();
@@ -23,6 +25,8 @@ app.use(cors());//para q permita q cualquier servidor pida cosas y haga operacio
 app.use("/api/mediosDePago/",mediosDePagoRoutes);
 app.use("/api/productos/",productosRoutes);
 app.use("/api/usuarios/",usuariosRoutes);
+app.use("/api/denuncias/",denunciasRouters);
+//app.use("/api/reclamos/",reclamosRouters);
 
 
 module.exports = app;

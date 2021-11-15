@@ -1,5 +1,6 @@
 const {UserService} = require('../services/UsuarioServices');
 const {RolService} = require('../services/RolServices');
+
 const jwt = require('jsonwebtoken');
 const {SECRET} = require('../config/config.security');
 
@@ -116,28 +117,9 @@ const obtenerUsuario = async(req,res)=>{
     }
 }
 
-/*
-const realizarDenuncia = async (req,res)=>{
-    const {categoria, comentario,productoId, compradorId} = req.body;
-
-    let user = await UserService.getById(compradorId);
-    if( user ){
-        let denuncia = {
-            "categoria": categoria,
-            "comentario": comentario,
-            "productoId": productoId,
-            "compradorId": compradorId
-        };
-
-    }
-
-}
-*/
-
 module.exports ={
     registrarse,
     ingresar,
     obtenerUsuarios,
-    obtenerUsuario,
-    //realizarDenuncia
+    obtenerUsuario
 };   
