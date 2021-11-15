@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>TP Web Services SOAP/REST</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- FONT AWESOME 5 -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+            crossorigin="anonymous">
+    
+        <style>
+            main > .container {
+                padding: 60px 15px 0;
+            }
+        </style>
+        <!-- Estilo para Jquery Steps -->
+        <link href="css/jquery.steps.css" rel="stylesheet">
+    </head>
+<body class="d-flex flex-column h-100">
+    <header>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">Shop Distribuidos</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Compra</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">Todos los productos</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Productos populares</a></li>
+                                <li><a class="dropdown-item" href="#!">Nuevos productos</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Venta</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Ayuda</a></li>
+                    </ul>
+                    <form class="d-flex">
+                        
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="fas fa-shopping-cart me-1"></i>
+                            Carrito
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                        <ul class="navbar-nav ml-auto ml-md-0">
+
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" href="#" id="search" role="button">
+                            <i class="fas fa-search fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">                            <i class="fas fa-user-circle fa-fw"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">Perfil</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Compras</a></li>
+                                <li><a class="dropdown-item" href="#!">Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="flex-shrink-0">
+        <div class="container">
+            <form action="" method="post" class="form">
+                <div id="procesoCompra" class="mt-2">
+                    <h3>Productos del carrito</h3>
+                    <section>
+                        <div class="container mb-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"> </th>
+                                                    <th scope="col">Producto</th>
+                                                    <th scope="col" class="text-center">Cantidad</th>
+                                                    <th scope="col" class="text-right">Precio unitario</th>
+                                                    <th scope="col">Subtotal</th>
+                                                    <th> </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                                                    <td>Product Name Dada</td>
+                                                    <td><input class="form-control" type="text" value="1" /></td>
+                                                    <td class="text-right">124,90 €</td>
+                                                    <td>$</td>
+                                                    <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i> </button> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                                                    <td>Product Name Toto</td>
+                                                    <td><input class="form-control" type="text" value="1" /></td>
+                                                    <td class="text-right">33,90 €</td>
+                                                    <td>$</td>
+                                                    <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i> </button> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                                                    <td>Product Name Titi</td>
+                                                    <td><input class="form-control" type="text" value="1" /></td>
+                                                    <td class="text-right">70,00 €</td>
+                                                    <td>$</td>
+                                                    <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i> </button> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><strong>Total</strong></td>
+                                                    <td class="text-right"><strong>$</strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <h3>Envío</h3>
+                    <section>
+                        <p>Seleccione el domicilio al cual será enviado el pedido</p>
+                        <div class="form-group row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <!--Tipo (Débito/Crédito)-->
+                                    <div class="form-group col-md-12 my-2">
+                                        <label for="tipo" clas="form-label">Enviar a:</label>
+                                        <select class="form-select" aria-label="Default select" name="tipo" required>
+                                            <option selected value="">Seleccione el domicilio</option>
+                                            <option value="1"></option>
+                                        </select>                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <h3>Efectuar pago</h3>
+                    <section>
+                        <p>Seleccione la tarjeta con la cual desea pagar.</p>
+                        <div class="form-group row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <!--Tipo (Débito/Crédito)-->
+                                    <div class="form-group col-md-12 my-2">
+                                        <label for="tipo" clas="form-label">Tarjeta</label>
+                                        <select class="form-select" aria-label="Default select" name="tipo" required>
+                                            <option selected value="">Seleccione la tarjeta</option>
+                                            <option value="1"></option>
+                                        </select>                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5" align="right">
+                            <a href="#" role="button" class="btn btn-danger">Cancelar</a>
+                            <button type="submit" class="btn btn-success">Finalizar compra</button>
+                        </div>        
+                    </section>
+                </div>
+            </form>
+        </div>
+    </main>
+    <!-- Footer-->
+    <footer class="footer mt-auto py-4" style="background-color: rgb(245, 152, 2);">
+        <div class="container"><p class="m-0 text-center text-white">TP Distribuidos - Web Services SOAP/REST</p><p class="m-0 text-center text-white">Copyright &copy; 2021. Baez, Bustos, Galván, Rivera.</p></div>
+    </footer>
+    <!--Jquery-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!--Se agrega plugin Jquery Steps (el cual, a su vez, requiere Jquery cookie) 
+        para hacer el formulario de la receta de aplicación de a pasos -->
+    <script src="js/jquery-steps/jquery.cookie-1.3.1.js"></script>
+    <script src="js/jquery-steps/jquery.steps.js"></script>
+    <script>
+        //Script para utilizar el plugin jquery Steps
+        $("#procesoCompra").steps({
+            headerTag: "h3",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            autoFocus: true
+        });
+         //Se oculta botón Finalizar dado que no se utiliza
+         $('a[href="#finish"]').hide();
+    </script>
+    </body>
+</html>
