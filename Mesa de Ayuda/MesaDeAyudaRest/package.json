@@ -1,0 +1,47 @@
+{
+  "name": "mesadeayudarest",
+  "version": "1.0.0",
+  "description": "Modulo \"Mesa de Ayuda\" para Tp Web Services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Colo1396/Tp3WebServiceMaestro.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Colo1396/Tp3WebServiceMaestro/issues"
+  },
+  "homepage": "https://github.com/Colo1396/Tp3WebServiceMaestro#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.27.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "datauri": "^4.1.0",
+    "dotenv": "^10.0.0",
+    "exphbs": "^1.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "express-session": "^1.17.2",
+    "flash": "^1.1.0",
+    "hbs": "^4.1.2",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "mysql2": "^2.3.3-rc.0",
+    "passport": "^0.5.0",
+    "path": "^0.12.7",
+    "sequelize": "^6.9.0",
+    "tedious": "^14.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
