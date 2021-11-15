@@ -24,17 +24,40 @@ const obtenerDenuncia = async(req,res)=>{
     }
 }
 
+const obtenerDenunciasPorEstado = async(req,res)=>{
+    try{
+        const {estado} = req.body;
+        let denuncias = await DenunciaService.getAllByState(estado);
+        if(denuncias){
+            res.status(200).json({
+                message: "denuncias encontrada exitosamente",
+                data: denuncias
+            });
+        }else{
+            res.status(200).json({
+                message: "no se encontraron las denuncias",
+                data: denuncias
+            });
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: "Ocurrio un error --> "+err
+        });
+    }
+}
+
 const crearDenuncia = async (req,res)=>{
     try{
         const {categoria, comentario,productoId, compradorId} = req.body;
 
-        let user = await UserService.getById(compradorId);
+        let user = await UserService.getById(req.userId);
         if( user ){
             let denuncia = {
                 "categoria": categoria,
                 "comentario": comentario,
                 "productoId": productoId,
-                "compradorId": compradorId
+                "compradorId": user.id
             };
             let denunciaCreada = await DenunciaService.add(denuncia);
             return res.status(200).json({
@@ -93,5 +116,6 @@ module.exports = {
     crearDenuncia,
     modificarDenuncia,
     eliminarDenuncia,
-    obtenerDenuncia
+    obtenerDenuncia,
+    obtenerDenunciasPorEstado
 }

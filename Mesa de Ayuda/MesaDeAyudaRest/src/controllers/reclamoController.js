@@ -25,15 +25,38 @@ const obtenerReclamo = async(req,res)=>{
     }
 }
 
+const obtenerReclamosPorEstado = async(req,res)=>{
+    try{
+        const {estado} = req.body;
+        console.log(estado);
+        let reclamos = await ReclamoService.getAllByState(estado);
+        if(reclamos){
+            res.status(200).json({
+                message: "reclamos encontrados exitosamente",
+                data: reclamos
+            });
+        }else{
+            res.status(200).json({
+                message: "no se encontraron los reclamos",
+                data: reclamos
+            });
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: "Ocurrio un error --> "+err
+        });
+    }
+}
+
 const crearReclamo = async(req,res) =>{
     try{
-        const {productoId, compradorId} = req.body;
-
-        let user = await UserService.getById(compradorId);
+        const {productoId} = req.body;
+        let user = await UserService.getById(req.userId);
         if( user ){
             let reclamo = {
                 "productoId": productoId,
-                "compradorId": compradorId
+                "compradorId": user.id
             };
             let reclamoCreado = await ReclamoService.add(reclamo);
             return res.status(200).json({
@@ -90,5 +113,6 @@ module.exports = {
     crearReclamo,
     modificarReclamo,
     eliminarReclamo,
-    obtenerReclamo
+    obtenerReclamo,
+    obtenerReclamosPorEstado
 }

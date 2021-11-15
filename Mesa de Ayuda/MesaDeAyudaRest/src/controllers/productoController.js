@@ -58,7 +58,7 @@ const crearProducto = async (req, res) => {
             stock: req.body.stock,
             mediosDePago: req.body.mediosDePago.id
         }
-        const user = await UserService.getById(req.body.idVendedor);
+        const user = await UserService.getById(req.userId);
         const createdProducto = await ProductoService.add(producto, user);
         if(createdProducto){
             res.status(200).json({
