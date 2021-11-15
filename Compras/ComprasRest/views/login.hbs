@@ -1,0 +1,30 @@
+{{> header }}
+<body>
+    <div class="login-wrapper row">
+       {{> navHome}}
+        <form action="/login" method="post" class="form">
+                <img src="img/user2.png" alt="">
+                <h2>Iniciar sesión</h2>
+                <!--USUARIO-->
+                <div class="input-group">
+                    <input type="text" name="username" id="username" required>
+                    <label for="username"><i class="fa fa-user" aria-hidden="true"></i> &nbsp; Nombre de usuario </label>
+                </div>
+                <!--CONTRASEÑA-->
+                <div class="input-group">
+                    <input type="password" name="password" id="password" required>
+                    <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp; Contraseña</label>
+                </div>
+                <!-- BOTON  -->
+                <button type="submit" id="btn_logear" class="submit-btn">Ingresar
+                    <i class="fa fa-sign-in" aria-hidden="true" style="margin-left:5px;"></i> 
+                </button>
+                <div align="center">
+                    <a class="btn btn-link" href="#">Volver a inicio</a>
+                    <a class="btn btn-link" href="#">Registrarse</a>
+                </div>
+            </form>
+        </div>
+        {{> footer }}
+    </body>
+</html>
