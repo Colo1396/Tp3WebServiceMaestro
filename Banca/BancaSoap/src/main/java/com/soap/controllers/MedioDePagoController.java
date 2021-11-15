@@ -11,9 +11,9 @@ import java.util.logging.Logger;
 
 import com.soap.config.Conexion;
 import com.soap.models.MedioDePago;
+import com.soap.models.Usuario;
 
-
-public class MedioDePagoController extends Conexion{
+public class MedioDePagoController extends Conexion {
 	Connection con = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
@@ -29,7 +29,7 @@ public class MedioDePagoController extends Conexion{
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				
+
 				MedioDePago medioDePago = new MedioDePago(rs.getInt(1), rs.getString(2));
 				lista.add(medioDePago);
 			}
@@ -82,8 +82,6 @@ public class MedioDePagoController extends Conexion{
 
 			ps = con.prepareStatement(sql);
 			ps.setString(1, medioDePago.getNombre());
-			
-			
 
 			if (ps.executeUpdate() == 1) {
 				respuesta = true;
@@ -111,7 +109,6 @@ public class MedioDePagoController extends Conexion{
 			ps = con.prepareStatement(sql);
 			ps.setString(1, medioDePago.getNombre());
 			ps.setInt(2, medioDePago.getIdMedioDePago());
-			
 
 			if (ps.executeUpdate() == 1) {
 				respuesta = true;
@@ -136,6 +133,117 @@ public class MedioDePagoController extends Conexion{
 
 			con = conectar();
 			ps = con.prepareStatement(sql);
+
+			if (ps.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// -------------------------------------------------------------------
+	// Asociar un nuevo MedioDePago al usuario
+	public boolean asociarMedioDePago(Usuario usuario, MedioDePago medioDePago) throws SQLException {
+		try {
+			String sql = " INSERT INTO mpXUsu (idMediosPago, idUsuario) VALUES (?, ?);";
+
+			boolean respuesta = false;
+
+			con = conectar();
+
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, medioDePago.getIdMedioDePago());
+			ps.setInt(2, usuario.getIdUsuario());
+
+			if (ps.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// -------------------------------------------------------------------
+	// Asociar un nuevo MedioDePago al usuario
+	public boolean asociarMedioDePagoXId(int idUsuario, int idMedioDePago) throws SQLException {
+		try {
+			String sql = " INSERT INTO mpXUsu (idMediosPago, idUsuario) VALUES (?, ?);";
+
+			boolean respuesta = false;
+
+			con = conectar();
+
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idMedioDePago);
+			ps.setInt(2, idUsuario);
+
+			if (ps.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// -------------------------------------------------------------------
+	// Desasociar un MedioDePago 
+	public boolean desasociarMedioDePago(Usuario usuario, MedioDePago medioDePago) throws SQLException {
+		try {
+			//String sql = "DELETE FROM mediosPago WHERE idMediosPago = " + id + "";
+			String sql = "DELETE FROM mpXUsu WHERE idMediosPago = ? and idUsuario = ? ";
+			boolean respuesta = false;
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, medioDePago.getIdMedioDePago());
+			ps.setInt(2, usuario.getIdUsuario());
+
+			if (ps.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// -------------------------------------------------------------------
+	// Desasociar un MedioDePago por su id
+	public boolean desasociarMedioDePagoXId(int idUsuario, int idMedioDePago) throws SQLException {
+		try {
+			//String sql = "DELETE FROM mediosPago WHERE idMediosPago = " + id + "";
+			//String sql = "DELETE FROM mpXUsu WHERE idMediosPago = " + idMedioDePago +" and idUsuario = " + idUsuario + "";
+			String sql = "DELETE FROM mpXUsu WHERE idMediosPago = ? and idUsuario = ? ";
+			boolean respuesta = false;
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idMedioDePago);
+			ps.setInt(2, idUsuario);
 
 			if (ps.executeUpdate() == 1) {
 				respuesta = true;

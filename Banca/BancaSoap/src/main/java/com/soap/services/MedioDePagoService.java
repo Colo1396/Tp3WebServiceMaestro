@@ -12,6 +12,7 @@ import javax.xml.ws.RequestWrapper;
 
 import com.soap.controllers.MedioDePagoController;
 import com.soap.models.MedioDePago;
+import com.soap.models.Usuario;
 
 
 @WebService(serviceName = "MedioDePagoService")
@@ -90,6 +91,67 @@ public class MedioDePagoService {
 			return "Error al realizar la petición";
 		}
 	}
-
+	//------------------------------------------------------------------------------------
+	//Asignar medio de Pago
+	@WebMethod(operationName = "asociarMedioDePago")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.asociarMedioDePago")
+	public String asociarMedioDePago(@WebParam(name = "usuario") Usuario usuario,@WebParam(name = "medioDePago") MedioDePago medioDePago) {
+		try {
+			if (medioDePagoController.asociarMedioDePago(usuario,medioDePago)) {
+				return "MedioDePago " + medioDePago.getNombre() + " asociado al usuario "+usuario.getRazonSocial()+ " ID Banca:"+usuario.getIdUsuario();
+			}
+			return "Error al Asignar el MedioDePago";
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoService.class.getName()).log(Level.SEVERE, null, ex);
+			return "Error al realizar la petición, talves ya tiene ese medio de pago asignado.";
+		}
+	}
+	//------------------------------------------------------------------------------------
+	//Asignar medio de Pago por id de usuario y mp
+	@WebMethod(operationName = "asociarMedioDePagoXId")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.asociarMedioDePagoXId")
+	public String asociarMedioDePagoXId(@WebParam(name = "idUsuario") int idUsuario,@WebParam(name = "idMedioDePago") int idMedioDePago) {
+		try {
+			if (medioDePagoController.asociarMedioDePagoXId(idUsuario,idMedioDePago)) {
+				return "MedioDePago ID:" + idMedioDePago + " asociado al usuario  ID Banca:"+idUsuario;
+			}
+			return "Error al Asignar el MedioDePago";
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoService.class.getName()).log(Level.SEVERE, null, ex);
+			return "Error al realizar la petición, talves ya tiene ese medio de pago asignado.";
+		}
+	}
+	//------------------------------------------------------------------------------------
+	// Eliminar un MedioDePago por su id
+	@WebMethod(operationName = "desasociarMedioDePago")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.desasociarMedioDePago")
+	public String desasociarMedioDePago(@WebParam(name = "usuario") Usuario usuario,@WebParam(name = "medioDePago") MedioDePago medioDePago) {
+		try {
+			String msg = "El medioDePago no se ha podido desasociar del usuario";
+			if (medioDePagoController.desasociarMedioDePago(usuario,medioDePago)) {
+				msg = "El medioDePago se ha desasociar correctamente";
+			}
+			return msg;
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoService.class.getName()).log(Level.SEVERE, null, ex);
+			return "Error al realizar la petición";
+		}
+	}
+	//------------------------------------------------------------------------------------
+	// Eliminar un MedioDePago por su id
+	@WebMethod(operationName = "desasociarMedioDePagoXId")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.desasociarMedioDePagoXId")
+	public String desasociarMedioDePagoXId(@WebParam(name = "idUsuario") int idUsuario,@WebParam(name = "idMedioDePago") int idMedioDePago) {
+		try {
+			String msg = "El medioDePago no se ha podido desasociar del usuario";
+			if (medioDePagoController.desasociarMedioDePagoXId(idUsuario,idMedioDePago)) {
+				msg = "El medioDePago se ha desasociar correctamente";
+			}
+			return msg;
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoService.class.getName()).log(Level.SEVERE, null, ex);
+			return "Error al realizar la petición";
+		}
+	}
 
 }

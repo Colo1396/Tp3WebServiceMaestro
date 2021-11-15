@@ -89,4 +89,36 @@ public class MovHistoricoService {
 			return "Error al realizar la petición";
 		}
 	}
+	//------------------------------------------------------------------------------------
+	@WebMethod(operationName = "pagarConTajeta")
+	@RequestWrapper(className="com.soap.services.MovHistoricoService.pagarConTajeta")
+	public String pagarConTajeta(@WebParam(name = "monto") double monto,@WebParam(name = "idUsuario") int idUsuario, 
+			@WebParam(name = "idCuentaBancaria") int idCuentaBancaria,@WebParam(name = "idMediosPago") int idMediosPago,@WebParam(name = "idTarjeta") int idTarjeta) {
+		try {
+			if (movHistoricoController.pagarConTajeta( monto,  idUsuario,  idCuentaBancaria,  idMediosPago,  idTarjeta)) {
+				return "Transaccion cobro por tarjeta ha sido creado correctamente.";
+			}
+			return "Error al crear el movimiento";
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoService.class.getName()).log(Level.SEVERE, null, ex);
+			return "Error al realizar la petición";
+		}
+	}
+	//------------------------------------------------------------------------------------
+		@WebMethod(operationName = "devolucionConTajeta")
+	@RequestWrapper(className="com.soap.services.MovHistoricoService.devolucionConTajeta")
+	public String devolucionConTajeta(@WebParam(name = "monto") double monto,@WebParam(name = "idUsuario") int idUsuario, 
+			@WebParam(name = "idCuentaBancaria") int idCuentaBancaria,@WebParam(name = "idMediosPago") int idMediosPago,@WebParam(name = "idTarjeta") int idTarjeta) {
+		try {
+			if (movHistoricoController.devolucionConTajeta( monto,  idUsuario,  idCuentaBancaria,  idMediosPago,  idTarjeta)) {
+				return "Transaccion de devolucion de tarjeta ha sido creado correctamente.";
+			}
+			return "Error al crear el movimiento";
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoService.class.getName()).log(Level.SEVERE, null, ex);
+			return "Error al realizar la petición";
+		}
+	}
+	//------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------
 }
