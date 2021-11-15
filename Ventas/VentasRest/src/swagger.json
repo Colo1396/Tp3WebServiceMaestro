@@ -1,0 +1,484 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Modulo de Ventas API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:12575",
+      "description": "Servidor local"
+    }
+  ],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Devuelve el token de autorizacion",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "Username del usuario"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Password del usuario"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Informacion del usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "ID dependiendo del tipo de usuario"
+                    },
+                    "auth_token": {
+                      "type": "string",
+                      "description": "Token de autorizacion para el usuario"
+                    },
+                    "nombre": {
+                      "type": "string",
+                      "description": "Nombre del usuario"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Devuelve el usuario creado",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Informacion del usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{idUser}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Devuelve un usuario por ID",
+        "parameters": [
+          {
+            "name": "auth_token",
+            "in": "header",
+            "required": true,
+            "description": "Token de autorizacion",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "idUser",
+            "in": "path",
+            "required": true,
+            "description": "ID del usuario al que se quiere traer",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "El usuario correpondiente a ese ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Actualiza un usuario",
+        "parameters": [
+          {
+            "name": "auth_token",
+            "in": "header",
+            "required": true,
+            "description": "Token de autorizacion",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "El usuario actualizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/productos": {
+      "get": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Trae todos los productos",
+        "parameters": [
+          {
+            "name": "vendedor",
+            "in": "query",
+            "required": false,
+            "description": "Permite filtrar por un usuario especifico",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sinstock",
+            "in": "query",
+            "required": false,
+            "description": "Permite traer los productos sin stock",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de productos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Crea un producto, imagen en este caso es un blob",
+        "parameters": [
+          {
+            "name": "auth_token",
+            "in": "header",
+            "required": true,
+            "description": "Token de autorizacion",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Producto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Producto creado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/productos/{idProducto}": {
+      "get": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Trae un producto por id",
+        "parameters": [
+          {
+            "name": "idProducto",
+            "in": "path",
+            "required": true,
+            "description": "ID del producto buscado",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de productos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Actualiza un producto, imagen en este caso es un blob",
+        "parameters": [
+          {
+            "name": "auth_token",
+            "in": "header",
+            "required": true,
+            "description": "Token de autorizacion",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "idProducto",
+            "in": "path",
+            "required": true,
+            "description": "ID del producto buscado",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Producto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Producto actualizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mediosDePago": {
+      "get": {
+        "tags": [
+          "MediosDePago"
+        ],
+        "summary": "Devuelve todos los medios de pago",
+        "responses": {
+          "200": {
+            "description": "Todos los medios de pago disponibles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MedioDePago"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "El ID autogenerado por MySQL"
+          },
+          "username": {
+            "type": "string",
+            "description": "El nombre de usuario que indentifica al User"
+          },
+          "nombre": {
+            "type": "string",
+            "description": "El nombre del usuario"
+          },
+          "apellido": {
+            "type": "string",
+            "description": "El apellido del usuario"
+          },
+          "password": {
+            "type": "string",
+            "description": "La contraseña elegida por el usuario"
+          },
+          "dni": {
+            "type": "integer",
+            "description": "El DNI del usuario"
+          },
+          "telefono": {
+            "type": "integer",
+            "description": "El telefono de contacto del usuario"
+          },
+          "billetera": {
+            "type": "number",
+            "description": "El dinero acumulado por sus ventas"
+          },
+          "cuentasBancarias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CuentaBancaria"
+            }
+          }
+        }
+      },
+      "Producto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "El ID autogenerado por MySQL"
+          },
+          "nombre": {
+            "type": "string",
+            "description": "El nombre del producto"
+          },
+          "descripcion": {
+            "type": "string",
+            "description": "La descripcion del producto"
+          },
+          "imagen": {
+            "type": "string",
+            "description": "El link a la imagen del producto",
+            "format": "binary"
+          },
+          "precio": {
+            "type": "number",
+            "description": "El precio seleccionado del producto"
+          },
+          "stock": {
+            "type": "integer",
+            "description": "El stock disponible del producto"
+          },
+          "idVendedor": {
+            "type": "integer",
+            "description": "ID del usuario dueño del producto"
+          },
+          "cantidadVentas": {
+            "type": "integer",
+            "description": "Cantidad de unidades vendidas"
+          },
+          "mediosDePago": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MedioDePago"
+            }
+          }
+        }
+      },
+      "MedioDePago": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "El ID autogenerado por MySQL"
+          },
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del metodo de pago"
+          }
+        }
+      },
+      "CuentaBancaria": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "El ID autogenerado por MySQL"
+          },
+          "nroCuenta": {
+            "type": "string",
+            "description": "El numero identificatorio de la cuenta"
+          },
+          "idVendedor": {
+            "type": "integer",
+            "description": "El usuario al que pertenece la cuenta"
+          }
+        }
+      }
+    }
+  }
+}

@@ -669,456 +669,7 @@
          </cuentaBancaria>\r
       </ser:update>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/CuentaBancariaService/update"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="b72a5bf6-e98c-419b-a3d4-a2e37f214b89" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
-  <wsdl:types>
-    <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:element name="create" type="tns:create"/>
-      <xs:element name="createResponse" type="tns:createResponse"/>
-      <xs:element name="delete" type="tns:delete"/>
-      <xs:element name="deleteResponse" type="tns:deleteResponse"/>
-      <xs:element name="findAll" type="tns:findAll"/>
-      <xs:element name="findAllResponse" type="tns:findAllResponse"/>
-      <xs:element name="findById" type="tns:findById"/>
-      <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
-      <xs:element name="update" type="tns:update"/>
-      <xs:element name="updateResponse" type="tns:updateResponse"/>
-      <xs:complexType name="findById">
-        <xs:sequence>
-          <xs:element name="id" type="xs:int"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="findByIdResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="tns:medioDePago"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="medioDePago">
-        <xs:sequence>
-          <xs:element name="idMedioDePago" type="xs:int"/>
-          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="delete">
-        <xs:sequence>
-          <xs:element name="id" type="xs:int"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="deleteResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="findAll">
-        <xs:sequence/>
-      </xs:complexType>
-      <xs:complexType name="findAllResponse">
-        <xs:sequence>
-          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:medioDePago"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="create">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="medioDePago" type="tns:medioDePago"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="createResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="update">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="medioDePago" type="tns:medioDePago"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="updateResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="tns:medioDePago"/>
-        </xs:sequence>
-      </xs:complexType>
-    </xs:schema>
-  </wsdl:types>
-  <wsdl:message name="findById">
-    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findByIdResponse">
-    <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="deleteResponse">
-    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="updateResponse">
-    <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="delete">
-    <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findAll">
-    <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findAllResponse">
-    <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="create">
-    <wsdl:part element="tns:create" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="createResponse">
-    <wsdl:part element="tns:createResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="update">
-    <wsdl:part element="tns:update" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:portType name="MedioDePagoService">
-    <wsdl:operation name="findById">
-      <wsdl:input message="tns:findById" name="findById"></wsdl:input>
-      <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delete">
-      <wsdl:input message="tns:delete" name="delete"></wsdl:input>
-      <wsdl:output message="tns:deleteResponse" name="deleteResponse"></wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="findAll">
-      <wsdl:input message="tns:findAll" name="findAll"></wsdl:input>
-      <wsdl:output message="tns:findAllResponse" name="findAllResponse"></wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="create">
-      <wsdl:input message="tns:create" name="create"></wsdl:input>
-      <wsdl:output message="tns:createResponse" name="createResponse"></wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="update">
-      <wsdl:input message="tns:update" name="update"></wsdl:input>
-      <wsdl:output message="tns:updateResponse" name="updateResponse"></wsdl:output>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="MedioDePagoServiceSoapBinding" type="tns:MedioDePagoService">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="findById">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="findById">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="findByIdResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delete">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="delete">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="deleteResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="findAll">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="findAll">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="findAllResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="create">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="create">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="createResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="update">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="update">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="updateResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="MedioDePagoService">
-    <wsdl:port binding="tns:MedioDePagoServiceSoapBinding" name="MedioDePagoServicePort">
-      <soap:address location="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService"/>
-    </wsdl:port>
-  </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint></con:endpoints><con:operation id="8e3e53df-6200-4982-817f-f86420b318b1" isOneWay="false" action="" name="create" bindingOperationName="create" type="Request-Response" outputName="createResponse" inputName="create" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f4c9b1b5-3e61-4235-836e-076869988749" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:create>\r
-         <!--Optional:-->\r
-         <medioDePago>\r
-            <idMedioDePago>?</idMedioDePago>\r
-            <!--Optional:-->\r
-            <nombre>?</nombre>\r
-         </medioDePago>\r
-      </ser:create>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/create"/></con:call></con:operation><con:operation id="bcf82dbc-29c4-46e7-8aa7-67570cc8decf" isOneWay="false" action="" name="delete" bindingOperationName="delete" type="Request-Response" outputName="deleteResponse" inputName="delete" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0e5ac86c-0b19-4b1f-87af-2597e9c6cd9c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:delete>\r
-         <id>?</id>\r
-      </ser:delete>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/delete"/></con:call></con:operation><con:operation id="de0b8047-fb3a-4f7a-871f-e46c83ba85ae" isOneWay="false" action="" name="findAll" bindingOperationName="findAll" type="Request-Response" outputName="findAllResponse" inputName="findAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="21f666ea-7096-40df-b86e-1bdd06974251" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:findAll/>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/findAll"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9b7cb855-a569-4d65-a680-11684825294a" isOneWay="false" action="" name="findById" bindingOperationName="findById" type="Request-Response" outputName="findByIdResponse" inputName="findById" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="74af31a7-40c0-49f1-b58f-361c7f3da6f0" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:findById>\r
-         <id>?</id>\r
-      </ser:findById>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/findById"/></con:call></con:operation><con:operation id="44631618-6daf-45ab-ba17-3d8081689c0a" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7b1f23af-8c73-460a-aba2-26937b20942c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:update>\r
-         <!--Optional:-->\r
-         <medioDePago>\r
-            <idMedioDePago>?</idMedioDePago>\r
-            <!--Optional:-->\r
-            <nombre>?</nombre>\r
-         </medioDePago>\r
-      </ser:update>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/update"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d41d5191-3b66-4424-8eb6-3e6b5873c906" wsaVersion="NONE" name="MovHistoricoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MovHistoricoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MovHistoricoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
-  <wsdl:types>
-    <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:element name="create" type="tns:create"/>
-      <xs:element name="createResponse" type="tns:createResponse"/>
-      <xs:element name="delete" type="tns:delete"/>
-      <xs:element name="deleteResponse" type="tns:deleteResponse"/>
-      <xs:element name="findAll" type="tns:findAll"/>
-      <xs:element name="findAllResponse" type="tns:findAllResponse"/>
-      <xs:element name="findById" type="tns:findById"/>
-      <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
-      <xs:element name="update" type="tns:update"/>
-      <xs:element name="updateResponse" type="tns:updateResponse"/>
-      <xs:complexType name="findById">
-        <xs:sequence>
-          <xs:element name="id" type="xs:int"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="findByIdResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="tns:movHistorico"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="movHistorico">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="fecha" type="xs:dateTime"/>
-          <xs:element name="idCuentaBancaria" type="xs:int"/>
-          <xs:element name="idMedioDePago" type="xs:int"/>
-          <xs:element name="idTransaccion" type="xs:int"/>
-          <xs:element name="idUsuario" type="xs:int"/>
-          <xs:element name="monto" type="xs:double"/>
-          <xs:element name="signo" type="xs:int"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="delete">
-        <xs:sequence>
-          <xs:element name="id" type="xs:int"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="deleteResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="findAll">
-        <xs:sequence/>
-      </xs:complexType>
-      <xs:complexType name="findAllResponse">
-        <xs:sequence>
-          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:movHistorico"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="create">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="movHistorico" type="tns:movHistorico"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="createResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="update">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="movHistorico" type="tns:movHistorico"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="updateResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="tns:movHistorico"/>
-        </xs:sequence>
-      </xs:complexType>
-    </xs:schema>
-  </wsdl:types>
-  <wsdl:message name="findById">
-    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findByIdResponse">
-    <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="deleteResponse">
-    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="updateResponse">
-    <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="delete">
-    <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findAll">
-    <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findAllResponse">
-    <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="create">
-    <wsdl:part element="tns:create" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="createResponse">
-    <wsdl:part element="tns:createResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="update">
-    <wsdl:part element="tns:update" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:portType name="MovHistoricoService">
-    <wsdl:operation name="findById">
-      <wsdl:input message="tns:findById" name="findById"></wsdl:input>
-      <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delete">
-      <wsdl:input message="tns:delete" name="delete"></wsdl:input>
-      <wsdl:output message="tns:deleteResponse" name="deleteResponse"></wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="findAll">
-      <wsdl:input message="tns:findAll" name="findAll"></wsdl:input>
-      <wsdl:output message="tns:findAllResponse" name="findAllResponse"></wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="create">
-      <wsdl:input message="tns:create" name="create"></wsdl:input>
-      <wsdl:output message="tns:createResponse" name="createResponse"></wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="update">
-      <wsdl:input message="tns:update" name="update"></wsdl:input>
-      <wsdl:output message="tns:updateResponse" name="updateResponse"></wsdl:output>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="MovHistoricoServiceSoapBinding" type="tns:MovHistoricoService">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="findById">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="findById">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="findByIdResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delete">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="delete">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="deleteResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="findAll">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="findAll">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="findAllResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="create">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="create">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="createResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="update">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="update">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="updateResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="MovHistoricoService">
-    <wsdl:port binding="tns:MovHistoricoServiceSoapBinding" name="MovHistoricoServicePort">
-      <soap:address location="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService"/>
-    </wsdl:port>
-  </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint></con:endpoints><con:operation id="f62861d0-b845-41ca-8fe7-a20a1e23fb2a" isOneWay="false" action="" name="create" bindingOperationName="create" type="Request-Response" outputName="createResponse" inputName="create" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c64951af-868b-4cef-ad3b-c3fdae7ed865" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:create>\r
-         <!--Optional:-->\r
-         <movHistorico>\r
-            <!--Optional:-->\r
-            <fecha>?</fecha>\r
-            <idCuentaBancaria>?</idCuentaBancaria>\r
-            <idMedioDePago>?</idMedioDePago>\r
-            <idTransaccion>?</idTransaccion>\r
-            <idUsuario>?</idUsuario>\r
-            <monto>?</monto>\r
-            <signo>?</signo>\r
-         </movHistorico>\r
-      </ser:create>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/create"/></con:call></con:operation><con:operation id="3086aa32-5eed-43f2-a3d3-a644841b307e" isOneWay="false" action="" name="delete" bindingOperationName="delete" type="Request-Response" outputName="deleteResponse" inputName="delete" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e0843da9-95c1-4105-843a-8cd44149fabd" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:delete>\r
-         <id>?</id>\r
-      </ser:delete>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/delete"/></con:call></con:operation><con:operation id="5f8c6ecf-4ede-4e31-82b1-7e4ad9df65ca" isOneWay="false" action="" name="findAll" bindingOperationName="findAll" type="Request-Response" outputName="findAllResponse" inputName="findAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fb308c5d-9a3d-4e4b-9033-f73a449759b1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:findAll/>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/findAll"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="853d6525-241c-4ac5-9b31-73f65fd48548" isOneWay="false" action="" name="findById" bindingOperationName="findById" type="Request-Response" outputName="findByIdResponse" inputName="findById" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d5a1ab4c-e499-4a30-89b1-f3922328d75f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:findById>\r
-         <id>?</id>\r
-      </ser:findById>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/findById"/></con:call></con:operation><con:operation id="76aa011a-e22d-4d90-8a74-fcdf37186f76" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8fa39ce4-b7f2-40ec-96dd-1787d25327fb" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:update>\r
-         <!--Optional:-->\r
-         <movHistorico>\r
-            <!--Optional:-->\r
-            <fecha>?</fecha>\r
-            <idCuentaBancaria>?</idCuentaBancaria>\r
-            <idMedioDePago>?</idMedioDePago>\r
-            <idTransaccion>?</idTransaccion>\r
-            <idUsuario>?</idUsuario>\r
-            <monto>?</monto>\r
-            <signo>?</signo>\r
-         </movHistorico>\r
-      </ser:update>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/update"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="12e80538-eb42-4010-b477-bd139fe43834" wsaVersion="NONE" name="TarjetaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}TarjetaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="TarjetaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/CuentaBancariaService/update"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="12e80538-eb42-4010-b477-bd139fe43834" wsaVersion="NONE" name="TarjetaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}TarjetaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="TarjetaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="create" type="tns:create"/>
@@ -1352,4 +903,734 @@
          </tarjeta>\r
       </ser:update>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/update"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/update"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d10d2e5a-0585-4d0a-ac12-5947d6d56bb7" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="asociarMedioDePago" type="tns:asociarMedioDePago"/>
+      <xs:element name="asociarMedioDePagoResponse" type="tns:asociarMedioDePagoResponse"/>
+      <xs:element name="asociarMedioDePagoXId" type="tns:asociarMedioDePagoXId"/>
+      <xs:element name="asociarMedioDePagoXIdResponse" type="tns:asociarMedioDePagoXIdResponse"/>
+      <xs:element name="create" type="tns:create"/>
+      <xs:element name="createResponse" type="tns:createResponse"/>
+      <xs:element name="delete" type="tns:delete"/>
+      <xs:element name="deleteResponse" type="tns:deleteResponse"/>
+      <xs:element name="desasociarMedioDePago" type="tns:desasociarMedioDePago"/>
+      <xs:element name="desasociarMedioDePagoResponse" type="tns:desasociarMedioDePagoResponse"/>
+      <xs:element name="desasociarMedioDePagoXId" type="tns:desasociarMedioDePagoXId"/>
+      <xs:element name="desasociarMedioDePagoXIdResponse" type="tns:desasociarMedioDePagoXIdResponse"/>
+      <xs:element name="findAll" type="tns:findAll"/>
+      <xs:element name="findAllResponse" type="tns:findAllResponse"/>
+      <xs:element name="findById" type="tns:findById"/>
+      <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
+      <xs:element name="update" type="tns:update"/>
+      <xs:element name="updateResponse" type="tns:updateResponse"/>
+      <xs:complexType name="findById">
+        <xs:sequence>
+          <xs:element name="id" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:medioDePago"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="medioDePago">
+        <xs:sequence>
+          <xs:element name="idMedioDePago" type="xs:int"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="desasociarMedioDePagoXId">
+        <xs:sequence>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element name="idMedioDePago" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="desasociarMedioDePagoXIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="asociarMedioDePagoXId">
+        <xs:sequence>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element name="idMedioDePago" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="asociarMedioDePagoXIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delete">
+        <xs:sequence>
+          <xs:element name="id" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="desasociarMedioDePago">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="usuario" type="tns:usuario"/>
+          <xs:element minOccurs="0" name="medioDePago" type="tns:medioDePago"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="usuario">
+        <xs:sequence>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element name="idUsuarioRef" type="xs:int"/>
+          <xs:element minOccurs="0" name="razonSocial" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="desasociarMedioDePagoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findAll">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="findAllResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:medioDePago"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="asociarMedioDePago">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="usuario" type="tns:usuario"/>
+          <xs:element minOccurs="0" name="medioDePago" type="tns:medioDePago"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="asociarMedioDePagoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="medioDePago" type="tns:medioDePago"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="update">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="medioDePago" type="tns:medioDePago"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:medioDePago"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="desasociarMedioDePagoResponse">
+    <wsdl:part element="tns:desasociarMedioDePagoResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="desasociarMedioDePagoXIdResponse">
+    <wsdl:part element="tns:desasociarMedioDePagoXIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="desasociarMedioDePagoXId">
+    <wsdl:part element="tns:desasociarMedioDePagoXId" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asociarMedioDePagoResponse">
+    <wsdl:part element="tns:asociarMedioDePagoResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAll">
+    <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asociarMedioDePago">
+    <wsdl:part element="tns:asociarMedioDePago" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createResponse">
+    <wsdl:part element="tns:createResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="update">
+    <wsdl:part element="tns:update" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findById">
+    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByIdResponse">
+    <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asociarMedioDePagoXId">
+    <wsdl:part element="tns:asociarMedioDePagoXId" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="desasociarMedioDePago">
+    <wsdl:part element="tns:desasociarMedioDePago" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asociarMedioDePagoXIdResponse">
+    <wsdl:part element="tns:asociarMedioDePagoXIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllResponse">
+    <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create">
+    <wsdl:part element="tns:create" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MedioDePagoService">
+    <wsdl:operation name="findById">
+      <wsdl:input message="tns:findById" name="findById"></wsdl:input>
+      <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="desasociarMedioDePagoXId">
+      <wsdl:input message="tns:desasociarMedioDePagoXId" name="desasociarMedioDePagoXId"></wsdl:input>
+      <wsdl:output message="tns:desasociarMedioDePagoXIdResponse" name="desasociarMedioDePagoXIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="asociarMedioDePagoXId">
+      <wsdl:input message="tns:asociarMedioDePagoXId" name="asociarMedioDePagoXId"></wsdl:input>
+      <wsdl:output message="tns:asociarMedioDePagoXIdResponse" name="asociarMedioDePagoXIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input message="tns:delete" name="delete"></wsdl:input>
+      <wsdl:output message="tns:deleteResponse" name="deleteResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="desasociarMedioDePago">
+      <wsdl:input message="tns:desasociarMedioDePago" name="desasociarMedioDePago"></wsdl:input>
+      <wsdl:output message="tns:desasociarMedioDePagoResponse" name="desasociarMedioDePagoResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAll">
+      <wsdl:input message="tns:findAll" name="findAll"></wsdl:input>
+      <wsdl:output message="tns:findAllResponse" name="findAllResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="asociarMedioDePago">
+      <wsdl:input message="tns:asociarMedioDePago" name="asociarMedioDePago"></wsdl:input>
+      <wsdl:output message="tns:asociarMedioDePagoResponse" name="asociarMedioDePagoResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create">
+      <wsdl:input message="tns:create" name="create"></wsdl:input>
+      <wsdl:output message="tns:createResponse" name="createResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdl:input message="tns:update" name="update"></wsdl:input>
+      <wsdl:output message="tns:updateResponse" name="updateResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MedioDePagoServiceSoapBinding" type="tns:MedioDePagoService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="findById">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="desasociarMedioDePagoXId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="desasociarMedioDePagoXId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="desasociarMedioDePagoXIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="asociarMedioDePagoXId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="asociarMedioDePagoXId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="asociarMedioDePagoXIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="delete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="desasociarMedioDePago">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="desasociarMedioDePago">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="desasociarMedioDePagoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAll">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAll">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="asociarMedioDePago">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="asociarMedioDePago">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="asociarMedioDePagoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="create">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="update">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MedioDePagoService">
+    <wsdl:port binding="tns:MedioDePagoServiceSoapBinding" name="MedioDePagoServicePort">
+      <soap:address location="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint></con:endpoints><con:operation id="6a103378-e80d-4a0f-9f19-e02580d94cbb" isOneWay="false" action="" name="asociarMedioDePago" bindingOperationName="asociarMedioDePago" type="Request-Response" outputName="asociarMedioDePagoResponse" inputName="asociarMedioDePago" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1b58112f-08f9-46f4-88c5-8c52aef7a580" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:asociarMedioDePago>\r
+         <!--Optional:-->\r
+         <usuario>\r
+            <idUsuario>4</idUsuario>\r
+            <idUsuarioRef>4</idUsuarioRef>\r
+            <!--Optional:-->\r
+            <razonSocial>hghfgh</razonSocial>\r
+         </usuario>\r
+         <!--Optional:-->\r
+         <medioDePago>\r
+            <idMedioDePago>1</idMedioDePago>\r
+            <!--Optional:-->\r
+            <nombre>efe</nombre>\r
+         </medioDePago>\r
+      </ser:asociarMedioDePago>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/asociarMedioDePago"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d3536686-9db6-4a2b-a21a-644a9f9e7829" isOneWay="false" action="" name="create" bindingOperationName="create" type="Request-Response" outputName="createResponse" inputName="create" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2a18b198-0c20-444b-b9cb-332ef7bd7965" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:create>\r
+         <!--Optional:-->\r
+         <medioDePago>\r
+            <idMedioDePago>?</idMedioDePago>\r
+            <!--Optional:-->\r
+            <nombre>?</nombre>\r
+         </medioDePago>\r
+      </ser:create>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/create"/></con:call></con:operation><con:operation id="8b6e508e-bf5f-4b88-afb2-c2ad2e6f1b3a" isOneWay="false" action="" name="delete" bindingOperationName="delete" type="Request-Response" outputName="deleteResponse" inputName="delete" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fba4161d-f371-4cf2-9c50-b2e14140d6e7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:delete>\r
+         <id>?</id>\r
+      </ser:delete>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/delete"/></con:call></con:operation><con:operation id="0856eff1-32f1-48d4-9a09-1e99a7183192" isOneWay="false" action="" name="findAll" bindingOperationName="findAll" type="Request-Response" outputName="findAllResponse" inputName="findAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8a304fb7-8449-464b-be73-e62926731073" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:findAll/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/findAll"/></con:call></con:operation><con:operation id="601198ac-6f37-4910-98a5-f01015156b38" isOneWay="false" action="" name="findById" bindingOperationName="findById" type="Request-Response" outputName="findByIdResponse" inputName="findById" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ec414fb5-e23e-4801-9495-8f2c033f4aba" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:findById>\r
+         <id>?</id>\r
+      </ser:findById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/findById"/></con:call></con:operation><con:operation id="454c6e38-bbc4-400f-8f65-119d48eab768" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="42e85afd-dcce-4ba3-b6f9-18a59e9f5b0f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:update>\r
+         <!--Optional:-->\r
+         <medioDePago>\r
+            <idMedioDePago>?</idMedioDePago>\r
+            <!--Optional:-->\r
+            <nombre>?</nombre>\r
+         </medioDePago>\r
+      </ser:update>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/update"/></con:call></con:operation><con:operation id="e64a2587-ee92-4920-a0a0-d315f9d21298" isOneWay="false" action="" name="desasociarMedioDePagoXId" bindingOperationName="desasociarMedioDePagoXId" type="Request-Response" outputName="desasociarMedioDePagoXIdResponse" inputName="desasociarMedioDePagoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7d99c619-3d65-404f-ab6b-c9bc1cf1c180" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:desasociarMedioDePagoXId>\r
+         <idUsuario>3</idUsuario>\r
+         <idMedioDePago>4</idMedioDePago>\r
+      </ser:desasociarMedioDePagoXId>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/desasociarMedioDePagoXId"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="8b3746ff-8c72-4a46-9403-4936386825cd" isOneWay="false" action="" name="asociarMedioDePagoXId" bindingOperationName="asociarMedioDePagoXId" type="Request-Response" outputName="asociarMedioDePagoXIdResponse" inputName="asociarMedioDePagoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f31e4ace-f4d7-4a57-a70c-95d4b48c4358" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:asociarMedioDePagoXId>\r
+         <idUsuario>4</idUsuario>\r
+         <idMedioDePago>2</idMedioDePago>\r
+      </ser:asociarMedioDePagoXId>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/asociarMedioDePagoXId"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="30a83626-fcb7-48ef-bff2-e2c0eb45589d" isOneWay="false" action="" name="desasociarMedioDePago" bindingOperationName="desasociarMedioDePago" type="Request-Response" outputName="desasociarMedioDePagoResponse" inputName="desasociarMedioDePago" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c25db4c3-1023-47e5-9dbd-2403813c6f79" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:desasociarMedioDePago>\r
+         <!--Optional:-->\r
+         <usuario>\r
+            <idUsuario>?</idUsuario>\r
+            <idUsuarioRef>?</idUsuarioRef>\r
+            <!--Optional:-->\r
+            <razonSocial>?</razonSocial>\r
+         </usuario>\r
+         <!--Optional:-->\r
+         <medioDePago>\r
+            <idMedioDePago>?</idMedioDePago>\r
+            <!--Optional:-->\r
+            <nombre>?</nombre>\r
+         </medioDePago>\r
+      </ser:desasociarMedioDePago>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/desasociarMedioDePago"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="557bfbbc-a43d-4b3e-a823-570ef95ccdad" wsaVersion="NONE" name="MovHistoricoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MovHistoricoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MovHistoricoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="create" type="tns:create"/>
+      <xs:element name="createResponse" type="tns:createResponse"/>
+      <xs:element name="delete" type="tns:delete"/>
+      <xs:element name="deleteResponse" type="tns:deleteResponse"/>
+      <xs:element name="devolucionConTajeta" type="tns:devolucionConTajeta"/>
+      <xs:element name="devolucionConTajetaResponse" type="tns:devolucionConTajetaResponse"/>
+      <xs:element name="findAll" type="tns:findAll"/>
+      <xs:element name="findAllResponse" type="tns:findAllResponse"/>
+      <xs:element name="findById" type="tns:findById"/>
+      <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
+      <xs:element name="pagarConTajeta" type="tns:pagarConTajeta"/>
+      <xs:element name="pagarConTajetaResponse" type="tns:pagarConTajetaResponse"/>
+      <xs:element name="update" type="tns:update"/>
+      <xs:element name="updateResponse" type="tns:updateResponse"/>
+      <xs:complexType name="findById">
+        <xs:sequence>
+          <xs:element name="id" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:movHistorico"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="movHistorico">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fecha" type="xs:dateTime"/>
+          <xs:element name="idCuentaBancaria" type="xs:int"/>
+          <xs:element name="idMedioDePago" type="xs:int"/>
+          <xs:element name="idTransaccion" type="xs:int"/>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="signo" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="devolucionConTajeta">
+        <xs:sequence>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element name="idCuentaBancaria" type="xs:int"/>
+          <xs:element name="idMediosPago" type="xs:int"/>
+          <xs:element name="idTarjeta" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="devolucionConTajetaResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delete">
+        <xs:sequence>
+          <xs:element name="id" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findAll">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="findAllResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:movHistorico"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pagarConTajeta">
+        <xs:sequence>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element name="idCuentaBancaria" type="xs:int"/>
+          <xs:element name="idMediosPago" type="xs:int"/>
+          <xs:element name="idTarjeta" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pagarConTajetaResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="movHistorico" type="tns:movHistorico"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="update">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="movHistorico" type="tns:movHistorico"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:movHistorico"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="devolucionConTajetaResponse">
+    <wsdl:part element="tns:devolucionConTajetaResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="devolucionConTajeta">
+    <wsdl:part element="tns:devolucionConTajeta" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConTajetaResponse">
+    <wsdl:part element="tns:pagarConTajetaResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAll">
+    <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConTajeta">
+    <wsdl:part element="tns:pagarConTajeta" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createResponse">
+    <wsdl:part element="tns:createResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="update">
+    <wsdl:part element="tns:update" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findById">
+    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByIdResponse">
+    <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllResponse">
+    <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create">
+    <wsdl:part element="tns:create" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MovHistoricoService">
+    <wsdl:operation name="findById">
+      <wsdl:input message="tns:findById" name="findById"></wsdl:input>
+      <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucionConTajeta">
+      <wsdl:input message="tns:devolucionConTajeta" name="devolucionConTajeta"></wsdl:input>
+      <wsdl:output message="tns:devolucionConTajetaResponse" name="devolucionConTajetaResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input message="tns:delete" name="delete"></wsdl:input>
+      <wsdl:output message="tns:deleteResponse" name="deleteResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAll">
+      <wsdl:input message="tns:findAll" name="findAll"></wsdl:input>
+      <wsdl:output message="tns:findAllResponse" name="findAllResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConTajeta">
+      <wsdl:input message="tns:pagarConTajeta" name="pagarConTajeta"></wsdl:input>
+      <wsdl:output message="tns:pagarConTajetaResponse" name="pagarConTajetaResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create">
+      <wsdl:input message="tns:create" name="create"></wsdl:input>
+      <wsdl:output message="tns:createResponse" name="createResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdl:input message="tns:update" name="update"></wsdl:input>
+      <wsdl:output message="tns:updateResponse" name="updateResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MovHistoricoServiceSoapBinding" type="tns:MovHistoricoService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="findById">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucionConTajeta">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="devolucionConTajeta">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="devolucionConTajetaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="delete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAll">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAll">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConTajeta">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="pagarConTajeta">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="pagarConTajetaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="create">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="update">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MovHistoricoService">
+    <wsdl:port binding="tns:MovHistoricoServiceSoapBinding" name="MovHistoricoServicePort">
+      <soap:address location="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint></con:endpoints><con:operation id="432f77fa-6d8e-4c63-afdd-21e862fea310" isOneWay="false" action="" name="create" bindingOperationName="create" type="Request-Response" outputName="createResponse" inputName="create" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="070350de-c48a-4b9e-9021-693bd0327dc9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:create>\r
+         <!--Optional:-->\r
+         <movHistorico>\r
+            <!--Optional:-->\r
+            <fecha>?</fecha>\r
+            <idCuentaBancaria>?</idCuentaBancaria>\r
+            <idMedioDePago>?</idMedioDePago>\r
+            <idTransaccion>?</idTransaccion>\r
+            <idUsuario>?</idUsuario>\r
+            <monto>?</monto>\r
+            <signo>?</signo>\r
+         </movHistorico>\r
+      </ser:create>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/create"/></con:call></con:operation><con:operation id="9b13341a-9a73-4ea5-821b-f15bae5262bd" isOneWay="false" action="" name="delete" bindingOperationName="delete" type="Request-Response" outputName="deleteResponse" inputName="delete" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2e451ea2-f391-4fbe-b35f-e58f76a4d5ce" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:delete>\r
+         <id>?</id>\r
+      </ser:delete>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/delete"/></con:call></con:operation><con:operation id="4d742b8f-23f8-47e8-b28a-9ee496ebed8f" isOneWay="false" action="" name="findAll" bindingOperationName="findAll" type="Request-Response" outputName="findAllResponse" inputName="findAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c5f22352-241a-4e7a-8cb6-ed9150a6e680" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:findAll/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/findAll"/></con:call></con:operation><con:operation id="a6d4ca07-a9c4-4f1f-8240-e7f3142e2d91" isOneWay="false" action="" name="findById" bindingOperationName="findById" type="Request-Response" outputName="findByIdResponse" inputName="findById" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4f18aa25-680e-4781-a4ab-2d3a1a539cf7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:findById>\r
+         <id>?</id>\r
+      </ser:findById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/findById"/></con:call></con:operation><con:operation id="d46a2321-a8f1-48f1-9d5a-f68f40776181" isOneWay="false" action="" name="pagarConTajeta" bindingOperationName="pagarConTajeta" type="Request-Response" outputName="pagarConTajetaResponse" inputName="pagarConTajeta" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="89a8f3de-b806-445c-9bd3-c471e6996f80" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:pagarConTajeta>\r
+         <monto>500</monto>\r
+         <idUsuario>1</idUsuario>\r
+         <idCuentaBancaria>2</idCuentaBancaria>\r
+         <idMediosPago>3</idMediosPago>\r
+         <idTarjeta>2</idTarjeta>\r
+      </ser:pagarConTajeta>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConTajeta"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9042a947-9487-4818-b8ff-564e2b461caa" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0c3f812a-123d-447c-ae4d-4be96640e1b6" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:update>\r
+         <!--Optional:-->\r
+         <movHistorico>\r
+            <!--Optional:-->\r
+            <fecha>?</fecha>\r
+            <idCuentaBancaria>?</idCuentaBancaria>\r
+            <idMedioDePago>?</idMedioDePago>\r
+            <idTransaccion>?</idTransaccion>\r
+            <idUsuario>?</idUsuario>\r
+            <monto>?</monto>\r
+            <signo>?</signo>\r
+         </movHistorico>\r
+      </ser:update>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/update"/></con:call></con:operation><con:operation id="8d0c3e0c-6281-4a0d-9eff-61226c464d82" isOneWay="false" action="" name="devolucionConTajeta" bindingOperationName="devolucionConTajeta" type="Request-Response" outputName="devolucionConTajetaResponse" inputName="devolucionConTajeta" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a8ccef28-3772-4f91-acf9-a90de2f51374" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:devolucionConTajeta>\r
+         <monto>500</monto>\r
+         <idUsuario>1</idUsuario>\r
+         <idCuentaBancaria>2</idCuentaBancaria>\r
+         <idMediosPago>3</idMediosPago>\r
+         <idTarjeta>2</idTarjeta>\r
+      </ser:devolucionConTajeta>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConTajeta"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
