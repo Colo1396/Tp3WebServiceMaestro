@@ -109,6 +109,8 @@ sequelize.sync({ force: false})
 
 /** EXPORTO LOS OBJETOS PARA PODER USARLOS PARA LAS CONSULTAS */
 module.exports = {
+    Sequelize,
+    sequelize,
     UserModel,
     ProductoModel,
     MedioDePagoModel,

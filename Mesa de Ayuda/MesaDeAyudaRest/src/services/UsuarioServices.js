@@ -16,7 +16,8 @@ class UserService{
         if(dniExists){
             throw new Error("Ya existe un usuario con ese dni");
         }
-
+        console.log(user);
+        
         const salt = await bcrypt.genSalt(12);
         const hash = await bcrypt.hash(user.password, salt);
         user.password = hash;
@@ -31,6 +32,8 @@ class UserService{
         if(!userExists){
             throw new Error("El usuario ingresado no existe");
         }
+        console.log(user);
+        console.log(userExists);
         let isValid = await bcrypt.compare(user.password, userExists.password);
         const rolDelUser = await RolService.getById(userExists.rolId);
         let estaEncriptada = false;
@@ -63,7 +66,8 @@ class UserService{
                 isValid = false;
             } 
         }
-        
+        return isValid;
+       /* 
         if(isValid){
             const token = jwt.sign({id: userExists.id}, SECRET, {
                 expiresIn: 1200 //expira en 1 hora el token
@@ -73,7 +77,7 @@ class UserService{
         }
         else{
             throw new Error("La contraseña ingresada es incorrecta");
-        }
+        }*/
 
     }   
 

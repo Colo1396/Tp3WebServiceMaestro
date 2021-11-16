@@ -25,17 +25,17 @@
                     <a class="navbar-brand mr-1" href="/">UNLa</a>
                     <ul class="navbar-nav ml-auto ml-md-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/register">Registrarse</a>
+                            <a class="nav-link" aria-current="page" href="/usuarios/register">Registrarse</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">Iniciar sesión</a>
+                            <a class="nav-link" href="/usuarios/login">Iniciar sesión</a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </header>
 
-        <form action="/api/usuarios/loginPost" method="post" class="form">
+        <form action="/loginPost" method="post" class="form">
             <h2>Iniciar sesión</h2>
             <!--USUARIO-->
             <div class="input-group">
@@ -52,8 +52,7 @@
                 <i class="fa fa-sign-in" aria-hidden="true" style="margin-left:5px;"></i> 
             </button>
             <div align="center">
-                <a class="btn btn-link" href="#">Volver a inicio</a>
-                <a class="btn btn-link" href="#">Registrarse</a>
+                <a class="btn btn-link" href="/usuarios/register">Registrarse</a>
             </div>
         </form>
     </div>
