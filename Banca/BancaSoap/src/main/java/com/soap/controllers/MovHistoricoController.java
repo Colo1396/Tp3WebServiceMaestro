@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import java.util.Date;
 
 import com.soap.config.Conexion;
+import com.soap.models.CuentaBancaria;
 import com.soap.models.MovHistorico;
 import com.soap.models.Tarjeta;
 
@@ -164,7 +165,7 @@ public class MovHistoricoController extends Conexion {
 	}
 
 	// ------------------------------------------------------------------------------------
-	public boolean pagarConTajeta(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago, int idTarjeta)
+	public boolean pagarConTajetaCredito(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago, int idTarjeta)
 			throws SQLException {
 		try {
 
@@ -186,8 +187,8 @@ public class MovHistoricoController extends Conexion {
 				ps.setInt(2, idUsuario);
 				ps.setInt(3, idCuentaBancaria);
 				ps.setInt(4, idMediosPago);
-				
-				PreparedStatement ps2 = con.prepareStatement(sql2);			
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
 				ps2.setDouble(1, monto);
 				ps2.setDouble(2, monto);
 				ps2.setInt(3, idTarjeta);
@@ -199,8 +200,7 @@ public class MovHistoricoController extends Conexion {
 
 				return respuesta;
 
-			}
-			else {
+			} else {
 				return false;
 			}
 
@@ -212,9 +212,10 @@ public class MovHistoricoController extends Conexion {
 			con.close();
 		}
 	}
+
 	// ------------------------------------------------------------------------------------
-	public boolean devolucionConTajeta(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago, int idTarjeta)
-			throws SQLException {
+	public boolean devolucionConTajetaCredito(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago,
+			int idTarjeta) throws SQLException {
 		try {
 
 			TarjetaController tarjetaController = new TarjetaController();
@@ -235,8 +236,8 @@ public class MovHistoricoController extends Conexion {
 				ps.setInt(2, idUsuario);
 				ps.setInt(3, idCuentaBancaria);
 				ps.setInt(4, idMediosPago);
-				
-				PreparedStatement ps2 = con.prepareStatement(sql2);			
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
 				ps2.setDouble(1, monto);
 				ps2.setDouble(2, monto);
 				ps2.setInt(3, idTarjeta);
@@ -248,8 +249,7 @@ public class MovHistoricoController extends Conexion {
 
 				return respuesta;
 
-			}
-			else {
+			} else {
 				return false;
 			}
 
@@ -261,7 +261,181 @@ public class MovHistoricoController extends Conexion {
 			con.close();
 		}
 	}
+	// ------------------------------------------------------------------------------------	
+	
+	public boolean pagarConTajetaDebito(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago) throws SQLException {
+		try {
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
+
+			if ((cuentaBancaria.getMonto() - monto) >= 0) {
+
+				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), 1, ?, ?, ?, ?);";
+				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+				ps.setDouble(1, monto);
+				ps.setInt(2, idUsuario);
+				ps.setInt(3, idCuentaBancaria);
+				ps.setInt(4, idMediosPago);
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setDouble(1, monto);
+				ps2.setInt(2, idUsuario);
+				ps2.setInt(3, idCuentaBancaria);
+
+				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+				return respuesta;
+
+			} else {
+				return false;
+			}
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
 	// ------------------------------------------------------------------------------------
+	public boolean devolucionConTajetaDebito(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago) throws SQLException {
+		try {
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
+
+			String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
+			String sql2 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+			boolean respuesta = false;
+
+			con = conectar();
+
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, monto);
+			ps.setInt(2, idUsuario);
+			ps.setInt(3, idCuentaBancaria);
+			ps.setInt(4, idMediosPago);
+
+			PreparedStatement ps2 = con.prepareStatement(sql2);
+			ps2.setDouble(1, monto);
+			ps2.setInt(2, idUsuario);
+			ps2.setInt(3, idCuentaBancaria);
+
+			if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+	
 	// ------------------------------------------------------------------------------------
+	public boolean pagarConEfectivo(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago) throws SQLException {
+		try {
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
+
+			if ((cuentaBancaria.getMonto() - monto) >= 0) {
+
+				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), 1, ?, ?, ?, ?);";
+				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+				ps.setDouble(1, monto);
+				ps.setInt(2, idUsuario);
+				ps.setInt(3, idCuentaBancaria);
+				ps.setInt(4, idMediosPago);
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setDouble(1, monto);
+				ps2.setInt(2, idUsuario);
+				ps2.setInt(3, idCuentaBancaria);
+
+				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+				return respuesta;
+
+			} else {
+				return false;
+			}
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// ------------------------------------------------------------------------------------
+	public boolean devolucionConEfectivo(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago) throws SQLException {
+		try {
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
+
+			String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
+			String sql2 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+			boolean respuesta = false;
+
+			con = conectar();
+
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, monto);
+			ps.setInt(2, idUsuario);
+			ps.setInt(3, idCuentaBancaria);
+			ps.setInt(4, idMediosPago);
+
+			PreparedStatement ps2 = con.prepareStatement(sql2);
+			ps2.setDouble(1, monto);
+			ps2.setInt(2, idUsuario);
+			ps2.setInt(3, idCuentaBancaria);
+
+			if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
 
 }
