@@ -18,7 +18,7 @@ const {UserService} = require('./services/UsuarioServices');
 const app = express();
 const {MedioDePagoModel,UserModel,ProductoModel} = require('./database/connection');
 const { SECRET } = require('./config/config.security');
-require("./passport/local-auth");
+require("./libs/passport");
 
 
 //middlewares
@@ -58,8 +58,6 @@ app.use("/reclamos/",require('./routes/reclamosRoutes'));
 app.get('/home', isLoggedIn ,(req,res)=>{
     res.render('home');
 });
-
-
 
 module.exports = app;
 

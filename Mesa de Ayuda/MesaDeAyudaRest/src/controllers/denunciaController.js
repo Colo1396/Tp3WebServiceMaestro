@@ -82,7 +82,7 @@ const crearDenuncia = async (req,res)=>{
                 "categoria": categoria,
                 "comentario": comentario,
                 "productoId": productoId,
-                "compradorId": user.id
+                "userId": user.id
             };
             let denunciaCreada = await DenunciaService.add(denuncia);
             res.redirect("/home");

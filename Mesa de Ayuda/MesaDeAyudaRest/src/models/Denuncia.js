@@ -22,7 +22,7 @@ module.exports = (sequelize, type) =>{
             type: type.INTEGER,
             allowNull: false
         },
-        compradorId:{
+        userId:{
             type: type.INTEGER,
             allowNull: false
         },
