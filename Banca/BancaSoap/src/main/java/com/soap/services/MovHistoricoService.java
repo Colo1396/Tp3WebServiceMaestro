@@ -191,4 +191,24 @@ public class MovHistoricoService {
 			return "Error al realizar la petición";
 		}
 	}
+	// ------------------------------------------------------------------------------------
+	@WebMethod(operationName = "ntercambioEntreCuentas")
+	@RequestWrapper(className = "com.soap.services.MovHistoricoService.ntercambioEntreCuentas")
+	public String intercambioEntreCuentas(@WebParam(name = "monto") double monto,
+			@WebParam(name = "idUsuario") int idUsuario, 
+			@WebParam(name = "idCuentaBancariaAnterior") int idCuentaBancariaAnterior, 
+			@WebParam(name = "idCuentaBancariaNueva") int idCuentaBancariaNueva,
+			@WebParam(name = "idMediosPagoAnterior") int idMediosPagoAnterior,
+			@WebParam(name = "idMediosPagoNueva") int idMediosPagoNueva) {
+		try {
+			if (movHistoricoController.intercambioEntreCuentas(monto, idUsuario, idCuentaBancariaAnterior,idCuentaBancariaNueva, idMediosPagoAnterior,idMediosPagoNueva)) {
+				return "El intercambio entre cuentas ID:"+idCuentaBancariaAnterior+ "-->"+idCuentaBancariaNueva+ " ha sido creado correctamente.";
+			}
+			return "Error al crear el movimiento";
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoService.class.getName()).log(Level.SEVERE, null, ex);
+			return "Error al realizar la petición";
+		}
+	}
+	
 }
