@@ -1,0 +1,476 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Modulo de Mesa de Ayuda API",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080",
+        "description": "Servidor local"
+      }
+    ],
+    "paths": {
+      "/loginPost": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Devuelve el token de autorizacion",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "description": "Username del usuario"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Password del usuario"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Informacion del usuario",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "ID dependiendo del tipo de usuario"
+                      },
+                      "nombre": {
+                        "type": "string",
+                        "description": "Nombre del usuario"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/registerPost": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Devuelve el usuario creado",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Informacion del usuario",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/denuncias/lista": {
+        "get": {
+          "tags": [
+            "Denuncias"
+          ],
+          "summary": "Trae todos las denuncias",
+          "responses": {
+            "200": {
+              "description": "Lista de denuncias",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Denuncia"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    },
+    "/denuncias/listaPorEstado": {
+        "post": {
+          "tags": [
+            "Denuncias"
+          ],
+          "summary": "Devuelve un listado filtrado de las denuncias por su estado",
+          "parameters": [
+            {
+                "name": "estado",
+                "in": "path",
+                "required": true,
+                "description": "estado por el cual se filtraran las denuncias",
+                "schema": {
+                  "type": "string"
+                }
+              }
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Denuncia"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": 
+            {
+                "description": "Lista de denuncias filtradas",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Denuncia"
+                      }
+                    }
+                  }
+                }
+              }
+          }
+        }
+      },
+      "/denuncias/aceptar/{id}": {
+        "post": {
+          "tags": [
+            "Denuncias"
+          ],
+          "summary": "Actualiza una denuncias dandola por resuelta",
+          "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID de la denuncia a modificar",
+                "schema": {
+                  "type": "integer"
+                }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Denuncia"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "La denuncia fue actualizada cambiandole su estado a : 'resuelto' ",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Denuncia"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/denuncias/rechazar/{id}": {
+        "post": {
+          "tags": [
+            "Denuncias"
+          ],
+          "summary": "Rechaza una denuncia dandole de baja",
+          "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID de la denuncia a rechazar/eliminar",
+                "schema": {
+                  "type": "integer"
+                }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Denuncia"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "La denuncia fue rechazada, siendo dada de baja de la BD ",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Denuncia"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reclamos/lista": {
+        "get": {
+          "tags": [
+            "Reclamos"
+          ],
+          "summary": "Trae todos los reclamos",
+          "responses": {
+            "200": 
+            {
+              "description": "Lista de reclamos",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Reclamo"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    },
+    "/reclamos/listaPorEstado": {
+        "post": {
+          "tags": [
+            "Reclamos"
+          ],
+          "summary": "Devuelve un listado filtrado de los reclamos por su estado",
+          "parameters": [
+            {
+                "name": "estado",
+                "in": "path",
+                "required": true,
+                "description": "estado por el cual se filtraran las denuncias",
+                "schema": {
+                  "type": "string"
+                }
+              }
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reclamo"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": 
+            {
+                "description": "Lista de reclamos filtrados",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Reclamo"
+                      }
+                    }
+                  }
+                }
+              }
+          }
+        }
+      },
+    "/reclamos/rechazar/{id}": {
+        "post": {
+          "tags": [
+            "Reclamos"
+          ],
+          "summary": "Actualiza un reclamo dandola por resuelto",
+          "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID del reclamo a modificar",
+                "schema": {
+                  "type": "integer"
+                }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reclamo"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "El reclamo fue actualizado cambiandole su estado a : 'resuelto' ",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Reclamo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reclamos/aceptar/{id}": {
+        "post": {
+          "tags": [
+            "Reclamos"
+          ],
+          "summary": "Rechaza un reclamo dandole de baja de la BD",
+          "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID del reclamo a rechazar/eliminar",
+                "schema": {
+                  "type": "integer"
+                }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reclamo"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "El reclamo fue rechazado siendo eliminado de la BD",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Reclamo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "El ID autogenerado por MySQL"
+            },
+            "username": {
+              "type": "string",
+              "description": "El nombre de usuario que indentifica al User"
+            },
+            "nombre": {
+              "type": "string",
+              "description": "El nombre del usuario"
+            },
+            "apellido": {
+              "type": "string",
+              "description": "El apellido del usuario"
+            },
+            "password": {
+              "type": "string",
+              "description": "La contraseña elegida por el usuario"
+            },
+            "dni": {
+              "type": "integer",
+              "description": "El DNI del usuario"
+            }
+          }
+        },
+        "Denuncia": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "El ID autogenerado por MySQL"
+            },
+            "categoria": {
+              "type": "string",
+              "description": "La categoria de la denuncia "
+            },
+            "comentario": {
+              "type": "string",
+              "description": "Comentario de la denuncia"
+            },
+            "productoId": {
+              "type": "integer",
+              "description": "El id del producto denunciado"
+            },
+            "userId": {
+              "type": "number",
+              "description": "El id del usuario que realizo la denuncia"
+            },
+            "estado": {
+              "type": "string",
+              "description": "El estado de la denuncia"
+            }
+          }
+        },
+        "Reclamo": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "El ID autogenerado por MySQL"
+            },
+            "compraId": {
+              "type": "integer",
+              "description": "El id de la compra a la cual se le realizo un reclamo"
+            }
+          }
+        },
+        "MedioDePago": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "El ID autogenerado por MySQL"
+              },
+              "nombre": {
+                "type": "string",
+                "description": "Nombre del metodo de pago"
+              }
+            }
+          }
+    }
+  }
+}

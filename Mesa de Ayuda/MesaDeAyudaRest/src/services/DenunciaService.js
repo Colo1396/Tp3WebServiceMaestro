@@ -46,7 +46,7 @@ class DenunciaService{
             raw: true,
             nest: true,
             where:{
-               "compradorId": idUser
+               "userId": idUser
             }
         });
         return denuncias;

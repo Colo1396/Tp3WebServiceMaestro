@@ -1,20 +1,20 @@
 const {ReclamoService} = require('../services/ReclamoService');
 const {UserService} = require('../services/UsuarioServices');
+const {CompraService} = require('../services/CompraService');
 
 
-
-const filtrarReclamos = (reclamosAFiltrar)=>{
+const filtrarReclamos =  (reclamosAFiltrar)=>{
     let filtroReclamos = [];
-    reclamosAFiltrar.forEach(d => {
-        if(d.estado === "a resolver") {
+    reclamosAFiltrar.forEach((r) => {
+        if(r.estado === "a resolver") {
             filtroReclamos.push({
                 resuelto: false,
-                data: d
+                reclamo: r,
             });
         }else{
             filtroReclamos.push({
                 resuelto: true,
-                data: d
+                reclamo: r,
             });
         }
     });
@@ -77,11 +77,10 @@ const obtenerReclamosPorEstado = async(req,res)=>{
 
 const crearReclamo = async(req,res) =>{
     try{
-        const {productoId} = req.body;
         let user = await UserService.getById(res.locals.currentUser.dataValues.id);
         if( user ){
             let reclamo = {
-                "productoId": productoId,
+                "compraId": req.body.compraId,
                 "compradorId": user.id
             };
             let reclamoCreado = await ReclamoService.add(reclamo);

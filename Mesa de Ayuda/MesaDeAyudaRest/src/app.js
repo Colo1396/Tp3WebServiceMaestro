@@ -6,13 +6,12 @@ const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser'); 
-const {isLoggedIn,isNotLoggedIn} = require('./libs/auth');
-const {actualizarProducto,crearProducto,obtenerProducto,obtenerProductos} = require('./controllers/productoController');
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
-/**SERVICES */
-const {MedioDePagoService} = require('./services/MedioDePagosService');
-const {ProductoService} = require('./services/ProductosServices');
-const {UserService} = require('./services/UsuarioServices');
+const {isLoggedIn,isNotLoggedIn} = require('./libs/auth');
+
+
 
 //INITIALIZATE
 const app = express();
@@ -53,6 +52,7 @@ app.use(require('./routes/authRoutes'));
 app.use("/productos/",require('./routes/productsRoutes'));
 app.use("/denuncias/",require('./routes/denunciasRoutes'));
 app.use("/reclamos/",require('./routes/reclamosRoutes'));
+
 
 /** HOME **/
 app.get('/home', isLoggedIn ,(req,res)=>{

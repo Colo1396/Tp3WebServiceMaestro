@@ -39,51 +39,43 @@
   <header>
     <!-- Navbar -->
     <nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-        <a id="{{user.username}}" class="navbar-brand mr-1 username" href="/">UNLa</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/nuevoPost">Post</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/noticias">Noticias</a>
-            </li>
-          </ul>     
-        </div>
-        <ul class="navbar-nav ml-auto ml-md-0">
-          <li id="cantidadNoti" class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-bell fa-fw"></i>
-              <span id="contadorNoti" class="badge badge-danger">0</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-              <div id="notificaciones"></div>
-            </ul>
-          </li>
-          <li class="nav-item mx-1">
-            <a class="nav-link" href="/buscarUsuarios" id="search" role="button">
-              <i class="fas fa-search fa-fw"></i>
-            </a>
-          </li>
-          <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-user-circle fa-fw"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="#">Perfil</a>
-            <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+        <div class="container-fluid">
+            <a id="{{user.username}}" class="navbar-brand mr-1 username" href="/">UNLa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ver productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Comprar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/denuncias/nueva">Realizar Denuncia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reclamos/nuevo">Realizar Reclamo</a>
+                    </li>
+                </ul>
             </div>
-          </li>
-        </ul>
-      </div>
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-circle fa-fw"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#">Mi perfil</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
   </header>
 
@@ -114,7 +106,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Categoria</th>
                     <th scope="col">Comentario</th>
-                    <th scope="col">Producto/s</th>
+                    <th scope="col">Producto</th>
                     <th scope="col">UserId</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Accion</th>
@@ -123,20 +115,20 @@
                 <tbody align="center">
                   {{#each filtroDenuncias}}
                     <tr>
-                      <td>{{data.id}}</td>
-                      <td>{{data.categoria}}</td>
-                      <td>{{data.comentario}}</td>
-                      <td>{{data.productoId}}</td>
-                      <td>{{data.userId}}</td>
-                      <td>{{data.estado}}</td>
+                      <td>{{denuncia.id}}</td>
+                      <td>{{denuncia.categoria}}</td>
+                      <td>{{denuncia.comentario}}</td>
+                      <td>{{producto.nombre}}</td>
+                      <td>{{denuncia.userId}}</td>
+                      <td>{{denuncia.estado}}</td>
                       <td>
                        {{#if resuelto}}
                           <button disabled class="btn btn-success" type="submit" style="display: inline;">Todo Ok</button> 
                         {{else}}  
-                          <form action="/denuncias/aceptar/{{data.id}}" method="post">
+                          <form action="/denuncias/aceptar/{{denuncia.id}}" method="post">
                             <button class="btn btn-success" type="submit" style="display: inline;">Aceptar</button> 
                         </form>
-                        <form action="/denuncias/rechazar/{{data.id}}" method="post">
+                        <form action="/denuncias/rechazar/{{denuncia.id}}" method="post">
                           <button class="btn btn-danger" type="submit" style="display: inline;">Rechazar</button> 
                         </form> 
                         {{/if}}                       
@@ -151,11 +143,10 @@
       </div>
     </div>
   </main>      
-
   <!-- Pie de página -->
   <footer class="footer mt-auto py-3 bg-dark text-white">
     <div class="container" align="center">
-      <p>TP Kafka, Sist. Distribuidos, UNLa.
+      <p>TP Web Socket ApiRest, Sist. Distribuidos, UNLa.
       <br>
       &copy; 2021 Baez, Bustos, Galván, Rivera.</p>
     </div>

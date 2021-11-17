@@ -1,18 +1,19 @@
 const {UserService} = require('../services/UsuarioServices');
 const {DenunciaService} = require('../services/DenunciaService');
+const {ProductoService} = require('../services/ProductosServices');
 
 const filtrarDenuncias = (denunciasAFiltrar)=>{
     let filtroDenuncias = [];
-    denunciasAFiltrar.forEach(d => {
+    denunciasAFiltrar.forEach((d) => {
         if(d.estado === "a resolver") {
             filtroDenuncias.push({
                 resuelto: false,
-                data: d
+                denuncia: d,
             });
         }else{
             filtroDenuncias.push({
                 resuelto: true,
-                data: d
+                denuncia: d,
             });
         }
     });
