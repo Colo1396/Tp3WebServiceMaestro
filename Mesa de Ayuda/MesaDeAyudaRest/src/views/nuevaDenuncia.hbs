@@ -1,8 +1,8 @@
-<!doctype html>
-<html lang="es" class="h-100">
+<!DOCTYPE html>
+<html lang="en" class="h-100">
   <head>
     <meta charset="utf-8">
-    <title>{{page_title}}</title>
+    <title>Inicio</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sticky-footer-navbar/">
     {{!-- GOOGLE FONTS --}}
@@ -55,13 +55,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Comprar</a>
                     </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/denuncias/nueva">Realizar Denuncia</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/reclamos/nuevo">Realizar Reclamo</a>
-                      </li>
-    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/denuncias/nueva">Realizar Denuncia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reclamos/nuevo">Realizar Reclamo</a>
+                    </li>
                 </ul>
             </div>
             <ul class="navbar-nav ml-auto ml-md-0">
@@ -79,27 +78,55 @@
         </div>
     </nav>
   </header>
-    
-  <!-- Contenido de la página -->
-  <main class="flex-shrink-0">
-    <div class="container">
+<!-- Contenido de la página -->
+<main class="flex-shrink-0">
+  <div class="container">
 
-
-
-      <div class="container p-4">
-        <div class="row">
-          <div class="col-md-4 mx-auto">
-            <div class="card text-center">
-              <div class="card-body">
-                <h3>Bienvenido/a {{currentUser.username}}</h3>
-              </div>
+    <div class="container p-3">
+          <div class="row">
+            <div class="col-12 mx-auto">
+              <div class="card">
+                <div class="card-header text-white bg-info">
+                    NUEVA DENUNCIA
+                </div>
+                <div class="card-body">
+        
+        <form action="/denuncias/nuevaPost" method="post" class="form" style="margin-top:130px;">
+            <!--Categoria-->
+            <div class="input-group">
+                <select class="form-select" aria-label="Default select example" name="categoria">
+                    <option selected disabled>Elige una categoria</option>
+                    <option value="falsificación">Falsificación</option>
+                    <option value="producto ilegal">Producto Ilegal</option>
+                    <option value="fraude">Fraude</option>
+                    <option value="contenido inapropiado">Contenido Inapropiado</option>
+                </select>
+            <!--Comentario-->
+            <div class="input-group">
+                <input type="text" name="comentario" id="comentario" required>
+                <label for="comentario">Comentario</label>
             </div>
+            <!--Producto-->
+            <div class="input-group">
+                <input type="text" name="productoId" id="productoId" required>
+                <label for="productoId">Producto</label>
+            </div>
+            <!-- BOtON  -->
+            <div class="btn-group" style="margin-top:55px; display: flex; justify-content: center;">
+                <div class="col-6">
+                    <button type="submit" id="btn_register" class="register-btn">Completar
+                    </button>
+                </div>
+            </div>
+        </form>
           </div>
+</div>
+       
         </div>
-      </div>
     </div>
-  </main>
-  
+        </div>
+</div>
+    </main>
   <!-- Pie de página -->
   <footer class="footer mt-auto py-3 bg-dark text-white">
     <div class="container" align="center">
@@ -122,4 +149,3 @@ crossorigin="anonymous"></script>
 <script src="/js/like.js"></script>
 
 </body>
-</html>

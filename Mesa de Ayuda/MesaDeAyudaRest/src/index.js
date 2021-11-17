@@ -1,8 +1,6 @@
-const app = require('./app');
+const server = require('./app');
 
-async function main(){
-    await app.listen(8080);
-    console.log("Server on port 8080");
-}
+server.listen(process.env.PORT || 8080, ()=>{
+    console.log('Escuchando el puerto', process.env.PORT || 8080);
+});
 
-main();

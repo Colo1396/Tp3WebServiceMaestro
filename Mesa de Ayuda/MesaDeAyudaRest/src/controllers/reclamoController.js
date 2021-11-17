@@ -1,5 +1,37 @@
 const {ReclamoService} = require('../services/ReclamoService');
 const {UserService} = require('../services/UsuarioServices');
+const {CompraService} = require('../services/CompraService');
+
+
+const filtrarReclamos =  (reclamosAFiltrar)=>{
+    let filtroReclamos = [];
+    reclamosAFiltrar.forEach((r) => {
+        if(r.estado === "a resolver") {
+            filtroReclamos.push({
+                resuelto: false,
+                reclamo: r,
+            });
+        }else{
+            filtroReclamos.push({
+                resuelto: true,
+                reclamo: r,
+            });
+        }
+    });
+    return filtroReclamos;
+}
+
+const obtenerReclamos = async(req,res)=>{
+    try{
+        let reclamos = await ReclamoService.getAll();
+        return res.render('listaReclamos', {filtroReclamos: filtrarReclamos(reclamos)});  
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({
+            message: "Ocurrio un error --> "+err
+        });
+    }
+}
 
 
 const obtenerReclamo = async(req,res)=>{
@@ -28,18 +60,12 @@ const obtenerReclamo = async(req,res)=>{
 const obtenerReclamosPorEstado = async(req,res)=>{
     try{
         const {estado} = req.body;
-        console.log(estado);
-        let reclamos = await ReclamoService.getAllByState(estado);
+        let reclamos = [];
+
+        if(estado === "todos") reclamos = await ReclamoService.getAll();
+        else reclamos = await ReclamoService.getAllByState(estado);
         if(reclamos){
-            res.status(200).json({
-                message: "reclamos encontrados exitosamente",
-                data: reclamos
-            });
-        }else{
-            res.status(200).json({
-                message: "no se encontraron los reclamos",
-                data: reclamos
-            });
+            return res.render('listaReclamos', {filtroReclamos: filtrarReclamos(reclamos)});  
         }
     }catch(err){
         console.log(err);
@@ -51,11 +77,10 @@ const obtenerReclamosPorEstado = async(req,res)=>{
 
 const crearReclamo = async(req,res) =>{
     try{
-        const {productoId} = req.body;
-        let user = await UserService.getById(req.userId);
+        let user = await UserService.getById(res.locals.currentUser.dataValues.id);
         if( user ){
             let reclamo = {
-                "productoId": productoId,
+                "compraId": req.body.compraId,
                 "compradorId": user.id
             };
             let reclamoCreado = await ReclamoService.add(reclamo);
@@ -74,16 +99,12 @@ const crearReclamo = async(req,res) =>{
 const modificarReclamo = async(req,res)=>{
     try{
         const {id} = req.params;
-        const {estado} = req.body;        
         let reclamo = {
                 "id": id,
-                "estado": estado,
+                "estado": "resuelto",
         };
         let reclamoModificado = await ReclamoService.update(reclamo);
-            return res.status(200).json({
-                message: "Reclamo modificado con exito!!!",
-                data: reclamoModificado
-            });
+        res.redirect("/reclamos/lista");
     }catch(err){
         console.log(err);
         return res.status(500).json({
@@ -114,5 +135,6 @@ module.exports = {
     modificarReclamo,
     eliminarReclamo,
     obtenerReclamo,
-    obtenerReclamosPorEstado
+    obtenerReclamosPorEstado,
+    obtenerReclamos
 }

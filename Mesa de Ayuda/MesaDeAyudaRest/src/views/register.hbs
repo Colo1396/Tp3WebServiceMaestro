@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     {{!-- BOOTSTRAP 4 --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {{!-- BOOTSTRAP 5 --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     {{!-- FONT AWESOME 5 --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
@@ -34,7 +36,7 @@
                 </div>
             </nav>
         </header>
-        <form action="/api/usuarios/registerPost" method="post" class="form" style="margin-top:130px;">
+        <form action="/registerPost" method="post" class="form" style="margin-top:130px;">
             <h2>Registrarse</h2>
             <!--NAME-->
             <div class="input-group">
@@ -61,11 +63,17 @@
                 <input type="password" name="password" id="password" required>
                 <label for="password">Contraseña</label>
             </div>
-            <!-- BOTON  -->
-            <div class="btn-group">
-                <div class="col-6">
-                    <a href="#" id="btn_cancelar" class="btn cancelar-btn" style="text-decoration:none">Cancelar</a>
-                </div>
+            <!--ROL-->
+            <div class="input-group">
+                <select class="form-select" aria-label="Default select example" name="rolId">
+                {{#each rolesBuscados}}
+                    <option value= {{id}} >{{tipo}}</option>
+                {{/each}}
+                </select>
+            </div>
+            
+            <!-- BOtON  -->
+            <div class="btn-group" style="margin-top:55px; display: flex; justify-content: center;">
                 <div class="col-6">
                     <button type="submit" id="btn_register" class="register-btn">Registrarse
                     </button>
@@ -76,6 +84,16 @@
             </div>
         </form>
     </div>
+
+<!-- Pie de página -->
+  <footer class="footer mt-auto py-3 bg-dark text-white">
+    <div class="container" align="center">
+      <p>TP Web Socket ApiRest, Sist. Distribuidos, UNLa.
+      <br>
+      &copy; 2021 Baez, Bustos, Galván, Rivera.</p>
+    </div>
+  </footer>
+
     {{!-- SCRIPTS --}}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

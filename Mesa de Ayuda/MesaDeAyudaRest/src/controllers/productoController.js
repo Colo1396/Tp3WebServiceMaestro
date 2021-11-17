@@ -48,6 +48,7 @@ const obtenerProducto = async(req,res)=>{
     }
 }
 
+
 const crearProducto = async (req, res) => {
     try{
         const producto = {
@@ -56,15 +57,13 @@ const crearProducto = async (req, res) => {
             imagen: req.body.imagen,
             precio: req.body.precio,
             stock: req.body.stock,
-            mediosDePago: req.body.mediosDePago.id
+            mediosDePago: req.body.medioDePagoId
         }
-        const user = await UserService.getById(req.userId);
+
+        const user = await UserService.getById(res.locals.currentUser.dataValues.id);
         const createdProducto = await ProductoService.add(producto, user);
         if(createdProducto){
-            res.status(200).json({
-                message: "product succesfully created",
-                data: createdProducto
-            });
+            res.redirect('/usuarios/home');
         }
     } catch(err){
         console.error(err);
@@ -73,6 +72,7 @@ const crearProducto = async (req, res) => {
         });
     }
 }
+
 
 const actualizarProducto = async (req, res) => {
     try{

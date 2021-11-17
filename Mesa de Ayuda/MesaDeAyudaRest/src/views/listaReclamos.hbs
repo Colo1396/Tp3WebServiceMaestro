@@ -1,8 +1,8 @@
-<!doctype html>
-<html lang="es" class="h-100">
+<!DOCTYPE html>
+<html lang="en" class="h-100">
   <head>
     <meta charset="utf-8">
-    <title>{{page_title}}</title>
+    <title>Inicio</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sticky-footer-navbar/">
     {{!-- GOOGLE FONTS --}}
@@ -55,13 +55,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Comprar</a>
                     </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/denuncias/nueva">Realizar Denuncia</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/reclamos/nuevo">Realizar Reclamo</a>
-                      </li>
-    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/denuncias/nueva">Realizar Denuncia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reclamos/nuevo">Realizar Reclamo</a>
+                    </li>
                 </ul>
             </div>
             <ul class="navbar-nav ml-auto ml-md-0">
@@ -79,27 +78,66 @@
         </div>
     </nav>
   </header>
-    
+
   <!-- Contenido de la página -->
   <main class="flex-shrink-0">
     <div class="container">
-
-
-
       <div class="container p-4">
         <div class="row">
-          <div class="col-md-4 mx-auto">
-            <div class="card text-center">
-              <div class="card-body">
-                <h3>Bienvenido/a {{currentUser.username}}</h3>
-              </div>
+          <div class="col-12 mx-auto">
+            <form class="d-flex" action="/reclamos/listaPorEstado" method="POST">
+                  <select class="form-select" aria-label="Default select example" name="estado">
+                    <option value="todos">Todos</option>
+                    <option value="resuelto">Resuelto</option>
+                    <option value="a resolver">No Resuelto</option>
+                </select>
+              <button class="btn btn-outline-success" style="margin-left: 5px;" type="submit">Filtrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container p-4">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <div class="table-responsive">
+              <table class="table " align="center">
+                <thead align="center" class="bg-info">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">CompraId/s</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Accion</th>
+                  </tr>
+                </thead>
+                <tbody align="center">
+                  {{#each filtroReclamos}}
+                    <tr>
+                      <td>{{reclamo.id}}</td>
+                      <td>{{reclamo.compraId}}</td>
+                      <td>{{reclamo.estado}}</td>
+                      <td>
+                       {{#if resuelto}}
+                          <button disabled class="btn btn-success" type="submit" style="display: inline;">Todo Ok</button> 
+                        {{else}}  
+                          <form action="/reclamos/aceptar/{{reclamo.id}}" method="post">
+                            <button class="btn btn-success" type="submit" style="display: inline;">Aceptar</button> 
+                        </form>
+                        <form action="/reclamos/rechazar/{{reclamo.id}}" method="post">
+                          <button class="btn btn-danger" type="submit" style="display: inline;">Rechazar</button> 
+                        </form> 
+                        {{/if}}                       
+                      </td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
-  
+  </main>      
+
   <!-- Pie de página -->
   <footer class="footer mt-auto py-3 bg-dark text-white">
     <div class="container" align="center">
@@ -116,10 +154,4 @@ crossorigin="anonymous"></script>
 crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
-<script src="/js/notificaciones.js"></script>
-<script src="/js/seguir.js"></script>
-<script src="/js/like.js"></script>
-
 </body>
-</html>

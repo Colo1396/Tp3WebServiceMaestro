@@ -1,5 +1,36 @@
 const {UserService} = require('../services/UsuarioServices');
 const {DenunciaService} = require('../services/DenunciaService');
+const {ProductoService} = require('../services/ProductosServices');
+
+const filtrarDenuncias = (denunciasAFiltrar)=>{
+    let filtroDenuncias = [];
+    denunciasAFiltrar.forEach((d) => {
+        if(d.estado === "a resolver") {
+            filtroDenuncias.push({
+                resuelto: false,
+                denuncia: d,
+            });
+        }else{
+            filtroDenuncias.push({
+                resuelto: true,
+                denuncia: d,
+            });
+        }
+    });
+    return filtroDenuncias;
+}
+
+const obtenerDenuncias = async(req,res)=>{
+    try{
+        let denuncias = await DenunciaService.getAll();
+        return res.render('listaDenuncias', {filtroDenuncias: filtrarDenuncias(denuncias)});  
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({
+            message: "Ocurrio un error --> "+err
+        });
+    }
+}
 
 const obtenerDenuncia = async(req,res)=>{
     try{
@@ -27,17 +58,12 @@ const obtenerDenuncia = async(req,res)=>{
 const obtenerDenunciasPorEstado = async(req,res)=>{
     try{
         const {estado} = req.body;
-        let denuncias = await DenunciaService.getAllByState(estado);
+        let denuncias = [];
+        if(estado === "todos") denuncias = await DenunciaService.getAll();
+        else denuncias = await DenunciaService.getAllByState(estado);
+
         if(denuncias){
-            res.status(200).json({
-                message: "denuncias encontrada exitosamente",
-                data: denuncias
-            });
-        }else{
-            res.status(200).json({
-                message: "no se encontraron las denuncias",
-                data: denuncias
-            });
+            return res.render('listaDenuncias', {filtroDenuncias: filtrarDenuncias(denuncias)});  
         }
     }catch(err){
         console.log(err);
@@ -49,21 +75,19 @@ const obtenerDenunciasPorEstado = async(req,res)=>{
 
 const crearDenuncia = async (req,res)=>{
     try{
-        const {categoria, comentario,productoId, compradorId} = req.body;
+        const {categoria, comentario,productoId} = req.body;
 
-        let user = await UserService.getById(req.userId);
+        let user = await UserService.getById(res.locals.currentUser.dataValues.id);
         if( user ){
             let denuncia = {
                 "categoria": categoria,
                 "comentario": comentario,
                 "productoId": productoId,
-                "compradorId": user.id
+                "userId": user.id
             };
             let denunciaCreada = await DenunciaService.add(denuncia);
-            return res.status(200).json({
-                message: "Denuncia creada con exito!!!",
-                data: denunciaCreada
-            });
+            res.redirect("/home");
+
         }else return res.status(200).json({
             message: "El User indicado no existe"
         });
@@ -78,16 +102,12 @@ const crearDenuncia = async (req,res)=>{
 const modificarDenuncia = async(req,res)=>{
     try{
         const {id} = req.params;
-        const {estado} = req.body;        
         let denuncia = {
                 "id": id,
-                "estado": estado,
+                "estado": "resuelto",
         };
         let denunciaModificada = await DenunciaService.update(denuncia);
-            return res.status(200).json({
-                message: "Denuncia modificada con exito!!!",
-                data: denunciaModificada
-            });
+        return res.redirect('/denuncias/lista');
     }catch(err){
         console.log(err);
         return res.status(500).json({
@@ -100,10 +120,7 @@ const eliminarDenuncia = async(req,res)=>{
     try{
         const {id} = req.params;
         let denunciaEliminada = await DenunciaService.delete(id);
-            return res.status(200).json({
-                message: "Denuncia eliminada con exito!!!",
-                data: denunciaEliminada
-            });
+        return res.redirect('/denuncias/lista');
     }catch(err){
         console.log(err);
         return res.status(500).json({
@@ -117,5 +134,6 @@ module.exports = {
     modificarDenuncia,
     eliminarDenuncia,
     obtenerDenuncia,
-    obtenerDenunciasPorEstado
+    obtenerDenunciasPorEstado,
+    obtenerDenuncias
 }
