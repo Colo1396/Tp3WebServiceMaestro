@@ -176,8 +176,8 @@ public class MovHistoricoService {
 	}
 
 	// ------------------------------------------------------------------------------------
-	@WebMethod(operationName = "devolucionConTajeta")
-	@RequestWrapper(className = "com.soap.services.MovHistoricoService.devolucionConTajeta")
+	@WebMethod(operationName = "devolucionConEfectivo")
+	@RequestWrapper(className = "com.soap.services.MovHistoricoService.devolucionConEfectivo")
 	public String devolucionConEfectivo(@WebParam(name = "monto") double monto,
 			@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "idCuentaBancaria") int idCuentaBancaria,
 			@WebParam(name = "idMediosPago") int idMediosPago) {

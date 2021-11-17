@@ -404,9 +404,9 @@ public class MovHistoricoController extends Conexion {
 	public boolean devolucionConEfectivo(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago) throws SQLException {
 		try {
 
-			//CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
 
-			//CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
 
 			String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
 			String sql2 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
@@ -493,7 +493,7 @@ public class MovHistoricoController extends Conexion {
 				ps3.setInt(3, idCuentaBancariaNueva);
 				
 
-				if (ps.executeUpdate() == 1 && ps1.executeUpdate() == 1 && ps2.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+				if (ps.executeUpdate() == 1 && ps1.executeUpdate() == 1 && ps2.executeUpdate() == 1 && ps3.executeUpdate() == 1) {
 					respuesta = true;
 				}
 
