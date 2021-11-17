@@ -1797,19 +1797,19 @@
          <id>?</id>\r
       </ser:findById>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/findById"/></con:call></con:operation><con:operation id="95ba7181-b2c4-412d-b9c6-c63af70efb12" isOneWay="false" action="" name="ntercambioEntreCuentas" bindingOperationName="ntercambioEntreCuentas" type="Request-Response" outputName="ntercambioEntreCuentasResponse" inputName="ntercambioEntreCuentas" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c6703d82-aa9f-403e-b682-201ac6e83ca1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/findById"/></con:call></con:operation><con:operation id="95ba7181-b2c4-412d-b9c6-c63af70efb12" isOneWay="false" action="" name="ntercambioEntreCuentas" bindingOperationName="ntercambioEntreCuentas" type="Request-Response" outputName="ntercambioEntreCuentasResponse" inputName="ntercambioEntreCuentas" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c6703d82-aa9f-403e-b682-201ac6e83ca1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:ntercambioEntreCuentas>\r
-         <monto>?</monto>\r
-         <idUsuario>?</idUsuario>\r
-         <idCuentaBancariaAnterior>?</idCuentaBancariaAnterior>\r
-         <idCuentaBancariaNueva>?</idCuentaBancariaNueva>\r
-         <idMediosPagoAnterior>?</idMediosPagoAnterior>\r
-         <idMediosPagoNueva>?</idMediosPagoNueva>\r
+         <monto>250</monto>\r
+         <idUsuario>2</idUsuario>\r
+         <idCuentaBancariaAnterior>3</idCuentaBancariaAnterior>\r
+         <idCuentaBancariaNueva>4</idCuentaBancariaNueva>\r
+         <idMediosPagoAnterior>1</idMediosPagoAnterior>\r
+         <idMediosPagoNueva>1</idMediosPagoNueva>\r
       </ser:ntercambioEntreCuentas>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/ntercambioEntreCuentas"/></con:call></con:operation><con:operation id="ea387b6b-0547-4707-af74-02a57d7ab586" isOneWay="false" action="" name="pagarConEfectivo" bindingOperationName="pagarConEfectivo" type="Request-Response" outputName="pagarConEfectivoResponse" inputName="pagarConEfectivo" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d4ca4a63-3c51-40ce-9d93-084c869b0f1e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/ntercambioEntreCuentas"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ea387b6b-0547-4707-af74-02a57d7ab586" isOneWay="false" action="" name="pagarConEfectivo" bindingOperationName="pagarConEfectivo" type="Request-Response" outputName="pagarConEfectivoResponse" inputName="pagarConEfectivo" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d4ca4a63-3c51-40ce-9d93-084c869b0f1e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:pagarConEfectivo>\r
