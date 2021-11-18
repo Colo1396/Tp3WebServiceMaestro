@@ -130,6 +130,60 @@
           }
         }
       },
+      "/denuncias/nuevaPost": {
+        "post": {
+          "tags": [
+            "Denuncias"
+          ],
+          "summary": "Crea una denuncia",
+          "parameters": [
+              {
+                "name": "auth_token",
+                "in": "header",
+                "required": true,
+                "description": "Token de autorizacion",
+                "schema": {
+                  "type": "string"
+                }
+              }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "categoria":{
+                      "type": "string",
+                      "description": "Categoria de la denuncia a crear"
+                    },
+                    "comentario":{
+                      "type": "string",
+                      "description": "Comentario de la denuncia a crear"
+                    },
+                    "productoId":{
+                      "type": "integer",
+                      "description": "ID del producto al cual se le realizar la denuncia"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Iformacion de la denuncia",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Denuncia"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
 
       "/denuncias/lista": {
         "get": {
@@ -288,6 +342,52 @@
                 "application/json": {
                   "schema": {
                     "$ref": "#/components/schemas/Denuncia"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reclamos/nuevoPost": {
+        "post": {
+          "tags": [
+            "Reclamos"
+          ],
+          "summary": "Crea un reclamo",
+          "parameters": [
+              {
+                "name": "auth_token",
+                "in": "header",
+                "required": true,
+                "description": "Token de autorizacion",
+                "schema": {
+                  "type": "string"
+                }
+              }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "compraId":{
+                      "type": "integer",
+                      "description": "ID de la compra a la cual se le realizara el reclamo"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Iformacion del reclamo",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Reclamo"
                   }
                 }
               }
