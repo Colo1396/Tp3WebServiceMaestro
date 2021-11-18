@@ -77,7 +77,7 @@ const crearDenuncia = async (req,res)=>{
     try{
         const {categoria, comentario,productoId} = req.body;
 
-        let user = await UserService.getById(res.locals.currentUser.dataValues.id);
+        let user = await UserService.getById(req.user.id);
         if( user ){
             let denuncia = {
                 "categoria": categoria,

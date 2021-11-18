@@ -77,7 +77,7 @@ const obtenerReclamosPorEstado = async(req,res)=>{
 
 const crearReclamo = async(req,res) =>{
     try{
-        let user = await UserService.getById(res.locals.currentUser.dataValues.id);
+        let user = await UserService.getById(req.user.id);
         if( user ){
             let reclamo = {
                 "compraId": req.body.compraId,

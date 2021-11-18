@@ -10,7 +10,7 @@ const {crearReclamo, eliminarReclamo, modificarReclamo, obtenerReclamo, obtenerR
 router.get('/nuevo',[isAuthenticated,esRolComprador], (req,res)=>{
     res.render('nuevoReclamo');
 });
-router.post('/nuevoPost', isAuthenticated,[esRolComprador], crearReclamo);
+router.post('/nuevoPost', [isAuthenticated,esRolComprador], crearReclamo);
 
 router.get('/lista',[isAuthenticated,esRolMesaDeAyuda] , obtenerReclamos);
 router.post('/listaPorEstado',[isAuthenticated,esRolMesaDeAyuda], obtenerReclamosPorEstado);
