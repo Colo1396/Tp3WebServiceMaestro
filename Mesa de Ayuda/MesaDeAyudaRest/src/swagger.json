@@ -48,9 +48,13 @@
                         "type": "string",
                         "description": "ID dependiendo del tipo de usuario"
                       },
-                      "nombre": {
+                      "auth_token": {
                         "type": "string",
-                        "description": "Nombre del usuario"
+                        "description": "Token de autorizacion para el usuario"
+                      },
+                      "username": {
+                        "type": "string",
+                        "description": "Username del usuario"
                       }
                     }
                   }
@@ -89,10 +93,113 @@
           }
         }
       },
+      "/logout": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Finaliza la session del usuario logueado",
+          "parameters": [
+            {
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Informacion del usuario",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Mensaje devuelto informando que paso con la session"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/denuncias/nuevaPost": {
+        "post": {
+          "tags": [
+            "Denuncias"
+          ],
+          "summary": "Crea una denuncia",
+          "parameters": [
+              {
+                "name": "auth_token",
+                "in": "header",
+                "required": true,
+                "description": "Token de autorizacion",
+                "schema": {
+                  "type": "string"
+                }
+              }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "categoria":{
+                      "type": "string",
+                      "description": "Categoria de la denuncia a crear"
+                    },
+                    "comentario":{
+                      "type": "string",
+                      "description": "Comentario de la denuncia a crear"
+                    },
+                    "productoId":{
+                      "type": "integer",
+                      "description": "ID del producto al cual se le realizar la denuncia"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Iformacion de la denuncia",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Denuncia"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
       "/denuncias/lista": {
         "get": {
           "tags": [
             "Denuncias"
+          ],
+          "parameters": [
+            {
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
+              }
+            }
           ],
           "summary": "Trae todos las denuncias",
           "responses": {
@@ -120,20 +227,26 @@
           "summary": "Devuelve un listado filtrado de las denuncias por su estado",
           "parameters": [
             {
-                "name": "estado",
-                "in": "path",
-                "required": true,
-                "description": "estado por el cual se filtraran las denuncias",
-                "schema": {
-                  "type": "string"
-                }
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
               }
+            }
           ],
           "requestBody": {
             "content": {
-              "multipart/form-data": {
+              "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Denuncia"
+                  "type": "object",
+                  "properties": {
+                    "estado":{
+                      "type": "string",
+                      "description": "Estado por el cual se filtraran las denuncias"
+                    }
+                  }
                 }
               }
             }
@@ -164,6 +277,15 @@
           "summary": "Actualiza una denuncias dandola por resuelta",
           "parameters": [
             {
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
                 "name": "id",
                 "in": "path",
                 "required": true,
@@ -173,15 +295,6 @@
                 }
             }
           ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Denuncia"
-                }
-              }
-            }
-          },
           "responses": {
             "200": {
               "description": "La denuncia fue actualizada cambiandole su estado a : 'resuelto' ",
@@ -204,6 +317,15 @@
           "summary": "Rechaza una denuncia dandole de baja",
           "parameters": [
             {
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
                 "name": "id",
                 "in": "path",
                 "required": true,
@@ -213,15 +335,6 @@
                 }
             }
           ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Denuncia"
-                }
-              }
-            }
-          },
           "responses": {
             "200": {
               "description": "La denuncia fue rechazada, siendo dada de baja de la BD ",
@@ -236,12 +349,69 @@
           }
         }
       },
+      "/reclamos/nuevoPost": {
+        "post": {
+          "tags": [
+            "Reclamos"
+          ],
+          "summary": "Crea un reclamo",
+          "parameters": [
+              {
+                "name": "auth_token",
+                "in": "header",
+                "required": true,
+                "description": "Token de autorizacion",
+                "schema": {
+                  "type": "string"
+                }
+              }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "compraId":{
+                      "type": "integer",
+                      "description": "ID de la compra a la cual se le realizara el reclamo"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Iformacion del reclamo",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Reclamo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "/reclamos/lista": {
         "get": {
           "tags": [
             "Reclamos"
           ],
           "summary": "Trae todos los reclamos",
+                    "parameters": [
+            {
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
           "responses": {
             "200": 
             {
@@ -268,20 +438,26 @@
           "summary": "Devuelve un listado filtrado de los reclamos por su estado",
           "parameters": [
             {
-                "name": "estado",
-                "in": "path",
-                "required": true,
-                "description": "estado por el cual se filtraran las denuncias",
-                "schema": {
-                  "type": "string"
-                }
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
               }
+            }
           ],
           "requestBody": {
             "content": {
-              "multipart/form-data": {
+              "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Reclamo"
+                  "type": "object",
+                  "properties": {
+                    "estado":{
+                      "type": "string",
+                      "description": "Estado por el cual se filtraran los reclamos"
+                    }
+                  }
                 }
               }
             }
@@ -312,6 +488,15 @@
           "summary": "Actualiza un reclamo dandola por resuelto",
           "parameters": [
             {
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
                 "name": "id",
                 "in": "path",
                 "required": true,
@@ -321,15 +506,6 @@
                 }
             }
           ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Reclamo"
-                }
-              }
-            }
-          },
           "responses": {
             "200": {
               "description": "El reclamo fue actualizado cambiandole su estado a : 'resuelto' ",
@@ -352,6 +528,15 @@
           "summary": "Rechaza un reclamo dandole de baja de la BD",
           "parameters": [
             {
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
                 "name": "id",
                 "in": "path",
                 "required": true,
@@ -361,15 +546,6 @@
                 }
             }
           ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Reclamo"
-                }
-              }
-            }
-          },
           "responses": {
             "200": {
               "description": "El reclamo fue rechazado siendo eliminado de la BD",
@@ -457,20 +633,7 @@
               "description": "El id de la compra a la cual se le realizo un reclamo"
             }
           }
-        },
-        "MedioDePago": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer",
-                "description": "El ID autogenerado por MySQL"
-              },
-              "nombre": {
-                "type": "string",
-                "description": "Nombre del metodo de pago"
-              }
-            }
-          }
+        }
     }
   }
 }

@@ -5,14 +5,8 @@ const obtenerMediosDePago = async(req,res)=>{
             let mediosDePago = await MedioDePagoService.getAll();
             if(mediosDePago){
                 res.status(200).json({
-                    message: "mediosDePago encontrados exitosamente",
-                    data: mediosDePago
+                    mediosDePago
                 });        
-            }else{
-                res.status(200).json({
-                        message: "mediosDePago no encontrado",
-                        data: mediosDePago
-                });
             }
         }catch(err){
             console.log(err);
@@ -28,13 +22,7 @@ const obtenerMedioDePago = async(req,res)=>{
                 let medioDePago = await MedioDePagoService.getById(id);
                 if(medioDePago){
                         res.status(200).json({
-                                message: "medioDePago encontrado exitosamente",
-                                data: medioDePago
-                        });
-                }else{
-                        res.status(200).json({
-                                message: "medioDePago no encontrado",
-                                data: medioDePago
+                                medioDePago
                         });
                 }
         }catch(err){

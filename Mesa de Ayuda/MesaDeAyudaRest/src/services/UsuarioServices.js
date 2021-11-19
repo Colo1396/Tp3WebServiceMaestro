@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { UserModel } = require('../database/connection');
 const {RolService} = require('./RolServices');
-const {SECRET} = require('../config/config.security');
 
 class UserService{
     static async register(user){
@@ -16,14 +15,12 @@ class UserService{
         if(dniExists){
             throw new Error("Ya existe un usuario con ese dni");
         }
-        console.log(user);
         
         const salt = await bcrypt.genSalt(12);
         const hash = await bcrypt.hash(user.password, salt);
         user.password = hash;
 
-        const createdUser = await UserModel.create(user)
-
+        const createdUser = await UserModel.create(user);
         return createdUser;
     }   
 
@@ -59,25 +56,22 @@ class UserService{
                 }
             );
             const validar = await bcrypt.compare(user.password, hashUserPassword); //compara las dos contraseñas ahora si hasheadas
-            if(validar){
-                isValid = true;
-            } 
-            else{
-                isValid = false;
-            } 
+            if(validar) isValid = true;
+            else isValid = false; 
         }
-        return isValid;
-       /* 
+       
         if(isValid){
-            const token = jwt.sign({id: userExists.id}, SECRET, {
-                expiresIn: 1200 //expira en 1 hora el token
-            });               
-            const loginInfo = {auth_token: token, id: userExists.id};
+            const token = jwt.sign({ id: userExists.id }, process.env.TOKEN_SECRET,{ expiresIn: 60 * 60 * 2}); //expira en 2 horas el token
+            const loginInfo = {
+                auth_token: token, 
+                id: userExists.id, 
+                username: userExists.username
+            };
             return loginInfo;
         }
         else{
             throw new Error("La contraseña ingresada es incorrecta");
-        }*/
+        }
 
     }   
 

@@ -1,24 +1,23 @@
 const {Router} = require('express');
 const router = Router();
 
-const {esRolMesaDeAyuda, esRolComprador} = require('../middlewares/authjwt');
-
+const {isAuthenticated} = require('../middlewares/authenticate');
+const {esRolComprador,esRolMesaDeAyuda,esRolVendedor} = require('../middlewares/validationRol');
 const {crearDenuncia,eliminarDenuncia,modificarDenuncia, obtenerDenuncia, obtenerDenunciasPorEstado, obtenerDenuncias} = require('../controllers/denunciaController');
-const { isLoggedIn } = require('../libs/auth');
 
 // /denuncias/
 
 //router.get('/:id',  obtenerDenuncia);
 
 
-router.get('/nueva',[isLoggedIn,esRolComprador], (req,res)=>{
+router.get('/nueva',[isAuthenticated,esRolComprador], (req,res)=>{
     res.render('nuevaDenuncia');
 });
-router.post('/nuevaPost', [isLoggedIn,esRolComprador], crearDenuncia);
+router.post('/nuevaPost', [isAuthenticated,esRolComprador], crearDenuncia);
 
-router.get('/lista',[isLoggedIn,esRolMesaDeAyuda] , obtenerDenuncias);
-router.post('/listaPorEstado',[isLoggedIn,esRolMesaDeAyuda], obtenerDenunciasPorEstado);
-router.post('/aceptar/:id',[isLoggedIn,esRolMesaDeAyuda] ,modificarDenuncia);
-router.post('/rechazar/:id',[isLoggedIn,esRolMesaDeAyuda] ,eliminarDenuncia);
+router.get('/lista',[isAuthenticated, esRolMesaDeAyuda] , obtenerDenuncias);
+router.post('/listaPorEstado',[isAuthenticated,esRolMesaDeAyuda], obtenerDenunciasPorEstado);
+router.post('/aceptar/:id',[isAuthenticated,esRolMesaDeAyuda] ,modificarDenuncia);
+router.post('/rechazar/:id',[isAuthenticated,esRolMesaDeAyuda] ,eliminarDenuncia);
 
 module.exports = router;
