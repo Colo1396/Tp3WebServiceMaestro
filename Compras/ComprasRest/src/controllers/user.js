@@ -9,15 +9,14 @@ const {UserService} = require('../services/UserService');
 
 //Rutas de usuarios
 router.post('/register', async(req, res) =>{ 
-    //Obtener los parámetros de la petición
+    //Parámetros de la petición
     let params = req.body;
     
     try{
-        //Validar los datos
+        //Valido los datos
         var validate_nombre = !validator.isEmpty(params.nombre);
         var validate_apellido = !validator.isEmpty(params.apellido);
         var validate_username = !validator.isEmpty(params.username);
-        //var validate_email =  !validator.isEmpty(params.email) && validator.isEmail(params.email);
         var validate_password = !validator.isEmpty(params.password);
         var validate_dni = !validator.isEmpty(params.dni);
     }catch(err){
@@ -30,7 +29,7 @@ router.post('/register', async(req, res) =>{
     //Validación correcta
     if(validate_nombre && validate_apellido && validate_username && validate_password && validate_dni){
         
-        //Comprobar si el usuario existe
+        //Compruebo si el usuario existe
         var userExistente = await UserService.getUserByDniyUsername(params.dni, params.username);
         console.log(userExistente);
         //Si no existe,
@@ -46,7 +45,7 @@ router.post('/register', async(req, res) =>{
             const result = await UserService.add(params.username, hash, "ROLE_COMPRADOR", params.nombre, params.apellido, params.dni);
             //Devolver respuesta        
             return res.status(200).send({
-                status : "success nuevo",
+                status : "success nuevo user registrado",
                 user: result
             });
         
@@ -64,11 +63,11 @@ router.post('/register', async(req, res) =>{
 });
 
 router.post('/login', async(req, res) =>{ 
-    //Obtener los parámetros de la petición
+    //Parámetros de la petición
     const params = req.body;
 
     try{
-        //Validar los datos
+        //Valido los datos
         var validate_username = !validator.isEmpty(params.username);
         var validate_password = !validator.isEmpty(params.password);
     }catch(err){
@@ -85,7 +84,7 @@ router.post('/login', async(req, res) =>{
 
     //Buscar usuarios que coincidan con el username
     var userExistente = await UserService.getByUsername(params.username);
-    //Si lo encuentra
+    //Si no lo encuentra
     if(userExistente.user == null){
         return res.status(404).send({
             message: "El usuario no existe."
@@ -117,7 +116,7 @@ router.post('/login', async(req, res) =>{
         
     }else{
         return res.status(404).send({
-            message: "Credenciales incorrectas."
+            message: "Username o password incorrecto."
         });
     }
 });
@@ -129,11 +128,10 @@ router.put('/updateUser', auth.authenticated, async(req, res) =>{
 
     
     try{
-        //Validar datos
+        //Validacion datos
         var validate_nombre = !validator.isEmpty(params.nombre);
         var validate_apellido = !validator.isEmpty(params.apellido);
         var validate_username = !validator.isEmpty(params.username);
-        //var validate_email =  !validator.isEmpty(params.email) && validator.isEmail(params.email);
         var validate_dni = !validator.isEmpty(params.dni);
     }catch(er){
         return res.status(200).send({
