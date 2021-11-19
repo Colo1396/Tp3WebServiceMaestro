@@ -22,7 +22,7 @@ app.use(morgan('dev'));
 app.use(cors());
 
 //SETTINGS---------------------------------------------
-app.set('port', process.env.PORT || 12575);
+app.set('port', process.env.PORT || 8081);
 app.set('json spaces', 2);
 
 //ROUTES-----------------------------------------------

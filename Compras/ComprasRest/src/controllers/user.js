@@ -6,9 +6,10 @@ const jwt = require('../lib/jwt');
 
 const auth = require('../middlewares/authenticated');
 const {UserService} = require('../services/UserService');
+const {validarRegister} = require('../middlewares/authRegister');
 
 //Rutas de usuarios
-router.post('/register', async(req, res) =>{ 
+router.post('/register', validarRegister, async(req, res) =>{ 
     //Parámetros de la petición
     let params = req.body;
     
@@ -42,7 +43,7 @@ router.post('/register', async(req, res) =>{
             //Guardar usuario
             //FUNCIONA
             //const result = await UserService.add(user);
-            const result = await UserService.add(params.username, hash, "ROLE_COMPRADOR", params.nombre, params.apellido, params.dni);
+            const result = await UserService.add(params.username, hash, params.rolId, params.nombre, params.apellido, params.dni);
             //Devolver respuesta        
             return res.status(200).send({
                 status : "success nuevo user registrado",

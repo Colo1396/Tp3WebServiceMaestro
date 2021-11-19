@@ -38,7 +38,8 @@ module.exports = (sequelize, type) =>{
         },
         billetera: {
             type: type.DECIMAL,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 0
         }
     });
 }
