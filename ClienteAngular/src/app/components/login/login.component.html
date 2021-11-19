@@ -1,0 +1,51 @@
+<div class="login-wrapper row">
+    
+    <div class="col-12 mt-3">
+        <div class="col-md-4 mx-auto">
+            <div class="alert alert-danger mt-5" role="alert" *ngIf="status == 'error'">
+                Login inválido, verifique los datos ingresados.
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 mt-3">
+        <div class="col-md-4 mx-auto">
+            <div class="alert alert-success mt-5" role="alert" *ngIf="status == 'success'">
+                Login válido.
+            </div>
+        </div>
+    </div>
+    
+    <form class="form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <img src="img/user2.png" alt="">
+        <h2>Iniciar sesión</h2>
+        <div class="px-1 mb-4">
+            <!--USERNAME-->
+            <div class="input-group">
+                <input type="text" name="username" id="username" #username="ngModel" [(ngModel)]="user.username" required pattern="[a-zA-ZÀ-ÿ0-9]+">
+                <label for="username"><i class="fa fa-user" aria-hidden="true"></i> &nbsp; Nombre de usuario </label>
+                <small *ngIf="!username.valid && username.touched" class="invalid-feedback d-block">
+                    Username inválido.
+                </small>
+            </div>
+        </div>
+        <div class="px-1 mb-4">
+            <!--PASSWORD-->
+            <div class="input-group">
+                <input type="password" name="password" id="password" #password="ngModel" [(ngModel)]="user.password" required>
+                <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp; Contraseña</label>
+                <small *ngIf="!username.valid && username.touched" class="invalid-feedback d-block">
+                    Contraseña inválida.
+                </small>
+            </div>
+        </div>
+        <!-- BOTON  -->
+        <button type="submit" id="btn_logear" class="submit-btn" [disabled]="loginForm.invalid">Ingresar
+            <i class="fa fa-sign-in" aria-hidden="true" style="margin-left:5px;"></i> 
+        </button>
+        <div align="center">
+            <a class="btn btn-link" [routerLink]="['/']">Volver a inicio</a>
+            <a class="btn btn-link" [routerLink]="['/register']">Registrarse</a>
+        </div>
+    </form>
+</div>

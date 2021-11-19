@@ -14,7 +14,7 @@ class UserService {
         user.password = password;
         //user.email = params.email.toLowerCase();
         user.dni = dni;
-        user.rol = rol;
+        user.rolId = rol;
         return await user.save(); 
     }
 
