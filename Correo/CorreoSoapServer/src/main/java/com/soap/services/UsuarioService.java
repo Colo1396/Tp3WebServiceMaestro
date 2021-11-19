@@ -107,5 +107,14 @@ public class UsuarioService {
 		}
 	}
 	//----------------------------------------------------------------------------------
-	
+	@WebMethod(operationName = "findByDni")
+	@RequestWrapper(className="com.soap.services.UsuarioService.findByDni")
+	public Usuario findByDni(@WebParam(name = "id") int dni) {
+		try {
+			return usuarioController.findByDni(dni);
+		} catch (SQLException ex) {
+			Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
 }
