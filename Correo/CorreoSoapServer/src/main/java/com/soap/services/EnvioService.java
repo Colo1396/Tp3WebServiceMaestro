@@ -147,6 +147,31 @@ public class EnvioService {
 	}
 
 	//----------------------------------------------------------------------------------
-
+	@WebMethod(operationName = "solicitarCodSeguimiento")
+	@RequestWrapper(className="com.soap.services.EnvioService.solicitarCodSeguimiento")
+	public int solicitarCodSeguimiento(@WebParam(name = "dniDestinatario") int dniDestinatario,@WebParam(name = "dni") int dniOrigen,@WebParam(name = "domicilio") String domicilio) {
+		try {
+			Envio envio = envioController.solicitarCodSeguimiento(dniDestinatario,dniOrigen,domicilio);
+			if (envio!=null) {
+				System.out.println( "Envio con codigo de seguimiento" + envio.getCodSeguimiento() + " ha sido creado correctamente.");
+				return envio.getCodSeguimiento();
+			}
+			return 0;
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
+			return 0;
+		}
+	}
+	//-----------------------------------------------------------------------------------
+	@WebMethod(operationName = "traerEstado")
+	@RequestWrapper(className="com.soap.services.EnvioService.traerEstado")
+	public String traerEstado(@WebParam(name = "codSeguimiento") int codSeguimiento,@WebParam(name = "dni") int dni) {
+		try {
+			return envioController.traerEstado(codSeguimiento,dni);
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioService.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
 
 }

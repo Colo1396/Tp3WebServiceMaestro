@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.jws.WebParam;
+
 import com.soap.config.Conexion;
 import com.soap.models.Envio;
+import com.soap.models.Usuario;
 
 public class EnvioController extends Conexion {
 	Connection con = null;
@@ -274,5 +277,70 @@ public class EnvioController extends Conexion {
 		}
 	}
 	// ----------------------------------------------------------------------------------
+	public Envio solicitarCodSeguimiento(int dniDestinatario,int dniOrigen,String domicilio) throws SQLException {
+		try {
+			
+			UsuarioController usuarioController = new UsuarioController();
+			Usuario usuario=usuarioController.findByDni(dniOrigen);
+			
+			String sql = "INSERT INTO envio VALUES(null, ?, ?,?,?,?)";
 
+			Envio respuesta = null;
+
+			con = conectar();
+
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, (int) (100000 * Math.random()));
+			ps.setString(2, domicilio);
+			ps.setString(3, "1.En Preparacion");
+			ps.setInt(4, dniDestinatario);
+			ps.setInt(5, usuario.getIdUsuario());
+
+			if (ps.executeUpdate() == 1) {
+				PreparedStatement ps2 = con.prepareStatement("SELECT LAST_INSERT_ID();");
+				rs = ps2.executeQuery();
+				if (rs.next()) {
+					int idEnvioRecienCreado = rs.getInt(1);
+					EnvioController envioController= new EnvioController();
+					respuesta=envioController.findById(idEnvioRecienCreado);
+					System.out.println("El id de envio recien cargado es : "+respuesta.getIdEnvio());
+				}
+				 
+			}
+
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+	//----------------------------------------------------------------------------------
+	public String traerEstado(int codSeguimiento,int dni) throws SQLException {
+		try {
+			String sql = "SELECT estado FROM envio WHERE codSeguimiento = " + codSeguimiento + " and dni= "+dni;
+
+			String estado = null;
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				estado = rs.getString(1);
+
+			}
+
+			return estado;
+		} catch (SQLException ex) {
+			Logger.getLogger(EnvioController.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		} finally {
+			rs.close();
+			ps.close();
+			con.close();
+		}
+	}
 }
