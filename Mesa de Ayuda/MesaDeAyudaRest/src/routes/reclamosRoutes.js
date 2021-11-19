@@ -1,22 +1,20 @@
 const {Router} = require('express');
 const router = Router();
-
-const {esRolMesaDeAyuda, esRolComprador} = require('../middlewares/authjwt');
-
+const {esRolComprador,esRolMesaDeAyuda,esRolVendedor} = require('../middlewares/validationRol');
+const {isAuthenticated} = require('../middlewares/authenticate');
 const {crearReclamo, eliminarReclamo, modificarReclamo, obtenerReclamo, obtenerReclamosPorEstado, obtenerReclamos} = require('../controllers/reclamoController');
-const { isLoggedIn } = require('../libs/auth');
 
 // /reclamos/
 
 
-router.get('/nuevo',[isLoggedIn,esRolComprador], (req,res)=>{
+router.get('/nuevo',[isAuthenticated,esRolComprador], (req,res)=>{
     res.render('nuevoReclamo');
 });
-router.post('/nuevoPost', [isLoggedIn,esRolComprador], crearReclamo);
+router.post('/nuevoPost', [isAuthenticated,esRolComprador], crearReclamo);
 
-router.get('/lista',[isLoggedIn,esRolMesaDeAyuda] , obtenerReclamos);
-router.post('/listaPorEstado',[isLoggedIn,esRolMesaDeAyuda], obtenerReclamosPorEstado);
-router.post('/aceptar/:id',[isLoggedIn,esRolMesaDeAyuda] ,modificarReclamo);
-router.post('/rechazar/:id',[isLoggedIn,esRolMesaDeAyuda] ,eliminarReclamo);
+router.get('/lista',[isAuthenticated,esRolMesaDeAyuda] , obtenerReclamos);
+router.post('/listaPorEstado',[isAuthenticated,esRolMesaDeAyuda], obtenerReclamosPorEstado);
+router.post('/aceptar/:id',[isAuthenticated,esRolMesaDeAyuda] ,modificarReclamo);
+router.post('/rechazar/:id',[isAuthenticated,esRolMesaDeAyuda] ,eliminarReclamo);
 
 module.exports = router;
