@@ -90,7 +90,32 @@ public class TarjetaService {
 		}
 	}
 	//------------------------------------------------------------------------------------
+	@WebMethod(operationName = "validarTarjeta")
+	@RequestWrapper(className="com.soap.services.TarjetaService.validarTarjeta")
+	public boolean validarTarjeta(@WebParam(name = "dni") int dni,@WebParam(name = "nroTarjeta")String nroTarjeta) {
+		try {
+			boolean respuesta = false;
+			if (tarjetaController.validarTarjeta(dni,nroTarjeta)) {
+				respuesta = true;
+			}
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(TarjetaService.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		}
+	}
 	//------------------------------------------------------------------------------------
+	@WebMethod(operationName = "traerLimiteDisponible")
+	@RequestWrapper(className="com.soap.services.TarjetaService.traerLimiteDisponible")
+	public double traerLimiteDisponible(@WebParam(name = "dni") int dni,@WebParam(name = "nroTarjeta")String nroTarjeta) {
+		try {
+			double respuesta = tarjetaController.traerLimiteDisponible(dni,nroTarjeta);	
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(TarjetaService.class.getName()).log(Level.SEVERE, null, ex);
+			return 0;
+		}
+	}
 	//------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------

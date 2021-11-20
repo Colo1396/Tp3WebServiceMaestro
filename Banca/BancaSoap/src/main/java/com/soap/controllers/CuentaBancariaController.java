@@ -30,7 +30,7 @@ public class CuentaBancariaController extends Conexion {
 
 			while (rs.next()) {
 				//Usuario usuario = new Usuario(int idUsuario, String razonSocial, int idUsuarioRef);
-				CuentaBancaria cuentaBancaria = new CuentaBancaria(rs.getInt(1), rs.getString(2), rs.getDouble(3),rs.getInt(4));
+				CuentaBancaria cuentaBancaria = new CuentaBancaria(rs.getInt(1), rs.getString(2), rs.getDouble(3),rs.getInt(4),rs.getString(5));
 				lista.add(cuentaBancaria);
 			}
 			return lista;
@@ -56,7 +56,7 @@ public class CuentaBancariaController extends Conexion {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				cuentaBancaria = new CuentaBancaria(rs.getInt(1), rs.getString(2), rs.getDouble(3),rs.getInt(4));
+				cuentaBancaria = new CuentaBancaria(rs.getInt(1), rs.getString(2), rs.getDouble(3),rs.getInt(4),rs.getString(5));
 
 			}
 
@@ -74,7 +74,7 @@ public class CuentaBancariaController extends Conexion {
 	// Crear una nueva cuentaBancaria
 	public boolean create(CuentaBancaria cuentaBancaria) throws SQLException {
 		try {
-			String sql = "INSERT INTO cuentaBancaria VALUES(null, ?, ?, ?)";
+			String sql = "INSERT INTO cuentaBancaria VALUES(null, ?, ?, ?, ?)";
 
 			boolean respuesta = false;
 
@@ -83,8 +83,9 @@ public class CuentaBancariaController extends Conexion {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, cuentaBancaria.getNroCuenta());
 			ps.setDouble(2, cuentaBancaria.getMonto());
-			ps.setInt(2, cuentaBancaria.getIdUsuario());
-
+			ps.setInt(3, cuentaBancaria.getIdUsuario());
+			ps.setString(4, cuentaBancaria.getTipo());
+			
 			if (ps.executeUpdate() == 1) {
 				respuesta = true;
 			}
@@ -102,7 +103,7 @@ public class CuentaBancariaController extends Conexion {
 	// Actualizar una cuentaBancaria por su id
 	public boolean update(CuentaBancaria cuentaBancaria) throws SQLException {
 		try {
-			String sql = "UPDATE cuentaBancaria SET nroCuenta = ?, monto = ?,idUsuario = ? WHERE idCuentaBancaria = ?";
+			String sql = "UPDATE cuentaBancaria SET nroCuenta = ?, monto = ?,idUsuario = ? ,tipo = ? WHERE idCuentaBancaria = ?";
 
 			boolean respuesta = false;
 
@@ -113,7 +114,8 @@ public class CuentaBancariaController extends Conexion {
 			ps.setString(1, cuentaBancaria.getNroCuenta());
 			ps.setDouble(2, cuentaBancaria.getMonto());
 			ps.setInt(3, cuentaBancaria.getIdUsuario());
-			ps.setInt(4, cuentaBancaria.getIdCuentaBancaria());
+			ps.setString(4, cuentaBancaria.getTipo());
+			ps.setInt(5, cuentaBancaria.getIdCuentaBancaria());
 
 			if (ps.executeUpdate() == 1) {
 				respuesta = true;

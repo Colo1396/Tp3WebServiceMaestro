@@ -5,13 +5,16 @@ public class CuentaBancaria {
 	private String nroCuenta;
 	private double monto;
 	private int idUsuario;
+	private String tipo;
+	
 
-	public CuentaBancaria(int idCuentaBancaria, String nroCuenta, double monto, int idUsuario) {
+	public CuentaBancaria(int idCuentaBancaria, String nroCuenta, double monto, int idUsuario, String tipo) {
 
 		this.idCuentaBancaria = idCuentaBancaria;
 		this.nroCuenta = nroCuenta;
 		this.monto = monto;
 		this.idUsuario = idUsuario;
+		this.tipo=tipo;
 	}
 
 	public CuentaBancaria() {
@@ -48,6 +51,14 @@ public class CuentaBancaria {
 
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }
