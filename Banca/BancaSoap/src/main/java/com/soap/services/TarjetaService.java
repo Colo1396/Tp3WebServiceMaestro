@@ -105,6 +105,17 @@ public class TarjetaService {
 		}
 	}
 	//------------------------------------------------------------------------------------
+	@WebMethod(operationName = "traerLimiteDisponible")
+	@RequestWrapper(className="com.soap.services.TarjetaService.traerLimiteDisponible")
+	public double traerLimiteDisponible(@WebParam(name = "dni") int dni,@WebParam(name = "nroTarjeta")String nroTarjeta) {
+		try {
+			double respuesta = tarjetaController.traerLimiteDisponible(dni,nroTarjeta);	
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(TarjetaService.class.getName()).log(Level.SEVERE, null, ex);
+			return 0;
+		}
+	}
 	//------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------

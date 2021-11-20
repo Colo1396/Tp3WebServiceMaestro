@@ -939,7 +939,7 @@
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:validarTarjeta>\r
-         <dni>11111111</dni>\r
+         <dni>11111112</dni>\r
          <!--Optional:-->\r
          <nroTarjeta>010101</nroTarjeta>\r
       </ser:validarTarjeta>\r
