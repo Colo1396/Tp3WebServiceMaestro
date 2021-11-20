@@ -682,6 +682,8 @@
       <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
       <xs:element name="update" type="tns:update"/>
       <xs:element name="updateResponse" type="tns:updateResponse"/>
+      <xs:element name="validarTarjeta" type="tns:validarTarjeta"/>
+      <xs:element name="validarTarjetaResponse" type="tns:validarTarjetaResponse"/>
       <xs:complexType name="findById">
         <xs:sequence>
           <xs:element name="id" type="xs:int"/>
@@ -721,6 +723,17 @@
           <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:tarjeta"/>
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="validarTarjeta">
+        <xs:sequence>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroTarjeta" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="validarTarjetaResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="create">
         <xs:sequence>
           <xs:element minOccurs="0" name="tarjeta" type="tns:tarjeta"/>
@@ -752,6 +765,9 @@
   <wsdl:message name="deleteResponse">
     <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="validarTarjetaResponse">
+    <wsdl:part element="tns:validarTarjetaResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="updateResponse">
     <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -760,6 +776,9 @@
   </wsdl:message>
   <wsdl:message name="findAll">
     <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="validarTarjeta">
+    <wsdl:part element="tns:validarTarjeta" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="findAllResponse">
     <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
@@ -785,6 +804,10 @@
     <wsdl:operation name="findAll">
       <wsdl:input message="tns:findAll" name="findAll"></wsdl:input>
       <wsdl:output message="tns:findAllResponse" name="findAllResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarTarjeta">
+      <wsdl:input message="tns:validarTarjeta" name="validarTarjeta"></wsdl:input>
+      <wsdl:output message="tns:validarTarjetaResponse" name="validarTarjetaResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="create">
       <wsdl:input message="tns:create" name="create"></wsdl:input>
@@ -821,6 +844,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="findAllResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarTarjeta">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="validarTarjeta">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validarTarjetaResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -903,7 +935,16 @@
          </tarjeta>\r
       </ser:update>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/update"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d10d2e5a-0585-4d0a-ac12-5947d6d56bb7" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/update"/></con:call></con:operation><con:operation id="5849336c-1bbd-4628-8e17-9af8a3a284ee" isOneWay="false" action="" name="validarTarjeta" bindingOperationName="validarTarjeta" type="Request-Response" outputName="validarTarjetaResponse" inputName="validarTarjeta" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c5c8c439-bae1-4d52-8111-0dc33c4ade96" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/TarjetaService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:validarTarjeta>\r
+         <dni>11111111</dni>\r
+         <!--Optional:-->\r
+         <nroTarjeta>010101</nroTarjeta>\r
+      </ser:validarTarjeta>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/validarTarjeta"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d10d2e5a-0585-4d0a-ac12-5947d6d56bb7" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="asociarMedioDePago" type="tns:asociarMedioDePago"/>

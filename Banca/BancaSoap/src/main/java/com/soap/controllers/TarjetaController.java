@@ -177,6 +177,33 @@ public class TarjetaController  extends Conexion  {
 		}
 	}
 	//------------------------------------------------------------------------------------
+	public boolean validarTarjeta(int dni, String nroTarjeta ) throws SQLException {
+		try {
+			String sql = "select true from tarjeta t inner join cuentaBancaria cb on cb.idCuentaBancaria=t.idCuentaBancaria inner join usuario u on u.idUsuario=cb.idUsuario where u.idUsuarioRef = ? and t.nroTarjeta=?";
+
+			boolean respuesta = false;
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1,dni);
+			ps.setString(2,nroTarjeta);
+			
+			rs= ps.executeQuery();
+			if (rs.next()) {
+				respuesta = rs.getBoolean(1);
+
+			}
+		
+
+			return respuesta;
+		} catch (SQLException ex) {
+			Logger.getLogger(TarjetaController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
 	//------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------
