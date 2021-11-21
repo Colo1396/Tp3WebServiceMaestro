@@ -217,6 +217,37 @@ public class TarjetaController extends Conexion {
 		}
 	}
 	// ------------------------------------------------------------------------------------
+	public Tarjeta findByDniYNroTarj(int dni,String nroTarjeta) throws SQLException {
+		try {
+			String sql = "select t.saldo from tarjeta t inner join cuentaBancaria cb on cb.idCuentaBancaria=t.idCuentaBancaria inner join usuario u on u.idUsuario=cb.idUsuario where u.idUsuarioRef = ? and t.nroTarjeta=?";
+
+			Tarjeta tarjeta = null;
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, dni);
+			ps.setString(2, nroTarjeta);
+			
+			
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				tarjeta = new Tarjeta(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5),
+						rs.getDouble(6), rs.getInt(7));
+
+			}
+
+			return tarjeta;
+		} catch (SQLException ex) {
+			Logger.getLogger(TarjetaController.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		} finally {
+			rs.close();
+			ps.close();
+			con.close();
+		}
+	}
+
 	// ------------------------------------------------------------------------------------
 	// ------------------------------------------------------------------------------------
 

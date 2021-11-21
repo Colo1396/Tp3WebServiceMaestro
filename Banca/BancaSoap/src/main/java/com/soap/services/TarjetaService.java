@@ -117,6 +117,16 @@ public class TarjetaService {
 		}
 	}
 	//------------------------------------------------------------------------------------
+	@WebMethod(operationName = "findByDniYNroTarj")
+	@RequestWrapper(className="com.soap.services.TarjetaService.findByDniYNroTarj")
+	public Tarjeta findByDniYNroTarj(@WebParam(name = "dni") int dni,@WebParam(name = "nroTarjeta") String nroTarjeta) {
+		try {
+			return tarjetaController.findByDniYNroTarj(dni,nroTarjeta);
+		} catch (SQLException ex) {
+			Logger.getLogger(TarjetaService.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
 	//------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------
 }

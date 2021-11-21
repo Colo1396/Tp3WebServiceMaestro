@@ -680,6 +680,8 @@
       <xs:element name="findAllResponse" type="tns:findAllResponse"/>
       <xs:element name="findById" type="tns:findById"/>
       <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
+      <xs:element name="traerLimiteDisponible" type="tns:traerLimiteDisponible"/>
+      <xs:element name="traerLimiteDisponibleResponse" type="tns:traerLimiteDisponibleResponse"/>
       <xs:element name="update" type="tns:update"/>
       <xs:element name="updateResponse" type="tns:updateResponse"/>
       <xs:element name="validarTarjeta" type="tns:validarTarjeta"/>
@@ -703,6 +705,17 @@
           <xs:element minOccurs="0" name="nroTarjeta" type="xs:string"/>
           <xs:element name="saldo" type="xs:double"/>
           <xs:element minOccurs="0" name="tipo" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="traerLimiteDisponible">
+        <xs:sequence>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroTarjeta" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="traerLimiteDisponibleResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:double"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="delete">
@@ -756,20 +769,11 @@
       </xs:complexType>
     </xs:schema>
   </wsdl:types>
-  <wsdl:message name="findById">
-    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findByIdResponse">
-    <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="deleteResponse">
-    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
+  <wsdl:message name="traerLimiteDisponibleResponse">
+    <wsdl:part element="tns:traerLimiteDisponibleResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="validarTarjetaResponse">
     <wsdl:part element="tns:validarTarjetaResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="updateResponse">
-    <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="delete">
     <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
@@ -780,22 +784,41 @@
   <wsdl:message name="validarTarjeta">
     <wsdl:part element="tns:validarTarjeta" name="parameters"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="findAllResponse">
-    <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="create">
-    <wsdl:part element="tns:create" name="parameters"></wsdl:part>
-  </wsdl:message>
   <wsdl:message name="createResponse">
     <wsdl:part element="tns:createResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="update">
     <wsdl:part element="tns:update" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="findById">
+    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByIdResponse">
+    <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="traerLimiteDisponible">
+    <wsdl:part element="tns:traerLimiteDisponible" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllResponse">
+    <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create">
+    <wsdl:part element="tns:create" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="TarjetaService">
     <wsdl:operation name="findById">
       <wsdl:input message="tns:findById" name="findById"></wsdl:input>
       <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="traerLimiteDisponible">
+      <wsdl:input message="tns:traerLimiteDisponible" name="traerLimiteDisponible"></wsdl:input>
+      <wsdl:output message="tns:traerLimiteDisponibleResponse" name="traerLimiteDisponibleResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="delete">
       <wsdl:input message="tns:delete" name="delete"></wsdl:input>
@@ -826,6 +849,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="findByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="traerLimiteDisponible">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="traerLimiteDisponible">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="traerLimiteDisponibleResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -944,7 +976,16 @@
          <nroTarjeta>010101</nroTarjeta>\r
       </ser:validarTarjeta>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/validarTarjeta"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d10d2e5a-0585-4d0a-ac12-5947d6d56bb7" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/validarTarjeta"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="083d236a-9d07-4352-9e5d-ee67a14ec993" isOneWay="false" action="" name="traerLimiteDisponible" bindingOperationName="traerLimiteDisponible" type="Request-Response" outputName="traerLimiteDisponibleResponse" inputName="traerLimiteDisponible" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fb68d7e6-47c6-4be9-8e1a-9c266147f783" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/TarjetaService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:traerLimiteDisponible>\r
+         <dni>111111111</dni>\r
+         <!--Optional:-->\r
+         <nroTarjeta>020201</nroTarjeta>\r
+      </ser:traerLimiteDisponible>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/traerLimiteDisponible"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d10d2e5a-0585-4d0a-ac12-5947d6d56bb7" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="asociarMedioDePago" type="tns:asociarMedioDePago"/>

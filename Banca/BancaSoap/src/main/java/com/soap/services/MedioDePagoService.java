@@ -137,6 +137,7 @@ public class MedioDePagoService {
 			return "Error al realizar la petición";
 		}
 	}
+	
 	//------------------------------------------------------------------------------------
 	// Eliminar un MedioDePago por su id
 	@WebMethod(operationName = "desasociarMedioDePagoXId")
@@ -151,6 +152,18 @@ public class MedioDePagoService {
 		} catch (SQLException ex) {
 			Logger.getLogger(MedioDePagoService.class.getName()).log(Level.SEVERE, null, ex);
 			return "Error al realizar la petición";
+		}
+	}
+	
+	//------------------------------------------------------------------------------------
+	@WebMethod(operationName = "findByNombreMedioDePago")
+	@RequestWrapper(className="com.soap.services.MedioDePagoService.findByNombreMedioDePago")
+	public MedioDePago findByNombreMedioDePago(@WebParam(name = "nombreMP") String nombreMP) {
+		try {
+			return medioDePagoController.findByNombreMedioDePago(nombreMP);
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoService.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
 		}
 	}
 

@@ -149,5 +149,33 @@ public class UsuarioController  extends Conexion  {
 			con.close();
 		}
 	}
+	
+	//------------------------------------------------------------------------------------
+	public Usuario findByDni(int dni) throws SQLException {
+		try {
+			String sql = "SELECT * FROM usuario WHERE idUsuarioRef = " + dni + "";
+
+			Usuario usuario = null;
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getInt(3));
+
+			}
+
+			return usuario;
+		} catch (SQLException ex) {
+			Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		} finally {
+			rs.close();
+			ps.close();
+			con.close();
+		}
+	}
+
 
 }

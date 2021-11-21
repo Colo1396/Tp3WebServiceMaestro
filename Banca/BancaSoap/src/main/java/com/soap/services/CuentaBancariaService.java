@@ -89,4 +89,15 @@ public class CuentaBancariaService {
 			return "Error al realizar la petición";
 		}
 	}
+	
+	@WebMethod(operationName = "findByNroCta")
+	@RequestWrapper(className="com.soap.services.CuentaBancariaService.findByNroCta")
+	public CuentaBancaria findByNroCta(@WebParam(name = "nroCuentaBancaria") String nroCuentaBancaria) {
+		try {
+			return cuentaBancariaController.findByNroCta(nroCuentaBancaria);
+		} catch (SQLException ex) {
+			Logger.getLogger(CuentaBancariaService.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
 }

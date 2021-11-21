@@ -154,4 +154,30 @@ public class CuentaBancariaController extends Conexion {
 			con.close();
 		}
 	}
+	
+	public CuentaBancaria findByNroCta(String nroCuentaBancaria) throws SQLException {
+		try {
+			String sql = "SELECT * FROM cuentaBancaria WHERE nroCuenta = " + nroCuentaBancaria + "";
+
+			CuentaBancaria cuentaBancaria = null;
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				cuentaBancaria = new CuentaBancaria(rs.getInt(1), rs.getString(2), rs.getDouble(3),rs.getInt(4),rs.getString(5));
+
+			}
+
+			return cuentaBancaria;
+		} catch (SQLException ex) {
+			Logger.getLogger(CuentaBancariaController.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		} finally {
+			rs.close();
+			ps.close();
+			con.close();
+		}
+	}
 }

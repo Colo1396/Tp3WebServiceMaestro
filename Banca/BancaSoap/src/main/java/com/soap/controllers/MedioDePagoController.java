@@ -258,4 +258,34 @@ public class MedioDePagoController extends Conexion {
 			con.close();
 		}
 	}
+	
+	// -------------------------------------------------------------------
+	public MedioDePago findByNombreMedioDePago(String nombreMP) throws SQLException {
+		try {
+			String sql = "SELECT * FROM mediosPago WHERE nombre like '%" + nombreMP + "%'";
+
+			MedioDePago medioDePago = null;
+
+			con = conectar();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				medioDePago = new MedioDePago(rs.getInt(1), rs.getString(2));
+
+			}
+
+			return medioDePago;
+		} catch (SQLException ex) {
+			Logger.getLogger(MedioDePagoController.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		} finally {
+			rs.close();
+			ps.close();
+			con.close();
+		}
+	}
+	
+	
+	
 }

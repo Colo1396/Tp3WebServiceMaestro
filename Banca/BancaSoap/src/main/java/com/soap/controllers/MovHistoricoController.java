@@ -15,8 +15,10 @@ import java.util.Date;
 
 import com.soap.config.Conexion;
 import com.soap.models.CuentaBancaria;
+import com.soap.models.MedioDePago;
 import com.soap.models.MovHistorico;
 import com.soap.models.Tarjeta;
+import com.soap.models.Usuario;
 
 public class MovHistoricoController extends Conexion {
 
@@ -167,9 +169,118 @@ public class MovHistoricoController extends Conexion {
 		}
 	}
 
+	
+	// ************************************************************************************
 	// ------------------------------------------------------------------------------------
-	public boolean pagarConTajetaCredito(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago, int idTarjeta)
-			throws SQLException {
+	public boolean pagarConTajetaCredito(double monto, int dni, String nroTarjeta) throws SQLException {
+		try {
+
+			TarjetaController tarjetaController = new TarjetaController();
+			Tarjeta tarjeta = tarjetaController.findByDniYNroTarj(dni, nroTarjeta);
+
+			UsuarioController usuarioController = new UsuarioController();
+			Usuario usuario = usuarioController.findByDni(dni);
+
+			MedioDePagoController medioDePagoController = new MedioDePagoController();
+			MedioDePago medioDePago = medioDePagoController.findByNombreMedioDePago("credito");
+
+			if ((tarjeta.getMontoUtilizado() + monto) <= tarjeta.getLimite() && (tarjeta.getSaldo() - monto) >= 0) {
+
+				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), 1, ?, ?, ?, ?);";
+				String sql2 = "UPDATE tarjeta SET  montoUtilizado = (montoUtilizado + ?) , saldo = (saldo - ?) WHERE idTarjeta = ? and idCuentaBancaria= ? ; ";
+
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+				ps.setDouble(1, monto);
+				ps.setInt(2, usuario.getIdUsuario());
+				ps.setInt(3, tarjeta.getIdCuentaBancaria());
+				ps.setInt(4, medioDePago.getIdMedioDePago());
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setDouble(1, monto);
+				ps2.setDouble(2, monto);
+				ps2.setInt(3, tarjeta.getIdTarjeta());
+				ps2.setInt(4, tarjeta.getIdCuentaBancaria());
+
+				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+				return respuesta;
+
+			} else {
+				return false;
+			}
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// ------------------------------------------------------------------------------------
+	public boolean devolucionConTajetaCredito(double monto, int dni, String nroTarjeta) throws SQLException {
+		try {
+
+			TarjetaController tarjetaController = new TarjetaController();
+			Tarjeta tarjeta = tarjetaController.findByDniYNroTarj(dni, nroTarjeta);
+
+			UsuarioController usuarioController = new UsuarioController();
+			Usuario usuario = usuarioController.findByDni(dni);
+
+			MedioDePagoController medioDePagoController = new MedioDePagoController();
+			MedioDePago medioDePago = medioDePagoController.findByNombreMedioDePago("credito");
+
+			if ((tarjeta.getMontoUtilizado() - monto) <= tarjeta.getLimite() && (tarjeta.getSaldo() + monto) >= 0) {
+
+				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
+				String sql2 = "UPDATE tarjeta SET  montoUtilizado = (montoUtilizado - ?) , saldo = (saldo + ?) WHERE idTarjeta = ? and idCuentaBancaria= ? ; ";
+
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+				ps.setDouble(1, monto);
+				ps.setInt(2, usuario.getIdUsuario());
+				ps.setInt(3, tarjeta.getIdCuentaBancaria());
+				ps.setInt(4, medioDePago.getIdMedioDePago());
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setDouble(1, monto);
+				ps2.setDouble(2, monto);
+				ps2.setInt(3, tarjeta.getIdTarjeta());
+				ps2.setInt(4, tarjeta.getIdCuentaBancaria());
+
+				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+				return respuesta;
+
+			} else {
+				return false;
+			}
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// ************************************************************************************
+	// ------------------------------------------------------------------------------------
+	public boolean pagarConTajetaCreditoXId(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago,
+			int idTarjeta) throws SQLException {
 		try {
 
 			TarjetaController tarjetaController = new TarjetaController();
@@ -217,7 +328,7 @@ public class MovHistoricoController extends Conexion {
 	}
 
 	// ------------------------------------------------------------------------------------
-	public boolean devolucionConTajetaCredito(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago,
+	public boolean devolucionConTajetaCreditoXId(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago,
 			int idTarjeta) throws SQLException {
 		try {
 
@@ -264,189 +375,476 @@ public class MovHistoricoController extends Conexion {
 			con.close();
 		}
 	}
-	// ------------------------------------------------------------------------------------	
+
+	// ************************************************************************************
 	
-	public boolean pagarConTajetaDebito(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago) throws SQLException {
-		try {
-
-			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
-
-			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
-
-			if ((cuentaBancaria.getMonto() - monto) >= 0) {
-
-				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), 1, ?, ?, ?, ?);";
-				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
-
-				boolean respuesta = false;
-
-				con = conectar();
-
-				ps = con.prepareStatement(sql);
-				ps.setDouble(1, monto);
-				ps.setInt(2, idUsuario);
-				ps.setInt(3, idCuentaBancaria);
-				ps.setInt(4, idMediosPago);
-
-				PreparedStatement ps2 = con.prepareStatement(sql2);
-				ps2.setDouble(1, monto);
-				ps2.setInt(2, idUsuario);
-				ps2.setInt(3, idCuentaBancaria);
-
-				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
-					respuesta = true;
-				}
-
-				return respuesta;
-
-			} else {
-				return false;
-			}
-
-		} catch (SQLException ex) {
-			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
-			return false;
-		} finally {
-			ps.close();
-			con.close();
-		}
-	}
-
+	
+	//************************************************************************************
 	// ------------------------------------------------------------------------------------
-	public boolean devolucionConTajetaDebito(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago) throws SQLException {
-		try {
-
-			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
-
-			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
-
-			String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
-			String sql2 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
-
-			boolean respuesta = false;
-
-			con = conectar();
-
-			ps = con.prepareStatement(sql);
-			ps.setDouble(1, monto);
-			ps.setInt(2, idUsuario);
-			ps.setInt(3, idCuentaBancaria);
-			ps.setInt(4, idMediosPago);
-
-			PreparedStatement ps2 = con.prepareStatement(sql2);
-			ps2.setDouble(1, monto);
-			ps2.setInt(2, idUsuario);
-			ps2.setInt(3, idCuentaBancaria);
-
-			if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
-				respuesta = true;
-			}
-
-			return respuesta;
-
-		} catch (SQLException ex) {
-			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
-			return false;
-		} finally {
-			ps.close();
-			con.close();
-		}
-	}
-	
-	// ------------------------------------------------------------------------------------
-	public boolean pagarConEfectivo(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago) throws SQLException {
-		try {
-
-			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
-
-			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
-
-			if ((cuentaBancaria.getMonto() - monto) >= 0) {
-
-				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), 1, ?, ?, ?, ?);";
-				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
-
-				boolean respuesta = false;
-
-				con = conectar();
-
-				ps = con.prepareStatement(sql);
-				ps.setDouble(1, monto);
-				ps.setInt(2, idUsuario);
-				ps.setInt(3, idCuentaBancaria);
-				ps.setInt(4, idMediosPago);
-
-				PreparedStatement ps2 = con.prepareStatement(sql2);
-				ps2.setDouble(1, monto);
-				ps2.setInt(2, idUsuario);
-				ps2.setInt(3, idCuentaBancaria);
-
-				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
-					respuesta = true;
-				}
-
-				return respuesta;
-
-			} else {
-				return false;
-			}
-
-		} catch (SQLException ex) {
-			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
-			return false;
-		} finally {
-			ps.close();
-			con.close();
-		}
-	}
-
-	// ------------------------------------------------------------------------------------
-	public boolean devolucionConEfectivo(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago) throws SQLException {
-		try {
-
-			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
-
-			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
-
-			String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
-			String sql2 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
-
-			boolean respuesta = false;
-
-			con = conectar();
-
-			ps = con.prepareStatement(sql);
-			ps.setDouble(1, monto);
-			ps.setInt(2, idUsuario);
-			ps.setInt(3, idCuentaBancaria);
-			ps.setInt(4, idMediosPago);
-
-			PreparedStatement ps2 = con.prepareStatement(sql2);
-			ps2.setDouble(1, monto);
-			ps2.setInt(2, idUsuario);
-			ps2.setInt(3, idCuentaBancaria);
-
-			if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
-				respuesta = true;
-			}
-
-			return respuesta;
-
-		} catch (SQLException ex) {
-			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
-			return false;
-		} finally {
-			ps.close();
-			con.close();
-		}
-	}
-	// ------------------------------------------------------------------------------------
-	
-	
-	
-	
-	public boolean intercambioEntreCuentas(double monto,int idUsuario,int idCuentaBancariaAnterior,int idCuentaBancariaNueva,int idMediosPagoAnterior,int idMediosPagoNuevo)
+	public boolean pagarConTajetaDebito(double monto, int dni,  String nroTarjeta)
 			throws SQLException {
+		try {
+
+			TarjetaController tarjetaController = new TarjetaController();
+			Tarjeta tarjeta = tarjetaController.findByDniYNroTarj(dni, nroTarjeta);
+
+			UsuarioController usuarioController = new UsuarioController();
+			Usuario usuario = usuarioController.findByDni(dni);
+
+			MedioDePagoController medioDePagoController = new MedioDePagoController();
+			MedioDePago medioDePago = medioDePagoController.findByNombreMedioDePago("debito");
+			
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(tarjeta.getIdCuentaBancaria());
+
+			if ((cuentaBancaria.getMonto() - monto) >= 0) {
+
+				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), 1, ?, ?, ?, ?);";
+				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+				
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+				ps.setDouble(1, monto);
+				ps.setInt(2, usuario.getIdUsuario());
+				ps.setInt(3, tarjeta.getIdCuentaBancaria());
+				ps.setInt(4, medioDePago.getIdMedioDePago());
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setDouble(1, monto);
+				ps2.setInt(2, usuario.getIdUsuario());
+				ps2.setInt(3, tarjeta.getIdCuentaBancaria());
+
+				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+
+				return respuesta;
+
+			} else {
+				return false;
+			}
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+	// ------------------------------------------------------------------------------------
+	public boolean devolucionConTajetaDebito(double monto, int dni, String nroTarjeta) throws SQLException {
+		try {
+
+			TarjetaController tarjetaController = new TarjetaController();
+			Tarjeta tarjeta = tarjetaController.findByDniYNroTarj(dni, nroTarjeta);
+
+			UsuarioController usuarioController = new UsuarioController();
+			Usuario usuario = usuarioController.findByDni(dni);
+
+			MedioDePagoController medioDePagoController = new MedioDePagoController();
+			MedioDePago medioDePago = medioDePagoController.findByNombreMedioDePago("debito");
+
+			
+
+				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
+				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+				ps.setDouble(1, monto);
+				ps.setInt(2, usuario.getIdUsuario());
+				ps.setInt(3, tarjeta.getIdCuentaBancaria());
+				ps.setInt(4, medioDePago.getIdMedioDePago());
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setDouble(1, monto);
+				ps2.setInt(2, usuario.getIdUsuario());
+				ps2.setInt(3, tarjeta.getIdCuentaBancaria());
+
+				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+				return respuesta;
+
+			
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// ************************************************************************************
+	// ------------------------------------------------------------------------------------
+	public boolean pagarConTajetaDebitoXId(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago)
+			throws SQLException {
+		try {
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
+
+			if ((cuentaBancaria.getMonto() - monto) >= 0) {
+
+				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), 1, ?, ?, ?, ?);";
+				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+				ps.setDouble(1, monto);
+				ps.setInt(2, idUsuario);
+				ps.setInt(3, idCuentaBancaria);
+				ps.setInt(4, idMediosPago);
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setDouble(1, monto);
+				ps2.setInt(2, idUsuario);
+				ps2.setInt(3, idCuentaBancaria);
+
+				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+				return respuesta;
+
+			} else {
+				return false;
+			}
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+
+	// ------------------------------------------------------------------------------------
+	public boolean devolucionConTajetaDebitoXId(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago)
+			throws SQLException {
+		try {
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
+
+			String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
+			String sql2 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+			boolean respuesta = false;
+
+			con = conectar();
+
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, monto);
+			ps.setInt(2, idUsuario);
+			ps.setInt(3, idCuentaBancaria);
+			ps.setInt(4, idMediosPago);
+
+			PreparedStatement ps2 = con.prepareStatement(sql2);
+			ps2.setDouble(1, monto);
+			ps2.setInt(2, idUsuario);
+			ps2.setInt(3, idCuentaBancaria);
+
+			if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+	// ************************************************************************************
+	
+	
+	//************************************************************************************
+	// ------------------------------------------------------------------------------------
+	public boolean pagarConEfectivo(double monto, int dni, String nroCuentaBancaria)
+			throws SQLException {
+		try {
+
+			UsuarioController usuarioController = new UsuarioController();
+			Usuario usuario = usuarioController.findByDni(dni);
+
+			MedioDePagoController medioDePagoController = new MedioDePagoController();
+			MedioDePago medioDePago = medioDePagoController.findByNombreMedioDePago("efectivo");
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findByNroCta(nroCuentaBancaria);
+
+			if ((cuentaBancaria.getMonto() - monto) >= 0) {
+
+				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), 1, ?, ?, ?, ?);";
+				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+				ps.setDouble(1, monto);
+				ps.setInt(2, usuario.getIdUsuario());
+				ps.setInt(3, cuentaBancaria.getIdCuentaBancaria());
+				ps.setInt(4, medioDePago.getIdMedioDePago());
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setDouble(1, monto);
+				ps2.setInt(2, usuario.getIdUsuario());
+				ps2.setInt(3, cuentaBancaria.getIdCuentaBancaria());
+
+				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+				return respuesta;
+
+			} else {
+				return false;
+			}
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+	// ------------------------------------------------------------------------------------
+	public boolean devolucionConEfectivo(double monto, int dni, String nroCuentaBancaria)
+			throws SQLException {
+		try {
+			UsuarioController usuarioController = new UsuarioController();
+			Usuario usuario = usuarioController.findByDni(dni);
+
+			MedioDePagoController medioDePagoController = new MedioDePagoController();
+			MedioDePago medioDePago = medioDePagoController.findByNombreMedioDePago("efectivo");
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findByNroCta(nroCuentaBancaria);
+
+			String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
+			String sql2 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+			boolean respuesta = false;
+
+			con = conectar();
+
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, monto);
+			ps.setInt(2, usuario.getIdUsuario());
+			ps.setInt(3, cuentaBancaria.getIdCuentaBancaria());
+			ps.setInt(4, medioDePago.getIdMedioDePago());
+
+			PreparedStatement ps2 = con.prepareStatement(sql2);
+			ps2.setDouble(1, monto);
+			ps2.setInt(2, usuario.getIdUsuario());
+			ps2.setInt(3, cuentaBancaria.getIdCuentaBancaria());
+
+			if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+	// ************************************************************************************
+	// ------------------------------------------------------------------------------------
+	public boolean pagarConEfectivoXId(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago)
+			throws SQLException {
+		try {
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
+
+			if ((cuentaBancaria.getMonto() - monto) >= 0) {
+
+				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), 1, ?, ?, ?, ?);";
+				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+				boolean respuesta = false;
+
+				con = conectar();
+
+				ps = con.prepareStatement(sql);
+				ps.setDouble(1, monto);
+				ps.setInt(2, idUsuario);
+				ps.setInt(3, idCuentaBancaria);
+				ps.setInt(4, idMediosPago);
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setDouble(1, monto);
+				ps2.setInt(2, idUsuario);
+				ps2.setInt(3, idCuentaBancaria);
+
+				if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+					respuesta = true;
+				}
+
+				return respuesta;
+
+			} else {
+				return false;
+			}
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+	// ------------------------------------------------------------------------------------
+	public boolean devolucionConEfectivoXId(double monto, int idUsuario, int idCuentaBancaria, int idMediosPago)
+			throws SQLException {
+		try {
+
+			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+
+			CuentaBancaria cuentaBancaria = cuentaBancariaController.findById(idCuentaBancaria);
+
+			String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
+			String sql2 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+			boolean respuesta = false;
+
+			con = conectar();
+
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, monto);
+			ps.setInt(2, idUsuario);
+			ps.setInt(3, idCuentaBancaria);
+			ps.setInt(4, idMediosPago);
+
+			PreparedStatement ps2 = con.prepareStatement(sql2);
+			ps2.setDouble(1, monto);
+			ps2.setInt(2, idUsuario);
+			ps2.setInt(3, idCuentaBancaria);
+
+			if (ps.executeUpdate() == 1 && ps2.executeUpdate() == 1) {
+				respuesta = true;
+			}
+
+			return respuesta;
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		} finally {
+			ps.close();
+			con.close();
+		}
+	}
+	// ************************************************************************************
+
+	
+	// ************************************************************************************
+	// ------------------------------------------------------------------------------------
+	public boolean intercambioEntreCuentas(double monto, int dni, String nroCuentaBancariaAnterior,
+			String nroCuentaBancariaNueva, String nombreMediosPagoAnterior, String nombreMediosPagoNueva) throws SQLException {
+			try {
+
+				UsuarioController usuarioController = new UsuarioController();
+				Usuario usuario = usuarioController.findByDni(dni);
+
+				MedioDePagoController medioDePagoController = new MedioDePagoController();
+				MedioDePago medioDePagoAnterior = medioDePagoController.findByNombreMedioDePago(nombreMediosPagoAnterior);
+				MedioDePago medioDePagoNueva = medioDePagoController.findByNombreMedioDePago(nombreMediosPagoNueva);
+				
+				CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
+
+				CuentaBancaria cuentaBancariaAnterior = cuentaBancariaController.findByNroCta(nroCuentaBancariaAnterior);
+				CuentaBancaria cuentaBancariaNueva = cuentaBancariaController.findByNroCta(nroCuentaBancariaNueva);
+
+				if ((cuentaBancariaAnterior.getMonto() - monto) >= 0) {
+					// inserto la baja de la primer cuenta
+					String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
+					// inserto el alata en la segunda cuenta
+					String sql1 = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), +1, ?, ?, ?, ?);";
+					// actualizo la primer cuenta
+					String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+					// actualizo la segunda cuenta
+					String sql3 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
+
+					boolean respuesta = false;
+
+					con = conectar();
+
+					ps = con.prepareStatement(sql);
+					ps.setDouble(1, monto);
+					ps.setInt(2, usuario.getIdUsuario());
+					ps.setInt(3, cuentaBancariaAnterior.getIdCuentaBancaria());
+					ps.setInt(4, medioDePagoAnterior.getIdMedioDePago());
+
+					PreparedStatement ps1 = con.prepareStatement(sql1);
+					ps1.setDouble(1, monto);
+					ps1.setInt(2, usuario.getIdUsuario());
+					ps1.setInt(3, cuentaBancariaNueva.getIdCuentaBancaria());
+					ps1.setInt(4, medioDePagoNueva.getIdMedioDePago());
+
+					PreparedStatement ps2 = con.prepareStatement(sql2);
+					ps2.setDouble(1, monto);
+					ps2.setInt(2, usuario.getIdUsuario());
+					ps2.setInt(3, cuentaBancariaAnterior.getIdCuentaBancaria());
+
+					PreparedStatement ps3 = con.prepareStatement(sql3);
+					ps3.setDouble(1, monto);
+					ps3.setInt(2, usuario.getIdUsuario());
+					ps3.setInt(3, cuentaBancariaNueva.getIdCuentaBancaria());
+
+					if (ps.executeUpdate() == 1 && ps1.executeUpdate() == 1 && ps2.executeUpdate() == 1
+							&& ps3.executeUpdate() == 1) {
+						respuesta = true;
+					}
+
+					return respuesta;
+
+				} else {
+					return false;
+				}
+
+			} catch (SQLException ex) {
+				Logger.getLogger(MovHistoricoController.class.getName()).log(Level.SEVERE, null, ex);
+				return false;
+			} finally {
+				ps.close();
+				con.close();
+			}
+		}
+	// ------------------------------------------------------------------------------------
+	public boolean intercambioEntreCuentasXId(double monto, int idUsuario, int idCuentaBancariaAnterior,
+			int idCuentaBancariaNueva, int idMediosPagoAnterior, int idMediosPagoNuevo) throws SQLException {
 		try {
 
 			CuentaBancariaController cuentaBancariaController = new CuentaBancariaController();
@@ -454,16 +852,16 @@ public class MovHistoricoController extends Conexion {
 			CuentaBancaria cuentaBancariaAnterior = cuentaBancariaController.findById(idCuentaBancariaAnterior);
 			CuentaBancaria cuentaBancariaNueva = cuentaBancariaController.findById(idCuentaBancariaNueva);
 
-			if ((cuentaBancariaAnterior.getMonto() - monto) >=0 ) {
-				//inserto la baja de la primer cuenta
+			if ((cuentaBancariaAnterior.getMonto() - monto) >= 0) {
+				// inserto la baja de la primer cuenta
 				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
-				//inserto el alata en la segunda cuenta
+				// inserto el alata en la segunda cuenta
 				String sql1 = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), +1, ?, ?, ?, ?);";
-				//actualizo la primer cuenta
+				// actualizo la primer cuenta
 				String sql2 = "UPDATE cuentaBancaria SET  monto = (monto - ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
-				//actualizo la segunda cuenta
+				// actualizo la segunda cuenta
 				String sql3 = "UPDATE cuentaBancaria SET  monto = (monto + ?) WHERE idUsuario = ? and idCuentaBancaria= ? ; ";
-				
+
 				boolean respuesta = false;
 
 				con = conectar();
@@ -473,27 +871,25 @@ public class MovHistoricoController extends Conexion {
 				ps.setInt(2, idUsuario);
 				ps.setInt(3, idCuentaBancariaAnterior);
 				ps.setInt(4, idMediosPagoAnterior);
-				
+
 				PreparedStatement ps1 = con.prepareStatement(sql1);
 				ps1.setDouble(1, monto);
 				ps1.setInt(2, idUsuario);
 				ps1.setInt(3, idCuentaBancariaNueva);
 				ps1.setInt(4, idMediosPagoNuevo);
 
-
 				PreparedStatement ps2 = con.prepareStatement(sql2);
 				ps2.setDouble(1, monto);
 				ps2.setInt(2, idUsuario);
 				ps2.setInt(3, idCuentaBancariaAnterior);
-				
-				
+
 				PreparedStatement ps3 = con.prepareStatement(sql3);
 				ps3.setDouble(1, monto);
 				ps3.setInt(2, idUsuario);
 				ps3.setInt(3, idCuentaBancariaNueva);
-				
 
-				if (ps.executeUpdate() == 1 && ps1.executeUpdate() == 1 && ps2.executeUpdate() == 1 && ps3.executeUpdate() == 1) {
+				if (ps.executeUpdate() == 1 && ps1.executeUpdate() == 1 && ps2.executeUpdate() == 1
+						&& ps3.executeUpdate() == 1) {
 					respuesta = true;
 				}
 
@@ -511,5 +907,7 @@ public class MovHistoricoController extends Conexion {
 			con.close();
 		}
 	}
+	// ------------------------------------------------------------------------------------
+
 
 }
