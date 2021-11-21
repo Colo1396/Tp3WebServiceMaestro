@@ -477,14 +477,14 @@
          </usuario>
       </ser:update>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/update"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4b498c9f-b530-40e7-b75e-dbd65d036377" isOneWay="false" action="" name="findByDni" bindingOperationName="findByDni" type="Request-Response" outputName="findByDniResponse" inputName="findByDni" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7e20ff5c-58ad-4603-b427-4db92135e2f7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/UsuarioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/update"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4b498c9f-b530-40e7-b75e-dbd65d036377" isOneWay="false" action="" name="findByDni" bindingOperationName="findByDni" type="Request-Response" outputName="findByDniResponse" inputName="findByDni" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7e20ff5c-58ad-4603-b427-4db92135e2f7" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/UsuarioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:findByDni>\r
-         <dni>?</dni>\r
+         <dni>11111111</dni>\r
       </ser:findByDni>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/findByDni"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="95761dff-287b-45c4-8d5c-4d76cf579293" wsaVersion="NONE" name="CuentaBancariaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}CuentaBancariaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CuentaBancariaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/findByDni"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="95761dff-287b-45c4-8d5c-4d76cf579293" wsaVersion="NONE" name="CuentaBancariaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}CuentaBancariaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CuentaBancariaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="create" type="tns:create"/>
@@ -739,15 +739,15 @@
          </cuentaBancaria>\r
       </ser:update>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/CuentaBancariaService/update"/></con:call></con:operation><con:operation id="3a17ca27-cfb9-47e0-b27a-de77bbbc9260" isOneWay="false" action="" name="findByNroCta" bindingOperationName="findByNroCta" type="Request-Response" outputName="findByNroCtaResponse" inputName="findByNroCta" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="549df1df-34ad-4514-b540-3c8ade2843d5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/CuentaBancariaService/update"/></con:call></con:operation><con:operation id="3a17ca27-cfb9-47e0-b27a-de77bbbc9260" isOneWay="false" action="" name="findByNroCta" bindingOperationName="findByNroCta" type="Request-Response" outputName="findByNroCtaResponse" inputName="findByNroCta" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="549df1df-34ad-4514-b540-3c8ade2843d5" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:findByNroCta>\r
          <!--Optional:-->\r
-         <nroCuentaBancaria>?</nroCuentaBancaria>\r
+         <nroCuentaBancaria>552</nroCuentaBancaria>\r
       </ser:findByNroCta>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/CuentaBancariaService/findByNroCta"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="12e80538-eb42-4010-b477-bd139fe43834" wsaVersion="NONE" name="TarjetaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}TarjetaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="TarjetaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/CuentaBancariaService/findByNroCta"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="12e80538-eb42-4010-b477-bd139fe43834" wsaVersion="NONE" name="TarjetaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}TarjetaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="TarjetaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="create" type="tns:create"/>
@@ -1090,21 +1090,21 @@
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:traerLimiteDisponible>\r
-         <dni>111111111</dni>\r
+         <dni>11111111</dni>\r
          <!--Optional:-->\r
-         <nroTarjeta>020201</nroTarjeta>\r
+         <nroTarjeta>2131</nroTarjeta>\r
       </ser:traerLimiteDisponible>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/traerLimiteDisponible"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="2cab19d1-539a-4f66-9d17-3deda2a7c6f9" isOneWay="false" action="" name="findByDniYNroTarj" bindingOperationName="findByDniYNroTarj" type="Request-Response" outputName="findByDniYNroTarjResponse" inputName="findByDniYNroTarj" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="70b11b6a-d207-46e7-9f55-00d21cce3753" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/TarjetaService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/traerLimiteDisponible"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="2cab19d1-539a-4f66-9d17-3deda2a7c6f9" isOneWay="false" action="" name="findByDniYNroTarj" bindingOperationName="findByDniYNroTarj" type="Request-Response" outputName="findByDniYNroTarjResponse" inputName="findByDniYNroTarj" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="70b11b6a-d207-46e7-9f55-00d21cce3753" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/TarjetaService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:findByDniYNroTarj>\r
-         <dni>?</dni>\r
+         <dni>11111111</dni>\r
          <!--Optional:-->\r
-         <nroTarjeta>?</nroTarjeta>\r
+         <nroTarjeta>2111</nroTarjeta>\r
       </ser:findByDniYNroTarj>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/findByDniYNroTarj"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d10d2e5a-0585-4d0a-ac12-5947d6d56bb7" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/findByDniYNroTarj"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d10d2e5a-0585-4d0a-ac12-5947d6d56bb7" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="asociarMedioDePago" type="tns:asociarMedioDePago"/>
@@ -1541,15 +1541,15 @@
          </medioDePago>\r
       </ser:desasociarMedioDePago>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/desasociarMedioDePago"/></con:call></con:operation><con:operation id="a15219fd-518d-4646-be53-af10d20a1a3b" isOneWay="false" action="" name="findByNombreMedioDePago" bindingOperationName="findByNombreMedioDePago" type="Request-Response" outputName="findByNombreMedioDePagoResponse" inputName="findByNombreMedioDePago" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="83f7666c-88ee-4a0f-9441-c0d54e2daa5d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/desasociarMedioDePago"/></con:call></con:operation><con:operation id="a15219fd-518d-4646-be53-af10d20a1a3b" isOneWay="false" action="" name="findByNombreMedioDePago" bindingOperationName="findByNombreMedioDePago" type="Request-Response" outputName="findByNombreMedioDePagoResponse" inputName="findByNombreMedioDePago" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="83f7666c-88ee-4a0f-9441-c0d54e2daa5d" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:findByNombreMedioDePago>\r
          <!--Optional:-->\r
-         <nombreMP>?</nombreMP>\r
+         <nombreMP>bille</nombreMP>\r
       </ser:findByNombreMedioDePago>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/findByNombreMedioDePago"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="8e0a7da1-a770-44f2-8efd-dac1cf00158c" wsaVersion="NONE" name="MovHistoricoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MovHistoricoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MovHistoricoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/findByNombreMedioDePago"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="8e0a7da1-a770-44f2-8efd-dac1cf00158c" wsaVersion="NONE" name="MovHistoricoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MovHistoricoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MovHistoricoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="create" type="tns:create"/>
@@ -2232,34 +2232,33 @@
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:devolucionConEfectivo>\r
-         <monto>200</monto>\r
-         <idUsuario>2</idUsuario>\r
-         <idCuentaBancaria>3</idCuentaBancaria>\r
-         <idMediosPago>1</idMediosPago>\r
+         <monto>300</monto>\r
+         <dni>11111111</dni>\r
+         <!--Optional:-->\r
+         <nroCuentaBancaria>11</nroCuentaBancaria>\r
       </ser:devolucionConEfectivo>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConEfectivo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="48b158cf-367e-4ca1-84b8-e0cdec47922b" isOneWay="false" action="" name="devolucionConTajetaCredito" bindingOperationName="devolucionConTajetaCredito" type="Request-Response" outputName="devolucionConTajetaCreditoResponse" inputName="devolucionConTajetaCredito" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0fb97e55-9e70-4c4f-9256-a2ded42aae43" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:devolucionConTajetaCredito>\r
-         <monto>?</monto>\r
-         <idUsuario>?</idUsuario>\r
-         <idCuentaBancaria>?</idCuentaBancaria>\r
-         <idMediosPago>?</idMediosPago>\r
-         <idTarjeta>?</idTarjeta>\r
-      </ser:devolucionConTajetaCredito>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConTajetaCredito"/></con:call></con:operation><con:operation id="631c8ad2-8136-4e3e-9ef5-3448d3cd583a" isOneWay="false" action="" name="devolucionConTajetaDebito" bindingOperationName="devolucionConTajetaDebito" type="Request-Response" outputName="devolucionConTajetaDebitoResponse" inputName="devolucionConTajetaDebito" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="54b1277f-3383-4c74-a286-a228624d0f28" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConEfectivo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="48b158cf-367e-4ca1-84b8-e0cdec47922b" isOneWay="false" action="" name="devolucionConTajetaCredito" bindingOperationName="devolucionConTajetaCredito" type="Request-Response" outputName="devolucionConTajetaCreditoResponse" inputName="devolucionConTajetaCredito" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0fb97e55-9e70-4c4f-9256-a2ded42aae43" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:devolucionConTajetaCredito>
+         <monto>250</monto>
+         <dni>11111111</dni>
+         <!--Optional:-->
+         <nroTarjeta>2131</nroTarjeta>
+      </ser:devolucionConTajetaCredito>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConTajetaCredito"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="631c8ad2-8136-4e3e-9ef5-3448d3cd583a" isOneWay="false" action="" name="devolucionConTajetaDebito" bindingOperationName="devolucionConTajetaDebito" type="Request-Response" outputName="devolucionConTajetaDebitoResponse" inputName="devolucionConTajetaDebito" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="54b1277f-3383-4c74-a286-a228624d0f28" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:devolucionConTajetaDebito>\r
-         <monto>?</monto>\r
-         <idUsuario>?</idUsuario>\r
-         <idCuentaBancaria>?</idCuentaBancaria>\r
-         <idMediosPago>?</idMediosPago>\r
+         <monto>300</monto>\r
+         <dni>11111111</dni>\r
+         <!--Optional:-->\r
+         <nroTarjeta>2111</nroTarjeta>\r
       </ser:devolucionConTajetaDebito>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConTajetaDebito"/></con:call></con:operation><con:operation id="9d131aeb-f654-40f0-9ed8-85232bb696e1" isOneWay="false" action="" name="findAll" bindingOperationName="findAll" type="Request-Response" outputName="findAllResponse" inputName="findAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e41c1f41-f9c5-4e66-9d3a-d95eade44918" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConTajetaDebito"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9d131aeb-f654-40f0-9ed8-85232bb696e1" isOneWay="false" action="" name="findAll" bindingOperationName="findAll" type="Request-Response" outputName="findAllResponse" inputName="findAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e41c1f41-f9c5-4e66-9d3a-d95eade44918" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:findAll/>\r
@@ -2275,34 +2274,33 @@
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:pagarConEfectivo>\r
-         <monto>200</monto>\r
-         <idUsuario>2</idUsuario>\r
-         <idCuentaBancaria>3</idCuentaBancaria>\r
-         <idMediosPago>1</idMediosPago>\r
+         <monto>400</monto>\r
+         <dni>11111111</dni>\r
+         <!--Optional:-->\r
+         <nroCuentaBancaria>11</nroCuentaBancaria>\r
       </ser:pagarConEfectivo>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConEfectivo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1e67fa02-4136-4653-ae26-6e8e1f6a7439" isOneWay="false" action="" name="pagarConTajetaCredito" bindingOperationName="pagarConTajetaCredito" type="Request-Response" outputName="pagarConTajetaCreditoResponse" inputName="pagarConTajetaCredito" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b59e1e35-e58d-4c3a-b307-2b50177d4a3e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConEfectivo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1e67fa02-4136-4653-ae26-6e8e1f6a7439" isOneWay="false" action="" name="pagarConTajetaCredito" bindingOperationName="pagarConTajetaCredito" type="Request-Response" outputName="pagarConTajetaCreditoResponse" inputName="pagarConTajetaCredito" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b59e1e35-e58d-4c3a-b307-2b50177d4a3e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:pagarConTajetaCredito>\r
-         <monto>?</monto>\r
-         <idUsuario>?</idUsuario>\r
-         <idCuentaBancaria>?</idCuentaBancaria>\r
-         <idMediosPago>?</idMediosPago>\r
-         <idTarjeta>?</idTarjeta>\r
+         <monto>500</monto>\r
+         <dni>11111111</dni>\r
+         <!--Optional:-->\r
+         <nroTarjeta>2131</nroTarjeta>\r
       </ser:pagarConTajetaCredito>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConTajetaCredito"/></con:call></con:operation><con:operation id="2f15fa09-a5a8-4f3b-9b3c-40b703d8b94e" isOneWay="false" action="" name="pagarConTajetaDebito" bindingOperationName="pagarConTajetaDebito" type="Request-Response" outputName="pagarConTajetaDebitoResponse" inputName="pagarConTajetaDebito" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="185ac022-5e4e-4ace-b7f7-c6755ef8903a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConTajetaCredito"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="2f15fa09-a5a8-4f3b-9b3c-40b703d8b94e" isOneWay="false" action="" name="pagarConTajetaDebito" bindingOperationName="pagarConTajetaDebito" type="Request-Response" outputName="pagarConTajetaDebitoResponse" inputName="pagarConTajetaDebito" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="185ac022-5e4e-4ace-b7f7-c6755ef8903a" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:pagarConTajetaDebito>\r
-         <monto>?</monto>\r
-         <idUsuario>?</idUsuario>\r
-         <idCuentaBancaria>?</idCuentaBancaria>\r
-         <idMediosPago>?</idMediosPago>\r
+         <monto>700</monto>\r
+         <dni>11111111</dni>\r
+         <!--Optional:-->\r
+         <nroTarjeta>2111</nroTarjeta>\r
       </ser:pagarConTajetaDebito>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConTajetaDebito"/></con:call></con:operation><con:operation id="9bbf8b21-85ab-4e13-9e45-4c6ef986e677" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1c551860-5930-42bf-9427-e9e674efed04" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConTajetaDebito"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9bbf8b21-85ab-4e13-9e45-4c6ef986e677" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1c551860-5930-42bf-9427-e9e674efed04" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:update>\r
@@ -2351,33 +2349,33 @@
          <idMediosPago>?</idMediosPago>\r
       </ser:devolucionConTajetaDebitoXId>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConTajetaDebitoXId"/></con:call></con:operation><con:operation id="b0d187de-fbc3-4b46-9bdc-27fd6550494a" isOneWay="false" action="" name="intercambioEntreCuentas" bindingOperationName="intercambioEntreCuentas" type="Request-Response" outputName="intercambioEntreCuentasResponse" inputName="intercambioEntreCuentas" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4d7ce967-1f30-4cc4-9851-d682f49979c5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConTajetaDebitoXId"/></con:call></con:operation><con:operation id="b0d187de-fbc3-4b46-9bdc-27fd6550494a" isOneWay="false" action="" name="intercambioEntreCuentas" bindingOperationName="intercambioEntreCuentas" type="Request-Response" outputName="intercambioEntreCuentasResponse" inputName="intercambioEntreCuentas" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4d7ce967-1f30-4cc4-9851-d682f49979c5" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:intercambioEntreCuentas>\r
-         <monto>?</monto>\r
-         <dni>?</dni>\r
+         <monto>200</monto>\r
+         <dni>11111111</dni>\r
          <!--Optional:-->\r
-         <nroCuentaBancariaAnterior>?</nroCuentaBancariaAnterior>\r
+         <nroCuentaBancariaAnterior>11</nroCuentaBancariaAnterior>\r
          <!--Optional:-->\r
-         <nroCuentaBancariaNueva>?</nroCuentaBancariaNueva>\r
+         <nroCuentaBancariaNueva>41</nroCuentaBancariaNueva>\r
          <!--Optional:-->\r
-         <nombreMediosPagoAnterior>?</nombreMediosPagoAnterior>\r
+         <nombreMediosPagoAnterior>Efectivo</nombreMediosPagoAnterior>\r
          <!--Optional:-->\r
-         <nombreMediosPagoNueva>?</nombreMediosPagoNueva>\r
+         <nombreMediosPagoNueva>BilleteraV</nombreMediosPagoNueva>\r
       </ser:intercambioEntreCuentas>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/intercambioEntreCuentas"/></con:call></con:operation><con:operation id="ef824363-99e7-4534-b41c-e9b23ac4abb7" isOneWay="false" action="" name="pagarConEfectivoXId" bindingOperationName="pagarConEfectivoXId" type="Request-Response" outputName="pagarConEfectivoXIdResponse" inputName="pagarConEfectivoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8b8e3b1c-d504-46cd-83c1-12f20ce22bc7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/intercambioEntreCuentas"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ef824363-99e7-4534-b41c-e9b23ac4abb7" isOneWay="false" action="" name="pagarConEfectivoXId" bindingOperationName="pagarConEfectivoXId" type="Request-Response" outputName="pagarConEfectivoXIdResponse" inputName="pagarConEfectivoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8b8e3b1c-d504-46cd-83c1-12f20ce22bc7" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:pagarConEfectivoXId>\r
-         <monto>?</monto>\r
-         <idUsuario>?</idUsuario>\r
-         <idCuentaBancaria>?</idCuentaBancaria>\r
-         <idMediosPago>?</idMediosPago>\r
+         <monto>100</monto>\r
+         <idUsuario>1</idUsuario>\r
+         <idCuentaBancaria>1</idCuentaBancaria>\r
+         <idMediosPago>1</idMediosPago>\r
       </ser:pagarConEfectivoXId>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConEfectivoXId"/></con:call></con:operation><con:operation id="43e8aa1d-3f40-422c-bbef-cb6a52899169" isOneWay="false" action="" name="devolucionConEfectivoXId" bindingOperationName="devolucionConEfectivoXId" type="Request-Response" outputName="devolucionConEfectivoXIdResponse" inputName="devolucionConEfectivoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d6b5d33a-d659-487b-a831-6fd66a4fd787" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConEfectivoXId"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="43e8aa1d-3f40-422c-bbef-cb6a52899169" isOneWay="false" action="" name="devolucionConEfectivoXId" bindingOperationName="devolucionConEfectivoXId" type="Request-Response" outputName="devolucionConEfectivoXIdResponse" inputName="devolucionConEfectivoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d6b5d33a-d659-487b-a831-6fd66a4fd787" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:devolucionConEfectivoXId>\r
