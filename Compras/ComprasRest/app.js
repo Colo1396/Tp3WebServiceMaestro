@@ -67,6 +67,8 @@ app.use(require('./src/controllers/probando'));
 app.use(require('./src/controllers/user'));
 //PRODUCTO
 app.use(require('./src/controllers/producto'));
+//USER
+app.use(require('./src/controllers/domicilio'));
 
 
 //Crear el servidor

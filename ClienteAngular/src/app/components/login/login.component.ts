@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private _userService:UserService,
     private _router: Router, 
     private _route: ActivatedRoute) {
-    this.user = new User('', '', '', 'ROLE_COMPRADOR', '','','');
+    this.user = new User('', '', '', '', '','','', '');
   }
 
   ngOnInit(): void {

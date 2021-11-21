@@ -1,0 +1,178 @@
+<main class="flex-shrink-0 py-4 mt-5">
+    <div class="container">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    <div class="card shadow mb-4">
+                        <div class="card-body table-responsive">
+                            <h1 align="center">Perfil</h1>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Username</th>
+                                        <td>{{ user.username }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <td>{{ user.nombre }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Apellido</th>
+                                        <td>{{ user.apellido }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>DNI</th>
+                                        <td>{{ user.dni }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Domicilio/s</th>
+                                        <td>
+                                            <ul class="list-group list-domicilios">
+                                                <li class="list-group-item" *ngFor="let domicilio of domicilios" >
+                                                    <p *ngFor="let domicilioAux of domicilio | keyvalue">
+                                                        <b style="text-transform: uppercase;">{{domicilioAux.key}}</b> : {{domicilioAux.value}}
+                                                    </p> 
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tarjeta/s</th>
+                                        <td>
+                                            <ul class="list-group list-tarjetas">
+                                                <li class="list-group-item" *ngFor="let tarjeta of tarjetas" >
+                                                    <p *ngFor="let tarjetaAux of tarjeta | keyvalue">
+                                                        <b style="text-transform: uppercase;">{{tarjetaAux.key}}</b> : {{tarjetaAux.value}}
+                                                    </p> 
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="center" align="center">
+                                <a class="btn btn-secondary m-2" [routerLink]="['/editUserComprador']">Editar</a>       
+                                <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#modalAgregarDomicilio">
+                                    Agregar domicilio
+                                </button>
+                                <button type="button" class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#modalAgregarTarjeta">
+                                    Agregar tarjeta
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal agregar domicilio -->
+        <div class="modal fade" id="modalAgregarDomicilio" tabindex="-1" aria-labelledby="modalAgregarDomicilioLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgb(245, 152, 2);">
+                        <h5 class="modal-title text-white" id="modalAgregarDomicilioLabel">Agregar domicilio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <!--Provincia-->
+                                        <div class="form-group col-md-6 my-2">
+                                            <label for="provincia" clas="form-label">Provincia</label>
+                                            <input type="text" name="provincia" id="provincia" class="form-control" required>
+                                        </div>
+                                        <!--Localidad-->
+                                        <div class="form-group col-md-6 my-2">
+                                            <label for="localidad" clas="form-label">Localidad</label>
+                                            <input type="text" name="localidad" id="localidad" class="form-control" required>
+                                        </div>
+                                        <!--Calle-->
+                                        <div class="form-group col-md-6 my-2">
+                                            <label for="calle" clas="form-label">Calle</label>
+                                            <input type="text" name="calle" id="calle" class="form-control" required>
+                                        </div>
+                                        <!--Número-->
+                                        <div class="form-group col-md-6 my-2">
+                                            <label for="numero" clas="form-label">Número</label>
+                                            <input type="text" name="numero" id="numero" class="form-control" required>
+                                        </div>
+                                        <!--Piso/Depto-->
+                                        <div class="form-group col-md-6 my-2">
+                                            <label for="pisoDepto" clas="form-label">Piso y Depto (opcional)</label>
+                                            <input type="text" name="pisoDepto" id="pisoDepto" class="form-control">
+                                        </div>
+                                        <div class="modal-footer mt-3 my-2">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-success">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- Modal agregar tarjeta -->
+        <div class="modal fade" id="modalAgregarTarjeta" tabindex="-1" aria-labelledby="modalAgregarTarjetaLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgb(245, 152, 2);">
+                        <h5 class="modal-title text-white" id="modalAgregarTarjetaLabel">Agregar tarjeta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <!--Tipo (Débito/Crédito)-->
+                                        <div class="form-group col-md-12 my-2">
+                                            <label for="tipo" clas="form-label">Tipo</label>
+                                            <select class="form-select" aria-label="Default select" name="tipo" required>
+                                                <option selected value="">Seleccione el tipo de la tarjeta</option>
+                                                <option value="credito">Crédito</option>
+                                                <option value="debito">Débito</option>
+                                            </select>                                            
+                                        </div>
+                                        <!--Nombre-->
+                                        <div class="form-group col-md-12 my-2">
+                                            <label for="nombreTitular" clas="form-label">Nombre del titular (tal cual como figura en el dorso de la tarjeta)</label>
+                                            <input type="text" name="nombreTitular" id="nombreTitular" class="form-control" required>
+                                        </div>
+                                        <!--DNI-->
+                                        <div class="form-group col-md-12 my-2">
+                                            <label for="dniTitutar" clas="form-label">DNI Titular</label>
+                                            <input type="text" name="dniTitutar" id="dniTitutar" class="form-control" required>
+                                        </div>
+                                        <!--Número-->
+                                        <div class="form-group col-md-12 my-2">
+                                            <label for="numero" clas="form-label">Número</label>
+                                            <input type="text" name="numero" id="numero" class="form-control" required>
+                                        </div>
+                                        <!--Fecha Venc-->
+                                        <div class="form-group col-md-12 my-2">
+                                            <label for="fechaVenc" clas="form-label">Fecha de Vencimiento</label>
+                                            <input type="date" name="fechaVenc" id="fechaVenc" class="form-control" required>
+                                        </div>
+                                        <!--Código de seguridad-->
+                                        <div class="form-group col-md-12 my-2">
+                                            <label for="codSeguridad" clas="form-label">Código de seguridad</label>
+                                            <input type="text" name="codSeguridad" id="codSeguridad" class="form-control" required>
+                                        </div>
+                                        <div class="modal-footer mt-3">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-success">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
