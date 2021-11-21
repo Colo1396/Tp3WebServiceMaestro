@@ -235,6 +235,8 @@
       <xs:element name="deleteResponse" type="tns:deleteResponse"/>
       <xs:element name="findAll" type="tns:findAll"/>
       <xs:element name="findAllResponse" type="tns:findAllResponse"/>
+      <xs:element name="findByDni" type="tns:findByDni"/>
+      <xs:element name="findByDniResponse" type="tns:findByDniResponse"/>
       <xs:element name="findById" type="tns:findById"/>
       <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
       <xs:element name="update" type="tns:update"/>
@@ -254,6 +256,16 @@
           <xs:element name="idUsuario" type="xs:int"/>
           <xs:element name="idUsuarioRef" type="xs:int"/>
           <xs:element minOccurs="0" name="razonSocial" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByDni">
+        <xs:sequence>
+          <xs:element name="dni" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByDniResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:usuario"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="delete">
@@ -305,6 +317,9 @@
   <wsdl:message name="deleteResponse">
     <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="findByDni">
+    <wsdl:part element="tns:findByDni" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="updateResponse">
     <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -313,6 +328,9 @@
   </wsdl:message>
   <wsdl:message name="findAll">
     <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByDniResponse">
+    <wsdl:part element="tns:findByDniResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="findAllResponse">
     <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
@@ -330,6 +348,10 @@
     <wsdl:operation name="findById">
       <wsdl:input message="tns:findById" name="findById"></wsdl:input>
       <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByDni">
+      <wsdl:input message="tns:findByDni" name="findByDni"></wsdl:input>
+      <wsdl:output message="tns:findByDniResponse" name="findByDniResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="delete">
       <wsdl:input message="tns:delete" name="delete"></wsdl:input>
@@ -356,6 +378,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="findByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByDni">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findByDni">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByDniResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -446,7 +477,14 @@
          </usuario>
       </ser:update>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/update"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="95761dff-287b-45c4-8d5c-4d76cf579293" wsaVersion="NONE" name="CuentaBancariaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}CuentaBancariaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CuentaBancariaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/update"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4b498c9f-b530-40e7-b75e-dbd65d036377" isOneWay="false" action="" name="findByDni" bindingOperationName="findByDni" type="Request-Response" outputName="findByDniResponse" inputName="findByDni" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7e20ff5c-58ad-4603-b427-4db92135e2f7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/UsuarioService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:findByDni>\r
+         <dni>?</dni>\r
+      </ser:findByDni>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/UsuarioService/findByDni"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="95761dff-287b-45c4-8d5c-4d76cf579293" wsaVersion="NONE" name="CuentaBancariaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}CuentaBancariaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CuentaBancariaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="create" type="tns:create"/>
@@ -457,6 +495,8 @@
       <xs:element name="findAllResponse" type="tns:findAllResponse"/>
       <xs:element name="findById" type="tns:findById"/>
       <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
+      <xs:element name="findByNroCta" type="tns:findByNroCta"/>
+      <xs:element name="findByNroCtaResponse" type="tns:findByNroCtaResponse"/>
       <xs:element name="update" type="tns:update"/>
       <xs:element name="updateResponse" type="tns:updateResponse"/>
       <xs:complexType name="findById">
@@ -475,6 +515,17 @@
           <xs:element name="idUsuario" type="xs:int"/>
           <xs:element name="monto" type="xs:double"/>
           <xs:element minOccurs="0" name="nroCuenta" type="xs:string"/>
+          <xs:element minOccurs="0" name="tipo" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByNroCta">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="nroCuentaBancaria" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByNroCtaResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:cuentaBancaria"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="delete">
@@ -523,6 +574,9 @@
   <wsdl:message name="findByIdResponse">
     <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="findByNroCta">
+    <wsdl:part element="tns:findByNroCta" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="deleteResponse">
     <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -538,6 +592,9 @@
   <wsdl:message name="findAllResponse">
     <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="findByNroCtaResponse">
+    <wsdl:part element="tns:findByNroCtaResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="create">
     <wsdl:part element="tns:create" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -551,6 +608,10 @@
     <wsdl:operation name="findById">
       <wsdl:input message="tns:findById" name="findById"></wsdl:input>
       <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByNroCta">
+      <wsdl:input message="tns:findByNroCta" name="findByNroCta"></wsdl:input>
+      <wsdl:output message="tns:findByNroCtaResponse" name="findByNroCtaResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="delete">
       <wsdl:input message="tns:delete" name="delete"></wsdl:input>
@@ -577,6 +638,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="findByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByNroCta">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findByNroCta">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByNroCtaResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -669,7 +739,15 @@
          </cuentaBancaria>\r
       </ser:update>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/CuentaBancariaService/update"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="12e80538-eb42-4010-b477-bd139fe43834" wsaVersion="NONE" name="TarjetaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}TarjetaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="TarjetaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/CuentaBancariaService/update"/></con:call></con:operation><con:operation id="3a17ca27-cfb9-47e0-b27a-de77bbbc9260" isOneWay="false" action="" name="findByNroCta" bindingOperationName="findByNroCta" type="Request-Response" outputName="findByNroCtaResponse" inputName="findByNroCta" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="549df1df-34ad-4514-b540-3c8ade2843d5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:findByNroCta>\r
+         <!--Optional:-->\r
+         <nroCuentaBancaria>?</nroCuentaBancaria>\r
+      </ser:findByNroCta>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/CuentaBancariaService/findByNroCta"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="12e80538-eb42-4010-b477-bd139fe43834" wsaVersion="NONE" name="TarjetaServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}TarjetaServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/TarjetaService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="TarjetaService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="create" type="tns:create"/>
@@ -678,6 +756,8 @@
       <xs:element name="deleteResponse" type="tns:deleteResponse"/>
       <xs:element name="findAll" type="tns:findAll"/>
       <xs:element name="findAllResponse" type="tns:findAllResponse"/>
+      <xs:element name="findByDniYNroTarj" type="tns:findByDniYNroTarj"/>
+      <xs:element name="findByDniYNroTarjResponse" type="tns:findByDniYNroTarjResponse"/>
       <xs:element name="findById" type="tns:findById"/>
       <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
       <xs:element name="traerLimiteDisponible" type="tns:traerLimiteDisponible"/>
@@ -705,6 +785,17 @@
           <xs:element minOccurs="0" name="nroTarjeta" type="xs:string"/>
           <xs:element name="saldo" type="xs:double"/>
           <xs:element minOccurs="0" name="tipo" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByDniYNroTarj">
+        <xs:sequence>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroTarjeta" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByDniYNroTarjResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:tarjeta"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="traerLimiteDisponible">
@@ -775,6 +866,9 @@
   <wsdl:message name="validarTarjetaResponse">
     <wsdl:part element="tns:validarTarjetaResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="findByDniYNroTarj">
+    <wsdl:part element="tns:findByDniYNroTarj" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="delete">
     <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -783,6 +877,9 @@
   </wsdl:message>
   <wsdl:message name="validarTarjeta">
     <wsdl:part element="tns:validarTarjeta" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByDniYNroTarjResponse">
+    <wsdl:part element="tns:findByDniYNroTarjResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="createResponse">
     <wsdl:part element="tns:createResponse" name="parameters"></wsdl:part>
@@ -815,6 +912,10 @@
     <wsdl:operation name="findById">
       <wsdl:input message="tns:findById" name="findById"></wsdl:input>
       <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByDniYNroTarj">
+      <wsdl:input message="tns:findByDniYNroTarj" name="findByDniYNroTarj"></wsdl:input>
+      <wsdl:output message="tns:findByDniYNroTarjResponse" name="findByDniYNroTarjResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="traerLimiteDisponible">
       <wsdl:input message="tns:traerLimiteDisponible" name="traerLimiteDisponible"></wsdl:input>
@@ -849,6 +950,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="findByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByDniYNroTarj">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findByDniYNroTarj">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByDniYNroTarjResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -985,7 +1095,16 @@
          <nroTarjeta>020201</nroTarjeta>\r
       </ser:traerLimiteDisponible>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/traerLimiteDisponible"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d10d2e5a-0585-4d0a-ac12-5947d6d56bb7" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/traerLimiteDisponible"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="2cab19d1-539a-4f66-9d17-3deda2a7c6f9" isOneWay="false" action="" name="findByDniYNroTarj" bindingOperationName="findByDniYNroTarj" type="Request-Response" outputName="findByDniYNroTarjResponse" inputName="findByDniYNroTarj" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="70b11b6a-d207-46e7-9f55-00d21cce3753" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/TarjetaService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:findByDniYNroTarj>\r
+         <dni>?</dni>\r
+         <!--Optional:-->\r
+         <nroTarjeta>?</nroTarjeta>\r
+      </ser:findByDniYNroTarj>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/TarjetaService/findByDniYNroTarj"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="d10d2e5a-0585-4d0a-ac12-5947d6d56bb7" wsaVersion="NONE" name="MedioDePagoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MedioDePagoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MedioDePagoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="asociarMedioDePago" type="tns:asociarMedioDePago"/>
@@ -1004,6 +1123,8 @@
       <xs:element name="findAllResponse" type="tns:findAllResponse"/>
       <xs:element name="findById" type="tns:findById"/>
       <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
+      <xs:element name="findByNombreMedioDePago" type="tns:findByNombreMedioDePago"/>
+      <xs:element name="findByNombreMedioDePagoResponse" type="tns:findByNombreMedioDePagoResponse"/>
       <xs:element name="update" type="tns:update"/>
       <xs:element name="updateResponse" type="tns:updateResponse"/>
       <xs:complexType name="findById">
@@ -1080,6 +1201,16 @@
           <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:medioDePago"/>
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="findByNombreMedioDePago">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="nombreMP" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByNombreMedioDePagoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:medioDePago"/>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="asociarMedioDePago">
         <xs:sequence>
           <xs:element minOccurs="0" name="usuario" type="tns:usuario"/>
@@ -1131,6 +1262,9 @@
   <wsdl:message name="findAll">
     <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="findByNombreMedioDePago">
+    <wsdl:part element="tns:findByNombreMedioDePago" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="asociarMedioDePago">
     <wsdl:part element="tns:asociarMedioDePago" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -1148,6 +1282,9 @@
   </wsdl:message>
   <wsdl:message name="deleteResponse">
     <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByNombreMedioDePagoResponse">
+    <wsdl:part element="tns:findByNombreMedioDePagoResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="updateResponse">
     <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
@@ -1191,6 +1328,10 @@
     <wsdl:operation name="findAll">
       <wsdl:input message="tns:findAll" name="findAll"></wsdl:input>
       <wsdl:output message="tns:findAllResponse" name="findAllResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByNombreMedioDePago">
+      <wsdl:input message="tns:findByNombreMedioDePago" name="findByNombreMedioDePago"></wsdl:input>
+      <wsdl:output message="tns:findByNombreMedioDePagoResponse" name="findByNombreMedioDePagoResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="asociarMedioDePago">
       <wsdl:input message="tns:asociarMedioDePago" name="asociarMedioDePago"></wsdl:input>
@@ -1258,6 +1399,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="findAllResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByNombreMedioDePago">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findByNombreMedioDePago">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByNombreMedioDePagoResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -1391,7 +1541,15 @@
          </medioDePago>\r
       </ser:desasociarMedioDePago>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/desasociarMedioDePago"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="8e0a7da1-a770-44f2-8efd-dac1cf00158c" wsaVersion="NONE" name="MovHistoricoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MovHistoricoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MovHistoricoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/desasociarMedioDePago"/></con:call></con:operation><con:operation id="a15219fd-518d-4646-be53-af10d20a1a3b" isOneWay="false" action="" name="findByNombreMedioDePago" bindingOperationName="findByNombreMedioDePago" type="Request-Response" outputName="findByNombreMedioDePagoResponse" inputName="findByNombreMedioDePago" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="83f7666c-88ee-4a0f-9441-c0d54e2daa5d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MedioDePagoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:findByNombreMedioDePago>\r
+         <!--Optional:-->\r
+         <nombreMP>?</nombreMP>\r
+      </ser:findByNombreMedioDePago>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MedioDePagoService/findByNombreMedioDePago"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="8e0a7da1-a770-44f2-8efd-dac1cf00158c" wsaVersion="NONE" name="MovHistoricoServiceSoapBinding" type="wsdl" bindingName="{http://services.soap.com/}MovHistoricoServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl"><con:part><con:url>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MovHistoricoService" targetNamespace="http://services.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://services.soap.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="create" type="tns:create"/>
@@ -1400,31 +1558,57 @@
       <xs:element name="deleteResponse" type="tns:deleteResponse"/>
       <xs:element name="devolucionConEfectivo" type="tns:devolucionConEfectivo"/>
       <xs:element name="devolucionConEfectivoResponse" type="tns:devolucionConEfectivoResponse"/>
+      <xs:element name="devolucionConEfectivoXId" type="tns:devolucionConEfectivoXId"/>
+      <xs:element name="devolucionConEfectivoXIdResponse" type="tns:devolucionConEfectivoXIdResponse"/>
       <xs:element name="devolucionConTajetaCredito" type="tns:devolucionConTajetaCredito"/>
       <xs:element name="devolucionConTajetaCreditoResponse" type="tns:devolucionConTajetaCreditoResponse"/>
+      <xs:element name="devolucionConTajetaCreditoXId" type="tns:devolucionConTajetaCreditoXId"/>
+      <xs:element name="devolucionConTajetaCreditoXIdResponse" type="tns:devolucionConTajetaCreditoXIdResponse"/>
       <xs:element name="devolucionConTajetaDebito" type="tns:devolucionConTajetaDebito"/>
       <xs:element name="devolucionConTajetaDebitoResponse" type="tns:devolucionConTajetaDebitoResponse"/>
+      <xs:element name="devolucionConTajetaDebitoXId" type="tns:devolucionConTajetaDebitoXId"/>
+      <xs:element name="devolucionConTajetaDebitoXIdResponse" type="tns:devolucionConTajetaDebitoXIdResponse"/>
       <xs:element name="findAll" type="tns:findAll"/>
       <xs:element name="findAllResponse" type="tns:findAllResponse"/>
       <xs:element name="findById" type="tns:findById"/>
       <xs:element name="findByIdResponse" type="tns:findByIdResponse"/>
-      <xs:element name="ntercambioEntreCuentas" type="tns:ntercambioEntreCuentas"/>
-      <xs:element name="ntercambioEntreCuentasResponse" type="tns:ntercambioEntreCuentasResponse"/>
+      <xs:element name="intercambioEntreCuentas" type="tns:intercambioEntreCuentas"/>
+      <xs:element name="intercambioEntreCuentasResponse" type="tns:intercambioEntreCuentasResponse"/>
+      <xs:element name="intercambioEntreCuentasXId" type="tns:intercambioEntreCuentasXId"/>
+      <xs:element name="intercambioEntreCuentasXIdResponse" type="tns:intercambioEntreCuentasXIdResponse"/>
       <xs:element name="pagarConEfectivo" type="tns:pagarConEfectivo"/>
       <xs:element name="pagarConEfectivoResponse" type="tns:pagarConEfectivoResponse"/>
+      <xs:element name="pagarConEfectivoXId" type="tns:pagarConEfectivoXId"/>
+      <xs:element name="pagarConEfectivoXIdResponse" type="tns:pagarConEfectivoXIdResponse"/>
       <xs:element name="pagarConTajetaCredito" type="tns:pagarConTajetaCredito"/>
       <xs:element name="pagarConTajetaCreditoResponse" type="tns:pagarConTajetaCreditoResponse"/>
+      <xs:element name="pagarConTajetaCreditoXId" type="tns:pagarConTajetaCreditoXId"/>
+      <xs:element name="pagarConTajetaCreditoXIdResponse" type="tns:pagarConTajetaCreditoXIdResponse"/>
       <xs:element name="pagarConTajetaDebito" type="tns:pagarConTajetaDebito"/>
       <xs:element name="pagarConTajetaDebitoResponse" type="tns:pagarConTajetaDebitoResponse"/>
+      <xs:element name="pagarConTajetaDebitoXId" type="tns:pagarConTajetaDebitoXId"/>
+      <xs:element name="pagarConTajetaDebitoXIdResponse" type="tns:pagarConTajetaDebitoXIdResponse"/>
       <xs:element name="update" type="tns:update"/>
       <xs:element name="updateResponse" type="tns:updateResponse"/>
-      <xs:complexType name="devolucionConTajetaCredito">
+      <xs:complexType name="pagarConTajetaCreditoXId">
         <xs:sequence>
           <xs:element name="monto" type="xs:double"/>
           <xs:element name="idUsuario" type="xs:int"/>
           <xs:element name="idCuentaBancaria" type="xs:int"/>
           <xs:element name="idMediosPago" type="xs:int"/>
           <xs:element name="idTarjeta" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pagarConTajetaCreditoXIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="devolucionConTajetaCredito">
+        <xs:sequence>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroTarjeta" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="devolucionConTajetaCreditoResponse">
@@ -1435,10 +1619,8 @@
       <xs:complexType name="pagarConTajetaCredito">
         <xs:sequence>
           <xs:element name="monto" type="xs:double"/>
-          <xs:element name="idUsuario" type="xs:int"/>
-          <xs:element name="idCuentaBancaria" type="xs:int"/>
-          <xs:element name="idMediosPago" type="xs:int"/>
-          <xs:element name="idTarjeta" type="xs:int"/>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroTarjeta" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="pagarConTajetaCreditoResponse">
@@ -1475,6 +1657,61 @@
           <xs:element name="signo" type="xs:int"/>
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="devolucionConTajetaCreditoXId">
+        <xs:sequence>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element name="idCuentaBancaria" type="xs:int"/>
+          <xs:element name="idMediosPago" type="xs:int"/>
+          <xs:element name="idTarjeta" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="devolucionConTajetaCreditoXIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="devolucionConTajetaDebitoXId">
+        <xs:sequence>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element name="idCuentaBancaria" type="xs:int"/>
+          <xs:element name="idMediosPago" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="devolucionConTajetaDebitoXIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="intercambioEntreCuentas">
+        <xs:sequence>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroCuentaBancariaAnterior" type="xs:string"/>
+          <xs:element minOccurs="0" name="nroCuentaBancariaNueva" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombreMediosPagoAnterior" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombreMediosPagoNueva" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="intercambioEntreCuentasResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pagarConEfectivoXId">
+        <xs:sequence>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="idUsuario" type="xs:int"/>
+          <xs:element name="idCuentaBancaria" type="xs:int"/>
+          <xs:element name="idMediosPago" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pagarConEfectivoXIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="update">
         <xs:sequence>
           <xs:element minOccurs="0" name="movHistorico" type="tns:movHistorico"/>
@@ -1485,17 +1722,15 @@
           <xs:element minOccurs="0" name="return" type="tns:movHistorico"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="ntercambioEntreCuentas">
+      <xs:complexType name="devolucionConEfectivoXId">
         <xs:sequence>
           <xs:element name="monto" type="xs:double"/>
           <xs:element name="idUsuario" type="xs:int"/>
-          <xs:element name="idCuentaBancariaAnterior" type="xs:int"/>
-          <xs:element name="idCuentaBancariaNueva" type="xs:int"/>
-          <xs:element name="idMediosPagoAnterior" type="xs:int"/>
-          <xs:element name="idMediosPagoNueva" type="xs:int"/>
+          <xs:element name="idCuentaBancaria" type="xs:int"/>
+          <xs:element name="idMediosPago" type="xs:int"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="ntercambioEntreCuentasResponse">
+      <xs:complexType name="devolucionConEfectivoXIdResponse">
         <xs:sequence>
           <xs:element minOccurs="0" name="return" type="xs:string"/>
         </xs:sequence>
@@ -1510,12 +1745,26 @@
           <xs:element minOccurs="0" name="return" type="tns:movHistorico"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="pagarConEfectivo">
+      <xs:complexType name="intercambioEntreCuentasXId">
         <xs:sequence>
           <xs:element name="monto" type="xs:double"/>
           <xs:element name="idUsuario" type="xs:int"/>
-          <xs:element name="idCuentaBancaria" type="xs:int"/>
-          <xs:element name="idMediosPago" type="xs:int"/>
+          <xs:element name="idCuentaBancariaAnterior" type="xs:int"/>
+          <xs:element name="idCuentaBancariaNueva" type="xs:int"/>
+          <xs:element name="idMediosPagoAnterior" type="xs:int"/>
+          <xs:element name="idMediosPagoNueva" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="intercambioEntreCuentasXIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pagarConEfectivo">
+        <xs:sequence>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroCuentaBancaria" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="pagarConEfectivoResponse">
@@ -1526,9 +1775,8 @@
       <xs:complexType name="devolucionConEfectivo">
         <xs:sequence>
           <xs:element name="monto" type="xs:double"/>
-          <xs:element name="idUsuario" type="xs:int"/>
-          <xs:element name="idCuentaBancaria" type="xs:int"/>
-          <xs:element name="idMediosPago" type="xs:int"/>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroCuentaBancaria" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="devolucionConEfectivoResponse">
@@ -1536,7 +1784,7 @@
           <xs:element minOccurs="0" name="return" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="devolucionConTajetaDebito">
+      <xs:complexType name="pagarConTajetaDebitoXId">
         <xs:sequence>
           <xs:element name="monto" type="xs:double"/>
           <xs:element name="idUsuario" type="xs:int"/>
@@ -1544,7 +1792,7 @@
           <xs:element name="idMediosPago" type="xs:int"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="devolucionConTajetaDebitoResponse">
+      <xs:complexType name="pagarConTajetaDebitoXIdResponse">
         <xs:sequence>
           <xs:element minOccurs="0" name="return" type="xs:string"/>
         </xs:sequence>
@@ -1559,12 +1807,23 @@
           <xs:element minOccurs="0" name="return" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="devolucionConTajetaDebito">
+        <xs:sequence>
+          <xs:element name="monto" type="xs:double"/>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroTarjeta" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="devolucionConTajetaDebitoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="pagarConTajetaDebito">
         <xs:sequence>
           <xs:element name="monto" type="xs:double"/>
-          <xs:element name="idUsuario" type="xs:int"/>
-          <xs:element name="idCuentaBancaria" type="xs:int"/>
-          <xs:element name="idMediosPago" type="xs:int"/>
+          <xs:element name="dni" type="xs:int"/>
+          <xs:element minOccurs="0" name="nroTarjeta" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="pagarConTajetaDebitoResponse">
@@ -1574,20 +1833,20 @@
       </xs:complexType>
     </xs:schema>
   </wsdl:types>
+  <wsdl:message name="pagarConTajetaCreditoXIdResponse">
+    <wsdl:part element="tns:pagarConTajetaCreditoXIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="devolucionConTajetaDebitoXIdResponse">
+    <wsdl:part element="tns:devolucionConTajetaDebitoXIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="devolucionConTajetaCredito">
     <wsdl:part element="tns:devolucionConTajetaCredito" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="pagarConTajetaCredito">
     <wsdl:part element="tns:pagarConTajetaCredito" name="parameters"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="delete">
-    <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findAll">
-    <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="ntercambioEntreCuentasResponse">
-    <wsdl:part element="tns:ntercambioEntreCuentasResponse" name="parameters"></wsdl:part>
+  <wsdl:message name="devolucionConTajetaCreditoXId">
+    <wsdl:part element="tns:devolucionConTajetaCreditoXId" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="devolucionConEfectivoResponse">
     <wsdl:part element="tns:devolucionConEfectivoResponse" name="parameters"></wsdl:part>
@@ -1595,32 +1854,26 @@
   <wsdl:message name="devolucionConTajetaDebitoResponse">
     <wsdl:part element="tns:devolucionConTajetaDebitoResponse" name="parameters"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="update">
-    <wsdl:part element="tns:update" name="parameters"></wsdl:part>
+  <wsdl:message name="intercambioEntreCuentas">
+    <wsdl:part element="tns:intercambioEntreCuentas" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="createResponse">
     <wsdl:part element="tns:createResponse" name="parameters"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="ntercambioEntreCuentas">
-    <wsdl:part element="tns:ntercambioEntreCuentas" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="findById">
-    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
-  </wsdl:message>
   <wsdl:message name="findByIdResponse">
     <wsdl:part element="tns:findByIdResponse" name="parameters"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="deleteResponse">
-    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="pagarConTajetaCreditoResponse">
-    <wsdl:part element="tns:pagarConTajetaCreditoResponse" name="parameters"></wsdl:part>
+  <wsdl:message name="intercambioEntreCuentasXId">
+    <wsdl:part element="tns:intercambioEntreCuentasXId" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="pagarConEfectivo">
     <wsdl:part element="tns:pagarConEfectivo" name="parameters"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="devolucionConEfectivo">
-    <wsdl:part element="tns:devolucionConEfectivo" name="parameters"></wsdl:part>
+  <wsdl:message name="intercambioEntreCuentasResponse">
+    <wsdl:part element="tns:intercambioEntreCuentasResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConTajetaDebitoXIdResponse">
+    <wsdl:part element="tns:pagarConTajetaDebitoXIdResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="updateResponse">
     <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
@@ -1628,25 +1881,77 @@
   <wsdl:message name="pagarConTajetaDebitoResponse">
     <wsdl:part element="tns:pagarConTajetaDebitoResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="pagarConTajetaDebitoXId">
+    <wsdl:part element="tns:pagarConTajetaDebitoXId" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="devolucionConTajetaCreditoXIdResponse">
+    <wsdl:part element="tns:devolucionConTajetaCreditoXIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConTajetaDebito">
+    <wsdl:part element="tns:pagarConTajetaDebito" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConEfectivoXIdResponse">
+    <wsdl:part element="tns:pagarConEfectivoXIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConTajetaCreditoXId">
+    <wsdl:part element="tns:pagarConTajetaCreditoXId" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAll">
+    <wsdl:part element="tns:findAll" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="intercambioEntreCuentasXIdResponse">
+    <wsdl:part element="tns:intercambioEntreCuentasXIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="devolucionConTajetaDebitoXId">
+    <wsdl:part element="tns:devolucionConTajetaDebitoXId" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConEfectivoXId">
+    <wsdl:part element="tns:pagarConEfectivoXId" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="update">
+    <wsdl:part element="tns:update" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="devolucionConEfectivoXId">
+    <wsdl:part element="tns:devolucionConEfectivoXId" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findById">
+    <wsdl:part element="tns:findById" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConTajetaCreditoResponse">
+    <wsdl:part element="tns:pagarConTajetaCreditoResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="devolucionConEfectivoXIdResponse">
+    <wsdl:part element="tns:devolucionConEfectivoXIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="devolucionConEfectivo">
+    <wsdl:part element="tns:devolucionConEfectivo" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="devolucionConTajetaCreditoResponse">
     <wsdl:part element="tns:devolucionConTajetaCreditoResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="findAllResponse">
     <wsdl:part element="tns:findAllResponse" name="parameters"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="devolucionConTajetaDebito">
-    <wsdl:part element="tns:devolucionConTajetaDebito" name="parameters"></wsdl:part>
-  </wsdl:message>
   <wsdl:message name="create">
     <wsdl:part element="tns:create" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="devolucionConTajetaDebito">
+    <wsdl:part element="tns:devolucionConTajetaDebito" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="pagarConEfectivoResponse">
     <wsdl:part element="tns:pagarConEfectivoResponse" name="parameters"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="pagarConTajetaDebito">
-    <wsdl:part element="tns:pagarConTajetaDebito" name="parameters"></wsdl:part>
-  </wsdl:message>
   <wsdl:portType name="MovHistoricoService">
+    <wsdl:operation name="pagarConTajetaCreditoXId">
+      <wsdl:input message="tns:pagarConTajetaCreditoXId" name="pagarConTajetaCreditoXId"></wsdl:input>
+      <wsdl:output message="tns:pagarConTajetaCreditoXIdResponse" name="pagarConTajetaCreditoXIdResponse"></wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="devolucionConTajetaCredito">
       <wsdl:input message="tns:devolucionConTajetaCredito" name="devolucionConTajetaCredito"></wsdl:input>
       <wsdl:output message="tns:devolucionConTajetaCreditoResponse" name="devolucionConTajetaCreditoResponse"></wsdl:output>
@@ -1663,17 +1968,37 @@
       <wsdl:input message="tns:findAll" name="findAll"></wsdl:input>
       <wsdl:output message="tns:findAllResponse" name="findAllResponse"></wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="devolucionConTajetaCreditoXId">
+      <wsdl:input message="tns:devolucionConTajetaCreditoXId" name="devolucionConTajetaCreditoXId"></wsdl:input>
+      <wsdl:output message="tns:devolucionConTajetaCreditoXIdResponse" name="devolucionConTajetaCreditoXIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucionConTajetaDebitoXId">
+      <wsdl:input message="tns:devolucionConTajetaDebitoXId" name="devolucionConTajetaDebitoXId"></wsdl:input>
+      <wsdl:output message="tns:devolucionConTajetaDebitoXIdResponse" name="devolucionConTajetaDebitoXIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="intercambioEntreCuentas">
+      <wsdl:input message="tns:intercambioEntreCuentas" name="intercambioEntreCuentas"></wsdl:input>
+      <wsdl:output message="tns:intercambioEntreCuentasResponse" name="intercambioEntreCuentasResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConEfectivoXId">
+      <wsdl:input message="tns:pagarConEfectivoXId" name="pagarConEfectivoXId"></wsdl:input>
+      <wsdl:output message="tns:pagarConEfectivoXIdResponse" name="pagarConEfectivoXIdResponse"></wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="update">
       <wsdl:input message="tns:update" name="update"></wsdl:input>
       <wsdl:output message="tns:updateResponse" name="updateResponse"></wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ntercambioEntreCuentas">
-      <wsdl:input message="tns:ntercambioEntreCuentas" name="ntercambioEntreCuentas"></wsdl:input>
-      <wsdl:output message="tns:ntercambioEntreCuentasResponse" name="ntercambioEntreCuentasResponse"></wsdl:output>
+    <wsdl:operation name="devolucionConEfectivoXId">
+      <wsdl:input message="tns:devolucionConEfectivoXId" name="devolucionConEfectivoXId"></wsdl:input>
+      <wsdl:output message="tns:devolucionConEfectivoXIdResponse" name="devolucionConEfectivoXIdResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="findById">
       <wsdl:input message="tns:findById" name="findById"></wsdl:input>
       <wsdl:output message="tns:findByIdResponse" name="findByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="intercambioEntreCuentasXId">
+      <wsdl:input message="tns:intercambioEntreCuentasXId" name="intercambioEntreCuentasXId"></wsdl:input>
+      <wsdl:output message="tns:intercambioEntreCuentasXIdResponse" name="intercambioEntreCuentasXIdResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="pagarConEfectivo">
       <wsdl:input message="tns:pagarConEfectivo" name="pagarConEfectivo"></wsdl:input>
@@ -1683,13 +2008,17 @@
       <wsdl:input message="tns:devolucionConEfectivo" name="devolucionConEfectivo"></wsdl:input>
       <wsdl:output message="tns:devolucionConEfectivoResponse" name="devolucionConEfectivoResponse"></wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="devolucionConTajetaDebito">
-      <wsdl:input message="tns:devolucionConTajetaDebito" name="devolucionConTajetaDebito"></wsdl:input>
-      <wsdl:output message="tns:devolucionConTajetaDebitoResponse" name="devolucionConTajetaDebitoResponse"></wsdl:output>
+    <wsdl:operation name="pagarConTajetaDebitoXId">
+      <wsdl:input message="tns:pagarConTajetaDebitoXId" name="pagarConTajetaDebitoXId"></wsdl:input>
+      <wsdl:output message="tns:pagarConTajetaDebitoXIdResponse" name="pagarConTajetaDebitoXIdResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="create">
       <wsdl:input message="tns:create" name="create"></wsdl:input>
       <wsdl:output message="tns:createResponse" name="createResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucionConTajetaDebito">
+      <wsdl:input message="tns:devolucionConTajetaDebito" name="devolucionConTajetaDebito"></wsdl:input>
+      <wsdl:output message="tns:devolucionConTajetaDebitoResponse" name="devolucionConTajetaDebitoResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="pagarConTajetaDebito">
       <wsdl:input message="tns:pagarConTajetaDebito" name="pagarConTajetaDebito"></wsdl:input>
@@ -1698,12 +2027,12 @@
   </wsdl:portType>
   <wsdl:binding name="MovHistoricoServiceSoapBinding" type="tns:MovHistoricoService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="pagarConTajetaCredito">
+    <wsdl:operation name="pagarConTajetaCreditoXId">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="pagarConTajetaCredito">
+      <wsdl:input name="pagarConTajetaCreditoXId">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="pagarConTajetaCreditoResponse">
+      <wsdl:output name="pagarConTajetaCreditoXIdResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -1713,6 +2042,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="devolucionConTajetaCreditoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConTajetaCredito">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="pagarConTajetaCredito">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="pagarConTajetaCreditoResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -1734,6 +2072,42 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="devolucionConTajetaCreditoXId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="devolucionConTajetaCreditoXId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="devolucionConTajetaCreditoXIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucionConTajetaDebitoXId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="devolucionConTajetaDebitoXId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="devolucionConTajetaDebitoXIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="intercambioEntreCuentas">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="intercambioEntreCuentas">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="intercambioEntreCuentasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConEfectivoXId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="pagarConEfectivoXId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="pagarConEfectivoXIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="update">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="update">
@@ -1743,12 +2117,12 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ntercambioEntreCuentas">
+    <wsdl:operation name="devolucionConEfectivoXId">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="ntercambioEntreCuentas">
+      <wsdl:input name="devolucionConEfectivoXId">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="ntercambioEntreCuentasResponse">
+      <wsdl:output name="devolucionConEfectivoXIdResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -1758,6 +2132,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="findByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="intercambioEntreCuentasXId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="intercambioEntreCuentasXId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="intercambioEntreCuentasXIdResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -1779,12 +2162,12 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="devolucionConTajetaDebito">
+    <wsdl:operation name="pagarConTajetaDebitoXId">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="devolucionConTajetaDebito">
+      <wsdl:input name="pagarConTajetaDebitoXId">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="devolucionConTajetaDebitoResponse">
+      <wsdl:output name="pagarConTajetaDebitoXIdResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -1794,6 +2177,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="createResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucionConTajetaDebito">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="devolucionConTajetaDebito">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="devolucionConTajetaDebitoResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -1879,19 +2271,7 @@
          <id>?</id>\r
       </ser:findById>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/findById"/></con:call></con:operation><con:operation id="95ba7181-b2c4-412d-b9c6-c63af70efb12" isOneWay="false" action="" name="ntercambioEntreCuentas" bindingOperationName="ntercambioEntreCuentas" type="Request-Response" outputName="ntercambioEntreCuentasResponse" inputName="ntercambioEntreCuentas" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c6703d82-aa9f-403e-b682-201ac6e83ca1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:ntercambioEntreCuentas>\r
-         <monto>250</monto>\r
-         <idUsuario>2</idUsuario>\r
-         <idCuentaBancariaAnterior>3</idCuentaBancariaAnterior>\r
-         <idCuentaBancariaNueva>4</idCuentaBancariaNueva>\r
-         <idMediosPagoAnterior>1</idMediosPagoAnterior>\r
-         <idMediosPagoNueva>1</idMediosPagoNueva>\r
-      </ser:ntercambioEntreCuentas>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/ntercambioEntreCuentas"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ea387b6b-0547-4707-af74-02a57d7ab586" isOneWay="false" action="" name="pagarConEfectivo" bindingOperationName="pagarConEfectivo" type="Request-Response" outputName="pagarConEfectivoResponse" inputName="pagarConEfectivo" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d4ca4a63-3c51-40ce-9d93-084c869b0f1e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/findById"/></con:call></con:operation><con:operation id="ea387b6b-0547-4707-af74-02a57d7ab586" isOneWay="false" action="" name="pagarConEfectivo" bindingOperationName="pagarConEfectivo" type="Request-Response" outputName="pagarConEfectivoResponse" inputName="pagarConEfectivo" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d4ca4a63-3c51-40ce-9d93-084c869b0f1e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:pagarConEfectivo>\r
@@ -1939,4 +2319,94 @@
          </movHistorico>\r
       </ser:update>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/update"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/update"/></con:call></con:operation><con:operation id="97ed7eac-047a-4e16-bae2-fda81b5edd21" isOneWay="false" action="" name="pagarConTajetaCreditoXId" bindingOperationName="pagarConTajetaCreditoXId" type="Request-Response" outputName="pagarConTajetaCreditoXIdResponse" inputName="pagarConTajetaCreditoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="22219e7f-5d0b-4f6f-a69e-728d6c4e5eff" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:pagarConTajetaCreditoXId>\r
+         <monto>?</monto>\r
+         <idUsuario>?</idUsuario>\r
+         <idCuentaBancaria>?</idCuentaBancaria>\r
+         <idMediosPago>?</idMediosPago>\r
+         <idTarjeta>?</idTarjeta>\r
+      </ser:pagarConTajetaCreditoXId>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConTajetaCreditoXId"/></con:call></con:operation><con:operation id="3fb6ccf3-1b5b-444c-aae2-637be25cdfa3" isOneWay="false" action="" name="devolucionConTajetaCreditoXId" bindingOperationName="devolucionConTajetaCreditoXId" type="Request-Response" outputName="devolucionConTajetaCreditoXIdResponse" inputName="devolucionConTajetaCreditoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0fe1e340-c40b-45cc-a60e-554c82f322e2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:devolucionConTajetaCreditoXId>\r
+         <monto>?</monto>\r
+         <idUsuario>?</idUsuario>\r
+         <idCuentaBancaria>?</idCuentaBancaria>\r
+         <idMediosPago>?</idMediosPago>\r
+         <idTarjeta>?</idTarjeta>\r
+      </ser:devolucionConTajetaCreditoXId>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConTajetaCreditoXId"/></con:call></con:operation><con:operation id="7b65e2fa-e49b-4ffc-9d07-e90d1f975cc9" isOneWay="false" action="" name="devolucionConTajetaDebitoXId" bindingOperationName="devolucionConTajetaDebitoXId" type="Request-Response" outputName="devolucionConTajetaDebitoXIdResponse" inputName="devolucionConTajetaDebitoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="696e0b36-f6f9-479b-a292-b354c93f558f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:devolucionConTajetaDebitoXId>\r
+         <monto>?</monto>\r
+         <idUsuario>?</idUsuario>\r
+         <idCuentaBancaria>?</idCuentaBancaria>\r
+         <idMediosPago>?</idMediosPago>\r
+      </ser:devolucionConTajetaDebitoXId>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConTajetaDebitoXId"/></con:call></con:operation><con:operation id="b0d187de-fbc3-4b46-9bdc-27fd6550494a" isOneWay="false" action="" name="intercambioEntreCuentas" bindingOperationName="intercambioEntreCuentas" type="Request-Response" outputName="intercambioEntreCuentasResponse" inputName="intercambioEntreCuentas" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4d7ce967-1f30-4cc4-9851-d682f49979c5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:intercambioEntreCuentas>\r
+         <monto>?</monto>\r
+         <dni>?</dni>\r
+         <!--Optional:-->\r
+         <nroCuentaBancariaAnterior>?</nroCuentaBancariaAnterior>\r
+         <!--Optional:-->\r
+         <nroCuentaBancariaNueva>?</nroCuentaBancariaNueva>\r
+         <!--Optional:-->\r
+         <nombreMediosPagoAnterior>?</nombreMediosPagoAnterior>\r
+         <!--Optional:-->\r
+         <nombreMediosPagoNueva>?</nombreMediosPagoNueva>\r
+      </ser:intercambioEntreCuentas>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/intercambioEntreCuentas"/></con:call></con:operation><con:operation id="ef824363-99e7-4534-b41c-e9b23ac4abb7" isOneWay="false" action="" name="pagarConEfectivoXId" bindingOperationName="pagarConEfectivoXId" type="Request-Response" outputName="pagarConEfectivoXIdResponse" inputName="pagarConEfectivoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8b8e3b1c-d504-46cd-83c1-12f20ce22bc7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:pagarConEfectivoXId>\r
+         <monto>?</monto>\r
+         <idUsuario>?</idUsuario>\r
+         <idCuentaBancaria>?</idCuentaBancaria>\r
+         <idMediosPago>?</idMediosPago>\r
+      </ser:pagarConEfectivoXId>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConEfectivoXId"/></con:call></con:operation><con:operation id="43e8aa1d-3f40-422c-bbef-cb6a52899169" isOneWay="false" action="" name="devolucionConEfectivoXId" bindingOperationName="devolucionConEfectivoXId" type="Request-Response" outputName="devolucionConEfectivoXIdResponse" inputName="devolucionConEfectivoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d6b5d33a-d659-487b-a831-6fd66a4fd787" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:devolucionConEfectivoXId>\r
+         <monto>?</monto>\r
+         <idUsuario>?</idUsuario>\r
+         <idCuentaBancaria>?</idCuentaBancaria>\r
+         <idMediosPago>?</idMediosPago>\r
+      </ser:devolucionConEfectivoXId>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/devolucionConEfectivoXId"/></con:call></con:operation><con:operation id="f1728764-8155-4b9e-9678-0da930aeebdf" isOneWay="false" action="" name="intercambioEntreCuentasXId" bindingOperationName="intercambioEntreCuentasXId" type="Request-Response" outputName="intercambioEntreCuentasXIdResponse" inputName="intercambioEntreCuentasXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="36994125-83c2-4c34-9a6d-84daa03f283b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:intercambioEntreCuentasXId>\r
+         <monto>?</monto>\r
+         <idUsuario>?</idUsuario>\r
+         <idCuentaBancariaAnterior>?</idCuentaBancariaAnterior>\r
+         <idCuentaBancariaNueva>?</idCuentaBancariaNueva>\r
+         <idMediosPagoAnterior>?</idMediosPagoAnterior>\r
+         <idMediosPagoNueva>?</idMediosPagoNueva>\r
+      </ser:intercambioEntreCuentasXId>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/intercambioEntreCuentasXId"/></con:call></con:operation><con:operation id="907d4e3f-a4a8-4664-b915-ef1256cc1d85" isOneWay="false" action="" name="pagarConTajetaDebitoXId" bindingOperationName="pagarConTajetaDebitoXId" type="Request-Response" outputName="pagarConTajetaDebitoXIdResponse" inputName="pagarConTajetaDebitoXId" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5db70c12-a8a7-411a-b378-aa4d31a86134" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/BancaSoap-0.0.1/MovHistoricoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.soap.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:pagarConTajetaDebitoXId>\r
+         <monto>?</monto>\r
+         <idUsuario>?</idUsuario>\r
+         <idCuentaBancaria>?</idCuentaBancaria>\r
+         <idMediosPago>?</idMediosPago>\r
+      </ser:pagarConTajetaDebitoXId>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.soap.com/MovHistoricoService/pagarConTajetaDebitoXId"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

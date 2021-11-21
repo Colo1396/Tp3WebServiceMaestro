@@ -237,7 +237,7 @@ public class MovHistoricoController extends Conexion {
 			MedioDePagoController medioDePagoController = new MedioDePagoController();
 			MedioDePago medioDePago = medioDePagoController.findByNombreMedioDePago("credito");
 
-			if ((tarjeta.getMontoUtilizado() - monto) <= tarjeta.getLimite() && (tarjeta.getSaldo() + monto) >= 0) {
+			if ((tarjeta.getMontoUtilizado() - monto) <= tarjeta.getLimite() && (tarjeta.getMontoUtilizado() - monto) >= 0 && (tarjeta.getSaldo() + monto) >= 0 && (tarjeta.getSaldo() + monto)<=tarjeta.getLimite()) {
 
 				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
 				String sql2 = "UPDATE tarjeta SET  montoUtilizado = (montoUtilizado - ?) , saldo = (saldo + ?) WHERE idTarjeta = ? and idCuentaBancaria= ? ; ";
@@ -336,7 +336,7 @@ public class MovHistoricoController extends Conexion {
 
 			Tarjeta tarjeta = tarjetaController.findById(idTarjeta);
 
-			if ((tarjeta.getMontoUtilizado() - monto) <= tarjeta.getLimite() && (tarjeta.getSaldo() + monto) >= 0) {
+			if ((tarjeta.getMontoUtilizado() - monto) <= tarjeta.getLimite() && (tarjeta.getMontoUtilizado() - monto) >= 0 && (tarjeta.getSaldo() + monto) >= 0 && (tarjeta.getSaldo() + monto)<=tarjeta.getLimite()) {
 
 				String sql = "INSERT INTO movHistorico (idTransaccion, fecha, signo, monto, idUsuario, idCuentaBancaria, idMediosPago) VALUES (null, now(), -1, ?, ?, ?, ?);";
 				String sql2 = "UPDATE tarjeta SET  montoUtilizado = (montoUtilizado - ?) , saldo = (saldo + ?) WHERE idTarjeta = ? and idCuentaBancaria= ? ; ";
