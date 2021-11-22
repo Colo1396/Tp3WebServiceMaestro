@@ -67,9 +67,12 @@ app.use(require('./src/controllers/probando'));
 app.use(require('./src/controllers/user'));
 //PRODUCTO
 app.use(require('./src/controllers/producto'));
-//USER
+//DOMICILIO
 app.use(require('./src/controllers/domicilio'));
+//TARJETA
 app.use(require('./src/controllers/tarjeta'));
+//CARRITO
+app.use(require('./src/controllers/carrito'));
 
 
 

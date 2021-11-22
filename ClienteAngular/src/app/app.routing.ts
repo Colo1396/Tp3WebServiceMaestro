@@ -12,6 +12,7 @@ import { UserEditComponent } from "./components/user-edit/user-edit.component";
 import { UserPerfilCompradorComponent } from "./components/user-perfil-comprador/user-perfil-comprador.component";
 import { DomicilioAddComponent } from "./components/domicilio-add/domicilio-add.component";
 import { TarjetaAddComponent } from "./components/tarjeta-add/tarjeta-add.component";
+import { ProductoShowComponent } from "./components/producto-show/producto-show.component";
 
 //Rutas
 const appRoutes: Routes = [
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
     { path: 'perfilComprador', component: UserPerfilCompradorComponent },
     { path: 'domicilio/new', component: DomicilioAddComponent },
     { path: 'tarjeta/new', component: TarjetaAddComponent },  
+    { path: 'producto/:productoId', component: ProductoShowComponent },  
     { path: '**', component: LoginComponent}
 ];
 

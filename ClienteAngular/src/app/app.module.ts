@@ -15,6 +15,8 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { UserPerfilCompradorComponent } from './components/user-perfil-comprador/user-perfil-comprador.component';
 import { DomicilioAddComponent } from './components/domicilio-add/domicilio-add.component';
 import { TarjetaAddComponent } from './components/tarjeta-add/tarjeta-add.component';
+import { ProductoShowComponent } from './components/producto-show/producto-show.component';
+import { ProductoListComponent } from './components/producto-list/producto-list.component';
 
 @NgModule({
   //componentes que representen algo en la vista
@@ -26,7 +28,9 @@ import { TarjetaAddComponent } from './components/tarjeta-add/tarjeta-add.compon
     UserEditComponent,
     UserPerfilCompradorComponent,
     DomicilioAddComponent,
-    TarjetaAddComponent
+    TarjetaAddComponent,
+    ProductoShowComponent,
+    ProductoListComponent
   ],
   //cargar los modulos dentro de la aplicación
   imports: [
