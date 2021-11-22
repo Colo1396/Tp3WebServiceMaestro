@@ -14,6 +14,14 @@ module.exports = (sequalize, type)=>{
             type: type.STRING,
             allowNull : false
         },
+        nombreTitular: {
+            type: type.STRING,
+            allowNull : false
+        },
+        dniTitular: {
+            type: type.INTEGER,
+            allowNull: false
+        },
         fechaVenc: {
             type: type.DATE,
             allowNull : false

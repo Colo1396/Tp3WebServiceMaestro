@@ -20,7 +20,8 @@ const cuentaBancariaModel = require('./models/CuentaBancaria');
     host : "localhost",
     port: "3306",
     dialect: "mysql"
-});*/
+});
+*/
 
 const sequelize = new Sequelize("bbglhfbpl88th3ne8zmg", "unyu1hkmsskogwus", "V96syZVkwK1AwOV0O3Wn" ,{
     host : "bbglhfbpl88th3ne8zmg-mysql.services.clever-cloud.com",
@@ -74,6 +75,22 @@ CategoriaModel.hasMany(ProductoModel, {
 ProductoModel.belongsTo(CategoriaModel, {
     foreignKey: 'idCategoria',
     as: 'categoria'
+});
+
+/*** relacion one to many de User (COMPRADOR) y Carrito **/
+UserModel.hasMany(CarritoModel, {
+    foreignKey: 'idComprador' , 
+    as: 'carrito'
+});
+CarritoModel.belongsTo(UserModel, {
+    foreignKey: 'idComprador',
+    as: 'comprador'
+});
+
+/*** relacion one to many de User (VENDEDOR) y Carrito **/
+CarritoModel.belongsTo(UserModel, {
+    foreignKey: 'idVendedor',
+    as: 'vendedor'
 });
 
 /*** relacion one to many de Producto y ProductoCarrito **/

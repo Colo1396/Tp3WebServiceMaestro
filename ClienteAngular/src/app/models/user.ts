@@ -6,6 +6,7 @@ export class User{
         public nombre: string,
         public apellido: string,
         public dni: string,
-        public rolId:string
+        public rolId:string,
+        public telefono:string
     ){}
 }
