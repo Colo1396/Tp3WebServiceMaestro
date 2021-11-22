@@ -1,6 +1,8 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from './services/user.service';
+import * as $ from 'jquery';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-root',

@@ -7,6 +7,5 @@ export class Domicilio{
         public numero: string,
         public pisoDepto: string,
         public idUser: any
-
     ){}
 }

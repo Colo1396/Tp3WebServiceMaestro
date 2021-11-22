@@ -9,6 +9,14 @@ module.exports = (sequalize, type)=>{
         total: {
             type: type.DOUBLE,
             allowNull : false
+        },
+        idComprador: {
+            type: type.INTEGER,
+            allowNull : false
+        },
+        idVendedor: {
+            type: type.INTEGER,
+            allowNull : false
         }
     });
 }

@@ -80,6 +80,22 @@ ProductoModel.belongsTo(CategoriaModel, {
     as: 'categoria'
 });
 
+/*** relacion one to many de User (COMPRADOR) y Carrito **/
+UserModel.hasMany(CarritoModel, {
+    foreignKey: 'idComprador' , 
+    as: 'carrito'
+});
+CarritoModel.belongsTo(UserModel, {
+    foreignKey: 'idComprador',
+    as: 'comprador'
+});
+
+/*** relacion one to many de User (VENDEDOR) y Carrito **/
+CarritoModel.belongsTo(UserModel, {
+    foreignKey: 'idVendedor',
+    as: 'vendedor'
+});
+
 /*** relacion one to many de Producto y ProductoCarrito **/
 ProductoModel.hasMany(ProductoCarritoModel, {
     foreignKey: 'idProducto' , 

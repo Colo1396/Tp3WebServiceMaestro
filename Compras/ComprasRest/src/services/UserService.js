@@ -43,10 +43,10 @@ class UserService {
         return  {user};    
     }
 
-    static async updateUser(idUser, username, nombre, apellido, dni){
+    static async updateUser(idUser, rolId, username, nombre, apellido, dni, telefono){
         var userActualizado = await UserModel.update(
             //{nombre: nombre, apellido: apellido},
-            {username: username, nombre: nombre, apellido: apellido, dni: dni},
+            {rolId: rolId, username: username, nombre: nombre, apellido: apellido, dni: dni, telefono: telefono},
             {where: {
                 id: idUser
             }},
