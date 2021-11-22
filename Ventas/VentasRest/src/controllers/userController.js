@@ -9,7 +9,8 @@ const register = async (req, res) => {
             apellido: req.body.apellido,
             password: req.body.password,
             dni: req.body.dni,
-            billetera: 0
+            billetera: 0,
+            rolId: req.body.rolId
         }
         const createdUser = await UserService.register(user);
         res.status(200).send(createdUser);

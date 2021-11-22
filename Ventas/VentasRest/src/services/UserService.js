@@ -1,12 +1,11 @@
 const Op = require('sequelize').Op;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const RolService = require('./RolService');
+const { RolService } = require('./RolService');
 const { UserModel, CuentaBancariaModel } = require('../connection');
 
 class UserService{
     static async register(user){
-        rolAllowed = false;
         const role = await RolService.getById(user.rolId);
         if(role.tipo !== 'vendedor'){
             throw new Error('El tipo de rol de usuario no es permitido');
@@ -38,8 +37,8 @@ class UserService{
         }
         
         const isValid = await bcrypt.compare(user.password, userExists.password);
-
-        if(userExists.rol !== 'vendedor'){
+        
+        if(userExists.rol.dataValues.tipo !== 'vendedor'){
             throw new Error('El tipo de rol de usuario no es permitido');
         }
 

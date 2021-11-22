@@ -1,4 +1,3 @@
-const Op = require('sequelize').Op;
 const {CategoriaModel} = require('../connection');
 
 class CategoriaService {
@@ -14,4 +13,4 @@ class CategoriaService {
     }
 }
 
-module.exports = CategoriaService;
+module.exports = {CategoriaService};

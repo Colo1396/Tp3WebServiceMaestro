@@ -187,8 +187,8 @@ ReclamoModel.belongsTo(CompraModel,{
 
 /**********PRODUCTO MEDIO DE PAGO **************/
 /* relacion many to many de Producto y MedioDePago */
-ProductoModel.belongsToMany(MedioDePagoModel, { through: 'producto_mediodepago'});
-MedioDePagoModel.belongsToMany(ProductoModel, { through: 'producto_mediodepago'});
+ProductoModel.belongsToMany(MedioDePagoModel, { through: 'producto_mediodepago', as: 'mediosDePago'});
+MedioDePagoModel.belongsToMany(ProductoModel, { through: 'producto_mediodepago', as: 'productos'});
 
 UserModel.hasMany(CuentaBancariaModel, {
     foreignKey: 'idVendedor',
@@ -209,8 +209,17 @@ sequelize.sync({ force: true})
 
 /** EXPORTO LOS OBJETOS PARA PODER USARLOS PARA LAS CONSULTAS */
 module.exports = {
+    MedioDePagoModel,
+    CuentaBancariaModel,
     UserModel,
     ProductoModel,
-    MedioDePagoModel,
-    CuentaBancariaModel
+    RolModel,
+    DenunciaModel,
+    ReclamoModel,
+    DomicilioModel,
+    TarjetaModel,
+    CompraModel,
+    CategoriaModel,
+    ProductoCarritoModel,
+    CarritoModel
 }

@@ -26,4 +26,4 @@ class RolService{
     }
 }
 
-module.exports = RolService;
+module.exports = {RolService};
