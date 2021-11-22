@@ -5,13 +5,16 @@ const { MedioDePagoService } = require('./MedioDePagoService');
 const path = require('path');
 
 class ProductoService{
-    static async getAll(idVendedor = null, sinStock = null){
+    static async getAll(idVendedor = null, sinStock = null, precioGte = null, precioLte = null, categoria = null){
         const productos = await ProductoModel.findAll({
             where: {
                 ...idVendedor ? {idVendedor: idVendedor} : {},
-                ...sinStock ? {} : { stock: { [Op.gt]: 0 } }
+                ...sinStock ? {} : { stock: { [Op.gt]: 0 } },
+                ...precioGte ? { precio: { [Op.gte]: precioGte } } : {},
+                ...precioLte ? { precio: { [Op.lte]: precioLte } } : {},
+                ...categoria ? { categoria: categoria } : {}
             },
-            include: ['mediosDePago']
+            include: ['mediosDePago', 'categoria'],
          });
         return productos;    
     }
@@ -21,7 +24,7 @@ class ProductoService{
             where: {
                 id: id
             },
-            include: ['mediosDePago']
+            include: ['mediosDePago', 'categoria']
         });
         return producto;    
     }

@@ -32,7 +32,8 @@ const postProducto = async (req, res) => {
             imagen: imagen,
             precio: req.body.precio,
             stock: req.body.stock,
-            mediosDePago: req.body.mediosDePago
+            mediosDePago: req.body.mediosDePago,
+            idCategoria: req.body.idCategoria
         }
         const createdProducto = await ProductoService.add(producto, req.user);
         res.status(200).send(createdProducto);    
