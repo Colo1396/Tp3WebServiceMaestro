@@ -1,4 +1,5 @@
 import { CuentaBancaria } from './cuentaBancaria';
+import { Rol } from './rol';
 
 export interface User{
     id: number;
@@ -11,4 +12,6 @@ export interface User{
     auth_token?: string;
     billetera?: number;
     cuentasBancarias?: CuentaBancaria[];
+    rol?: Rol;
+    rolId?: number;
 }

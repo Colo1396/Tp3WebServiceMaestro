@@ -30,6 +30,9 @@
                             <input type="number" class="form-control" id="inputStock" [(ngModel)]="producto.stock" name="stock" placeholder="0" required>
                         </div>
                     </div>
+                    <select class="form-select" [(ngModel)]="selectedCategoria" name="categoria">
+                        <option *ngFor="let ct of categorias" value="{{ct.id}}">{{ct.nombre}}</option>
+                    </select>
                     <p class="fs-5 mb-1 pt-3">Medios de pago</p>
                     <div class="btn-group" role="group">
                         <button class="btn btn-outline-primary" [ngClass]="{'active' : mp.selected}" *ngFor="let mp of producto.mediosDePago" (click)="selectMP(mp)">{{mp.nombre}}</button>

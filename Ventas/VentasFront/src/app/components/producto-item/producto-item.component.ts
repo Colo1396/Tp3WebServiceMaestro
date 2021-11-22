@@ -38,6 +38,8 @@ export class ProductoItemComponent implements OnInit {
 
   getMediosDePago(){
     this.medioDePagoService.getAll().subscribe(mps => {
+      console.log(mps);
+      console.log(this.producto);
       this.mediosDePago = mps;
       this.mediosDePago.forEach(mp => {
         if(this.producto.mediosDePago.some(mp2 => mp2.id == mp.id)){
