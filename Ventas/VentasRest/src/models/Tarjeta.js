@@ -1,38 +1,30 @@
 module.exports = (sequalize, type)=>{
-    return sequalize.define('user',{
+    return sequalize.define('tarjeta',{
         id: {
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull : false
         },
-        username: {
+        tipo: {
             type: type.STRING,
             allowNull : false
         },
-        nombre: {
+        numero: {
             type: type.STRING,
             allowNull : false
         },
-        apellido: {
-            type: type.STRING,
-            allowNull: false
+        fechaVenc: {
+            type: type.DATE,
+            allowNull : false
         },
-        password: {
+        codSeguridad: {
             type: type.STRING,
             allowNull : false
         },
-        dni: {
+        idUser: {
             type: type.INTEGER,
-            allowNull: false
-        },
-        telefono: {
-            type: type.INTEGER,
-            allowNull: true
-        },
-        billetera: {
-            type: type.DECIMAL,
-            allowNull: false
+            allowNull : false
         }
     });
 }
