@@ -9,7 +9,7 @@ class TarjetaService {
 
     static async getTarjetasByUser(idUser){
         var tarjetas = await TarjetaModel.findAll({
-            attributes: ['tipo', 'numero'],
+            attributes: ['tipo', 'numero', 'nombreTitular', 'dniTitular'],
             where : { idUser: idUser}
         });
         return  tarjetas;    

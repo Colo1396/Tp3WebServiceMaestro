@@ -27,5 +27,34 @@ router.get('/tarjetas/:userId', auth.authenticated, async(req, res) =>{
     });
 });
 
+router.post('/tarjeta/new', auth.authenticated, async(req, res) =>{
+
+    let params = req.body;
+    console.log(params);
+    try{
+        var datosTarjeta = {
+            tipo: params.tipo,
+            numero: params.numero,
+            nombreTitular: params.nombreTitular,
+            dniTitular: params.dniTitular,
+            fechaVenc: params.fechaVenc,
+            codSeguridad: params.codSeguridad,
+            idUser: params.idUser
+        }
+        const createdTarjeta = await TarjetaService.add(datosTarjeta);
+        //Devolver respuesta
+        console.log(createdTarjeta);
+        return res.status(200).send({
+            status: "success",
+            createdTarjeta
+        });
+    } catch(err){
+        return res.status(400).send({
+            status: "error",
+            message: err
+        });
+    }
+});
+
 
 module.exports = router;

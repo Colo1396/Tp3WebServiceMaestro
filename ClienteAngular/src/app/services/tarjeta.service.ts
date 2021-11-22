@@ -34,4 +34,13 @@ export class TarjetaService{
 
         return this._http.get(this.url+'tarjetas/'+userId, {headers: headers});
     }
+
+    //AGREGAR TARJETA
+    add(tarjeta): Observable<any>{
+        let params = JSON.stringify(tarjeta);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('Authorization', this.getToken());
+        console.log("antes de enviar");
+        return this._http.post(this.url+'tarjeta/new', params, {headers: headers});
+    }
 }

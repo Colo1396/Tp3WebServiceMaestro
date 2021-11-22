@@ -13,6 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { UserPerfilCompradorComponent } from './components/user-perfil-comprador/user-perfil-comprador.component';
+import { DomicilioAddComponent } from './components/domicilio-add/domicilio-add.component';
+import { TarjetaAddComponent } from './components/tarjeta-add/tarjeta-add.component';
 
 @NgModule({
   //componentes que representen algo en la vista
@@ -22,7 +24,9 @@ import { UserPerfilCompradorComponent } from './components/user-perfil-comprador
     LoginComponent,
     HomeComponent,
     UserEditComponent,
-    UserPerfilCompradorComponent
+    UserPerfilCompradorComponent,
+    DomicilioAddComponent,
+    TarjetaAddComponent
   ],
   //cargar los modulos dentro de la aplicación
   imports: [

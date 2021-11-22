@@ -1,0 +1,91 @@
+
+<main class="flex-shrink-0 py-4 mt-5">
+    <div class="container">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col-12 mx-auto">
+
+                    <div class="col-12 mt-5">
+                        <div class="col-md-8 mx-auto">
+                            <div class="alert alert-success mt-5" role="alert" *ngIf="status == 'success'">
+                                Domicilio creado exitosamente, puede verificarlo ingresando a su <a [routerLink]="['/perfilComprador']" class="alert-link">Perfil</a>.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <div class="col-md-4 mx-auto">
+                            <div class="alert alert-danger mt-5" role="alert" *ngIf="status == 'error'">
+                                El domicilio ingresado no se pudo agregar.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header bg-light">
+                            <h1 align="center" style="color: rgb(245, 152, 2);">Agregar domicilio</h1>
+                        </div>
+                        <div class="card-body">
+                            <form class="form" #newDomicilioForm="ngForm" (ngSubmit)="onSubmit(newDomicilioForm)">
+                                <div class="form-group row">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <!--Provincia-->
+                                            <div class="form-group col-md-6 my-2">
+                                                <label for="provincia">Provincia</label>
+                                                <input type="text" name="provincia" id="provincia" class="form-control" #provincia="ngModel" [(ngModel)]="domicilio.provincia" required pattern="[a-zA-ZÀ-ÿ]+">
+    
+                                                <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback d-block">
+                                                    Provincia inválida.
+                                                </small>
+                                            </div>
+                                            <!--Localidad-->
+                                            <div class="form-group col-md-6 my-2">
+                                                <label for="localidad">Localidad</label>
+                                                <input type="text" name="localidad" id="localidad" class="form-control" #localidad="ngModel" [(ngModel)]="domicilio.localidad" required pattern="[a-zA-ZÀ-ÿ]+">
+    
+                                                <small *ngIf="!localidad.valid && localidad.touched" class="invalid-feedback d-block">
+                                                    Localidad inválida.
+                                                </small>
+                                            </div>
+                                            <!--Calle-->
+                                            <div class="form-group col-md-6 my-2">
+                                                <label for="calle">Calle</label>
+                                                <input type="text" name="calle" id="calle" class="form-control" #calle="ngModel" [(ngModel)]="domicilio.calle" required pattern="[a-zA-ZÀ-ÿ-0-9]+">
+    
+                                                <small *ngIf="!calle.valid && calle.touched" class="invalid-feedback d-block">
+                                                    Calle inválida.
+                                                </small>
+                                            </div>
+                                            <!--Número-->
+                                            <div class="form-group col-md-6 my-2">
+                                                <label for="numero">Número</label>
+                                                <input type="text" name="numero" id="numero" class="form-control" #numero="ngModel" [(ngModel)]="domicilio.numero" required pattern="[0-9]+">
+    
+                                                <small *ngIf="!numero.valid && numero.touched" class="invalid-feedback d-block">
+                                                    Número inválido.
+                                                </small>
+                                            </div>
+                                            <!--Piso/Depto-->
+                                            <div class="form-group col-md-6 my-2">
+                                                <label for="pisoDepto">Piso y Depto (opcional</label>
+                                                <input type="text" name="pisoDepto" id="pisoDepto" class="form-control" #pisoDepto="ngModel" [(ngModel)]="domicilio.pisoDepto" pattern="[a-zA-ZÀ-ÿ]+">
+                                            </div>
+                                            <div align="center" class="row">
+                                                <div class="col-6">
+                                                    <a [routerLink]="['/perfilComprador']" id="btn_cancelar" class="btn btn-danger" style="text-decoration:none">Cancelar</a>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="submit" id="btn-newDomicilio" value="Guardar" class="btn btn-success" [disabled]="newDomicilioForm.invalid"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

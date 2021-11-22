@@ -69,6 +69,8 @@ app.use(require('./src/controllers/user'));
 app.use(require('./src/controllers/producto'));
 //USER
 app.use(require('./src/controllers/domicilio'));
+app.use(require('./src/controllers/tarjeta'));
+
 
 
 //Crear el servidor

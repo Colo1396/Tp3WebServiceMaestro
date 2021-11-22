@@ -90,4 +90,12 @@ export class UserService{
 
         return this._http.get(this.url+'user/'+userId, {headers: headers});
     }
+
+    add(domicilio): Observable<any>{
+        let params = JSON.stringify(domicilio);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('Authorization', this.getToken());
+        console.log("antes de enviar");
+        return this._http.post(this.url+'newDomicilio', params, {headers: headers});
+    }
 }

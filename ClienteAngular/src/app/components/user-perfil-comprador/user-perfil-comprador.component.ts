@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
@@ -14,7 +14,7 @@ import { globalCompras } from '../../services/global';
   styleUrls: ['./user-perfil-comprador.component.css'],
   providers: [UserService, DomicilioService, TarjetaService]
 })
-export class UserPerfilCompradorComponent implements OnInit {
+export class UserPerfilCompradorComponent implements OnInit, DoCheck{
 
   public user: User;
   public domicilios: Domicilio[];
@@ -30,7 +30,7 @@ export class UserPerfilCompradorComponent implements OnInit {
     private _userService:UserService,
     private _domicilioService:DomicilioService,
     private _tarjetaService:TarjetaService
-  ) { 
+  ){
       this.identity = this._userService.getIdentity();
       this.token = this._userService.getToken();
       this.user = JSON.parse(this.identity);
@@ -38,18 +38,13 @@ export class UserPerfilCompradorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    //this._route.params.subscribe(params => {
-      //var userId = params['id'];
-      //this.getUser(userId);
-      //this.getDomicilios(userId);
-     
-    
-    //});
-
     this.getUser(this.user.id);
     this.getDomicilios(this.user.id);
     this.getTarjetas(this.user.id);
+  }
+
+  //Para que se actualice el contenido sin tener que recargar la página
+  ngDoCheck(){
   }
 
   getUser(userId){
@@ -57,10 +52,6 @@ export class UserPerfilCompradorComponent implements OnInit {
       response =>{
         if(response.user){
           this.user = JSON.parse(response.user);
-          console.log(this.user);
-
-        }else{
-          //redireccion
         }
       },
       error => {
@@ -86,10 +77,9 @@ export class UserPerfilCompradorComponent implements OnInit {
   getTarjetas(userId){
     this._tarjetaService.getTarjetasByUser(userId).subscribe(
       response => {
-        if(response.domicilios){
-          this.domicilios = response.domicilios;
+        if(response.tarjetas){
+          this.tarjetas = response.tarjetas;
         }
-  
       },
       error => {
         console.log(error);
