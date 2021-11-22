@@ -4,6 +4,5 @@ export class ProductoCarrito{
         public cantidad: string,
         public idProducto: any,
         public idCarrito: any
-        //public idCarrito: any
     ){}
 }
