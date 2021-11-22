@@ -1,6 +1,3 @@
-const {Sequelize} = require('sequelize');
-const sequelize = require('../database/connection');
-
 module.exports = (sequalize, type)=>{
     return sequalize.define('domicilio',{
         id: {
@@ -27,7 +24,7 @@ module.exports = (sequalize, type)=>{
         },
         pisoDepto: {
             type: type.STRING,
-            allowNull : false
+            allowNull : true
         },
         idUser: {
             type: type.INTEGER,

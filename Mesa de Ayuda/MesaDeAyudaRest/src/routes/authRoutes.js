@@ -17,7 +17,7 @@ router.get('/register', isNotAuthenticated , async(req,res)=>{
 });
 router.post('/registerPost',[isNotAuthenticated,validarRegister] ,async (req,res) =>{
     try{
-        let {username,password,dni,nombre,apellido, rolId} = req.body;
+        let {username,password,dni,nombre,apellido, rolId, telefono} = req.body;
         if(rolId === undefined) rolId = 1; //por defecto si no se le asigna un rol, tendra por defecto el rol "comprador"
         const user =await UserService.register({
             rolId,
@@ -25,7 +25,8 @@ router.post('/registerPost',[isNotAuthenticated,validarRegister] ,async (req,res
             password,
             dni,
             nombre,
-            apellido
+            apellido,
+            telefono
         });
         return res.status(200).json({
             user

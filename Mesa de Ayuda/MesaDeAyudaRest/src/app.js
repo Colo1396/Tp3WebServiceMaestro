@@ -9,26 +9,25 @@ const cookieParser = require('cookie-parser');
 
 //INITIALIZATE
 const app = express();
-require('./middlewares/authenticate');
 
 //SETTINGS---------------------------------------------
 dotenv.config({path: __dirname + '/.env.local'});
-app.set('json spaces', 2);
-app.set('view engine', 'hbs');
-app.set('views', './src/views');
+//app.set('json spaces', 2);
+//app.set('view engine', 'hbs');
+//app.set('views', './src/views');
 
 //MIDDLEWARES
 app.use(express.urlencoded({extended:false}))//para q cuando envien un POST desde un form lo entienda
 app.use(express.json()); //enteder los datos json
 app.use(morgan('dev')); //mostar por consola lo que va llegando
 app.use(cors());//para q permita q cualquier servidor pida cosas y haga operaciones
-app.use(express.static(path.join(__dirname, './views/static')));
 app.use(cookieParser());
+
+//app.use(express.static(path.join(__dirname, './views/static')));
 
 
 //ROUTES------------------------------------------------
 app.use(require('./routes/authRoutes'));
-app.use("/productos/",require('./routes/productsRoutes'));
 app.use("/denuncias/",require('./routes/denunciasRoutes'));
 app.use("/reclamos/",require('./routes/reclamosRoutes'));
 

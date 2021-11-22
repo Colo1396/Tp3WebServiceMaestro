@@ -1,9 +1,7 @@
 const {Sequelize} = require('sequelize');
-const sequelize = require('../database/connection');
 
 module.exports = (sequelize, type) =>{
-    
-    return sequelize.define('user', {
+    return sequelize.define('usuario', {
         id: {
             type: type.INTEGER,
             primaryKey: true,
@@ -33,9 +31,15 @@ module.exports = (sequelize, type) =>{
         dni: {
             type: type.INTEGER,
             allowNull: false
+        },
+        telefono: {
+            type: type.INTEGER,
+            allowNull: true
+        },
+        billetera: {
+            type: type.DECIMAL,
+            allowNull: false,
+            defaultValue: 0
         }
     });
-
 }
-
-

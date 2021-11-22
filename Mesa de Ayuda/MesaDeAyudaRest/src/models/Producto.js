@@ -1,43 +1,42 @@
-const {Sequelize} = require('sequelize');
-const sequelize = require('../database/connection');
-
-
-module.exports = (sequelize, type) =>{
-    return sequelize.define('producto', {
+module.exports = (sequalize, type)=>{
+    return sequalize.define('producto',{
         id: {
             type: type.INTEGER,
-            allowNull : false,
             primaryKey: true,
-            autoIncrement: true
-        }, 
+            autoIncrement: true,
+            allowNull : false
+        },
         nombre: {
             type: type.STRING,
-            allowNull: false
+            allowNull : false
         },
         descripcion: {
             type: type.STRING,
-            allowNull: false
+            allowNull : false
         },
         imagen: {
             type: type.STRING,
-            allowNull: false
+            allowNull : false
         },
         precio: {
-            type: type.DECIMAL(10,2),
-            allowNull: false
+            type: type.DOUBLE,
+            allowNull : false
         },
         stock: {
             type: type.INTEGER,
-            allowNull: false
+            allowNull : false
         },
-        idVendedor:{
-            type: type.INTEGER,
-            allowNull: false
+        formaDePago: {
+            type: type.STRING,
+            allowNull : false
         },
-        cantidadVentas: {
+        idUser: {
             type: type.INTEGER,
-            allowNull: false
+            allowNull : false
+        },
+        idCategoria: {
+            type: type.INTEGER,
+            allowNull : false
         }
     });
-     
 }

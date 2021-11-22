@@ -1,9 +1,6 @@
-const {Sequelize} = require('sequelize');
-const sequelize = require('../database/connection');
-
 module.exports = (sequelize, type) =>{
     return sequelize.define(
-        'Rol',{
+        'rol',{
             id: {
                 type: type.INTEGER,
                 primaryKey: true,
@@ -16,5 +13,4 @@ module.exports = (sequelize, type) =>{
             }
     });
 } 
-
 

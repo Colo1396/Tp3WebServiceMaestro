@@ -6,7 +6,7 @@
     },
     "servers": [
       {
-        "url": "http://localhost:8080",
+        "url": "http://localhost:8082",
         "description": "Servidor local"
       }
     ],
@@ -74,7 +74,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "type": "object",
+                  "properties": {
+                    "username":{
+                      "type": "string",
+                      "description": "Nombre para la cuenta del usuario"
+                    },
+                    "password":{
+                      "type": "string",
+                      "description": "Contraseña elegida por el usuario para su cuenta"
+                    },
+                    "rolId":{
+                      "type": "integer",
+                      "description": "Rol elegido para la cuenta del usuario (Comprador, Vendedor)"
+                    },
+                    "nombre":{
+                      "type": "string",
+                      "description": "Nombre del usuario"
+                    },
+                    "apellido":{
+                      "type": "string",
+                      "description": "Apellido del usuario"
+                    },
+                    "dni":{
+                      "type": "integer",
+                      "description": "DNI del usuario"
+                    },
+                    "telefono":{
+                      "type": "integer",
+                      "description": "Telefono del usuario"
+                    }
+                  }
                 }
               }
             }
@@ -93,6 +123,7 @@
           }
         }
       },
+      /*
       "/logout": {
         "post": {
           "tags": [
@@ -130,6 +161,7 @@
           }
         }
       },
+      */
       "/denuncias/nuevaPost": {
         "post": {
           "tags": [
@@ -589,6 +621,18 @@
             "dni": {
               "type": "integer",
               "description": "El DNI del usuario"
+            },
+            "telefono": {
+              "type": "integer",
+              "description": "El telefono del usuario"
+            },
+            "billetera": {
+              "type": "integer",
+              "description": "La cuenta del usuario"
+            },
+            "rol":{
+              "type": "object",
+              "$ref": "#/components/schemas/Rol"
             }
           }
         },
@@ -631,6 +675,19 @@
             "compraId": {
               "type": "integer",
               "description": "El id de la compra a la cual se le realizo un reclamo"
+            }
+          }
+        },
+        "Rol": {
+          "type": "object",
+          "properties": {
+            "id":{
+              "type": "integer",
+              "description": "El ID autogenerado por MySQL"
+            },
+            "tipo":{
+              "type": "string",
+              "description": "El tipo de rol asignado a cada usuario"
             }
           }
         }

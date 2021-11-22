@@ -1,6 +1,3 @@
-const {Sequelize} = require('sequelize');
-const sequelize = require('../database/connection');
-
 module.exports = (sequalize, type)=>{
     return sequalize.define('productoCarrito',{
         id: {

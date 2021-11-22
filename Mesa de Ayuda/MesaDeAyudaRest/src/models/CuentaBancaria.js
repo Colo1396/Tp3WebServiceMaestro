@@ -1,14 +1,18 @@
 module.exports = (sequalize, type)=>{
-    return sequalize.define('categoria',{
+    return sequalize.define('cuentaBancaria',{
         id: {
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull : false
         },
-        nombre: {
+        nroCuenta: {
             type: type.STRING,
-            allowNull : false
+            allowNull: false
+        },
+        idVendedor: {
+            type: type.INTEGER,
+            allowNull: false
         }
     });
 }
