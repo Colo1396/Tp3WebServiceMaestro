@@ -32,7 +32,7 @@
                                             <!--Provincia-->
                                             <div class="form-group col-md-6 my-2">
                                                 <label for="provincia">Provincia</label>
-                                                <input type="text" name="provincia" id="provincia" class="form-control" #provincia="ngModel" [(ngModel)]="domicilio.provincia" required pattern="[a-zA-ZÀ-ÿ]+">
+                                                <input type="text" name="provincia" id="provincia" class="form-control" #provincia="ngModel" [(ngModel)]="domicilio.provincia" required pattern="[a-zA-ZÀ-ÿ ]+">
     
                                                 <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback d-block">
                                                     Provincia inválida.
@@ -41,7 +41,7 @@
                                             <!--Localidad-->
                                             <div class="form-group col-md-6 my-2">
                                                 <label for="localidad">Localidad</label>
-                                                <input type="text" name="localidad" id="localidad" class="form-control" #localidad="ngModel" [(ngModel)]="domicilio.localidad" required pattern="[a-zA-ZÀ-ÿ]+">
+                                                <input type="text" name="localidad" id="localidad" class="form-control" #localidad="ngModel" [(ngModel)]="domicilio.localidad" required pattern="[a-zA-ZÀ-ÿ ]+">
     
                                                 <small *ngIf="!localidad.valid && localidad.touched" class="invalid-feedback d-block">
                                                     Localidad inválida.
@@ -50,7 +50,7 @@
                                             <!--Calle-->
                                             <div class="form-group col-md-6 my-2">
                                                 <label for="calle">Calle</label>
-                                                <input type="text" name="calle" id="calle" class="form-control" #calle="ngModel" [(ngModel)]="domicilio.calle" required pattern="[a-zA-ZÀ-ÿ-0-9]+">
+                                                <input type="text" name="calle" id="calle" class="form-control" #calle="ngModel" [(ngModel)]="domicilio.calle" required pattern="[a-zA-ZÀ-ÿ-0-9 ]+">
     
                                                 <small *ngIf="!calle.valid && calle.touched" class="invalid-feedback d-block">
                                                     Calle inválida.
@@ -68,7 +68,7 @@
                                             <!--Piso/Depto-->
                                             <div class="form-group col-md-6 my-2">
                                                 <label for="pisoDepto">Piso y Depto (opcional</label>
-                                                <input type="text" name="pisoDepto" id="pisoDepto" class="form-control" #pisoDepto="ngModel" [(ngModel)]="domicilio.pisoDepto" pattern="[a-zA-ZÀ-ÿ]+">
+                                                <input type="text" name="pisoDepto" id="pisoDepto" class="form-control" #pisoDepto="ngModel" [(ngModel)]="domicilio.pisoDepto" pattern="[a-zA-ZÀ-ÿ ]+">
                                             </div>
                                             <div align="center" class="row">
                                                 <div class="col-6">
