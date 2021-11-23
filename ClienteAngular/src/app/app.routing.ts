@@ -19,6 +19,7 @@ import { CompraPagoComponent } from './components/compra-pago/compra-pago.compon
 import { CompraConfirmacionComponent } from './components/compra-confirmacion/compra-confirmacion.component';
 import { CompraListComponent } from './components/compra-list/compra-list.component';
 import { CompraShowComponent } from './components/compra-show/compra-show.component';
+import { ProductoListComponent } from './components/producto-list/producto-list.component';
 
 //Rutas
 const appRoutes: Routes = [
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
     { path: 'editUserComprador', component: UserEditComponent }, 
     { path: 'perfilComprador', component: UserPerfilCompradorComponent },
     { path: 'domicilio/new', component: DomicilioAddComponent },
-    { path: 'tarjeta/new', component: TarjetaAddComponent },  
+    { path: 'tarjeta/new', component: TarjetaAddComponent },
+    { path: 'productos', component: ProductoListComponent },  
     { path: 'producto/:productoId', component: ProductoShowComponent },
     { path: 'carrito', component: CarritoListComponent },
     { path: 'carrito/:carritoId', component: CarritoShowComponent },
@@ -37,6 +39,7 @@ const appRoutes: Routes = [
     { path: 'compra/confirmacion/:compraId', component: CompraConfirmacionComponent },
     { path: 'compras', component: CompraListComponent },
     { path: 'compra/:compraId', component: CompraShowComponent },
+    { path: 'productos', component: ProductoListComponent },
     { path: '**', component: LoginComponent}
 ];
 

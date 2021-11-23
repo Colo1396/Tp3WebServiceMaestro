@@ -11,21 +11,24 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                   <li class="nav-item"><a class="nav-link active" aria-current="page" [routerLink]="['/']">Inicio</a></li>
+                <!--
                   <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Compra</a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="#!">Todos los productos</a></li>
+                          <li><a class="dropdown-item" [routerLink]="['/productos']">Todos los productos</a></li>
                           <li><hr class="dropdown-divider" /></li>
                           <li><a class="dropdown-item" href="#!">Productos populares</a></li>
                           <li><a class="dropdown-item" href="#!">Nuevos productos</a></li>
                       </ul>
                   </li>
+                -->
+                  <li class="nav-item"><a class="nav-link" [routerLink]="['/productos']">Productos</a></li>
                   <li class="nav-item"><a class="nav-link" href="#!">Venta</a></li>
                   <li class="nav-item"><a class="nav-link" href="#!">Ayuda</a></li>
                   <li class="nav-item">
                     <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
+                      <input class="form-control me-2" type="search" placeholder="Buscar producto" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
                   </li>
               </ul>
@@ -41,7 +44,9 @@
                 <a class="btn btn-outline-dark" type="submit" *ngIf ="identity" [routerLink]="['/carrito']">
                     <i class="fas fa-shopping-cart me-1"></i>
                     Carrito
+                    <!--
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    -->
                 </a>
                 <ul class="navbar-nav ml-auto ml-md-0" *ngIf="identity">
 
@@ -55,7 +60,7 @@
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li><a class="dropdown-item" [routerLink]="['/perfilComprador']">Perfil</a></li>
-                          <li><a class="dropdown-item" [routerLink]="['/editUserComprador']">Ajustes</a></li>
+                          <li><a class="dropdown-item" [routerLink]="['/editUserComprador']">Editar perfil</a></li>
                           <li><a class="dropdown-item" [routerLink]="['/compras']">Compras</a></li>
                           <li><hr class="dropdown-divider" /></li>
                           <li><a class="dropdown-item pointer" (click)="logout()">Cerrar sesión</a></li>
