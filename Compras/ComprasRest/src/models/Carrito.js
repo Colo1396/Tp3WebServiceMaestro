@@ -22,6 +22,5 @@ module.exports = (sequalize, type)=>{
             type: type.INTEGER,
             allowNull : true
         }
-        //VER SI AGREGO ID COMPRA
     });
 }

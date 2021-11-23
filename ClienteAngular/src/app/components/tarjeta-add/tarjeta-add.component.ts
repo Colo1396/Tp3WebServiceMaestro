@@ -41,11 +41,9 @@ export class TarjetaAddComponent implements OnInit {
     console.log(this.tarjeta);
     this._tarjetaService.add(this.tarjeta).subscribe(
       response => {
-        console.log(response);
         if(response.createdTarjeta && response.createdTarjeta.id){
           this.status = 'success';
           $(document).ready(function(){
-            console.log("entro");
             $('.form').trigger("reset");
           });
         }else{

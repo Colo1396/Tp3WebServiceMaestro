@@ -46,7 +46,6 @@ export class DomicilioAddComponent implements OnInit {
         if(response.createdDomicilio && response.createdDomicilio.id){
           this.status = 'success';
           $(document).ready(function(){
-            console.log("entro");
             $('.form').trigger("reset");
           });
         }else{

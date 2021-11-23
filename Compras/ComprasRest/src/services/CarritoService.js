@@ -32,7 +32,6 @@ class CarritoService {
             where : { idComprador: idUser}
         });
         return  carritos;    
-        //return {domicilios};
     }
 
     static async getCarritosByUserSinAsociarEnCompra(idUser){
@@ -48,7 +47,6 @@ class CarritoService {
             }
         });
         return  carritos;    
-        //return {domicilios};
     }
 
     static async getCarritoByPk(idCarrito){
@@ -56,10 +54,7 @@ class CarritoService {
             where : { id: idCarrito},
             include: ['productosCarrito', 'vendedor']
         });
-        //var carrito = await CarritoModel.findByPk(idCarrito);
-
         return  carrito;    
-        //return {domicilios};
     }
     
     static async update(carrito){
@@ -79,9 +74,7 @@ class CarritoService {
 
     static async getById(idCarrito){
         var carrito = await CarritoModel.findByPk(idCarrito);
-
         return  carrito;    
-        //return {domicilios};
     }
 
 

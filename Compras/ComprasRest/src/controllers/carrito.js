@@ -15,7 +15,6 @@ const { CompraService } = require('../services/CompraService');
 
 router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
     let params = req.body;
-    console.log("llego");
 
     try{
         //Busco el producto para obtener su vendedor
@@ -27,25 +26,17 @@ router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
                 idVendedor: producto.idUser, 
                 idCompra: null
             }
-            console.log(datosNuevoCarrito);
 
             //Busco si existe un carrito de ese vendedor
             var carritoExistente = await CarritoService.getCarritoByVendedoryComprador(producto.idUser, params.idUser);
-            console.log(carritoExistente);
-
-            console.log("1r");
-            console.log(carritoExistente);
 
             //Creo un carrito, si no hay un carrito asociado a ese vendedor
             if(carritoExistente == null){
                 carritoExistente = await CarritoService.add(datosNuevoCarrito);
             }
-            console.log("2r");
-
     
             //Busco si ya está ese producto en el carrito
             const productoCarritoExistente = await ProductoCarritoService.getProductoCarritoByVendedoryComprador(carritoExistente.id, params.idProducto);
-            console.log("PRODUCTO EXISTENTE");
             var total = 0;
             if(productoCarritoExistente == null){
                 var datosProductoCarrito = {
@@ -55,7 +46,6 @@ router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
                 }
                 var nuevoProductoCarrito = await ProductoCarritoService.add(datosProductoCarrito);
                 total = carritoExistente.total + (nuevoProductoCarrito.cantidad * producto.precio);
-                console.log("despues del add");
             }else{
                 productoCarritoExistente.cantidad += parseInt(params.cantidad);
                 productoCarrito = await ProductoCarritoService.update(productoCarritoExistente);
@@ -86,7 +76,6 @@ router.get('/carritos/:userId', auth.authenticated, async(req, res) =>{
     var userId = req.params.userId;
     var carritos = await CarritoService.getCarritosByUserSinAsociarEnCompra(userId);
 
-    console.log(carritos);
     if(carritos == null){
         return res.status(400).send({
             status: "error",
