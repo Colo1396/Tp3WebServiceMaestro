@@ -10,10 +10,13 @@ const {ProductoService} = require('../services/ProductoService');
 const {ProductoCarritoService} = require('../services/ProductoCarritoService');
 const {UserService} = require('../services/UserService');
 const ProductoCarrito = require('../models/ProductoCarrito');
+const { CompraService } = require('../services/CompraService');
 
 
 router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
     let params = req.body;
+    console.log("llego");
+
     try{
         //Busco el producto para obtener su vendedor
         var producto = await ProductoService.getById(params.idProducto);
@@ -22,17 +25,27 @@ router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
                 total: 0,
                 idComprador: params.idUser,
                 idVendedor: producto.idUser, 
+                idCompra: null
             }
+            console.log(datosNuevoCarrito);
+
             //Busco si existe un carrito de ese vendedor
             var carritoExistente = await CarritoService.getCarritoByVendedoryComprador(producto.idUser, params.idUser);
-    
+            console.log(carritoExistente);
+
+            console.log("1r");
+            console.log(carritoExistente);
+
             //Creo un carrito, si no hay un carrito asociado a ese vendedor
             if(carritoExistente == null){
                 carritoExistente = await CarritoService.add(datosNuevoCarrito);
             }
+            console.log("2r");
+
     
             //Busco si ya está ese producto en el carrito
             const productoCarritoExistente = await ProductoCarritoService.getProductoCarritoByVendedoryComprador(carritoExistente.id, params.idProducto);
+            console.log("PRODUCTO EXISTENTE");
             var total = 0;
             if(productoCarritoExistente == null){
                 var datosProductoCarrito = {
@@ -42,6 +55,7 @@ router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
                 }
                 var nuevoProductoCarrito = await ProductoCarritoService.add(datosProductoCarrito);
                 total = carritoExistente.total + (nuevoProductoCarrito.cantidad * producto.precio);
+                console.log("despues del add");
             }else{
                 productoCarritoExistente.cantidad += parseInt(params.cantidad);
                 productoCarrito = await ProductoCarritoService.update(productoCarritoExistente);
@@ -70,7 +84,7 @@ router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
 router.get('/carritos/:userId', auth.authenticated, async(req, res) =>{
 
     var userId = req.params.userId;
-    var carritos = await CarritoService.getCarritosByUser(userId);
+    var carritos = await CarritoService.getCarritosByUserSinAsociarEnCompra(userId);
 
     console.log(carritos);
     if(carritos == null){

@@ -35,6 +35,22 @@ class CarritoService {
         //return {domicilios};
     }
 
+    static async getCarritosByUserSinAsociarEnCompra(idUser){
+        var carritos = await CarritoModel.findAll({
+            attributes: ['id', 'idVendedor'],
+            where:{
+                [Op.and]: [ 
+                    {idComprador: idUser }, 
+                    { idCompra: {
+                    [Op.eq]: null
+                        }
+                    }],
+            }
+        });
+        return  carritos;    
+        //return {domicilios};
+    }
+
     static async getCarritoByPk(idCarrito){
         var carrito = await CarritoModel.findAll({
             where : { id: idCarrito},
@@ -47,12 +63,16 @@ class CarritoService {
     }
     
     static async update(carrito){
+        console.log("dentro de update");
+        console.log(carrito);
         var carritoActualizado = await CarritoModel.update(
-            {total: carrito.total, idComprador: carrito.idComprador, idVendedor: carrito.idVendedor},
+            {total: carrito.total, idComprador: carrito.idComprador, idVendedor: carrito.idVendedor, idCompra: carrito.idCompra},
             {where: {
                 id: carrito.id
             }},
         );
+        console.log(carritoActualizado);
+
         return carritoActualizado;
     }
 

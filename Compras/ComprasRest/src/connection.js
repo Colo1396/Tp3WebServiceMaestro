@@ -141,6 +141,11 @@ CompraModel.belongsTo(CarritoModel, {
     as: 'carrito'
 });
 
+CarritoModel.belongsTo(CarritoModel, {
+    foreignKey: 'idCompra',
+    as: 'compra'
+});
+
 /*** relacion one to one entre Compra y Tarjeta (como medioDePago) **/
 CompraModel.belongsTo(TarjetaModel, {
     foreignKey: 'idMedioDePago',
