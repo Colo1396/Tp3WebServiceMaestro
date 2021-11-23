@@ -32,7 +32,6 @@ router.post('/register', validarRegister, async(req, res) =>{
         
         //Compruebo si el usuario existe
         var userExistente = await UserService.getUserByDniyUsername(params.dni, params.username);
-        console.log(userExistente);
         //Si no existe,
         //if(!userExistente){
         if(userExistente.user == null){
@@ -122,18 +121,16 @@ router.post('/login', async(req, res) =>{
     }
 });
 
-router.put('/updateUser', auth.authenticated, async(req, res) =>{
-    
+router.put('/user/edit', auth.authenticated, async(req, res) =>{
     //Obtener datos del usuario
     var params = req.body;
-
-    
     try{
         //Validacion datos
         var validate_nombre = !validator.isEmpty(params.nombre);
         var validate_apellido = !validator.isEmpty(params.apellido);
         var validate_username = !validator.isEmpty(params.username);
-        var validate_dni = !validator.isEmpty(params.dni);
+        var validate_dni = !validator.isEmpty(params.dni.toString());
+        var validate_telefono = !validator.isEmpty(params.telefono);
     }catch(er){
         return res.status(200).send({
             message: "Faltan datos por enviar.", 
@@ -151,7 +148,7 @@ router.put('/updateUser', auth.authenticated, async(req, res) =>{
     var usernameExistente = await UserService.getByUsername(params.username);
     console.log(usernameExistente);
     
-    if(usernameExistente.user){
+    if(usernameExistente.user.id != userId){
         return res.status(200).send({
             message: "El username no puede ser modificado porque ya está en uso."
         });
@@ -161,7 +158,7 @@ router.put('/updateUser', auth.authenticated, async(req, res) =>{
     var dniExistente = await UserService.getByDni(params.dni);
     console.log(dniExistente);
     
-    if(dniExistente.user){
+    if(dniExistente.user.id != userId){
         return res.status(200).send({
             message: "El dni no puede ser modificado porque ya está en uso."
         });
@@ -170,7 +167,7 @@ router.put('/updateUser', auth.authenticated, async(req, res) =>{
     try{
         //SOLO PERMITIA MODIFICAR NOMBRE, APELLIDO
         //var userActualizado = await UserService.updateUser(userId, params.nombre, params.apellido);
-        var userActualizado = await UserService.updateUser(userId, params.username, params.nombre, params.apellido, params.dni);
+        var userActualizado = await UserService.updateUser(userId, params.rolId, params.username, params.nombre, params.apellido, params.dni, params.telefono);
     }catch(err){
         return res.status(500).send({
             status: "error",
@@ -209,12 +206,9 @@ router.get('/users', async(req, res) =>{
 router.get('/user/:userId', auth.authenticated, async(req, res) =>{
 
     var userId = req.params.userId;
-
-    console.log(userId);
     
     var user = await UserService.getById(userId);
 
-    console.log(user);
     if(user.user == null){
         return res.status(400).send({
             status: "error",

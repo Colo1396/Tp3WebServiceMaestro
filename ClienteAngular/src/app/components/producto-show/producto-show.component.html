@@ -1,0 +1,49 @@
+<main class="flex-shrink-0">
+    <div class="container mb-5">
+        <div class="col-12 mt-5">
+            <div class="col-md-8 mx-auto">
+                <div class="alert alert-success mt-5" role="alert" *ngIf="status == 'success'">
+                    Producto agregado al carrito.
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-5">
+            <div class="col-md-8 mx-auto">
+                <div class="alert alert-danger mt-5" role="alert" *ngIf="status == 'error'">
+                    El producto no se pudo agregar al carrito, verifique que la cantidad solicitada sea igual o menor que el stock del producto.
+                </div>
+            </div>
+        </div>
+        <!-- Producto -->
+        <section class="">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{producto?.imagen}}" alt="..." /></div>
+                    <div class="col-md-6">
+                        <div class="small mb-1">Vendedor: {{ producto?.idUser }}</div>
+                        <h1 class="display-5 fw-bolder">{{ producto?.nombre }}</h1>
+                        <div class="fs-5 mb-4">
+                            <span style="font-size: 50px;">$ {{ producto?.precio }}</span>
+                        </div>
+                        <p class="lead">Descripción: {{ producto?.descripcion }}</p>
+                        <p class="lead">Forma de pago: {{ producto?.formaDePago }}</p>
+                        <p class="lead my-4" style="color:green;">Stock: {{ producto?.stock }}</p>
+                        <div class="d-flex">
+                            <form class="form row" #agregarProductoCarritoForm="ngForm" (ngSubmit)="onSubmit(agregarProductoCarritoForm)">
+                                <div class="form-group col-md-6 mt-2 mb-2">
+                                    <input type="text" name="cantidad" id="cantidad" style="max-width: 3rem" value="0" class="form-control" #cantidad="ngModel" [(ngModel)]="productoCarrito.cantidad" required pattern="[0-9]+">
+                                    <small *ngIf="!cantidad.valid && cantidad.touched" class="invalid-feedback d-block">
+                                        Cantidad inválida.
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6 mt-2 mb-2">
+                                    <input type="submit" id="btn-newProductoCarrito" class="btn btn-outline-success flex-shrink-0" value="Añadir al carrito" class="btn btn-success"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>

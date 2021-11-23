@@ -26,12 +26,8 @@ router.get('/productos', async(req, res) =>{
 router.get('/producto/:productoId', auth.authenticated, async(req, res) =>{
 
     var productoId = req.params.productoId;
-
-    console.log(productoId);
-    
     var producto = await ProductoService.getById(productoId);
 
-    console.log(producto);
     if(producto === null){
         return res.status(400).send({
             status: "error",

@@ -71,5 +71,31 @@ export class UserService{
         return this.token;
     }
 
+    update(user): Observable<any>{
+        let params = JSON.stringify(user);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('Authorization', this.getToken());
 
+        //url de Compras Rest
+        return this._http.put(this.url+'user/edit', params, {headers:headers});
+    }
+
+    getUsers():Observable<any>{
+        return this._http.get(this.url+'users');
+    }
+
+    getUser(userId):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('Authorization', this.getToken());
+
+        return this._http.get(this.url+'user/'+userId, {headers: headers});
+    }
+
+    add(domicilio): Observable<any>{
+        let params = JSON.stringify(domicilio);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('Authorization', this.getToken());
+        console.log("antes de enviar");
+        return this._http.post(this.url+'newDomicilio', params, {headers: headers});
+    }
 }
