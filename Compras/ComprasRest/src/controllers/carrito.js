@@ -88,8 +88,27 @@ router.get('/carritos/:userId', auth.authenticated, async(req, res) =>{
 
 });
 
-router.get('/carrito/:carritoId', auth.authenticated, async(req, res) =>{
+router.get('/productosCarrito/:carritoId', auth.authenticated, async(req, res) =>{
 
+    var carritoId = req.params.carritoId;
+    var carrito = await ProductoCarritoService.getProductosCarritoByIdCarrito(carritoId);
+
+    if(carrito == null){
+        return res.status(400).send({
+            status: "error",
+            message: "No existe el usuario."
+        });
+    }
+
+    //Devolver respuesta
+    return res.status(200).send({
+        status: "success",
+        carrito
+    });
+
+});
+
+router.get('/carrito/:carritoId', auth.authenticated, async(req, res) =>{
     var carritoId = req.params.carritoId;
     var carrito = await ProductoCarritoService.getProductosCarritoByIdCarrito(carritoId);
 

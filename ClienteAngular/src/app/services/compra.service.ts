@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Carrito } from '../models/carrito';
+import { Compra } from '../models/compra';
 import { globalCompras } from './global';
 
 @Injectable()
-export class CarritoService{
+export class CompraService{
 
     //propiedad
     public url: string;
@@ -34,15 +34,21 @@ export class CarritoService{
         return this._http.get(this.url+'carritos/'+userId, {headers: headers});
     }
 
-    getProductosCarrito(carritoId):Observable<any>{
+    getCompra(compraId):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                         .set('Authorization', this.getToken());
-        return this._http.get(this.url+'productosCarrito/'+carritoId, {headers: headers});
+                                        console.log("antes de enviar");
+
+        return this._http.get(this.url+'compra/'+compraId, {headers: headers});
     }
 
-    getCarrito(carritoId):Observable<any>{
+    //EFECTUAR COMPRA
+    pagar(compra): Observable<any>{
+        let params = JSON.stringify(compra);
+        console.log(params);
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                         .set('Authorization', this.getToken());
-        return this._http.get(this.url+'carrito/'+carritoId, {headers: headers});
+        console.log("antes de enviar");
+        return this._http.post(this.url+'compra/new', params, {headers: headers});
     }
 }

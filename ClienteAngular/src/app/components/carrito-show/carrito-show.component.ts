@@ -19,6 +19,7 @@ export class CarritoShowComponent implements OnInit {
   public user: User;
   public carrito: ProductoCarrito[];
   public total;
+  public carritoId;
   public identity;
   public token;
   public status;
@@ -40,8 +41,8 @@ export class CarritoShowComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
-      var carritoId = params['carritoId'];
-      this.getProductosCarrito(carritoId);
+      this.carritoId = params['carritoId'];
+      this.getProductosCarrito(this.carritoId);
     });
   }
 
@@ -50,7 +51,6 @@ export class CarritoShowComponent implements OnInit {
       response => {
         console.log(response);
         if(response.carrito){
-          
           this.carrito = response.carrito;
           var total;
           response.carrito.forEach( function(value){

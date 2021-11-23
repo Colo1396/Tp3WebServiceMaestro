@@ -79,6 +79,7 @@ export class UserPerfilCompradorComponent implements OnInit, DoCheck{
       response => {
         if(response.tarjetas){
           this.tarjetas = response.tarjetas;
+          console.log(this.tarjetas);
         }
       },
       error => {

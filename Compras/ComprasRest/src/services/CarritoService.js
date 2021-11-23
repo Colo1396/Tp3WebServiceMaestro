@@ -57,6 +57,14 @@ class CarritoService {
     }
 
 
+    static async getById(idCarrito){
+        var carrito = await CarritoModel.findByPk(idCarrito);
+
+        return  carrito;    
+        //return {domicilios};
+    }
+
+
 }
 
 module.exports = {

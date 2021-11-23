@@ -9,7 +9,7 @@ class DomicilioService {
 
     static async getDomiciliosByUser(idUser){
         var domicilios = await DomicilioModel.findAll({
-            attributes: ['provincia', 'localidad', 'calle', 'numero', 'pisoDepto'],
+            attributes: ['id', 'provincia', 'localidad', 'calle', 'numero', 'pisoDepto'],
             where : { idUser: idUser}
         });
         return  domicilios;    

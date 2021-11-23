@@ -1,6 +1,6 @@
 export class Domicilio{
     constructor(
-        public _id: string,
+        public id: string,
         public provincia: string,
         public localidad: string,
         public calle: string,

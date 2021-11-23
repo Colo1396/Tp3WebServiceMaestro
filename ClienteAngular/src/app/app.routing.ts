@@ -15,6 +15,8 @@ import { TarjetaAddComponent } from "./components/tarjeta-add/tarjeta-add.compon
 import { ProductoShowComponent } from "./components/producto-show/producto-show.component";
 import { CarritoShowComponent } from "./components/carrito-show/carrito-show.component";
 import { CarritoListComponent } from "./components/carrito-list/carrito-list.component";
+import { CompraPagoComponent } from './components/compra-pago/compra-pago.component';
+import { CompraConfirmacionComponent } from './components/compra-confirmacion/compra-confirmacion.component';
 
 //Rutas
 const appRoutes: Routes = [
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
     { path: 'producto/:productoId', component: ProductoShowComponent },
     { path: 'carrito', component: CarritoListComponent },
     { path: 'carrito/:carritoId', component: CarritoShowComponent },
-
+    { path: 'pago/:carritoId', component: CompraPagoComponent },
+    { path: 'compra/confirmacion/:compraId', component: CompraConfirmacionComponent },
     { path: '**', component: LoginComponent}
 ];
 

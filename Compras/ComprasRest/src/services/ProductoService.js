@@ -17,6 +17,14 @@ class ProductoService {
     static async getById(id){
         return await ProductoModel.findByPk(id);
     }
+
+    static async getProductoMedioDePago(idProducto){
+        var producto = await ProductoModel.findAll({
+            where : { id: idProducto}
+            //include: ['producto_mediodepago']
+        });
+        return  producto;    
+    }
 }
 
 module.exports = {

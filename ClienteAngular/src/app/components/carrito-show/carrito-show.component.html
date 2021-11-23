@@ -23,12 +23,12 @@
                             </thead>
                             <tbody>
                                     <tr *ngFor="let item of carrito, index as id">
-                                        <td class="col-6 ml-5" align="center"><img src="{{item.producto.imagen}}" width="50" height="50"/> </td>
-                                        <td class="col-6 m-5">{{ item.producto.nombre }}</td>
-                                        <td class="col-6 m-5">{{ item.cantidad }}</td>
-                                        <td class="col-6 m-5">{{ item.producto.precio }}</td>
-                                        <td class="col-6 m-5">{{ item.producto.precio.valueOf() * item.cantidad.valueOf()  | currency }}</td>
-                                        <td class="col-6 m-5 p-3"><a class="btn btn-lg btn-info">Eliminar</a></td>
+                                        <td class="col-6 ml-5 p-3" align="center"><img src="{{item.producto.imagen}}" width="50" height="50"/> </td>
+                                        <td class="col-6 m-5 p-3">{{ item.producto.nombre }}</td>
+                                        <td class="col-6 m-5 p-3">{{ item.cantidad }}</td>
+                                        <td class="col-6 m-5 p-3">{{ item.producto.precio }}</td>
+                                        <td class="col-6 m-5 p-3">{{ item.producto.precio.valueOf() * item.cantidad.valueOf()  | currency }}</td>
+                                        <td class="col-6 m-5 p-3"><a class="btn btn-danger">Eliminar</a></td>
                                     </tr>
                                     <hr>
                                     <tr>
@@ -49,7 +49,7 @@
                             <a class="btn btn-lg btn-block btn-secondary">Continuar comprando</a>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <a class="btn btn-lg btn-block btn-success text-uppercase">Finalizar compra</a>
+                            <a class="btn btn-lg btn-block btn-success text-uppercase" [routerLink]="['/pago/', carritoId]">Finalizar compra</a>
                         </div>
                     </div>
                 </div>
