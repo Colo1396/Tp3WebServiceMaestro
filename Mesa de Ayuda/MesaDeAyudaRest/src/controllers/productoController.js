@@ -1,109 +1,84 @@
-const {ProductoService} = require('../services/ProductosServices');
-const {UserService} = require('../services/UsuarioServices');
+const { ProductoService } = require('../services/ProductoService');
+const { dataURI } = require('../middlewares/multerConfig');
 
-
-const obtenerProductos = async(req,res)=>{
+const getAllProductos = async (req, res) => {
     try{
-        let products = await ProductoService.getAll();
-        if(products){
-            res.status(200).json({
-                message: "Products succesfully encountered",
-                data: products
-            });        
-        
-        }else{
-            res.status(200).json({
-            message: "Products not found",
-            data: products
-            });
-        }
-    }catch(err){
-        console.log(err);
-        res.status(500).json({
-            message: "Something goes wrong"
-        });
-    } 
-}
-
-const obtenerProducto = async(req,res)=>{
-    try{
-        const {id} = req.params;
-        let product = await ProductoService.getById(id);
-        if(product){
-            res.status(200).json({
-                message: "product succesfully encountered",
-                data: product
-            });
-        }else{
-            res.status(200).json({
-                message: "product not found",
-                data: product
-            });
-        }
-    }catch(err){
-        console.log(err);
-        res.status(500).json({
-            message: "Something goes wrong"
-        });
-    }
-}
-
-
-const crearProducto = async (req, res) => {
-    try{
-        const producto = {
-            nombre: req.body.nombre,
-            descripcion: req.body.descripcion,
-            imagen: req.body.imagen,
-            precio: req.body.precio,
-            stock: req.body.stock,
-            mediosDePago: req.body.medioDePagoId
-        }
-
-        const user = await UserService.getById(res.locals.currentUser.dataValues.id);
-        const createdProducto = await ProductoService.add(producto, user);
-        if(createdProducto){
-            res.redirect('/usuarios/home');
-        }
+        const productos = await ProductoService.getAll(
+            req.query.vendedor, 
+            req.query.sinstock, 
+            req.query.precioGte,
+            req.query.precioLte,
+            req.query.idCategoria);
+        res.status(200).send(productos);
     } catch(err){
         console.error(err);
-        res.status(500).json({
-            message: "Something goes wrong"
-        });
+        res.status(400).send(err.message);
     }
 }
 
-
-const actualizarProducto = async (req, res) => {
+const getProducto = async (req, res) => {
     try{
+        const producto = await ProductoService.getById(req.params.idProducto);
+        res.status(200).send(producto);
+        res.end();
+    } catch(err){
+        console.error(err);
+        res.status(400).send(err.message);
+    }
+}
+
+const postProducto = async (req, res) => {
+    try{
+        const imagen = dataURI(req);
+
         const producto = {
             nombre: req.body.nombre,
             descripcion: req.body.descripcion,
-            imagen: req.body.imagen,
+            imagen: imagen,
             precio: req.body.precio,
             stock: req.body.stock,
-            cantidadVentas: req.body.cantidadVentas,
+            mediosDePago: req.body.mediosDePago,
+            idCategoria: req.body.idCategoria
+        }
+        const createdProducto = await ProductoService.add(producto, req.user);
+        res.status(200).send(createdProducto);    
+        res.end();
+    } catch(err){
+        console.error(err);
+        res.status(400).send(err.message);
+    }
+}
+
+const putProducto = async (req, res) => {
+    try{
+        const imagen = dataURI(req);
+
+        const producto = {
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion,
+            imagen: imagen,
+            precio: req.body.precio,
+            stock: req.body.stock,
             mediosDePago: req.body.mediosDePago
         }
-        const updatedProducto = await ProductoService.update(producto, req.params.id);
-        if(updatedProducto){
-            res.status(200).json({
-                message: "product succesfully updated",
-                data: updatedProducto
-            });
-        }
+        const updatedProducto = await ProductoService.update(producto, req.params.idProducto);
+        res.status(200).send(updatedProducto);    
+        res.end();
     } catch(err){
         console.error(err);
-        res.status(500).json({
-            message: "Something goes wrong"
-        });    
+        res.status(400).send(err.message);
     }
 }
 
+const deleteProducto = async (req, res) => {
 
-module.exports ={
-    obtenerProducto,
-    obtenerProductos,
-    crearProducto,
-    actualizarProducto
-};   
+}
+
+module.exports = {
+    getAllProductos,
+    getProducto,
+    postProducto,
+    putProducto,
+    deleteProducto
+}
+

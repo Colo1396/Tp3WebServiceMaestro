@@ -1,0 +1,52 @@
+  <!-- Contenido de la página -->
+  <main class="flex-shrink-0">
+    <div class="container">
+      <div class="container p-4">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <form class="d-flex" action="/reclamos/listaPorEstado" method="POST">
+                  <select class="form-select" aria-label="Default select example" name="estado" [(ngModel)]="selectedEstado">
+                    <option value="todos">Todos</option>
+                    <option value="resuelto">Resuelto</option>
+                    <option value="a resolver">No Resuelto</option>
+                </select>
+                <button type="submit" class="btn btn-outline-success" style="margin-left: 5px;" (click)="onSumbitEstado()" >Filtrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container p-4">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <div class="table-responsive">
+              <table class="table " align="center">
+                <thead align="center" class="bg-info">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">CompraId/s</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Accion</th>
+                  </tr>
+                </thead>
+                <tbody align="center">
+                    <tr *ngFor="let reclamo of reclamos">
+                      <td>{{reclamo.id}}</td>
+                      <td>{{reclamo.compraId}}</td>
+                      <td>{{reclamo.estado}}</td>
+                      <td>
+                          <form >
+                            <button class="btn btn-success" type="submit" (click)="onSumbitAceptarReclamo('{{reclamo.id}}')"   style="display: inline;">Aceptar </button> 
+                        </form>
+                        <form >
+                            <button class="btn btn-danger" type="submit" (click)="onSumbitRechazaReclamo('{{reclamo.id}}')" style="display: inline;">Rechazar</button> 
+                        </form> 
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main> 

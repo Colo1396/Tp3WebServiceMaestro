@@ -24,7 +24,7 @@ module.exports = (sequalize, type)=>{
         },
         pisoDepto: {
             type: type.STRING,
-            allowNull : true
+            allowNull : false
         },
         idUser: {
             type: type.INTEGER,

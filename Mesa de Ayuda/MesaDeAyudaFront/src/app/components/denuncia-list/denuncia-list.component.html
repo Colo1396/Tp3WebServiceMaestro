@@ -1,0 +1,59 @@
+  <!-- Contenido de la página -->
+  <main class="flex-shrink-0">
+    <div class="container">
+      <div class="container p-4">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <form class="d-flex">
+                  <select class="form-select" aria-label="Default select example" name="estado" [(ngModel)]="selectedEstado">
+                    <option value="todos">Todos</option>
+                    <option value="resuelto">Resuelto</option>
+                    <option value="a resolver">No Resuelto</option>
+                </select>
+              <button type="submit" class="btn btn-outline-success" style="margin-left: 5px;" (click)="onSumbitEstado()" >Filtrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container p-4">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <div class="table-responsive">
+              <table class="table " align="center">
+                <thead align="center" class="bg-info">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Comentario</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">UserId</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Accion</th>
+                  </tr>
+                </thead>
+                <tbody align="center">
+                    <tr *ngFor="let denuncia of denuncias">
+                      <td>{{denuncia.id}}</td>
+                      <td>{{denuncia.categoria}}</td>
+                      <td>{{denuncia.comentario}}</td>
+                      <td>{{denuncia.productoId}}</td>
+                      <td>{{denuncia.userId}}</td>
+                      <td>{{denuncia.estado}}</td>
+                      <td>
+                          <form>
+                            <button class="btn btn-success" type="submit" (click)="onSumbitAceptarDenuncia('{{denuncia.id}}')"   style="display: inline;">Aceptar </button> 
+                        </form>
+                        <form>
+                          <button class="btn btn-danger" type="submit" (click)="onSumbitRechazarDenuncia('{{reclamo.id}}')" style="display: inline;">Rechazar</button> 
+                        </form> 
+                      </td>
+                    </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>   

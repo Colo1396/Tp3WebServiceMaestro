@@ -623,7 +623,7 @@
             },
             "billetera": {
               "type": "integer",
-              "description": "La cuenta del usuario"
+              "description": "Las cuentas del usuario"
             },
             "rol":{
               "type": "object",

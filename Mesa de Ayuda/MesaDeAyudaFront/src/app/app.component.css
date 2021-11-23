@@ -1,0 +1,17 @@
+#logo{
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  color: #FFF;
+}
+
+nav{
+  background-color: #F58A07;
+}
+
+#crearProducto{
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 3;
+}

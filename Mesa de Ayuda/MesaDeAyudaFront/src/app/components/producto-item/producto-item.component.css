@@ -1,0 +1,29 @@
+p{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+#btnVendidos{
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+#btnEdit{
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.preview-image{
+    cursor: pointer;
+}
+
+#inputImage{
+    display: none;
+}

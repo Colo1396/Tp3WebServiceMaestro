@@ -6,13 +6,8 @@ const validarRegister = async(req,res,next)=>{
     if(rolAsignado){
         if(rolAsignado.tipo === "comprador" || rolAsignado.tipo === "vendedor"){
             next();
-        }else{
-            return res.render('login'); //si no es de rol comprador y vendedor lo redirige a la vista de login
         }
-    }else{
-        next();
     }
-
 }
 
 module.exports = {

@@ -1,0 +1,34 @@
+<main class="flex-shrink-0">
+    <div class="container">
+  
+      <div class="container p-3">
+            <div class="row">
+              <div class="col-12 mx-auto">
+                <div class="card">
+                  <div class="card-header text-white bg-info">
+                      NUEVO RECLAMO
+                  </div>
+                  <div class="card-body">
+          
+          <form class="form" style="margin-top:130px;">
+              <!--COMPRA-->
+              <div class="input-group">
+                <label for="compraId">Compra</label>
+                <input type="number" class="form-control" id="compraId" name="compraId" [(ngModel)]="reclamo.compraId" required>          
+              </div>
+              <!-- BOtON  -->
+              <div class="btn-group" style="margin-top:55px; display: flex; justify-content: center;">
+                <div class="col-6">
+                    <button type="submit" id="btn_register" class="btn btn-success" (click)="onSubmit()" >Completar
+                    </button>
+                </div>
+              </div>
+          </form>
+            </div>
+  </div>
+         
+          </div>
+      </div>
+          </div>
+  </div>
+      </main>

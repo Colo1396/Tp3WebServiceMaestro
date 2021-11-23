@@ -1,39 +1,41 @@
 const {Sequelize} = require('sequelize');
+const fs = require('fs');
 
-const userModel = require('../models/Usuario');
-const domicilioModel = require('../models/Domicilio');
-const tarjetaModel = require('../models/Tarjeta');
-const compraModel = require('../models/Compra');
 const productoModel = require('../models/Producto');
-const categoriaModel = require('../models/Categoria');
-const productoCarritoModel = require('../models/ProductoCarrito');
-const carritoModel = require('../models/Carrito');
+const cuentaBancariaModel = require('../models/CuentaBancaria');
+const userModel = require('../models/Usuario');
 const medioDePagoModel = require('../models/MedioDePago');
 const rolModel = require('../models/Rol');
 const denunciaModel = require('../models/Denuncia');
 const reclamoModel = require('../models/Reclamo');
-const cuentaBancariaModel = require('../models/CuentaBancaria');
+const domicilioModel = require('../models/Domicilio');
+const tarjetaModel = require('../models/Tarjeta');
+const compraModel = require('../models/Compra');
+const categoriaModel = require('../models/Categoria');
+const productoCarritoModel = require('../models/ProductoCarrito');
+const carritoModel = require('../models/Carrito');
 
-/** CONFIGURACIÓN CONEXION PARA LA BD LOCAL */
-const sequelize = new Sequelize("mesadeayuda_db", "root", "123456789" ,{
+/** CONFIGURACIÓN CONEXION PARA LA BD */
+const sequelize = new Sequelize("tpiiitienda", "root", "123456789" ,{
     host : "localhost",
     port: "3306",
     dialect: "mysql",
-    logging: false
+    dialectOptions: {
+        multipleStatements: true
+    } 
 });
 
-/*
-const sequelize = new Sequelize("bbglhfbpl88th3ne8zmg", "unyu1hkmsskogwus", "V96syZVkwK1AwOV0O3Wn" ,{
-    host : "bbglhfbpl88th3ne8zmg-mysql.services.clever-cloud.com",
-    port: "3306",
-    dialect: "mysql"
-});
-*/
+// const sequelize = new Sequelize("bbglhfbpl88th3ne8zmg", "unyu1hkmsskogwus", "V96syZVkwK1AwOV0O3Wn" ,{
+//     host : "bbglhfbpl88th3ne8zmg-mysql.services.clever-cloud.com",
+//     port: "3306",
+//     dialect: "mysql"
+// });
 
 /*** REALIZO LOS MAPEOS DE LAS CLASES */
+const MedioDePagoModel = medioDePagoModel(sequelize, Sequelize);
+const CuentaBancariaModel = cuentaBancariaModel(sequelize, Sequelize);
 const UserModel = userModel(sequelize, Sequelize);
 const ProductoModel = productoModel(sequelize, Sequelize);
-const MedioDePagoModel = medioDePagoModel(sequelize, Sequelize);
 const RolModel = rolModel(sequelize, Sequelize);
 const DenunciaModel = denunciaModel(sequelize, Sequelize);
 const ReclamoModel = reclamoModel(sequelize, Sequelize);
@@ -43,17 +45,15 @@ const CompraModel = compraModel(sequelize, Sequelize);
 const CategoriaModel = categoriaModel(sequelize, Sequelize);
 const ProductoCarritoModel = productoCarritoModel(sequelize, Sequelize);
 const CarritoModel = carritoModel(sequelize, Sequelize);
-const CuentaBancariaModel = cuentaBancariaModel(sequelize, Sequelize);
 
-//USER
 /*** relacion one to many de User y Tarjeta **/
 UserModel.hasMany(TarjetaModel, {
-        foreignKey: 'idUser' , 
-        as: 'tarjetas'
-    });
+    foreignKey: 'idUser' , 
+    as: 'tarjetas'
+});
 TarjetaModel.belongsTo(UserModel, {
     foreignKey: 'idUser',
-    as: 'user'
+    as: 'usuario'
 });
 
 /*** relacion one to many de User y Domicilio **/
@@ -63,11 +63,20 @@ UserModel.hasMany(DomicilioModel, {
 });
 DomicilioModel.belongsTo(UserModel, {
     foreignKey: 'idUser',
-    as: 'user'
+    as: 'usuario'
 });
 
-//PRODUCTO
+/* relacion one to many de User y Rol*/
+RolModel.hasMany(UserModel, {
+    foreignKey: 'rolId',
+    as: 'roles'
+});
+UserModel.belongsTo(RolModel, {
+    foreignKey: 'rolId',
+    as: 'rol'
+});
 
+/***********PRODUCTO **********/
 /*** relacion one to many de Categoria y Producto **/
 CategoriaModel.hasMany(ProductoModel, {
     foreignKey: 'idCategoria' , 
@@ -97,8 +106,17 @@ ProductoCarritoModel.belongsTo(CarritoModel, {
     foreignKey: 'idCarrito',
     as: 'carrito'
 });
+/* relacion one to many de User y Producto */
+UserModel.hasMany(ProductoModel, {
+    foreignKey: 'idVendedor',
+    as: 'productos'
+});
+ProductoModel.belongsTo(UserModel, {
+    foreignKey: 'idVendedor',
+    as: 'usuario'
+});
 
-//COMPRAS
+/*******************COMPRAS**********************/
 /*** relacion one to many de Compra y User (vendedor) **/
 UserModel.hasMany(CompraModel, {
     foreignKey: 'idVendedor' , 
@@ -118,7 +136,6 @@ CompraModel.belongsTo(UserModel, {
     foreignKey: 'idComprador',
     as: 'comprador'
 });
-
 /*** relacion one to one entre Compra y Carrito **/
 CompraModel.belongsTo(CarritoModel, {
     foreignKey: 'idCarrito',
@@ -130,30 +147,10 @@ CompraModel.belongsTo(TarjetaModel, {
     foreignKey: 'idMedioDePago',
     as: 'medioDePago'
 });
-
 /*** relacion one to one entre Compra y Domicilio (Destino) **/
 CompraModel.belongsTo(DomicilioModel, {
     foreignKey: 'idDestino',
     as: 'destino'
-});
-
-UserModel.hasMany(CuentaBancariaModel, {
-    foreignKey: 'idVendedor',
-    as: 'cuentasBancarias'
-});
-CuentaBancariaModel.belongsTo(UserModel, {
-    foreignKey: 'idVendedor',
-    as: 'vendedor'
-});
-
-/* relacion one to many de User y Rol*/
-RolModel.hasMany(UserModel, {
-    foreignKey: 'rolId',
-    as: 'roles'
-});
-UserModel.belongsTo(RolModel, {
-    foreignKey: 'rolId',
-    as: 'rol'
 });
 
 /****************DENUNCIA************ */
@@ -164,8 +161,9 @@ UserModel.hasMany(DenunciaModel,{
 });
 DenunciaModel.belongsTo(UserModel,{
     foreignKey: 'userId',
-    as: 'user'
+    as: 'usuario'
 });
+
 
 /****************RECLAMO************ */
 /* relacion one to many de compra y reclamo */
@@ -181,29 +179,39 @@ ReclamoModel.belongsTo(CompraModel,{
 
 /**********PRODUCTO MEDIO DE PAGO **************/
 /* relacion many to many de Producto y MedioDePago */
-ProductoModel.belongsToMany(MedioDePagoModel, { through: 'producto_mediodepago'});
-MedioDePagoModel.belongsToMany(ProductoModel, { through: 'producto_mediodepago'});
+ProductoModel.belongsToMany(MedioDePagoModel, { through: 'producto_mediodepago', as: 'mediosDePago'});
+MedioDePagoModel.belongsToMany(ProductoModel, { through: 'producto_mediodepago', as: 'productos'});
+
+UserModel.hasMany(CuentaBancariaModel, {
+    foreignKey: 'idVendedor',
+    as: 'cuentasBancarias'
+});
+CuentaBancariaModel.belongsTo(UserModel, {
+    foreignKey: 'idVendedor',
+    as: 'vendedor'
+});
 
 /** INICIALIZO EL MAPEO **/
 sequelize.sync({ force: false})
     .then( ()=>{
         console.log("Models mapeados!!!");
+        const config = fs.readFileSync(__dirname + '/datos.sql', 'utf-8');
+        sequelize.query(config);
     });
 
 /** EXPORTO LOS OBJETOS PARA PODER USARLOS PARA LAS CONSULTAS */
 module.exports = {
-    UserModel,
-    DomicilioModel,
-    TarjetaModel, 
-    CategoriaModel,
-    ProductoModel,
-    ProductoCarritoModel,
-    CarritoModel,
-    CompraModel,
-    CuentaBancariaModel,
-    DenunciaModel,
     MedioDePagoModel,
-    ReclamoModel,
+    CuentaBancariaModel,
+    UserModel,
+    ProductoModel,
     RolModel,
-    sequelize
+    DenunciaModel,
+    ReclamoModel,
+    DomicilioModel,
+    TarjetaModel,
+    CompraModel,
+    CategoriaModel,
+    ProductoCarritoModel,
+    CarritoModel
 }

@@ -1,53 +1,71 @@
-const {UserService} = require('../services/UsuarioServices');
-const {RolService} = require('../services/RolServices');
+const { UserService } = require('../services/UserService');
+const { ProductoService } = require('../services/ProductoService');
 
-const obtenerUsuarios = async(req,res)=>{
+const register = async (req, res) => {
     try{
-        let users = await UserService.getAll();
-        if(users){
-            res.status(200).json({
-                message: "Users succesfully encountered",
-                data: users
-            });        
-        
-        }else{
-            res.status(200).json({
-            message: "Users not found",
-            data: users
-            });
+        const user = {
+            username: req.body.username,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            password: req.body.password,
+            dni: req.body.dni,
+            billetera: 0,
+            rolId: req.body.rolId
         }
-    }catch(err){
-        console.log(err);
-        res.status(500).json({
-            message: "Something goes wrong"
-        });
-    } 
-}
-
-const obtenerUsuario = async(req,res)=>{
-    try{
-        const {id} = req.params;
-        let user = await UserService.getById(id);
-        if(user){
-            res.status(200).json({
-                message: "User succesfully encountered",
-                data: user
-            });
-        }else{
-            res.status(200).json({
-                message: "User not found",
-                data: user
-            });
-        }
-    }catch(err){
-        console.log(err);
-        res.status(500).json({
-            message: "Something goes wrong"
-        });
+        const createdUser = await UserService.register(user);
+        res.status(200).send(createdUser);
+    } catch(err){
+        console.error(err);
+        res.status(400).send(err.message);
     }
 }
 
-module.exports ={
-    obtenerUsuarios,
-    obtenerUsuario
-};   
+const login = async (req, res) => {
+    try{
+        const user = {
+            username: req.body.username,
+            password: req.body.password
+        }
+        const loginInfo = await UserService.login(user);
+        res.status(200).send(loginInfo);
+    } catch(err){
+        console.error(err);
+        res.status(400).send(err.message);
+    }
+}
+
+const getUser = async (req, res) => {
+    try{
+        const user = await UserService.getById(req.params.idUser);
+        res.status(200).send(user);
+    } catch(err){
+        console.error(err);
+        res.status(400).send(err.message);
+    }
+}
+
+const putUser = async (req, res) => {
+    try{
+        console.log(req.body.cuentaNueva);
+        const user = {
+            username: req.body.username,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            dni: req.body.dni,
+            telefono: req.body.telefono,
+            cuentaNueva: req.body.cuentaNueva
+        }
+        const updatedUser = await UserService.update(user, req.user.id);
+        res.status(200).send(updatedUser);
+    } catch(err){
+        console.error(err);
+        res.status(400).send(err.message);
+    }
+}
+
+module.exports = {
+    register,
+    login,
+    getUser,
+    putUser
+}

@@ -8,35 +8,35 @@ module.exports = (sequalize, type)=>{
         },
         nombre: {
             type: type.STRING,
-            allowNull : false
+            allowNull: false
         },
         descripcion: {
             type: type.STRING,
-            allowNull : false
+            allowNull: false
         },
         imagen: {
             type: type.STRING,
-            allowNull : false
+            allowNull: false
         },
         precio: {
-            type: type.DOUBLE,
-            allowNull : false
+            type: type.DECIMAL(10,2),
+            allowNull: false
         },
         stock: {
             type: type.INTEGER,
-            allowNull : false
+            allowNull: false
         },
-        formaDePago: {
-            type: type.STRING,
-            allowNull : false
-        },
-        idUser: {
+        idVendedor:{
             type: type.INTEGER,
-            allowNull : false
+            allowNull: false
+        },
+        cantidadVentas: {
+            type: type.INTEGER,
+            allowNull: false
         },
         idCategoria: {
             type: type.INTEGER,
-            allowNull : false
+            allowNull: false
         }
     });
 }
