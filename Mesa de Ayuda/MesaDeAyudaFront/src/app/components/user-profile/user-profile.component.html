@@ -1,0 +1,88 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-8">
+        <h3 class="mb-4">Mi perfil</h3>
+        <h5 class="mb-3">Datos personales</h5> 
+        <ul class="list-group mb-3">
+            <li class="list-group-item">
+                <div class="row align-items-center">
+                    <div class="col-4">
+                      <label for="inputUsuario" class="col-form-label">Usuario</label>
+                    </div>
+                    <div class="col-6">
+                      <input type="text" id="inputUsuario" class="form-control" [(ngModel)]="user.username">
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row align-items-center">
+                    <div class="col-4">
+                      <label for="inputNombre" class="col-form-label">Nombre</label>
+                    </div>
+                    <div class="col-6">
+                      <input type="text" id="inputNombre" class="form-control" [(ngModel)]="user.nombre">
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row align-items-center">
+                    <div class="col-4">
+                      <label for="inputApellido" class="col-form-label">Apellido</label>
+                    </div>
+                    <div class="col-6">
+                      <input type="text" id="inputApellido" class="form-control" [(ngModel)]="user.apellido">
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row align-items-center">
+                    <div class="col-4">
+                      <label for="inputDni" class="col-form-label">Dni</label>
+                    </div>
+                    <div class="col-6">
+                      <input type="text" id="inputDni" class="form-control" [(ngModel)]="user.dni">
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row align-items-center">
+                    <div class="col-4">
+                      <label for="inputTelefono" class="col-form-label">Telefono</label>
+                    </div>
+                    <div class="col-6">
+                      <input type="text" id="inputTelefono" class="form-control" [(ngModel)]="user.telefono">
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <h5 class="mb-3">Cuentas bancarias</h5> 
+        <ul class="list-group mb-3">
+          <li class="list-group-item" *ngFor="let cb of user.cuentasBancarias">
+            <div class="row align-items-center">
+                <div class="col-4">
+                  <label for="inputCuenta3" class="col-form-label">Nro Cuenta</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" id="inputCuenta3" class="form-control" disabled value="{{cb.nroCuenta}}">
+                </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+              <div class="row align-items-center">
+                  <div class="col-4">
+                    <label for="inputCuenta" class="col-form-label">Nro Cuenta</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="text" id="inputCuenta" class="form-control" [(ngModel)]="cuentaNueva.nroCuenta">
+                  </div>
+              </div>
+          </li>
+        </ul>
+        <div class="d-flex justify-content-end">
+            <button [ngClass]="{'btn-primary': !saved, 'btn-success': saved}" class="btn btn-primary" (click)="updateUser()">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> 
+              Guardar Cambios
+            </button>
+        </div>
+    </div>
+</div>
+

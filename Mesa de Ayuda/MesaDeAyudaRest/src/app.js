@@ -1,36 +1,45 @@
-const express= require('express');
+const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors');
-const path = require('path');
+const cors = require("cors");
 const dotenv = require('dotenv');
-const passport = require('passport');
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
+const { cloudinaryConfig } = require('./middlewares/cloudinaryConfig');
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+dotenv.config({path: __dirname + '/.env.local'});
 
-//INITIALIZATE
+//ROUTES-IMPORTS-------------------------------------------------
+const authRoutes = require('./routes/authRoutes');
+const denunciaRoutes = require('./routes/denunciasRoutes')
+const reclamoRoutes = require('./routes/reclamosRoutes')
+const rolRoute = require('./routes/rolesRoutes');
+const userRoute = require('./routes/usuariosRoutes');
+const categoriaRoute = require('./routes/categoriaRoutes');
+const productoRoute = require('./routes/productosRoutes');
+const medioDePagoRoute = require('./routes/mediosDePagoRoutes');
+
+//INICIALIZACIONES-------------------------------------------------
 const app = express();
-require('./middlewares/authenticate');
+
+//MIDDLEWARES------------------------------------------
+app.use(express.urlencoded({extended:false}))
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(cors());
 
 //SETTINGS---------------------------------------------
-dotenv.config({path: __dirname + '/.env.local'});
 app.set('json spaces', 2);
-app.set('view engine', 'hbs');
-app.set('views', './src/views');
 
-//MIDDLEWARES
-app.use(express.urlencoded({extended:false}))//para q cuando envien un POST desde un form lo entienda
-app.use(express.json()); //enteder los datos json
-app.use(morgan('dev')); //mostar por consola lo que va llegando
-app.use(cors());//para q permita q cualquier servidor pida cosas y haga operaciones
-app.use(express.static(path.join(__dirname, './views/static')));
-app.use(cookieParser());
+//ROUTES-----------------------------------------------
+app.use('*', cloudinaryConfig)
+app.use('/', swaggerUI.serve);
+app.use(authRoutes);
+app.use('/users', userRoute);
+app.use('/denuncias/', denunciaRoutes);
+app.use('/reclamos/', reclamoRoutes);
+app.use('/productos', productoRoute);
+app.use('/mediosDePago', medioDePagoRoute);
+app.use('/roles', rolRoute);
+app.use('/categorias', categoriaRoute);
+app.get('/', swaggerUI.setup(swaggerDocument));
 
-
-//ROUTES------------------------------------------------
-app.use(require('./routes/authRoutes'));
-app.use("/productos/",require('./routes/productsRoutes'));
-app.use("/denuncias/",require('./routes/denunciasRoutes'));
-app.use("/reclamos/",require('./routes/reclamosRoutes'));
-
-module.exports = app;
-
+module.exports=app

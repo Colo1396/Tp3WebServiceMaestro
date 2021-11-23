@@ -5,29 +5,19 @@ const jwt = require('jsonwebtoken');
 const isAuthenticated = (req, res, next) => {
     try{
         //Chequeo si el header con el token esta
-        let authorization = req.header('auth_token');
-        if( authorization && authorization.toLowerCase().startsWith('bearer')) {
-            let token = authorization.split(' ')[1];
-            console.log(token);
-            //Compruebo si es un token valido
-            const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-            if(!token || !decodedToken ){
-                    return res.status(401).send({
-                        message: 'Token invalido o expirado'
-                    });
-                }else{ req.user = decodedToken;  next();}
+        const token = req.header('auth_token');
+        if(!token) return res.status(401).send('Token missing');
 
-        }else{
-            return res.status(401).send({
-                messae: 'El header no tiene un token asignado'
-            });
+        //Compruebo si es un token valido
+        req.user = jwt.verify(token, process.env.TOKEN_SECRET);
+        if(!req.user){
+            return res.status(401).send('Session expired');
         }
- 
-    }catch(err){
+
+        return next();
+    } catch(err){
         console.log(err);
-        res.status(500).send({
-            message: 'Ocurrio un error: ' + err 
-        });
+        res.status(400).send(err);
     }
 }
 

@@ -1,0 +1,12 @@
+.default-image{
+    background-color: lightgray;
+    color: #fff;
+}
+
+.preview-image{
+    cursor: pointer;
+}
+
+#inputImage{
+    display: none;
+}

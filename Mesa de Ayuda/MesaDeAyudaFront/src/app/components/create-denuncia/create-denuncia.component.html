@@ -1,0 +1,46 @@
+<main class="flex-shrink-0">
+    <div class="container">
+  
+      <div class="container p-3">
+            <div class="row">
+              <div class="col-12 mx-auto">
+                <div class="card">
+                  <div class="card-header text-white bg-info">
+                      NUEVA DENUNCIA
+                  </div>
+                  <div class="card-body">
+          
+          <form class="form" style="margin-top:130px;">
+              <!--categoria-->
+              <div class="input-group">
+                <label for="categoria">Categoria</label>
+                  <select class="form-select" [(ngModel)]="selectedCategoria" id="categoria" required name="categoria">
+                    <option *ngFor="let c of categorias" value="{{c.id}}">{{c.nombre}}</option>
+                  </select>
+              <!--Comentario-->
+              <div class="input-group">
+                <label for="comentario">Comentario</label>
+                <input type="text" class="form-control" id="comentario" [(ngModel)]="denuncia.comentario" name="comentario" required>                  
+              </div>
+              <!--Producto-->
+              <div class="input-group">
+                <label for="productoId">Producto</label>
+                <input type="number" class="form-control" id="productoId" [(ngModel)]="denuncia.productoId" name="productoId" required>          
+              </div>
+              <!-- BOtON  -->
+              <div class="btn-group" style="margin-top:55px; display: flex; justify-content: center;">
+                  <div class="col-6">
+                      <button type="submit" id="btn_register" class="btn btn-success" (click)="onSubmit()" >Completar
+                      </button>
+                  </div>
+              </div>
+              </div>
+          </form>
+            </div>
+  </div>
+         
+          </div>
+      </div>
+          </div>
+  </div>
+      </main>

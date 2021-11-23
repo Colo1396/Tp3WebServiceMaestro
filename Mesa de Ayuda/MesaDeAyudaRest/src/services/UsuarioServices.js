@@ -21,7 +21,7 @@ class UserService{
         user.password = hash;
 
         const createdUser = await UserModel.create(user);
-        return createdUser;
+        return await this.getByUsername(createdUser.username);
     }   
 
     static async login(user){
@@ -92,9 +92,11 @@ class UserService{
         const users = await UserModel.findOne({
             where:{
                 username: username
-            }
+            },
+            include: "rol",
+            raw: true,
+            nest: true        
         });
-
         return users;
     }
 

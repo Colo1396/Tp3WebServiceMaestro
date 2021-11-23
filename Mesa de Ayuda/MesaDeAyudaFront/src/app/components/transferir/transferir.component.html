@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title">Billetera virtual</h4>
+                    <h4>{{user.billetera | currency:'USD':'symbol':'1.0-0'}}</h4>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="user.cuentasBancarias?.length === 0" class="text-center">
+            <h2 class="mb-4">No tenes cuentas asociadas todavia, agrega una</h2>
+            <a class="btn btn-lg btn-primary" routerLink="/profile">Agregar Cuenta</a>
+        </div>
+        <div class="card mb-3" *ngFor="let cb of user.cuentasBancarias">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title">Nro Cuenta</h4>
+                    <h5 class="text-muted">{{cb.nroCuenta}}</h5>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-5">
+                      <label for="inputTransferir" class="col-form-label fs-5">Monto a transferir</label>
+                    </div>
+                    <div class="col-5">
+                      <input type="text" id="inputTransferir" class="form-control" placeholder="0">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-primary">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

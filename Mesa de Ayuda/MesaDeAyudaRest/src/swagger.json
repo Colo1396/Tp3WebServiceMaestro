@@ -6,7 +6,7 @@
     },
     "servers": [
       {
-        "url": "http://localhost:8080",
+        "url": "http://localhost:8082",
         "description": "Servidor local"
       }
     ],
@@ -74,7 +74,37 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "type": "object",
+                  "properties": {
+                    "username":{
+                      "type": "string",
+                      "description": "Nombre para la cuenta del usuario"
+                    },
+                    "password":{
+                      "type": "string",
+                      "description": "Contraseña elegida por el usuario para su cuenta"
+                    },
+                    "rolId":{
+                      "type": "integer",
+                      "description": "Rol elegido para la cuenta del usuario (Comprador, Vendedor)"
+                    },
+                    "nombre":{
+                      "type": "string",
+                      "description": "Nombre del usuario"
+                    },
+                    "apellido":{
+                      "type": "string",
+                      "description": "Apellido del usuario"
+                    },
+                    "dni":{
+                      "type": "integer",
+                      "description": "DNI del usuario"
+                    },
+                    "telefono":{
+                      "type": "integer",
+                      "description": "Telefono del usuario"
+                    }
+                  }
                 }
               }
             }
@@ -86,43 +116,6 @@
                 "application/json": {
                   "schema": {
                     "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/logout": {
-        "post": {
-          "tags": [
-            "Users"
-          ],
-          "summary": "Finaliza la session del usuario logueado",
-          "parameters": [
-            {
-              "name": "auth_token",
-              "in": "header",
-              "required": true,
-              "description": "Token de autorizacion",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Informacion del usuario",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string",
-                        "description": "Mensaje devuelto informando que paso con la session"
-                      }
-                    }
                   }
                 }
               }
@@ -289,7 +282,7 @@
                 "name": "id",
                 "in": "path",
                 "required": true,
-                "description": "ID de la denuncia a modificar",
+                "description": "ID de la denuncia a aceptar",
                 "schema": {
                   "type": "integer"
                 }
@@ -297,11 +290,21 @@
           ],
           "responses": {
             "200": {
-              "description": "La denuncia fue actualizada cambiandole su estado a : 'resuelto' ",
+              "description": "La denuncia fue aceptada cambiandole su estado a : 'resuelto' ",
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/Denuncia"
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Mensaje que informa el estado del endpoint"
+                      },
+                      "denunciaAceptada": {
+                        "type": "object",
+                        "description": "Informacion de la denuncia que ha sido aceptada"
+                      }
+                    }
                   }
                 }
               }
@@ -341,7 +344,13 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/Denuncia"
+                    "type": "object",
+                    "properties": {
+                      "message":{
+                        "type": "string",
+                        "description": "Mensaje indicando el estado del enpoint"
+                      }
+                    }
                   }
                 }
               }
@@ -485,47 +494,8 @@
           "tags": [
             "Reclamos"
           ],
-          "summary": "Actualiza un reclamo dandola por resuelto",
-          "parameters": [
-            {
-              "name": "auth_token",
-              "in": "header",
-              "required": true,
-              "description": "Token de autorizacion",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-                "name": "id",
-                "in": "path",
-                "required": true,
-                "description": "ID del reclamo a modificar",
-                "schema": {
-                  "type": "integer"
-                }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "El reclamo fue actualizado cambiandole su estado a : 'resuelto' ",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Reclamo"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/reclamos/aceptar/{id}": {
-        "post": {
-          "tags": [
-            "Reclamos"
-          ],
           "summary": "Rechaza un reclamo dandole de baja de la BD",
+
           "parameters": [
             {
               "name": "auth_token",
@@ -549,10 +519,67 @@
           "responses": {
             "200": {
               "description": "El reclamo fue rechazado siendo eliminado de la BD",
+
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/Reclamo"
+                    "type": "object",
+                    "properties": {
+                      "message":{
+                        "type": "string",
+                        "description": "Mensaje indicando el estado del enpoint"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reclamos/aceptar/{id}": {
+        "post": {
+          "tags": [
+            "Reclamos"
+          ],
+          "summary": "Acepta un reclamo dandola por resuelto",
+          "parameters": [
+            {
+              "name": "auth_token",
+              "in": "header",
+              "required": true,
+              "description": "Token de autorizacion",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID del reclamo a aceptar",
+                "schema": {
+                  "type": "integer"
+                }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "El reclamo fue actualizado cambiandole su estado a : 'resuelto' ",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Mensaje que informa el estado del endpoint"
+                      },
+                      "reclamoAceptado": {
+                        "type": "object",
+                        "description": "Informacion del reclamo que ha sido aceptado"
+                      }
+                    }
                   }
                 }
               }
@@ -589,6 +616,18 @@
             "dni": {
               "type": "integer",
               "description": "El DNI del usuario"
+            },
+            "telefono": {
+              "type": "integer",
+              "description": "El telefono del usuario"
+            },
+            "billetera": {
+              "type": "integer",
+              "description": "Las cuentas del usuario"
+            },
+            "rol":{
+              "type": "object",
+              "$ref": "#/components/schemas/Rol"
             }
           }
         },
@@ -631,6 +670,19 @@
             "compraId": {
               "type": "integer",
               "description": "El id de la compra a la cual se le realizo un reclamo"
+            }
+          }
+        },
+        "Rol": {
+          "type": "object",
+          "properties": {
+            "id":{
+              "type": "integer",
+              "description": "El ID autogenerado por MySQL"
+            },
+            "tipo":{
+              "type": "string",
+              "description": "El tipo de rol asignado a cada usuario"
             }
           }
         }

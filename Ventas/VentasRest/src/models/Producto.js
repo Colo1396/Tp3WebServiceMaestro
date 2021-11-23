@@ -33,6 +33,10 @@ module.exports = (sequalize, type)=>{
         cantidadVentas: {
             type: type.INTEGER,
             allowNull: false
+        },
+        idCategoria: {
+            type: type.INTEGER,
+            allowNull: false
         }
     });
 }

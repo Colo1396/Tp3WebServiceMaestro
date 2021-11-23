@@ -3,7 +3,12 @@ const { dataURI } = require('../middlewares/multerConfig');
 
 const getAllProductos = async (req, res) => {
     try{
-        const productos = await ProductoService.getAll(req.query.vendedor, req.query.sinstock);
+        const productos = await ProductoService.getAll(
+            req.query.vendedor, 
+            req.query.sinstock, 
+            req.query.precioGte,
+            req.query.precioLte,
+            req.query.idCategoria);
         res.status(200).send(productos);
     } catch(err){
         console.error(err);
@@ -32,7 +37,8 @@ const postProducto = async (req, res) => {
             imagen: imagen,
             precio: req.body.precio,
             stock: req.body.stock,
-            mediosDePago: req.body.mediosDePago
+            mediosDePago: req.body.mediosDePago,
+            idCategoria: req.body.idCategoria
         }
         const createdProducto = await ProductoService.add(producto, req.user);
         res.status(200).send(createdProducto);    
