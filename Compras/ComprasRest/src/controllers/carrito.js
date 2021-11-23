@@ -33,7 +33,7 @@ router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
     
             //Busco si ya está ese producto en el carrito
             const productoCarritoExistente = await ProductoCarritoService.getProductoCarritoByVendedoryComprador(carritoExistente.id, params.idProducto);
-    
+            var total = 0;
             if(productoCarritoExistente == null){
                 var datosProductoCarrito = {
                     cantidad: params.cantidad,
@@ -41,14 +41,15 @@ router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
                     idCarrito: carritoExistente.id,
                 }
                 var nuevoProductoCarrito = await ProductoCarritoService.add(datosProductoCarrito);
-                console.log("devolver producto");
-                console.log(nuevoProductoCarrito);
+                total = carritoExistente.total + (nuevoProductoCarrito.cantidad * producto.precio);
             }else{
                 productoCarritoExistente.cantidad += parseInt(params.cantidad);
                 productoCarrito = await ProductoCarritoService.update(productoCarritoExistente);
-                console.log("devolver producto");
-                console.log(productoCarritoExistente);
+                total = carritoExistente.total + (productoCarritoExistente.cantidad * producto.precio);
             }
+
+            carritoExistente.total = total;
+            carritoExistente = await CarritoService.update(carritoExistente);
             //Devolver respuesta
             return res.status(200).send({
                 status: "success",
@@ -64,6 +65,47 @@ router.post('/addProductoCarrito', auth.authenticated, async(req, res) =>{
             message: err
         });
     }
+});
+
+router.get('/carritos/:userId', auth.authenticated, async(req, res) =>{
+
+    var userId = req.params.userId;
+    var carritos = await CarritoService.getCarritosByUser(userId);
+
+    console.log(carritos);
+    if(carritos == null){
+        return res.status(400).send({
+            status: "error",
+            message: "No existe el usuario."
+        });
+    }
+
+    //Devolver respuesta
+    return res.status(200).send({
+        status: "success",
+        carritos
+    });
+
+});
+
+router.get('/carrito/:carritoId', auth.authenticated, async(req, res) =>{
+
+    var carritoId = req.params.carritoId;
+    var carrito = await ProductoCarritoService.getProductosCarritoByIdCarrito(carritoId);
+
+    if(carrito == null){
+        return res.status(400).send({
+            status: "error",
+            message: "No existe el usuario."
+        });
+    }
+
+    //Devolver respuesta
+    return res.status(200).send({
+        status: "success",
+        carrito
+    });
+
 });
 
 

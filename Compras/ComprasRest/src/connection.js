@@ -16,7 +16,8 @@ const reclamoModel = require('./models/Reclamo');
 const cuentaBancariaModel = require('./models/CuentaBancaria');
 
 /** CONFIGURACIÓN CONEXION PARA LA BD LOCAL */
-/*const sequelize = new Sequelize("tp3-compras", "root", "toor" ,{
+/*
+const sequelize = new Sequelize("tp3-compras", "root", "toor" ,{
     host : "localhost",
     port: "3306",
     dialect: "mysql"

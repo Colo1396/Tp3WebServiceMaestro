@@ -13,6 +13,8 @@ import { UserPerfilCompradorComponent } from "./components/user-perfil-comprador
 import { DomicilioAddComponent } from "./components/domicilio-add/domicilio-add.component";
 import { TarjetaAddComponent } from "./components/tarjeta-add/tarjeta-add.component";
 import { ProductoShowComponent } from "./components/producto-show/producto-show.component";
+import { CarritoShowComponent } from "./components/carrito-show/carrito-show.component";
+import { CarritoListComponent } from "./components/carrito-list/carrito-list.component";
 
 //Rutas
 const appRoutes: Routes = [
@@ -24,7 +26,10 @@ const appRoutes: Routes = [
     { path: 'perfilComprador', component: UserPerfilCompradorComponent },
     { path: 'domicilio/new', component: DomicilioAddComponent },
     { path: 'tarjeta/new', component: TarjetaAddComponent },  
-    { path: 'producto/:productoId', component: ProductoShowComponent },  
+    { path: 'producto/:productoId', component: ProductoShowComponent },
+    { path: 'carrito', component: CarritoListComponent },
+    { path: 'carrito/:carritoId', component: CarritoShowComponent },
+
     { path: '**', component: LoginComponent}
 ];
 

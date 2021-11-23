@@ -25,6 +25,15 @@ class ProductoCarritoService {
         );
         return productoActualizado;
     }
+
+    static async getProductosCarritoByIdCarrito(idCarrito){
+        var carrito = await ProductoCarritoModel.findAll({
+            where : { idCarrito: idCarrito},
+            include: ['producto', 'carrito']
+        });
+        return  carrito;    
+    }
+    
 }
 
 module.exports = {

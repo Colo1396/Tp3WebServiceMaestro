@@ -17,6 +17,8 @@ import { DomicilioAddComponent } from './components/domicilio-add/domicilio-add.
 import { TarjetaAddComponent } from './components/tarjeta-add/tarjeta-add.component';
 import { ProductoShowComponent } from './components/producto-show/producto-show.component';
 import { ProductoListComponent } from './components/producto-list/producto-list.component';
+import { CarritoListComponent } from './components/carrito-list/carrito-list.component';
+import { CarritoShowComponent } from './components/carrito-show/carrito-show.component';
 
 @NgModule({
   //componentes que representen algo en la vista
@@ -30,7 +32,9 @@ import { ProductoListComponent } from './components/producto-list/producto-list.
     DomicilioAddComponent,
     TarjetaAddComponent,
     ProductoShowComponent,
-    ProductoListComponent
+    ProductoListComponent,
+    CarritoListComponent,
+    CarritoShowComponent
   ],
   //cargar los modulos dentro de la aplicación
   imports: [
