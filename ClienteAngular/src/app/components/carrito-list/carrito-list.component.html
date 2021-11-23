@@ -1,0 +1,37 @@
+<main class="flex-shrink-0 mt-5">
+    <div class="container">
+        <section class="jumbotron text-center m-4">
+            <div class="container">
+                <h1 class="jumbotron-heading">LISTA DE CARRITOS SEGÚN EL VENDEDOR</h1>
+            </div>
+        </section>
+
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead align="center">
+                                <tr>
+                                    <th class="col" align="center">Carrito</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--
+                                    <div class="" *ngFor="let carrito of carritos |keyvalue" >
+                                -->
+                                <div class="" *ngFor="let carrito of carritos, index as id" >
+                                    <tr>
+                                        <td class="col-6 ml-5" align="center"><img src="https://image.flaticon.com/icons/png/512/107/107831.png" width="50" height="50"/> </td>
+                                        <td class="col-6 m-5">Carrito N°: {{id+1}}</td>
+                                        <td class="col-6 m-5 p-3"><a class="btn btn-lg btn-info" [routerLink]="['/carrito/', carrito.id]">Ver</a></td>
+                                    </tr>
+                                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

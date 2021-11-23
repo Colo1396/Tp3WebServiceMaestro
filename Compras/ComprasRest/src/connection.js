@@ -20,8 +20,7 @@ const cuentaBancariaModel = require('./models/CuentaBancaria');
     host : "localhost",
     port: "3306",
     dialect: "mysql"
-});
-*/
+});*/
 
 const sequelize = new Sequelize("bbglhfbpl88th3ne8zmg", "unyu1hkmsskogwus", "V96syZVkwK1AwOV0O3Wn" ,{
     host : "bbglhfbpl88th3ne8zmg-mysql.services.clever-cloud.com",
@@ -138,6 +137,11 @@ CompraModel.belongsTo(UserModel, {
 CompraModel.belongsTo(CarritoModel, {
     foreignKey: 'idCarrito',
     as: 'carrito'
+});
+
+CarritoModel.belongsTo(CarritoModel, {
+    foreignKey: 'idCompra',
+    as: 'compra'
 });
 
 /*** relacion one to one entre Compra y Tarjeta (como medioDePago) **/

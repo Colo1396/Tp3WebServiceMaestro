@@ -67,6 +67,11 @@ class UserService {
         var user = await UserModel.findByPk(id);
         return  {user};    
     }
+
+    static async getVendedor(id){
+        var vendedor = await UserModel.findByPk(id);
+        return  vendedor;    
+    }
 }
 
 module.exports = {
