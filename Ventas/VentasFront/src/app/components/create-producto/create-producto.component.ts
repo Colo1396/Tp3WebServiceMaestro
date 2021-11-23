@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Categoria } from 'src/app/interfaces/categoria';
 import { MedioDePago } from 'src/app/interfaces/medioDePago';
 import { Producto } from 'src/app/interfaces/producto';
+import { CategoriaService } from 'src/app/services/categoria.service';
 import { MedioDePagoService } from 'src/app/services/medio-de-pago.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -23,19 +25,27 @@ export class CreateProductoComponent implements OnInit {
   imagen?: any;
   imagePath?: any;
   loading: boolean = false;
+  categorias: Categoria[] = [];
+  selectedCategoria: number = 1;
 
   constructor(
     private productoService: ProductoService,
     private medioDePagoService: MedioDePagoService,
+    private categoriaService: CategoriaService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.getMediosDePago();
+    this.getMedioDePagos();
+    this.getCategorias();
   }
 
-  getMediosDePago(){
+  getMedioDePagos(){
     this.medioDePagoService.getAll().subscribe(mp => this.producto.mediosDePago = mp);
+  }
+
+  getCategorias(){
+    this.categoriaService.getAll().subscribe(categorias => this.categorias = categorias);
   }
 
   previewImage(event: any): void{
@@ -62,6 +72,7 @@ export class CreateProductoComponent implements OnInit {
     formData.append('precio', this.producto.precio.toString());
     formData.append('stock', this.producto.stock.toString());
     formData.append('cantidadVentas', this.producto.cantidadVentas.toString());
+    formData.append('idCategoria', this.selectedCategoria.toString());
     formData.append('imagen', this.imagen);
 
     this.producto.mediosDePago.forEach(mp => {

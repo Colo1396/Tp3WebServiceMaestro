@@ -1,14 +1,14 @@
 module.exports = (sequalize, type)=>{
-    return sequalize.define('medioDePago',{
+    return sequalize.define('carrito',{
         id: {
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull : false
         },
-        nombre: {
-            type: type.STRING,
-            allowNull: false
+        total: {
+            type: type.DOUBLE,
+            allowNull : false
         }
     });
 }

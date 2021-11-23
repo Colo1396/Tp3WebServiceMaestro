@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth-service.service';
+import { RolService } from 'src/app/services/rol.service';
 
 @Component({
   selector: 'app-register',
@@ -23,13 +24,27 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private rolService: RolService,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.traerRoles();
+  }
+
+  traerRoles(){
+    this.rolService.getAll().subscribe(roles => {
+      roles.forEach(role => {
+        console.log(role);
+        if(role.tipo === 'vendedor'){
+          this.user.rolId = role.id;
+        }
+      });
+    });
   }
 
   onSubmit(){
     this.loading = true;
+    console.log(this.user);
     this.authService.register(this.user).subscribe(user => {
       this.router.navigate(['/login']);
     });

@@ -1,10 +1,16 @@
 const Op = require('sequelize').Op;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { RolService } = require('./RolService');
 const { UserModel, CuentaBancariaModel } = require('../connection');
 
 class UserService{
     static async register(user){
+        const role = await RolService.getById(user.rolId);
+        if(role.tipo !== 'vendedor'){
+            throw new Error('El tipo de rol de usuario no es permitido');
+        }
+
         const usernameExists = await this.getByUsername(user.username);
         if(usernameExists){
             throw new Error("Ya existe un usuario con ese username");
@@ -31,13 +37,17 @@ class UserService{
         }
         
         const isValid = await bcrypt.compare(user.password, userExists.password);
+        
+        if(userExists.rol.dataValues.tipo !== 'vendedor'){
+            throw new Error('El tipo de rol de usuario no es permitido');
+        }
 
         if(isValid){
             const token = jwt.sign({ id: userExists.id }, process.env.TOKEN_SECRET);
             const loginInfo = {
                 auth_token: token, 
                 id: userExists.id, 
-                nombre: userExists.nombre
+                rol: userExists.rol
             };
             return loginInfo;
         }
@@ -69,7 +79,8 @@ class UserService{
             where:{
                 username: username
             },
-            include: ['cuentasBancarias']
+            include: ['cuentasBancarias'],
+            include: ['rol']
         });
 
         return users;

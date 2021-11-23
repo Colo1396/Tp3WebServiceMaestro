@@ -11,6 +11,8 @@ dotenv.config({path: __dirname + '/.env.local'});
 const userRoute = require('./routes/users');
 const productoRoute = require('./routes/productos');
 const medioDePagoRoute = require('./routes/mediosDePago');
+const rolRoute = require('./routes/roles');
+const categoriaRoute = require('./routes/categorias');
 
 //INICIALIZACIONES-------------------------------------------------
 const app = express();
@@ -31,6 +33,8 @@ app.use('/', swaggerUI.serve);
 app.use('/users', userRoute);
 app.use('/productos', productoRoute);
 app.use('/mediosDePago', medioDePagoRoute);
+app.use('/roles', rolRoute);
+app.use('/categorias', categoriaRoute);
 
 app.get('/', swaggerUI.setup(swaggerDocument));
 

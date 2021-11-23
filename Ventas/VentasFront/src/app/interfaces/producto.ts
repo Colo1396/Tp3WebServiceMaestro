@@ -1,3 +1,4 @@
+import { Categoria } from "./categoria";
 import { MedioDePago } from "./medioDePago";
 
 export interface Producto{
@@ -9,4 +10,6 @@ export interface Producto{
     stock: number;
     mediosDePago: Array<MedioDePago>;
     cantidadVentas: number;
+    idCategoria?: number;
+    categoria?: Categoria;
 }
