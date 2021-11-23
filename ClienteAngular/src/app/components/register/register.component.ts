@@ -32,6 +32,9 @@ export class RegisterComponent implements OnInit {
       response => {
         if(response.user && response.user.id){
           this.status = 'success';
+          $(document).ready(function(){
+            $('.form').trigger("reset");
+          });
         }else{
           this.status = 'error';
         }

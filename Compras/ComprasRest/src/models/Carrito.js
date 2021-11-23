@@ -17,7 +17,10 @@ module.exports = (sequalize, type)=>{
         idVendedor: {
             type: type.INTEGER,
             allowNull : false
+        },
+        idCompra: {
+            type: type.INTEGER,
+            allowNull : true
         }
-        //VER SI AGREGO ID COMPRA
     });
 }

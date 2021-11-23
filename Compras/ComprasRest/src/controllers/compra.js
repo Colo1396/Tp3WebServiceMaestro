@@ -18,13 +18,10 @@ const ProductoCarrito = require('../models/ProductoCarrito');
 
 router.post('/compra/new', auth.authenticated, async(req, res) =>{
     let params = req.body;
-    console.log("llego");
     try{
         //Verificamos que no exista una compra asociada a ese carrito
         var compra = await CompraService.getCompraByCarrito(params.idCarrito);
-        console.log(compra);
-        console.log(compra.length);
-        if(compra === null || !compra.length){
+        if(compra === null || !compra.length || compra.length === 0){
             //Busco el carrito para obtener el vendedor
             var carrito = await CarritoService.getById(params.idCarrito);
 
@@ -33,7 +30,6 @@ router.post('/compra/new', auth.authenticated, async(req, res) =>{
 
             //Obtengo la tarjeta del usuario
             const tarjeta = await TarjetaService.getTarjeta(params.idComprador);
-            //console.log(tarjeta.tipo);
 
             productosCarrito.forEach(async(element) =>{
                 var productoMedioDePago = await ProductoService.getById(element.idProducto);
@@ -43,12 +39,6 @@ router.post('/compra/new', auth.authenticated, async(req, res) =>{
                         message: "No se acepta el medio de pago seleccionado"
                     });
                 }
-                /*
-                if(productoMedioDePago.formaDePago == tarjeta.tipo){
-                    console.log("entro 2do if");
-                    console.log(productoMedioDePago.formaDePago);
-                    console.log(tarjeta.tipo);
-                }*/
             });
 
             //Verificar si cambió la cantidad solicitada de un producto. De ser así, se actualiza.
@@ -78,6 +68,9 @@ router.post('/compra/new', auth.authenticated, async(req, res) =>{
             }
             //Persisto la compra
             var nuevaCompra = await CompraService.add(datosCompra);
+            
+            carrito.idCompra = nuevaCompra.id;
+            var actualizoCarrito = await CarritoService.update(carrito);
 
             return res.status(200).send({
                 status: "success",

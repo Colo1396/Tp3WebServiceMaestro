@@ -32,7 +32,21 @@ class CarritoService {
             where : { idComprador: idUser}
         });
         return  carritos;    
-        //return {domicilios};
+    }
+
+    static async getCarritosByUserSinAsociarEnCompra(idUser){
+        var carritos = await CarritoModel.findAll({
+            attributes: ['id', 'idVendedor'],
+            where:{
+                [Op.and]: [ 
+                    {idComprador: idUser }, 
+                    { idCompra: {
+                    [Op.eq]: null
+                        }
+                    }],
+            }
+        });
+        return  carritos;    
     }
 
     static async getCarritoByPk(idCarrito){
@@ -40,28 +54,27 @@ class CarritoService {
             where : { id: idCarrito},
             include: ['productosCarrito', 'vendedor']
         });
-        //var carrito = await CarritoModel.findByPk(idCarrito);
-
         return  carrito;    
-        //return {domicilios};
     }
     
     static async update(carrito){
+        console.log("dentro de update");
+        console.log(carrito);
         var carritoActualizado = await CarritoModel.update(
-            {total: carrito.total, idComprador: carrito.idComprador, idVendedor: carrito.idVendedor},
+            {total: carrito.total, idComprador: carrito.idComprador, idVendedor: carrito.idVendedor, idCompra: carrito.idCompra},
             {where: {
                 id: carrito.id
             }},
         );
+        console.log(carritoActualizado);
+
         return carritoActualizado;
     }
 
 
     static async getById(idCarrito){
         var carrito = await CarritoModel.findByPk(idCarrito);
-
         return  carrito;    
-        //return {domicilios};
     }
 
 
