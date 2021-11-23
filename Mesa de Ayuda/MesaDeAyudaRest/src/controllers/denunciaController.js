@@ -103,18 +103,33 @@ const crearDenuncia = async (req,res)=>{
     }
 }
 
-const modificarDenuncia = async(req,res)=>{
+const aceptarDenuncia = async(req,res)=>{
     try{
         const {id} = req.params;
         let denuncia = {
                 "id": id,
                 "estado": "resuelto",
         };
-        let denunciaModificada = await DenunciaService.update(denuncia);
-        //return res.redirect('/denuncias/lista');
-        res.status(200).send({
-            message: 'Denuncia modificada exitosamente!!!',
-            denunciaModificada
+        var denunciasAceptadas = await DenunciaService.getAllByState("resuelto");
+
+        for (let index = 0; index < denunciasAceptadas.length; index++) {
+            if(denunciasAceptadas[index].id == id){
+                return res.status(200).send({
+                    message: 'La denuncia ya ha sido aceptada',
+                    denunciaAceptada: denunciasAceptadas[index]
+                });
+            }
+        }
+        await DenunciaService.update(denuncia);
+
+        //procedo a eliminar el producto de la denuncia
+        let denunciaAceptada = await DenunciaService.getById(id);
+        let productoEliminado = await ProductoService.delete(denunciaAceptada.productoId);
+
+        return res.status(200).send({
+            message: 'Denuncia aceptada exitosamente!!!',
+            denunciaAceptada,
+            productoEliminado
         });
     }catch(err){
         console.log(err);
@@ -124,13 +139,13 @@ const modificarDenuncia = async(req,res)=>{
     }
 }
 
-const eliminarDenuncia = async(req,res)=>{
+const rechazarDenuncia = async(req,res)=>{
     try{
         const {id} = req.params;
         await DenunciaService.delete(id);
         //return res.redirect('/denuncias/lista');
         res.status(200).send({
-            message: 'Denuncia eliminada exitosamente!!!'
+            message: 'Denuncia rechazada exitosamente!!!'
         });
     }catch(err){
         console.log(err);
@@ -142,8 +157,8 @@ const eliminarDenuncia = async(req,res)=>{
 
 module.exports = {
     crearDenuncia,
-    modificarDenuncia,
-    eliminarDenuncia,
+    aceptarDenuncia,
+    rechazarDenuncia,
     obtenerDenuncia,
     obtenerDenunciasPorEstado,
     obtenerDenuncias

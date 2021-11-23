@@ -101,6 +101,14 @@ class ProductoService{
          });
          return products;
     }
+
+    static async delete(idProducto){
+        let prductoEliminado = await ProductoModel.destroy({
+            where: {
+                "id": idProducto
+            }
+        });
+        return prductoEliminado;    }
 }
 
 module.exports = { ProductoService }

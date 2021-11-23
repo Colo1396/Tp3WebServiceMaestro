@@ -99,18 +99,29 @@ const crearReclamo = async(req,res) =>{
     }
 }
 
-const modificarReclamo = async(req,res)=>{
+const aceptarReclamo = async(req,res)=>{
     try{
         const {id} = req.params;
         let reclamo = {
                 "id": id,
                 "estado": "resuelto",
         };
-        let reclamoModificado = await ReclamoService.update(reclamo);
+        var reclamosAceptados = await ReclamoService.getAllByState("resuelto");
+
+        for (let index = 0; index < reclamosAceptados.length; index++) {
+            if(reclamosAceptados[index].id == id){
+                return res.status(200).send({
+                    message: 'El reclamo ya ha sido aceptado',
+                    reclamoAceptado: reclamosAceptados[index]
+                });
+            }
+        }
+        await ReclamoService.update(reclamo);
+        let reclamoAceptado = await ReclamoService.getById(id);
         //res.redirect("/reclamos/lista");
         return res.status(200).send({
-            message: 'Reclamo modificado exitosamente!!!',
-            reclamoModificado
+            message: 'Reclamo aceptado exitosamente!!!',
+            reclamoAceptado
         });
     }catch(err){
         console.log(err);
@@ -120,12 +131,12 @@ const modificarReclamo = async(req,res)=>{
     }
 }
 
-const eliminarReclamo = async(req,res)=>{
+const rechazarReclamo = async(req,res)=>{
     try{
         const {id} = req.params;
         let reclamoEliminado = await ReclamoService.delete(id);
             return res.status(200).send({
-                message: "Reclamo eliminado con exito!!!",
+                message: "Reclamo rechazado con exito!!!",
             });
     }catch(err){
         console.log(err);
@@ -138,8 +149,8 @@ const eliminarReclamo = async(req,res)=>{
 
 module.exports = {
     crearReclamo,
-    modificarReclamo,
-    eliminarReclamo,
+    aceptarReclamo,
+    rechazarReclamo,
     obtenerReclamo,
     obtenerReclamosPorEstado,
     obtenerReclamos

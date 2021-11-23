@@ -166,15 +166,6 @@ DenunciaModel.belongsTo(UserModel,{
     foreignKey: 'userId',
     as: 'user'
 });
-/* relacion one to many de producto y denuncia */
-ProductoModel.hasMany(DenunciaModel,{
-    foreignKey: 'productoId',
-    as: 'denuncias'
-});
-DenunciaModel.belongsTo(ProductoModel,{
-    foreignKey: 'productoId',
-    as: 'producto'
-});
 
 /****************RECLAMO************ */
 /* relacion one to many de compra y reclamo */

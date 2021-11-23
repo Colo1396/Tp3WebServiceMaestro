@@ -57,33 +57,5 @@ router.post('/loginPost',isNotAuthenticated,async(req,res)=>{
         });
     }
 });
-/*
-router.post('/logout', isAuthenticated ,async(req, res) => {
-    try{
-        console.log(req.header('auth_token'));
-        var tokenSession =req.header('auth_token');
-        tokenSession.replace(tokenSession,'');
-
-        //le quito el token de la session al user, agregandole ''
-        res.status(200).send({
-            message: `Usuario deslogueado exitosamente`
-        });
-    }catch(err){
-        res.status(500).json({
-            message: 'Ocurrio un error --> '+ err
-        });
-    }
-});
-*/
-
-
-
-/************* HOME ****************/
-router.get('/' ,(req,res)=>{
-    res.redirect('/login');
-});
-router.get('/home', isAuthenticated , (req,res)=>{
-    res.render('home');
-});
 
 module.exports = router;
