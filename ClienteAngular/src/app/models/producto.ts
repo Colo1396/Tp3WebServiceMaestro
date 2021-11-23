@@ -1,10 +1,10 @@
 export class Producto{
     constructor(
-        public _id: string,
+        public id: string,
         public nombre: string,
         public descripcion: string,
         public imagen: string,
-        public precio: string,
+        public precio: number,
         public stock: string,
         public formaDePago: string,
         public idUser: any,

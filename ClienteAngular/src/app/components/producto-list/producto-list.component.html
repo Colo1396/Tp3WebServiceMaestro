@@ -1,1 +1,36 @@
-<p>producto-list works!</p>
+<main class="flex-shrink-0 mt-5">
+    <div class="container mt-5">
+        <section class="jumbotron text-center mt-5">
+            <div class="container">
+                <h1 class="jumbotron-heading mt-5">PRODUCTOS</h1>
+            </div>
+        </section>
+
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr align="center">
+                                    <th scope="col">Imagen</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of productos, index as id" align="center">
+                                    <td class="col-3"><img src="{{item.imagen}}" width="50" height="50"/> </td>
+                                    <td class="col-6">{{ item.nombre }}</td>
+                                    <td class="col-8">{{ item.precio | currency:'USD':'symbol':'1.2-2' }}</td>
+                                    <td class="col-3"><a class="btn btn-info"  [routerLink]="['/producto/', item.id]">Ver</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

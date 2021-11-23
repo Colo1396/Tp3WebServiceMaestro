@@ -1,0 +1,30 @@
+<main class="flex-shrink-0 py-4 my-5">
+    <div class="container">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-header text-white" style="background-color: rgb(245, 152, 2);">
+                        COMPRA EXITOSA
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-success">¡¡COMPRA FINALIZADA!!</h5>
+                            <p class="card-text"><b>El proceso de compra fue realizado con éxito. </b> A continuación podrá ver el detalle de la compra, como también solicitar el código de seguimiento de su pedido.</p>
+                            <div align="center" class="row">
+                                <div class="col-12">
+                                    <a [routerLink]="['/compra/', compraId]" class="btn btn-info text-white m-3">Detalle compra</a>
+                                
+                                    <a class="btn btn-secondary m-3">Código de seguimiento</a>
+
+                                </div>
+                                <div class="col-12">
+                                    <a  class="btn btn-link">Volver a inicio</a>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -28,8 +28,8 @@ export class ProductoService{
         return this.token;
     }
 
-    getUsers():Observable<any>{
-        return this._http.get(this.url+'users');
+    getProductos():Observable<any>{
+        return this._http.get(this.url+'productos');
     }
 
     getProducto(productoId):Observable<any>{
