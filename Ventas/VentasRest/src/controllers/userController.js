@@ -9,7 +9,7 @@ const register = async (req, res) => {
             apellido: req.body.apellido,
             password: req.body.password,
             dni: req.body.dni,
-            billetera: 0,
+            billetera: 10,
             rolId: req.body.rolId
         }
         const createdUser = await UserService.register(user);
@@ -63,9 +63,20 @@ const putUser = async (req, res) => {
     }
 }
 
+const transferir = async (req, res) => {
+    try{
+        const result = await UserService.transferir(req.user, req.body.nroCuenta, req.body.monto);
+        res.status(200).send(result);
+    } catch(err){
+        console.error(err);
+        res.status(400).send(err.message);
+    }
+}
+
 module.exports = {
     register,
     login,
     getUser,
-    putUser
+    putUser,
+    transferir
 }

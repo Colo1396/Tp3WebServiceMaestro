@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CuentaBancaria } from 'src/app/interfaces/cuentaBancaria';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
@@ -14,7 +15,7 @@ export class TransferirComponent implements OnInit {
     username: ''
   };
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.getCuentasBancarias();
@@ -24,5 +25,11 @@ export class TransferirComponent implements OnInit {
     this.userService.getOne().subscribe(user => {
       this.user = user;
     });
+  }
+
+  transferirMonto(nroCuenta: string, monto: string){
+    this.userService.transferir(nroCuenta, Number(monto)).subscribe(result => {
+      this.router.navigate(['/']);
+    })
   }
 }
