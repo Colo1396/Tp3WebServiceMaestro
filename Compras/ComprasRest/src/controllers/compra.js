@@ -100,61 +100,53 @@ router.post('/compra/new', auth.authenticated, async(req, res) =>{
 
 router.get('/compra/:compraId', auth.authenticated, async(req, res) =>{
 
-    console.log(req.params.compraId);
-
     var compraId = req.params.compraId;
-    var compra = await CompraService.getCompra(compraId);
-    console.log("compra");
-    console.log(compra);
-    var productosCarrito = await ProductoCarritoService.getProductosCarritoByIdCarrito(compra.idCarrito);
-    console.log("productosCarrito");
-    console.log(productosCarrito);
-    var vendedor = await UserService.getById(compra.idVendedor);
-    console.log("vendedor");
-    console.log(vendedor);
-    var tarjeta = await TarjetaService.getTarjetaByPk(compra.idMedioDePago);
-    console.log("tarjeta");
-    console.log(tarjeta);
+    var compras = await CompraService.getCompra(compraId);
+    var productosCarritoComprado = await ProductoCarritoService.getProductosCarritoByIdCarrito(compras.idCarrito);
+    var vendedor = await UserService.getVendedor(compras.idVendedor);
 
-    var destino = await DomicilioService.getDomiciliosByUser(compra.idDestino);
-    console.log("destino");
-    console.log(destino);
+    //Compra con menos datos 
+    var fechaCompra = await CompraService.getFechaCompra(compraId);
 
-    /*
-    
-    console.log("tarjeta");
-    console.log(compra.idMedioDePago.tarjeta);
+    var medioDePago = await TarjetaService.getTarjetaFindOne(compras.idMedioDePago);
+    var destino = await DomicilioService.getDomicilioByPk(compras.idDestino);
 
-    var vendedor = await UserService.getById(compra.idVendedor);
-    var productosCarrito = await ProductoCarritoService.getProductosCarritoByIdCarrito(compra.compraId);
-    var tarjeta = await TarjetaService.getTarjetaByPk(compra.idMedioDePago.id);
-    console.log("tarjeta");
-    console.log(tarjeta);
-
-    var destino = await DomicilioService.getDomiciliosByUser(compra.idDestino.id);
-    console.log("destino");
-
-    console.log(destino);
-    */
-
-
-    if(compra == null){
+    if(compras == null){
         return res.status(400).send({
             status: "error",
-            message: "No existe la compra."
+            message: "No existe el usuario."
         });
     }
 
-    console.log(compra);
     //Devolver respuesta
     return res.status(200).send({
         status: "success",
-        compra,
-        productosCarrito,
+        fechaCompra,
+        productosCarritoComprado,
         vendedor,
-        destino, 
-        tarjeta 
+        medioDePago,
+        destino
+    });
 
+});
+
+router.get('/compras/:userId', auth.authenticated, async(req, res) =>{
+
+    var userId = req.params.userId;
+    var compras = await CompraService.getComprasByUser(userId);
+
+    console.log(compras);
+    if(compras == null){
+        return res.status(400).send({
+            status: "error",
+            message: "No existe el usuario."
+        });
+    }
+
+    //Devolver respuesta
+    return res.status(200).send({
+        status: "success",
+        compras
     });
 
 });

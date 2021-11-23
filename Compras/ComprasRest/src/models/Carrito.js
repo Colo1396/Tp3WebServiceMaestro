@@ -18,5 +18,6 @@ module.exports = (sequalize, type)=>{
             type: type.INTEGER,
             allowNull : false
         }
+        //VER SI AGREGO ID COMPRA
     });
 }

@@ -17,6 +17,8 @@ import { CarritoShowComponent } from "./components/carrito-show/carrito-show.com
 import { CarritoListComponent } from "./components/carrito-list/carrito-list.component";
 import { CompraPagoComponent } from './components/compra-pago/compra-pago.component';
 import { CompraConfirmacionComponent } from './components/compra-confirmacion/compra-confirmacion.component';
+import { CompraListComponent } from './components/compra-list/compra-list.component';
+import { CompraShowComponent } from './components/compra-show/compra-show.component';
 
 //Rutas
 const appRoutes: Routes = [
@@ -33,6 +35,8 @@ const appRoutes: Routes = [
     { path: 'carrito/:carritoId', component: CarritoShowComponent },
     { path: 'pago/:carritoId', component: CompraPagoComponent },
     { path: 'compra/confirmacion/:compraId', component: CompraConfirmacionComponent },
+    { path: 'compras', component: CompraListComponent },
+    { path: 'compra/:compraId', component: CompraShowComponent },
     { path: '**', component: LoginComponent}
 ];
 

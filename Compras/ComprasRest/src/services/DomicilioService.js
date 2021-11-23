@@ -15,6 +15,11 @@ class DomicilioService {
         return  domicilios;    
         //return {domicilios};
     }
+
+    static async getDomicilioByPk(id){
+        var domicilio = await DomicilioModel.findByPk(id);
+        return  domicilio;    
+    }
 }
 
 module.exports = {

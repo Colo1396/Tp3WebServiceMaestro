@@ -21,6 +21,8 @@ import { CarritoListComponent } from './components/carrito-list/carrito-list.com
 import { CarritoShowComponent } from './components/carrito-show/carrito-show.component';
 import { CompraPagoComponent } from './components/compra-pago/compra-pago.component';
 import { CompraConfirmacionComponent } from './components/compra-confirmacion/compra-confirmacion.component';
+import { CompraListComponent } from './components/compra-list/compra-list.component';
+import { CompraShowComponent } from './components/compra-show/compra-show.component';
 
 @NgModule({
   //componentes que representen algo en la vista
@@ -38,7 +40,9 @@ import { CompraConfirmacionComponent } from './components/compra-confirmacion/co
     CarritoListComponent,
     CarritoShowComponent,
     CompraPagoComponent,
-    CompraConfirmacionComponent
+    CompraConfirmacionComponent,
+    CompraListComponent,
+    CompraShowComponent
   ],
   //cargar los modulos dentro de la aplicación
   imports: [

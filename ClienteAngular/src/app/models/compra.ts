@@ -7,5 +7,6 @@ export class Compra{
         public idMedioDePago: string,
         public idDestino: string,
         public carrito: any,
+        public createdAt:string
     ){}
 }

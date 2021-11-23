@@ -33,6 +33,14 @@ class TarjetaService {
 
         return  tarjeta;    
     }
+
+    static async getTarjetaFindOne(idTarjeta){
+        var tarjeta = await TarjetaModel.findOne({
+            attributes: ['tipo', 'numero', 'nombreTitular', 'dniTitular'],
+            where : { id: idTarjeta}
+        });
+        return  tarjeta;    
+    }
 }
 
 module.exports = {

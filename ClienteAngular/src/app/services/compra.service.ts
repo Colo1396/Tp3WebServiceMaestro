@@ -28,10 +28,10 @@ export class CompraService{
         return this.token;
     }
 
-    getCarritos(userId):Observable<any>{
+    getCompras(userId):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                         .set('Authorization', this.getToken());
-        return this._http.get(this.url+'carritos/'+userId, {headers: headers});
+        return this._http.get(this.url+'compras/'+userId, {headers: headers});
     }
 
     getCompra(compraId):Observable<any>{
@@ -51,4 +51,12 @@ export class CompraService{
         console.log("antes de enviar");
         return this._http.post(this.url+'compra/new', params, {headers: headers});
     }
+
+    getCarritoCompra(compraId):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('Authorization', this.getToken());
+        return this._http.get(this.url+'compra/'+compraId, {headers: headers});
+    }
+
+    
 }

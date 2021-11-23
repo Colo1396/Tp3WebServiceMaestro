@@ -21,6 +21,23 @@ class CompraService {
         });
         return  compra;    
     }
+
+    static async getComprasByUser(idUser){
+        var compras = await CompraModel.findAll({
+            attributes: ['id', 'createdAt'],
+            where : { idComprador: idUser}
+        });
+        return  compras;    
+    }
+
+    static async getFechaCompra(idCompra){
+        var compra = await CompraModel.findOne({
+            attributes: ['id', 'createdAt'],
+            where : { id: idCompra}
+        });
+        return  compra;    
+    }
+
 }
 
 module.exports = {

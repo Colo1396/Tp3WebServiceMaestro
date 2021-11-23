@@ -51,7 +51,7 @@ export class CompraPagoComponent implements OnInit, DoCheck {
       this.url = globalCompras.url;
       this.total = 0;
       //id, idVendedor, idComprador, idCarrito, idMedioDePago, idDestino
-      this.compra = new Compra('', '', JSON.parse(this.user.id), '', '', '', '');
+      this.compra = new Compra('', '', JSON.parse(this.user.id), '', '', '', '', '');
   }
 
   ngOnInit(): void {
