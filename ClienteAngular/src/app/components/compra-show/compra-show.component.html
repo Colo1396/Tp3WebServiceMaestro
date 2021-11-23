@@ -1,0 +1,121 @@
+<main class="flex-shrink-0 py-4 mt-5 mb-5">
+    <div class="container">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    <div class="card shadow mb-4">
+                        <div class="card-body table-responsive">
+                            <h1 align="center">Compra</h1>
+                            <div class="table-responsive">
+
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Realizada:</th>
+                                            <td>
+                                                {{ compra.createdAt | date:'dd/MM/yyyy'}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Comprador</th>
+                                            <td>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                    Username: {{ user.username }}
+                                                    <br>
+                                                    Nombre y apellido: {{user.nombre}} {{user.apellido}} </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Vendedor</th>
+                                            <td>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                    Username: {{ vendedor.username }}
+                                                    <br>
+                                                    Nombre y apellido: {{vendedor.nombre}} {{vendedor.apellido}} </li>
+                                                </ul>                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Medio de pago</th>
+                                            <td>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                    Tipo: {{ medioDePago.tipo }}
+                                                    <br>
+                                                    Nro.: {{medioDePago.numero}}
+                                                    <br>
+                                                    Titular: {{medioDePago.nombreTitular}}
+                                                </li>
+                                                </ul>                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Destino de envío</th>
+                                            <td>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                    Dirección: {{ destino.calle }} {{ destino.numero }} {{destino.pisoDepto}}
+                                                    <br> 
+                                                    Localidad: {{destino.localidad }}
+                                                    <br>
+                                                    Provincia: {{ destino.provincia}} .
+                                                    </li>
+                                                </ul>                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Medio de pago</th>
+                                            <td>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                    Tipo: {{ medioDePago.tipo }}
+                                                    <br>
+                                                    Nro.: {{medioDePago.numero}}
+                                                    <br>
+                                                    Titular: {{medioDePago.nombreTitular}}
+                                                </li>
+                                                </ul>                                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Imagen</th>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col" class="text-center">Cantidad</th>
+                                            <th scope="col" class="text-right">Precio unitario</th>
+                                            <th scope="col">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr *ngFor="let prodCarrito of carrito, index as id">
+                                                <td class="col-6 ml-5 p-3" align="center"><img src="{{prodCarrito.producto.imagen}}" width="50" height="50"/> </td>
+                                                <td class="col-6 m-5 p-3">{{ prodCarrito.producto.nombre }}</td>
+                                                <td class="col-6 m-5 p-3">{{ prodCarrito.cantidad }}</td>
+                                                <td class="col-6 m-5 p-3">{{ prodCarrito.producto.precio | currency:'USD':'symbol':'1.2-2' }}</td>
+                                                <td class="col-6 m-5 p-3">{{ prodCarrito.producto.precio.valueOf() * prodCarrito.cantidad.valueOf()  | currency }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-6 ml-5"></td>
+                                                <td class="col-6 ml-5"></td>
+                                                <td class="col-6 ml-5"></td>
+                                                <td class="col-6 ml-5"><b>Total:</b></td>
+                                                <td class="col-6 ml-5">{{ total | currency:'USD':'symbol':'1.2-2' }}</td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

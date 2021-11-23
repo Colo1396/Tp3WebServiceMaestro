@@ -19,9 +19,7 @@ const cuentaBancariaModel = require('./models/CuentaBancaria');
 const sequelize = new Sequelize("mesadeayuda_db", "root", "123456789" ,{
     host : "localhost",
     port: "3306",
-    dialect: "mysql",
-    logging: false
-
+    dialect: "mysql"
 });
 
 /*
@@ -141,6 +139,11 @@ CompraModel.belongsTo(UserModel, {
 CompraModel.belongsTo(CarritoModel, {
     foreignKey: 'idCarrito',
     as: 'carrito'
+});
+
+CarritoModel.belongsTo(CarritoModel, {
+    foreignKey: 'idCompra',
+    as: 'compra'
 });
 
 /*** relacion one to one entre Compra y Tarjeta (como medioDePago) **/

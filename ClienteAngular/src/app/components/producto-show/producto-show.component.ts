@@ -36,14 +36,12 @@ export class ProductoShowComponent implements OnInit {
       this.token = this._userService.getToken();
       this.user = JSON.parse(this.identity);
       this.url = globalCompras.url;
-      this.productoCarrito = new ProductoCarrito('', '', '', '');
+      this.productoCarrito = new ProductoCarrito('', 0 , '', '', '');
   }
 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
-      console.log(params);
       this.productoId = params['productoId'];
-      console.log(this.productoId);
       this.getProducto(this.productoId);
     });
   }
@@ -63,13 +61,11 @@ export class ProductoShowComponent implements OnInit {
 
   onSubmit(form){
     var datos = {
-      //cantidad: form.form.controls.cantidad.value,
       cantidad: this.productoCarrito.cantidad,
       idProducto : this.productoId,
       idUser: JSON.parse(this.user.id)
     }
 
-    //this.productoCarrito.idProducto = this.productoId;
     this._productoCarritoService.addProductoCarrito(datos).subscribe(
       response => {
         console.log(response);

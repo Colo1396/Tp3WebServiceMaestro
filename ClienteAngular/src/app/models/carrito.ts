@@ -1,6 +1,8 @@
 export class Carrito{
     constructor(
-        public _id: string,
-        public total: string
+        public id: string,
+        public total: string,
+        public idVendedor: string,
+        public idComprador: string
     ){}
 }
