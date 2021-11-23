@@ -22,6 +22,8 @@
     "mysql2": "^2.3.2",
     "nodemon": "^2.0.14",
     "sequelize": "^6.8.0",
-    "swagger-ui-express": "^4.1.6"
+    "soap": "^0.43.0",
+    "swagger-ui-express": "^4.1.6",
+    "xml-js": "^1.6.11"
   }
 }

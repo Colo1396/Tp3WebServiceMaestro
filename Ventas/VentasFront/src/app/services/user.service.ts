@@ -25,4 +25,12 @@ export class UserService {
     console.log(updatedUser);
     return this.http.put<User>(this.serviceUrl, updatedUser);
   }
+
+  transferir(nroCuenta: string, monto: number){
+    const body = {
+      nroCuenta: nroCuenta,
+      monto: monto
+    }
+    return this.http.post(this.serviceUrl + '/transferir', body);
+  }
 }

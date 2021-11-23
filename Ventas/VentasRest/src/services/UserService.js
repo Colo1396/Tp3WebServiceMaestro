@@ -1,8 +1,11 @@
 const Op = require('sequelize').Op;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const soap = require('soap');
+const xmlParser = require('xml-js');
 const { RolService } = require('./RolService');
 const { UserModel, CuentaBancariaModel } = require('../connection');
+const wsUrl = 'http://localhost:8080/BancaSoap-0.0.1/CuentaBancariaService?wsdl';
 
 class UserService{
     static async register(user){
@@ -126,8 +129,89 @@ class UserService{
         );
         
         if(user.cuentaNueva){
-            await CuentaBancariaModel.create(user.cuentaNueva);
+            const cuentas = await updatedUser.getCuentasBancarias();
+            for(let i in cuentas){
+                if(cuentas[i].dataValues.nroCuenta === user.cuentaNueva.nroCuenta){
+                    throw new Error('La cuenta ingresada ya esta asociada');
+                }
+            }
+            const nuevaCuenta = {
+                nroCuentaBancaria: user.cuentaNueva.nroCuenta 
+            }
+            const client = await soap.createClientAsync(wsUrl);
+            const cuenta = await client.findByNroCtaAsync(nuevaCuenta);
+            const response = JSON.parse(xmlParser.xml2json(cuenta[1], {compact: true, spaces: 2}));
+
+            if(response['soap:Envelope']['soap:Body']['ns2:findByNroCtaResponse'].return){
+                await CuentaBancariaModel.create(user.cuentaNueva);
+            }
+            else{
+                throw new Error('La cuenta ingresada no existe');
+            }
         }
+
+        return updatedUser;
+    }
+
+    static async transferir(user, nroCuenta, monto){
+        const userExists = await this.getById(user.id);
+
+        if(userExists.billetera < monto){
+            throw new Error('El monto ingresado supera su saldo actual');
+        }
+
+        const cuentas = await userExists.getCuentasBancarias();
+        let cuentaValida = false;
+        for(let i in cuentas){
+            if(cuentas[i].dataValues.nroCuenta === nroCuenta){
+                cuentaValida = true;
+                break;
+            }
+        }
+        if(!cuentaValida){
+            throw new Error('No se encontro una cuenta asociada con ese numero');
+        }
+
+        let cuentaExists = {
+            nroCuentaBancaria: nroCuenta
+        }
+        let client = await soap.createClientAsync(wsUrl);
+        const cuenta = await client.findByNroCtaAsync(cuentaExists);
+        let response = JSON.parse(xmlParser.xml2json(cuenta[1], {compact: true, spaces: 2}));
+        response = response['soap:Envelope']['soap:Body']['ns2:findByNroCtaResponse'].return;
+
+        if(!response){
+            throw new Error('No se encontro una cuenta con ese numero');
+        }
+        
+        const cuentaActualizada = {
+            cuentaBancaria:{
+                idCuentaBancaria: response.idCuentaBancaria._text,
+                idUsuario: response.idUsuario._text,
+                monto: Number(response.monto._text) + monto,
+                nroCuenta: response.nroCuenta._text
+            }
+        }
+
+        client = await soap.createClientAsync(wsUrl);
+        const updatedCuenta = await client.updateAsync(cuentaActualizada);
+        response = JSON.parse(xmlParser.xml2json(updatedCuenta[1], {compact: true, spaces: 2}));
+        response = response['soap:Envelope']['soap:Body']['ns2:updateResponse'].return;
+
+        if(!response){
+            throw new Error('No se pudo realizar la transferencia');
+        }
+
+        const updatedUser = await userExists.update(
+            {
+                billetera: userExists.billetera - monto
+            },
+            {
+                where: {
+                    id: userExists.id
+                }
+            }
+        );
 
         return updatedUser;
     }
