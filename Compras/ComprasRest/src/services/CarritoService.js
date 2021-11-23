@@ -19,7 +19,13 @@ class CarritoService {
     static async getCarritoByVendedoryComprador(idVendedor, idComprador){
         var carrito = await CarritoModel.findOne({
             where : { 
-                [Op.and]: [ {idVendedor: idVendedor }, { idComprador: idComprador}],
+                [Op.and]: [ 
+                    {idVendedor: idVendedor }, 
+                    { idComprador: idComprador},
+                    { idCompra: {
+                        [Op.eq]: null
+                        }
+                    }]
             }
             //attributes: ['username', 'password', 'nombre', 'apellido']
         });
